@@ -202,8 +202,442 @@
  
   </section>
  
-  <!-- NEXT SECTIONS GO BELOW THIS LINE -->
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genesis — The Horseman's Journal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
  
+/* =============================================
+   GENESIS SECTION
+   Paste this entire block into your index.html
+   right after the closing </section> of the hero
+============================================= */
+.genesis{
+  position:relative;
+  background:#000;
+  color:#f0e6c8;
+  font-family:'EB Garamond',serif;
+  overflow:hidden;
+}
+ 
+/* Background texture */
+.genesis::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 20% 40%, rgba(212,175,55,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(120,60,0,0.06) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+ 
+/* ── SECTION HEADER ── */
+.genesis-header{
+  text-align:center;
+  padding:6rem 2rem 4rem;
+  position:relative;
+  z-index:2;
+}
+.genesis-eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:.65rem;
+  letter-spacing:6px;
+  color:rgba(212,175,55,0.5);
+  text-transform:uppercase;
+  display:block;
+  margin-bottom:1.2rem;
+}
+.genesis-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:700;
+  color:#E8C84A;
+  letter-spacing:2px;
+  text-shadow:0 0 40px rgba(212,175,55,0.3);
+  margin-bottom:.8rem;
+  line-height:1.1;
+}
+.genesis-author{
+  font-family:'Cinzel',serif;
+  font-size:.8rem;
+  letter-spacing:4px;
+  color:rgba(255,240,200,0.4);
+  text-transform:uppercase;
+}
+ 
+/* top ornament */
+.header-ornament{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  margin-bottom:2rem;
+}
+.orn-line{
+  width:120px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,0.4));
+}
+.orn-line.r{background:linear-gradient(90deg,rgba(212,175,55,0.4),transparent);}
+.orn-gem{
+  width:6px;height:6px;background:#E8C84A;
+  transform:rotate(45deg);
+  box-shadow:0 0 8px rgba(212,175,55,0.8);
+}
+ 
+/* ── CHAPTERS CONTAINER ── */
+.chapters{
+  max-width:780px;
+  margin:0 auto;
+  padding:0 2rem 8rem;
+  position:relative;
+  z-index:2;
+}
+ 
+/* ── CHAPTER BLOCK ── */
+.chapter{
+  margin-bottom:0;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.chapter.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+ 
+/* Chapter header */
+.chapter-header{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin-bottom:2rem;
+}
+.chapter-num{
+  font-family:'Cinzel',serif;
+  font-size:.6rem;
+  letter-spacing:3px;
+  color:rgba(212,175,55,0.35);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.chapter-title{
+  font-family:'Cinzel',serif;
+  font-size:.9rem;
+  font-weight:600;
+  letter-spacing:3px;
+  color:#E8C84A;
+  text-transform:uppercase;
+  white-space:nowrap;
+  text-shadow:0 0 20px rgba(212,175,55,0.3);
+}
+.chapter-line{
+  flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(212,175,55,0.25),transparent);
+}
+ 
+/* Chapter body text */
+.chapter-body{
+  font-size:clamp(1rem,1.8vw,1.15rem);
+  font-weight:400;
+  line-height:2;
+  color:rgba(240,230,200,0.82);
+  letter-spacing:.2px;
+}
+.chapter-body p{
+  margin-bottom:1.6rem;
+  text-indent:2em;
+}
+.chapter-body p:first-child{
+  text-indent:0;
+}
+.chapter-body .dropcap::first-letter{
+  font-family:'Cinzel Decorative',serif;
+  font-size:3.8em;
+  font-weight:700;
+  color:#E8C84A;
+  float:left;
+  line-height:.75;
+  margin:0.1em 0.12em 0 0;
+  text-shadow:0 0 30px rgba(212,175,55,0.5);
+}
+ 
+/* ── CHAPTER DIVIDER ── */
+.chapter-divider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1.2rem;
+  padding:3.5rem 0;
+}
+.cdiv-line{
+  flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,0.2));
+  max-width:200px;
+}
+.cdiv-line.r{background:linear-gradient(90deg,rgba(212,175,55,0.2),transparent);}
+.cdiv-center{
+  display:flex;align-items:center;gap:.6rem;
+}
+.cdiv-diamond{
+  width:5px;height:5px;
+  background:rgba(212,175,55,0.5);
+  transform:rotate(45deg);
+}
+.cdiv-diamond.big{
+  width:7px;height:7px;
+  background:#E8C84A;
+  box-shadow:0 0 8px rgba(212,175,55,0.6);
+}
+ 
+/* ── PULLQUOTE ── */
+.pullquote{
+  border-left:2px solid rgba(212,175,55,0.4);
+  padding:1rem 1.5rem;
+  margin:2rem 0;
+  font-style:italic;
+  font-size:clamp(1.05rem,2vw,1.3rem);
+  color:rgba(212,175,55,0.85);
+  line-height:1.8;
+  text-indent:0 !important;
+  background:rgba(212,175,55,0.03);
+  border-radius:0 4px 4px 0;
+}
+ 
+/* ── CLOSING VERSE ── */
+.closing-verse{
+  text-align:center;
+  padding:3rem 0 2rem;
+  font-style:italic;
+  font-size:clamp(1rem,1.8vw,1.15rem);
+  color:rgba(212,175,55,0.7);
+  line-height:2.2;
+  letter-spacing:.5px;
+}
+.closing-symbol{
+  display:block;
+  font-size:2rem;
+  margin-top:2rem;
+  letter-spacing:8px;
+}
+ 
+/* ── BOTTOM FADE ── */
+.genesis-bottom-fade{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:120px;
+  background:linear-gradient(0deg,#000,transparent);
+  pointer-events:none;
+  z-index:3;
+}
+</style>
+</head>
+<body style="background:#000;">
+ 
+<!-- =============================================
+     GENESIS SECTION — paste after </section> hero
+============================================= -->
+<section class="genesis" id="awakening">
+ 
+  <div class="genesis-header">
+    <span class="genesis-eyebrow">The Story Behind the Journal</span>
+    <div class="header-ornament">
+      <div class="orn-line"></div>
+      <div class="orn-gem"></div>
+      <div class="orn-line r"></div>
+    </div>
+    <h2 class="genesis-title">Genesis</h2>
+    <span class="genesis-author">by Praveen Kumar</span>
+  </div>
+ 
+  <div class="chapters">
+ 
+    <!-- ── CHAPTER I ── -->
+    <div class="chapter" id="ch1">
+      <div class="chapter-header">
+        <span class="chapter-num">Chapter I</span>
+        <div class="chapter-line"></div>
+        <span class="chapter-title">Eleven Years</span>
+      </div>
+      <div class="chapter-body">
+        <p class="dropcap">For eleven years I have lived inside the world of horses — stallions, warmbloods, creatures of pure instinct and ancient grace. They have slowly, mercilessly, remade me from the inside. Horsemanship was never about breaking them. It was never about force or domination. It was about learning to speak without words, to stand without fear, and to become the kind of man a thousand-pound animal chooses to trust with his life.</p>
+        <p>Yet even after eleven years among them, the rest of the world still feels too narrow for me. Only in their shadow do I finally feel tall enough to breathe.</p>
+        <p>I am ordinary. Quiet. A man whose heart has never learned how to beat below 120 — a restless drum that keeps time with something it cannot name. Shame has walked beside me longer than any friend. Disgust — first whispered by others, then repeated endlessly inside my own mind — has followed me like dust rising behind a galloping horse on a dry trail. I have never belonged in rooms full of people. The only place the air ever felt truly breathable was when a horse stood close, ears soft, eyes half-closed, breathing with me as if we had known each other long before language existed.</p>
+        <p>For the first seven or eight years, I trained like a man trying to outrun his own worth. Head high. Steps perfect. Response instant. I was never cruel and never raised a hand in anger. But my fingers carried a hidden tightness — the desperate need to prove I was enough. The horses obeyed me. Yet they never truly melted into my presence. They never turned back after the work was done to rest their heavy heads against my chest as if I were home.</p>
+      </div>
+    </div>
+ 
+    <div class="chapter-divider">
+      <div class="cdiv-line"></div>
+      <div class="cdiv-center">
+        <div class="cdiv-diamond"></div>
+        <div class="cdiv-diamond big"></div>
+        <div class="cdiv-diamond"></div>
+      </div>
+      <div class="cdiv-line r"></div>
+    </div>
+ 
+    <!-- ── CHAPTER II ── -->
+    <div class="chapter" id="ch2">
+      <div class="chapter-header">
+        <span class="chapter-num">Chapter II</span>
+        <div class="chapter-line"></div>
+        <span class="chapter-title">The Black Stallion</span>
+      </div>
+      <div class="chapter-body">
+        <p class="dropcap">Then the Black Stallion arrived.</p>
+        <p>Imported. Four years old. Barely schooled. A living storm wrapped in midnight muscle and raw sensitivity.</p>
+        <p>He felt different from every horse I had worked with before. There was a depth in his eyes and a power in his presence that touched something deeper in me. I had handled difficult horses before. I had guided frightened students through their fears. But this stallion was different. He could not speak, yet he read me with a honesty that cut straight through every mask I wore. I could speak, yet I had spent years speaking only the language of control.</p>
+        <div class="pullquote">
+          The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.
+        </div>
+        <p>We worked inside a small circle no wider than fifteen metres — built from bamboo poles and rusted iron, barely strong enough to hold a breeze, let alone a panicked stallion. One wrong move and he could shatter the fence or injure himself badly. That fear lived quietly in both of us every single day.</p>
+        <p>We were building the piaffe — that proud, suspended trot in place. Slow. Patient. Breath by breath. He felt every ounce of pressure I carried.</p>
+      </div>
+    </div>
+ 
+    <div class="chapter-divider">
+      <div class="cdiv-line"></div>
+      <div class="cdiv-center">
+        <div class="cdiv-diamond"></div>
+        <div class="cdiv-diamond big"></div>
+        <div class="cdiv-diamond"></div>
+      </div>
+      <div class="cdiv-line r"></div>
+    </div>
+ 
+    <!-- ── CHAPTER III ── -->
+    <div class="chapter" id="ch3">
+      <div class="chapter-header">
+        <span class="chapter-num">Chapter III</span>
+        <div class="chapter-line"></div>
+        <span class="chapter-title">The Storm</span>
+      </div>
+      <div class="chapter-body">
+        <p class="dropcap">He tried to run once. I stopped him firmly. He tried again. This time my hand tangled in the rope. He exploded forward and dragged me across the dirt like a broken doll. Someone else caught him and brought him to a stop. I stood up, dusted the earth from my skin, and kept working — not because I was brave, but because I still did not fully understand what was really happening between us.</p>
+        <p>Later that day I let him run free. I allowed him to empty everything he was carrying inside. When the storm finally passed, he walked back to me on his own. That day the lesson landed like a hoof to the chest: He was never fighting me. He was only begging for the space to be himself.</p>
+        <p>Another afternoon, I was trying harder than ever — following every rule, desperate to prove I could handle him. He reared once. Then again — closer, higher, more powerful. And something deep inside me finally snapped.</p>
+        <p>I shouted. I blamed him. I walked away. "I can't do this anymore."</p>
+        <p>I wasn't afraid of the horse. I was terrified of the man I was becoming in front of him. For the first time in eleven years, I truly believed I was finished with horses.</p>
+        <p>I don't know what kept me from leaving during those twenty painful days. Inside my head the voices were screaming — every insult I had ever swallowed, every doubt, every judgment. I felt small, exposed, and completely worthless.</p>
+        <div class="pullquote">
+          But I stayed.
+        </div>
+      </div>
+    </div>
+ 
+    <div class="chapter-divider">
+      <div class="cdiv-line"></div>
+      <div class="cdiv-center">
+        <div class="cdiv-diamond"></div>
+        <div class="cdiv-diamond big"></div>
+        <div class="cdiv-diamond"></div>
+      </div>
+      <div class="cdiv-line r"></div>
+    </div>
+ 
+    <!-- ── CHAPTER IV ── -->
+    <div class="chapter" id="ch4">
+      <div class="chapter-header">
+        <span class="chapter-num">Chapter IV</span>
+        <div class="chapter-line"></div>
+        <span class="chapter-title">The Surrender</span>
+      </div>
+      <div class="chapter-body">
+        <p class="dropcap">I stopped performing. I stopped correcting. I simply watched — the horse, myself, and the silent space growing between us.</p>
+        <p>When I finally stepped back into the circle, I did the one thing I had never truly done before. I stopped trying to fix him. I stayed close. Quiet. Present. And the world tilted on its axis.</p>
+        <p>Before he could even think of running, I felt the fear rise in my own body — that old familiar freeze. This time I did not move. I did not tighten. I did not try to control. I simply stayed.</p>
+        <p>And he stayed too.</p>
+        <div class="pullquote">
+          That was the moment the truth hit me like dawn after the longest night: A horse does not react to your hands first. He reacts to your soul. If I panic, he panics faster. If I am calm, he becomes calm. If I am honest, he offers me everything he has.
+        </div>
+        <p>So I stopped training him the old way. I started understanding him instead. Every small honest effort — a pause, a soft look, a single willing step — I honoured it like the precious gift it was.</p>
+        <p>He began to change on his own.</p>
+        <p>The piaffe came first in tiny sparks. Then in growing waves. Then in full, breathtaking power and beauty. When I returned after a few days away, I didn't have to teach him again. I simply stood there and showed him he was safe to try.</p>
+        <p>Within minutes, he offered it — proud, beautiful, and perfect.</p>
+      </div>
+    </div>
+ 
+    <div class="chapter-divider">
+      <div class="cdiv-line"></div>
+      <div class="cdiv-center">
+        <div class="cdiv-diamond"></div>
+        <div class="cdiv-diamond big"></div>
+        <div class="cdiv-diamond"></div>
+      </div>
+      <div class="cdiv-line r"></div>
+    </div>
+ 
+    <!-- ── CHAPTER V ── -->
+    <div class="chapter" id="ch5">
+      <div class="chapter-header">
+        <span class="chapter-num">Chapter V</span>
+        <div class="chapter-line"></div>
+        <span class="chapter-title">The Bond</span>
+      </div>
+      <div class="chapter-body">
+        <p class="dropcap">Today, when he sees me, he calls out. Sometimes with a low nicker. Sometimes by offering the piaffe right there in the open. He runs to block my path. He leans his massive body into mine. He rests that great, heavy head on my chest, on my shoulder, in the open cradle of my palms — and lets out the deepest sigh of trust I have ever heard.</p>
+        <p>Scratching has become our private language. Presence has become our unbreakable bond.</p>
+        <p>I thought I was training a black stallion. The truth is far more beautiful and far more humbling: He was training me.</p>
+        <p>Through him I learned what no book, no teacher, and no amount of years could ever teach with words: how to stay when every cell in my body wants to run, how to feel everything without being destroyed by it, and how to be calm without forcing calm.</p>
+        <p>I am still ordinary. Still uneasy in crowds. Still figuring out so much of this life.</p>
+        <p>But with a horse — especially with him — I am finally clear.</p>
+        <p>And that has always been enough.</p>
+      </div>
+    </div>
+ 
+    <div class="chapter-divider">
+      <div class="cdiv-line"></div>
+      <div class="cdiv-center">
+        <div class="cdiv-diamond"></div>
+        <div class="cdiv-diamond big"></div>
+        <div class="cdiv-diamond"></div>
+      </div>
+      <div class="cdiv-line r"></div>
+    </div>
+ 
+    <!-- ── CLOSING VERSE ── -->
+    <div class="chapter" id="ch6">
+      <div class="closing-verse">
+        <p>Eleven years of searching. One black stallion. One moment of complete surrender.</p>
+        <p>In his dark, unblinking eyes I finally found the belonging I had chased my entire life.</p>
+        <p>He didn't just teach me how to train horses.<br>He taught me how to train myself.</p>
+        <p>And in the quiet space between his heartbeat and mine,<br>I stopped running from who I am.</p>
+        <p>Now, when he offers that proud, floating piaffe and presses his thousand-pound heart against me,<br>I know the truth with every fibre of my being:</p>
+        <p><em>I am exactly where I belong.</em></p>
+        <p>And for the first time in my life — that is not just enough.</p>
+        <p><strong style="font-family:'Cinzel',serif;letter-spacing:4px;color:#E8C84A;font-size:1.1em;">It is everything.</strong></p>
+        <span class="closing-symbol">🖤 🐴</span>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <div class="genesis-bottom-fade"></div>
+</section>
+<!-- ── END GENESIS SECTION ── -->
+ 
+<script>
+/* Scroll reveal — chapters fade in as you scroll */
+const chapters = document.querySelectorAll('.chapter');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+chapters.forEach(c => observer.observe(c));
+</script>
+ 
+</body>
+</html>
+  
   <script>
     const starsEl = document.getElementById('stars');
     for(let i = 0; i < 130; i++){
