@@ -204,11 +204,9 @@
   </style>
 </head>
 <body>
-
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
-
   <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="scene">
@@ -240,7 +238,6 @@
       </nav>
     </div>
   </div>
-
   <!-- HERO -->
   <section class="hero" id="genesis">
     <video class="hero-video" autoplay muted loop playsinline>
@@ -280,7 +277,6 @@
     </div>
     <div class="scroll-hint"><div class="scroll-mouse"></div><span class="scroll-label">Scroll</span></div>
   </section>
-
   <!-- GENESIS -->
   <section class="genesis" id="awakening">
     <div class="genesis-header">
@@ -367,7 +363,6 @@
     </div>
     <div class="genesis-bottom-fade"></div>
   </section>
-
   <!-- COMPANIONS -->
   <section class="companions" id="companions">
     <div class="comp-header">
@@ -387,7 +382,6 @@
       <div class="horse-card card-wide" data-index="7"><div class="card-photo-wrap"><img class="card-photo" src="horse8.jpg" alt="Storm" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(135deg,#08001a,#050010,#0d0025);">🐎</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 08</span><div class="card-name">Storm</div><div class="card-meta"><span class="card-tag">Thoroughbred</span><span class="card-tag">Age: 9</span><span class="card-tag">Mare</span></div><p class="card-excerpt">She arrived wild and left refined — though I suspect it was she who refined me, and not the other way around.</p><span class="card-read">Read Her Story</span></div></div>
     </div>
   </section>
-
   <!-- STORY OVERLAY -->
   <div class="story-overlay" id="storyOverlay">
     <div class="story-backdrop" id="storyBackdrop"></div>
@@ -410,64 +404,8 @@
     </div>
   </div>
 
-  <!-- FUTURE SECTIONS GO BELOW THIS LINE -->
-
-  <script>
-    /* Stars */
-    const starsEl=document.getElementById('stars');
-    for(let i=0;i<130;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;animation-duration:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;starsEl.appendChild(s);}
-
-    /* Video swap */
-    const video=document.querySelector('.hero-video');
-    video.addEventListener('canplay',()=>{video.style.display='block';document.querySelector('.horse-bg').style.opacity='0';});
-
-    /* Genesis scroll reveal */
-    const chObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
-    document.querySelectorAll('.chapter').forEach(c=>chObserver.observe(c));
-
-    /* Companions */
-    const horses=[
-      {issue:'Companion No. 01',name:'T-Rex',breed:'Hanoverian',age:'8',gender:'Stallion',photo:'trex.jpg',memorial:false,story:`<p>He arrived imported, four years old, barely schooled — a living storm wrapped in midnight muscle and raw sensitivity. Every horse I had worked with before had been preparation for this one, though I did not know it yet.</p><div class="story-quote">The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.</div><p>We built the piaffe together inside a bamboo circle no wider than fifteen metres. He felt every ounce of pressure I carried. When I stopped trying to fix him and simply stayed — present, honest, unguarded — he offered me everything. Today when he sees me, he calls out. He didn't just teach me how to train horses. He taught me how to train myself.</p>`},
-      {issue:'Companion No. 02',name:'Gladiator',breed:'Warmblood',age:'20',gender:'Stallion',photo:'gladiator.jpg',memorial:true,story:`<p>Gladiator arrived wearing his name like armour — aggressive on the outside, coiled and sharp. But underneath that fire lived something ancient and tender, a sensitivity so deep it frightened him as much as it frightened everyone around him.</p><div class="story-quote">He taught me that fire and fragility have always lived in the same body — in horses, and in men.</div><p>Twenty years of life lived at full intensity, and he burned every single day of it bright. He is gone now. But I feel him every time a horse tests me and I choose to stay.</p>`},
-      {issue:'Companion No. 03',name:'Xanthos',breed:'Warmblood',age:'15',gender:'Gelding',photo:'xanthos.jpg',memorial:false,story:`<p>Xanthos — named after the immortal horse of Achilles, the one who could speak and who wept at his rider's fate. From the first day, this horse carried a mythic quality in his stillness.</p><div class="story-quote">He didn't move like a horse being ridden. He moved like a horse choosing to carry you — and the difference is everything.</div><p>Fifteen years and still carrying wisdom in his body that words cannot translate. He is the kind of horse that reminds you why you chose this life in the first place.</p>`},
-      {issue:'Companion No. 04',name:'Rubin',breed:'Warmblood',age:'10',gender:'Stallion',photo:'rubin.jpg',memorial:false,story:`<p>Rubin. A gemstone of a name for a horse who made you work to find his brilliance. He was not easy in the beginning — layered, complex, a horse who required patience before he would show you anything real.</p><div class="story-quote">The horses that make you earn their trust always give you something more precious than the ones who offer it freely.</div><p>When Rubin finally let you in, what you found was luminous. A mind as sharp as his body, and a willingness that felt like a gift.</p>`},
-      {issue:'Companion No. 05',name:'Highsocity',breed:'Warmblood',age:'7',gender:'Mare',photo:'highsocity.jpg',memorial:true,story:`<p>Seven years. That is all she had, and yet she lived those seven years with an elegance that most creatures never find in a lifetime. Highsocity moved through the world as though she had been born knowing something the rest of us were still searching for.</p><div class="story-quote">She taught me about grace — the kind that costs nothing and means everything.</div><p>She is gone. She is not forgotten. Not for a single day.</p>`},
-      {issue:'Companion No. 06',name:'Yuvraj',breed:'Indian Breed',age:'20',gender:'Stallion',photo:'yuvraj.jpg',memorial:false,story:`<p>Yuvraj means prince, and he has worn that title without vanity for twenty years. There is a quality to old horses that young ones cannot manufacture — a gravity, a patience, a knowing that settles into their eyes like still water.</p><div class="story-quote">Twenty years of living had not made him slow. It had made him true.</div><p>At twenty, he still moves like a king. He reminds me every day that wisdom is simply patience that has stayed long enough to become real.</p>`},
-      {issue:'Companion No. 07',name:'Arjun',breed:'Warmblood',age:'12',gender:'Gelding',photo:'horse7.jpg',memorial:false,story:`<p>If T-Rex was the storm, Arjun was the mountain. Twelve years old, steady as stone, honest in a way that asked nothing dramatic of you — only that you show up and mean it.</p><div class="story-quote">The quiet horses teach the deepest lessons, because they simply live patience and wait for you to understand.</div><p>Some teachers shout. Arjun simply stood and waited until I was worth standing beside.</p>`},
-      {issue:'Companion No. 08',name:'Storm',breed:'Thoroughbred',age:'9',gender:'Mare',photo:'horse8.jpg',memorial:false,story:`<p>She arrived wild — a Thoroughbred mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined — though I suspect it was she who refined me, and not the other way around.</div><p>Working with Storm was working with weather. You didn't control it. You learned to move inside it with respect.</p>`}
-    ];
-    let ci=0;
-    function openStory(i){ci=i;render();document.getElementById('storyOverlay').classList.add('open');document.body.style.overflow='hidden';}
-    function closeStory(){document.getElementById('storyOverlay').classList.remove('open');document.body.style.overflow='';}
-    function render(){
-      const h=horses[ci];
-      document.getElementById('storyIssue').textContent=h.issue;
-      document.getElementById('storyName').textContent=h.name;
-      document.getElementById('navCount').textContent=(ci+1)+' / '+horses.length;
-      document.getElementById('storyPageNum').textContent="The Horseman's Journal · "+h.issue;
-      document.getElementById('storyMemorialTag').innerHTML=h.memorial?'<span class="story-memorial-tag">In Memoriam — Passed Away</span>':'';
-      document.getElementById('storyVitals').innerHTML='<span class="story-vital">'+h.breed+'</span><span class="story-vital">Age: '+h.age+'</span><span class="story-vital">'+h.gender+'</span>';
-      const p=document.getElementById('storyPhoto');p.innerHTML='';p.style.fontSize='';
-      const img=document.createElement('img');img.src=h.photo;img.alt=h.name;img.onerror=function(){p.innerHTML='🐴';p.style.fontSize='8rem';};p.appendChild(img);
-      document.getElementById('storyText').innerHTML=h.story;
-      document.querySelector('.story-right').scrollTop=0;
-    }
-    document.querySelectorAll('.horse-card').forEach((c,i)=>c.addEventListener('click',()=>openStory(i)));
-    document.getElementById('storyClose').addEventListener('click',closeStory);
-    document.getElementById('storyBackdrop').addEventListener('click',closeStory);
-    document.getElementById('prevBtn').addEventListener('click',()=>{ci=(ci-1+horses.length)%horses.length;render();});
-    document.getElementById('nextBtn').addEventListener('click',()=>{ci=(ci+1)%horses.length;render();});
-    document.addEventListener('keydown',e=>{if(!document.getElementById('storyOverlay').classList.contains('open'))return;if(e.key==='Escape')closeStory();if(e.key==='ArrowRight'){ci=(ci+1)%horses.length;render();}if(e.key==='ArrowLeft'){ci=(ci-1+horses.length)%horses.length;render();}});
-    const cardObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*120);});},{threshold:0.1});
-    document.querySelectorAll('.horse-card').forEach(c=>cardObs.observe(c));
-  </script>
-
-</body>
-</html>
-
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
- 
 /* ─── CHRONICLES VIDEO HEADER ─── */
 .chronicles-hero{
   position:relative;width:100%;height:100vh;min-height:580px;
@@ -538,7 +476,6 @@
 }
 @keyframes chrFloat{0%{opacity:0;transform:translateY(60px) scale(.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
 @keyframes fadeUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
- 
 /* ─── HORSE INTRODUCTION ─── */
 .horse-intro{
   position:relative;background:#000;
@@ -595,18 +532,16 @@
   font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:4px;
   color:rgba(212,175,55,0.35);text-transform:uppercase;white-space:nowrap;
 }
- 
 /* ─── CHRONICLES BOOKS SECTION ─── */
 .chronicles{
   position:relative;background:#000;
-  padding:5rem 0 8rem;overflow:hidden;
+  padding:5rem 0 8rem;overflow:visible; /* ← FIXED: was hidden, now visible so the article panel can expand fully */
 }
 .chronicles::before{
   content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.03) 0%,transparent 60%);
   pointer-events:none;
 }
- 
 /* Section header */
 .chr-sec-header{text-align:center;padding:0 2rem 4rem;position:relative;z-index:2;}
 .chr-sec-eyebrow{
@@ -625,7 +560,6 @@
   font-size:clamp(.9rem,1.5vw,1.05rem);
   color:rgba(240,230,200,0.35);letter-spacing:.5px;
 }
- 
 /* Filter tabs */
 .chr-filters{
   display:flex;align-items:center;justify-content:center;
@@ -654,7 +588,6 @@
   width:1px;height:16px;
   background:rgba(212,175,55,0.15);
 }
- 
 /* Books grid */
 .books-grid{
   max-width:1300px;margin:0 auto;
@@ -666,7 +599,6 @@
 }
 @media(max-width:1000px){.books-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:620px){.books-grid{grid-template-columns:1fr;}}
- 
 /* ─── THE 3D BOOK ─── */
 .book-wrap{
   perspective:900px;
@@ -676,7 +608,6 @@
 }
 .book-wrap.visible{opacity:1;transform:translateY(0);}
 .book-wrap.hidden{display:none;}
- 
 .book-3d{
   position:relative;
   transform-style:preserve-3d;
@@ -687,7 +618,6 @@
 .book-wrap:hover .book-3d{
   transform:rotateX(10deg) rotateY(-3deg) translateY(-8px);
 }
- 
 /* Book inner — the actual spread */
 .book-spread{
   display:grid;grid-template-columns:1fr 8px 1fr;
@@ -700,7 +630,6 @@
     0 0 0 1px rgba(212,175,55,0.12);
   position:relative;
 }
- 
 /* Left page — photo */
 .book-left{
   position:relative;overflow:hidden;
@@ -741,7 +670,6 @@
   color:rgba(255,255,255,0.08);line-height:1;
   pointer-events:none;
 }
- 
 /* Spine */
 .book-spine{
   background:linear-gradient(180deg,
@@ -758,7 +686,6 @@
   top:10%;bottom:10%;left:50%;transform:translateX(-50%);
   width:1px;background:rgba(255,255,255,0.15);
 }
- 
 /* Right page — parchment + text */
 .book-right{
   position:relative;
@@ -796,7 +723,6 @@
   transform:rotate(-15deg);
   z-index:0;
 }
- 
 /* Right page content */
 .book-page-num{
   font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:3px;
@@ -848,7 +774,6 @@
 .book-wrap:hover .book-read{color:rgba(180,120,20,1);}
 .book-read::after{content:'→';transition:transform .2s;}
 .book-wrap:hover .book-read::after{transform:translateX(3px);}
- 
 /* Book bottom edge — thickness illusion */
 .book-edge{
   position:absolute;bottom:-8px;left:4px;right:4px;height:8px;
@@ -864,7 +789,6 @@
   filter:blur(6px);
   pointer-events:none;
 }
- 
 /* ─── ARTICLE READER PANEL ─── */
 .article-panel{
   max-width:900px;margin:4rem auto 0;padding:0 2rem;
@@ -877,7 +801,6 @@
   opacity:1;pointer-events:all;
   max-height:none;overflow:visible;
 }
- 
 .art-panel-inner{
   background:linear-gradient(160deg,#f5efd4 0%,#ede0b8 100%);
   border:1px solid rgba(212,175,55,0.2);
@@ -911,7 +834,6 @@
 }
 .art-close::before{transform:rotate(45deg);}
 .art-close::after{transform:rotate(-45deg);}
- 
 .art-header{margin-bottom:2.5rem;position:relative;z-index:1;}
 .art-label{
   font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:4px;
@@ -951,29 +873,24 @@
   padding:1.5rem;border:1px dashed rgba(180,130,40,0.2);
   border-radius:2px;text-align:center;line-height:1.8;
 }
- 
 /* scroll reveal */
 @keyframes bookIn{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body style="background:#000;">
- 
 <!-- =============================================
      CHRONICLES HERO — video header with title
 ============================================= -->
 <section class="chronicles-hero" id="chronicles">
- 
   <!-- Save your video as chronicles-bg.mp4 in GitHub, then remove display:none from .chr-video in CSS -->
   <video class="chr-video" autoplay muted loop playsinline>
     <source src="chronicles-bg.mp4" type="video/mp4">
   </video>
- 
   <div class="chr-animated-bg"></div>
   <div class="chr-particles" id="chrParticles"></div>
   <div class="chr-vignette"></div>
   <div class="chr-bar chr-bar-top"></div>
   <div class="chr-bar chr-bar-bottom"></div>
- 
   <div class="chr-content">
     <p class="chr-eyebrow">The Horseman's Journal</p>
     <h2 class="chr-title">Chron<span class="gold">icles</span></h2>
@@ -983,7 +900,6 @@
     <p class="chr-tagline">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
   </div>
 </section>
- 
 <!-- =============================================
      HORSE INTRODUCTION
 ============================================= -->
@@ -1003,18 +919,15 @@
     </div>
   </div>
 </section>
- 
 <!-- =============================================
      CHRONICLES — 3D BOOKS WITH FILTER TABS
 ============================================= -->
 <section class="chronicles" id="chronicles-books">
- 
   <div class="chr-sec-header">
     <span class="chr-sec-eyebrow">The Written Record</span>
     <h2 class="chr-sec-title">The Articles</h2>
     <p class="chr-sec-sub">Select a path. Open a book. Begin.</p>
   </div>
- 
   <div class="chr-filters">
     <button class="chr-filter-btn active" data-filter="all">All Articles</button>
     <div class="chr-filter-sep"></div>
@@ -1024,9 +937,7 @@
     <div class="chr-filter-sep"></div>
     <button class="chr-filter-btn" data-filter="edge">Your Unique Edge</button>
   </div>
- 
   <div class="books-grid" id="booksGrid">
- 
     <!-- BOOK 1 -->
     <div class="book-wrap" data-category="foundational" data-article="0">
       <div class="book-3d">
@@ -1057,7 +968,6 @@
         <div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 2 -->
     <div class="book-wrap" data-category="foundational" data-article="1">
       <div class="book-3d">
@@ -1087,7 +997,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 3 -->
     <div class="book-wrap" data-category="foundational" data-article="2">
       <div class="book-3d">
@@ -1117,7 +1026,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 4 -->
     <div class="book-wrap" data-category="foundational" data-article="3">
       <div class="book-3d">
@@ -1147,7 +1055,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 5 -->
     <div class="book-wrap" data-category="foundational" data-article="4">
       <div class="book-3d">
@@ -1177,7 +1084,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 6 -->
     <div class="book-wrap" data-category="practical" data-article="5">
       <div class="book-3d">
@@ -1207,7 +1113,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 7 -->
     <div class="book-wrap" data-category="practical" data-article="6">
       <div class="book-3d">
@@ -1237,7 +1142,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 8 -->
     <div class="book-wrap" data-category="practical" data-article="7">
       <div class="book-3d">
@@ -1267,7 +1171,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 9 -->
     <div class="book-wrap" data-category="practical" data-article="8">
       <div class="book-3d">
@@ -1297,7 +1200,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 10 -->
     <div class="book-wrap" data-category="practical" data-article="9">
       <div class="book-3d">
@@ -1327,7 +1229,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 11 -->
     <div class="book-wrap" data-category="edge" data-article="10">
       <div class="book-3d">
@@ -1357,7 +1258,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 12 -->
     <div class="book-wrap" data-category="edge" data-article="11">
       <div class="book-3d">
@@ -1387,7 +1287,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 13 -->
     <div class="book-wrap" data-category="edge" data-article="12">
       <div class="book-3d">
@@ -1417,7 +1316,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 14 -->
     <div class="book-wrap" data-category="edge" data-article="13">
       <div class="book-3d">
@@ -1447,7 +1345,6 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
     <!-- BOOK 15 -->
     <div class="book-wrap" data-category="edge" data-article="14">
       <div class="book-3d">
@@ -1477,9 +1374,7 @@
         <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
     </div>
- 
   </div><!-- end books-grid -->
- 
   <!-- ─── ARTICLE READER PANEL ─── -->
   <div class="article-panel" id="articlePanel">
     <div class="art-panel-inner">
@@ -1494,10 +1389,8 @@
       <div class="art-body" id="artBody"></div>
     </div>
   </div>
- 
 </section>
 <!-- END CHRONICLES SECTION -->
- 
 <script>
 /* ─── Chronicles particles ─── */
 const cp = document.getElementById('chrParticles');
@@ -1510,7 +1403,6 @@ if(cp){
     cp.appendChild(p);
   }
 }
- 
 /* ─── Video swap for chronicles ─── */
 const chrVideo = document.querySelector('.chr-video');
 if(chrVideo){
@@ -1519,7 +1411,6 @@ if(chrVideo){
     document.querySelector('.chr-animated-bg').style.opacity='0';
   });
 }
- 
 /* ─── Article data ─── */
 const articles = [
   {label:'Foundational · Article I',title:'Understanding Horse Psychology: How Horses Think and Perceive Humans',
@@ -1614,7 +1505,6 @@ const articles = [
    <p>The second way is the way of genuine partnership. It begins not with what you want the horse to do but with understanding what the horse is. It requires that you bring more curiosity than certainty, more listening than instruction, more patience than agenda. It produces a horse that is not performing for you — it is participating with you. The difference is everything. Partnership requires two willing participants. Everything else, however graceful or technically accomplished, is something less.</p>
    <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`}
 ];
- 
 /* ─── Filter buttons ─── */
 document.querySelectorAll('.chr-filter-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -1629,11 +1519,9 @@ document.querySelectorAll('.chr-filter-btn').forEach(btn=>{
     closeArticle();
   });
 });
- 
 /* ─── Open/close article ─── */
 const panel = document.getElementById('articlePanel');
 let openArticleIndex = -1;
- 
 function openArticle(i){
   const a = articles[i];
   openArticleIndex = i;
@@ -1650,14 +1538,12 @@ function closeArticle(){
   openArticleIndex=-1;
 }
 document.getElementById('artClose').addEventListener('click', closeArticle);
- 
 document.querySelectorAll('.book-wrap').forEach((bk,i)=>{
   bk.addEventListener('click',()=>{
-    if(openArticleIndex===i){ closeArticle(); return; }
+    if(openArticleIndex===parseInt(bk.dataset.article)){ closeArticle(); return; }
     openArticle(parseInt(bk.dataset.article));
   });
 });
- 
 /* ─── Book scroll reveal ─── */
 const bookObs = new IntersectionObserver(entries=>{
   entries.forEach((e,idx)=>{
@@ -1665,8 +1551,50 @@ const bookObs = new IntersectionObserver(entries=>{
   });
 },{threshold:0.08});
 document.querySelectorAll('.book-wrap').forEach(b=>bookObs.observe(b));
+/* Stars */
+const starsEl=document.getElementById('stars');
+for(let i=0;i<130;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;animation-duration:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;starsEl.appendChild(s);}
+/* Video swap */
+const video=document.querySelector('.hero-video');
+video.addEventListener('canplay',()=>{video.style.display='block';document.querySelector('.horse-bg').style.opacity='0';});
+/* Genesis scroll reveal */
+const chObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.chapter').forEach(c=>chObserver.observe(c));
+/* Companions */
+const horses=[
+  {issue:'Companion No. 01',name:'T-Rex',breed:'Hanoverian',age:'8',gender:'Stallion',photo:'trex.jpg',memorial:false,story:`<p>He arrived imported, four years old, barely schooled — a living storm wrapped in midnight muscle and raw sensitivity. Every horse I had worked with before had been preparation for this one, though I did not know it yet.</p><div class="story-quote">The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.</div><p>We built the piaffe together inside a bamboo circle no wider than fifteen metres. He felt every ounce of pressure I carried. When I stopped trying to fix him and simply stayed — present, honest, unguarded — he offered me everything. Today when he sees me, he calls out. He didn't just teach me how to train horses. He taught me how to train myself.</p>`},
+  {issue:'Companion No. 02',name:'Gladiator',breed:'Warmblood',age:'20',gender:'Stallion',photo:'gladiator.jpg',memorial:true,story:`<p>Gladiator arrived wearing his name like armour — aggressive on the outside, coiled and sharp. But underneath that fire lived something ancient and tender, a sensitivity so deep it frightened him as much as it frightened everyone around him.</p><div class="story-quote">He taught me that fire and fragility have always lived in the same body — in horses, and in men.</div><p>Twenty years of life lived at full intensity, and he burned every single day of it bright. He is gone now. But I feel him every time a horse tests me and I choose to stay.</p>`},
+  {issue:'Companion No. 03',name:'Xanthos',breed:'Warmblood',age:'15',gender:'Gelding',photo:'xanthos.jpg',memorial:false,story:`<p>Xanthos — named after the immortal horse of Achilles, the one who could speak and who wept at his rider's fate. From the first day, this horse carried a mythic quality in his stillness.</p><div class="story-quote">He didn't move like a horse being ridden. He moved like a horse choosing to carry you — and the difference is everything.</div><p>Fifteen years and still carrying wisdom in his body that words cannot translate. He is the kind of horse that reminds you why you chose this life in the first place.</p>`},
+  {issue:'Companion No. 04',name:'Rubin',breed:'Warmblood',age:'10',gender:'Stallion',photo:'rubin.jpg',memorial:false,story:`<p>Rubin. A gemstone of a name for a horse who made you work to find his brilliance. He was not easy in the beginning — layered, complex, a horse who required patience before he would show you anything real.</p><div class="story-quote">The horses that make you earn their trust always give you something more precious than the ones who offer it freely.</div><p>When Rubin finally let you in, what you found was luminous. A mind as sharp as his body, and a willingness that felt like a gift.</p>`},
+  {issue:'Companion No. 05',name:'Highsocity',breed:'Warmblood',age:'7',gender:'Mare',photo:'highsocity.jpg',memorial:true,story:`<p>Seven years. That is all she had, and yet she lived those seven years with an elegance that most creatures never find in a lifetime. Highsocity moved through the world as though she had been born knowing something the rest of us were still searching for.</p><div class="story-quote">She taught me about grace — the kind that costs nothing and means everything.</div><p>She is gone. She is not forgotten. Not for a single day.</p>`},
+  {issue:'Companion No. 06',name:'Yuvraj',breed:'Indian Breed',age:'20',gender:'Stallion',photo:'yuvraj.jpg',memorial:false,story:`<p>Yuvraj means prince, and he has worn that title without vanity for twenty years. There is a quality to old horses that young ones cannot manufacture — a gravity, a patience, a knowing that settles into their eyes like still water.</p><div class="story-quote">Twenty years of living had not made him slow. It had made him true.</div><p>At twenty, he still moves like a king. He reminds me every day that wisdom is simply patience that has stayed long enough to become real.</p>`},
+  {issue:'Companion No. 07',name:'Arjun',breed:'Warmblood',age:'12',gender:'Gelding',photo:'horse7.jpg',memorial:false,story:`<p>If T-Rex was the storm, Arjun was the mountain. Twelve years old, steady as stone, honest in a way that asked nothing dramatic of you — only that you show up and mean it.</p><div class="story-quote">The quiet horses teach the deepest lessons, because they simply live patience and wait for you to understand.</div><p>Some teachers shout. Arjun simply stood and waited until I was worth standing beside.</p>`},
+  {issue:'Companion No. 08',name:'Storm',breed:'Thoroughbred',age:'9',gender:'Mare',photo:'horse8.jpg',memorial:false,story:`<p>She arrived wild — a Thoroughbred mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined — though I suspect it was she who refined me, and not the other way around.</div><p>Working with Storm was working with weather. You didn't control it. You learned to move inside it with respect.</p>`}
+];
+let ci=0;
+function openStory(i){ci=i;render();document.getElementById('storyOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeStory(){document.getElementById('storyOverlay').classList.remove('open');document.body.style.overflow='';}
+function render(){
+  const h=horses[ci];
+  document.getElementById('storyIssue').textContent=h.issue;
+  document.getElementById('storyName').textContent=h.name;
+  document.getElementById('navCount').textContent=(ci+1)+' / '+horses.length;
+  document.getElementById('storyPageNum').textContent="The Horseman's Journal · "+h.issue;
+  document.getElementById('storyMemorialTag').innerHTML=h.memorial?'<span class="story-memorial-tag">In Memoriam — Passed Away</span>':'';
+  document.getElementById('storyVitals').innerHTML='<span class="story-vital">'+h.breed+'</span><span class="story-vital">Age: '+h.age+'</span><span class="story-vital">'+h.gender+'</span>';
+  const p=document.getElementById('storyPhoto');p.innerHTML='';p.style.fontSize='';
+  const img=document.createElement('img');img.src=h.photo;img.alt=h.name;img.onerror=function(){p.innerHTML='🐴';p.style.fontSize='8rem';};p.appendChild(img);
+  document.getElementById('storyText').innerHTML=h.story;
+  document.querySelector('.story-right').scrollTop=0;
+}
+document.querySelectorAll('.horse-card').forEach((c,i)=>c.addEventListener('click',()=>openStory(i)));
+document.getElementById('storyClose').addEventListener('click',closeStory);
+document.getElementById('storyBackdrop').addEventListener('click',closeStory);
+document.getElementById('prevBtn').addEventListener('click',()=>{ci=(ci-1+horses.length)%horses.length;render();});
+document.getElementById('nextBtn').addEventListener('click',()=>{ci=(ci+1)%horses.length;render();});
+document.addEventListener('keydown',e=>{if(!document.getElementById('storyOverlay').classList.contains('open'))return;if(e.key==='Escape')closeStory();if(e.key==='ArrowRight'){ci=(ci+1)%horses.length;render();}if(e.key==='ArrowLeft'){ci=(ci-1+horses.length)%horses.length;render();}});
+const cardObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*120);});},{threshold:0.1});
+document.querySelectorAll('.horse-card').forEach(c=>cardObs.observe(c));
 </script>
- 
 </body>
 </html>
- 
