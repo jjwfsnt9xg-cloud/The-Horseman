@@ -201,6 +201,108 @@
     .story-nav-btn:hover{color:#E8C84A;}
     .story-nav-count{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;color:rgba(212,175,55,0.25);}
     @media(max-width:700px){.story-magazine{grid-template-columns:1fr;}.story-left{display:none;}}
+
+    /* CHRONICLES */
+    .chronicles-hero{position:relative;width:100%;height:100vh;min-height:580px;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}
+    .chr-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;z-index:1;display:none;}
+    .chr-animated-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 30% 60%,rgba(212,175,55,0.12) 0%,transparent 55%),radial-gradient(ellipse at 75% 25%,rgba(100,40,0,0.2) 0%,transparent 50%),radial-gradient(ellipse at 50% 100%,rgba(50,20,80,0.15) 0%,transparent 50%),linear-gradient(180deg,#080400 0%,#000 100%);}
+    .chr-particles{position:absolute;inset:0;z-index:2;pointer-events:none;}
+    .chr-p{position:absolute;border-radius:50%;background:rgba(212,175,55,0.5);animation:chrRise linear infinite;}
+    @keyframes chrRise{0%{transform:translateY(0) translateX(0);opacity:0;}10%{opacity:1;}90%{opacity:.3;}100%{transform:translateY(-100vh) translateX(var(--d));opacity:0;}}
+    .chr-vignette{position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at 50% 50%,transparent 20%,rgba(0,0,0,0.8) 100%);}
+    .chr-bar{position:absolute;left:0;right:0;height:50px;background:#000;z-index:4;}
+    .chr-bar-top{top:0;}.chr-bar-bottom{bottom:0;}
+    .chr-content{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.2rem;padding:0 2rem;}
+    .chr-eyebrow{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:7px;color:rgba(212,175,55,0.5);text-transform:uppercase;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:.3s;}
+    .chr-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;color:#fff;letter-spacing:3px;line-height:1;text-shadow:0 0 60px rgba(212,175,55,0.5),0 0 120px rgba(212,175,55,0.2),0 4px 40px rgba(0,0,0,1);animation:chrFloat 2s cubic-bezier(.16,1,.3,1) forwards;opacity:0;animation-delay:.6s;}
+    .chr-title .gold{color:#E8C84A;text-shadow:0 0 40px rgba(212,175,55,1),0 0 100px rgba(212,175,55,0.4),0 4px 40px rgba(0,0,0,1);}
+    .chr-div{display:flex;align-items:center;gap:1rem;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:1.1s;}
+    .chr-dline{width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.5));}
+    .chr-dline.r{background:linear-gradient(90deg,rgba(212,175,55,0.5),transparent);}
+    .chr-dgem{width:6px;height:6px;background:#E8C84A;transform:rotate(45deg);box-shadow:0 0 10px rgba(212,175,55,1);}
+    .chr-tagline{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(.9rem,1.8vw,1.15rem);color:rgba(255,240,200,0.6);letter-spacing:1px;max-width:500px;line-height:1.8;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:1.3s;}
+    @keyframes chrFloat{0%{opacity:0;transform:translateY(60px) scale(.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
+    .horse-intro{position:relative;background:#000;padding:7rem 2rem 6rem;overflow:hidden;}
+    .horse-intro::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.05) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(100,40,0,0.06) 0%,transparent 50%);pointer-events:none;}
+    .intro-inner{max-width:860px;margin:0 auto;position:relative;z-index:2;text-align:center;}
+    .intro-badge{display:inline-flex;align-items:center;gap:10px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:5px;color:rgba(212,175,55,0.5);text-transform:uppercase;margin-bottom:2.5rem;}
+    .intro-badge::before,.intro-badge::after{content:'';display:block;width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.4));}
+    .intro-badge::after{background:linear-gradient(90deg,rgba(212,175,55,0.4),transparent);}
+    .intro-headline{font-family:'Cinzel Decorative',serif;font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:700;color:#E8C84A;letter-spacing:1px;line-height:1.2;text-shadow:0 0 30px rgba(212,175,55,0.25);margin-bottom:2.5rem;}
+    .intro-body{font-family:'EB Garamond',serif;font-size:clamp(1.05rem,1.8vw,1.25rem);color:rgba(240,230,200,0.75);line-height:2;letter-spacing:.2px;margin-bottom:2rem;}
+    .intro-body p{margin-bottom:1.5rem;}
+    .intro-body p:first-child::first-letter{font-family:'Cinzel Decorative',serif;font-size:3.6em;font-weight:700;color:#E8C84A;float:left;line-height:.75;margin:0.1em 0.12em 0 0;text-shadow:0 0 25px rgba(212,175,55,0.6);}
+    .intro-ornament{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:3rem;}
+    .iorn-line{flex:1;max-width:160px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3));}
+    .iorn-line.r{background:linear-gradient(90deg,rgba(212,175,55,0.3),transparent);}
+    .iorn-text{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:4px;color:rgba(212,175,55,0.35);text-transform:uppercase;white-space:nowrap;}
+    .chronicles{position:relative;background:#000;padding:5rem 0 8rem;overflow:hidden;}
+    .chronicles::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.03) 0%,transparent 60%);pointer-events:none;}
+    .chr-sec-header{text-align:center;padding:0 2rem 4rem;position:relative;z-index:2;}
+    .chr-sec-eyebrow{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:6px;color:rgba(212,175,55,0.4);text-transform:uppercase;display:block;margin-bottom:1rem;}
+    .chr-sec-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:#E8C84A;letter-spacing:2px;line-height:1.1;text-shadow:0 0 30px rgba(212,175,55,0.2);margin-bottom:.8rem;}
+    .chr-sec-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(.9rem,1.5vw,1.05rem);color:rgba(240,230,200,0.35);letter-spacing:.5px;}
+    .chr-filters{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:0 2rem 3.5rem;position:relative;z-index:2;}
+    .chr-filter-btn{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:2.5px;color:rgba(212,175,55,0.45);text-transform:uppercase;background:transparent;border:1px solid rgba(212,175,55,0.15);padding:9px 22px;border-radius:2px;cursor:pointer;transition:all .3s;white-space:nowrap;}
+    .chr-filter-btn:hover{color:rgba(212,175,55,0.8);border-color:rgba(212,175,55,0.35);background:rgba(212,175,55,0.04);}
+    .chr-filter-btn.active{color:#0a0500;background:#E8C84A;border-color:#E8C84A;box-shadow:0 0 20px rgba(212,175,55,0.3);}
+    .chr-filter-sep{width:1px;height:16px;background:rgba(212,175,55,0.15);}
+    .books-grid{max-width:1300px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem 2.5rem;position:relative;z-index:2;}
+    @media(max-width:1000px){.books-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:620px){.books-grid{grid-template-columns:1fr;}}
+    .book-wrap{perspective:900px;cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+    .book-wrap.visible{opacity:1;transform:translateY(0);}
+    .book-wrap.hidden{display:none;}
+    .book-3d{position:relative;transform-style:preserve-3d;transform:rotateX(22deg) rotateY(-6deg);transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s ease;width:100%;}
+    .book-wrap:hover .book-3d{transform:rotateX(10deg) rotateY(-3deg) translateY(-8px);}
+    .book-spread{display:grid;grid-template-columns:1fr 8px 1fr;width:100%;border-radius:3px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.9),0 10px 25px rgba(0,0,0,0.6),0 0 0 1px rgba(212,175,55,0.12);position:relative;}
+    .book-left{position:relative;overflow:hidden;min-height:340px;background:#0d0800;}
+    .book-left img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s ease;filter:brightness(.85) sepia(.1);}
+    .book-wrap:hover .book-left img{transform:scale(1.04);}
+    .book-left-placeholder{width:100%;height:100%;min-height:340px;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:.25;}
+    .book-left::after{content:'';position:absolute;top:0;right:0;bottom:0;width:24px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.5));pointer-events:none;}
+    .book-ribbon{position:absolute;top:16px;left:0;z-index:3;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;color:#0a0500;text-transform:uppercase;background:#E8C84A;padding:4px 12px 4px 10px;clip-path:polygon(0 0,100% 0,92% 50%,100% 100%,0 100%);font-weight:600;}
+    .book-num{position:absolute;bottom:12px;left:12px;z-index:3;font-family:'Cinzel Decorative',serif;font-size:2.2rem;font-weight:700;color:rgba(255,255,255,0.08);line-height:1;pointer-events:none;}
+    .book-spine{background:linear-gradient(180deg,rgba(212,175,55,0.6) 0%,rgba(180,130,20,0.8) 30%,rgba(212,175,55,0.5) 60%,rgba(140,90,0,0.7) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .book-spine::before{content:'';position:absolute;top:10%;bottom:10%;left:50%;transform:translateX(-50%);width:1px;background:rgba(255,255,255,0.15);}
+    .book-right{position:relative;background:linear-gradient(160deg,#f5efd4 0%,#ede0b8 40%,#e8d8a0 100%);padding:1.4rem 1.4rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;overflow:hidden;min-height:340px;}
+    .book-right::before{content:'';position:absolute;left:0;right:0;top:0;bottom:0;background:repeating-linear-gradient(180deg,transparent,transparent 27px,rgba(180,150,80,0.12) 27px,rgba(180,150,80,0.12) 28px);pointer-events:none;}
+    .book-right::after{content:'';position:absolute;left:28px;top:0;bottom:0;width:1px;background:rgba(200,100,100,0.2);pointer-events:none;}
+    .book-watermark{position:absolute;bottom:-10px;right:-10px;font-size:7rem;opacity:.05;pointer-events:none;line-height:1;transform:rotate(-15deg);z-index:0;}
+    .book-page-num{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:3px;color:rgba(100,70,20,0.4);text-transform:uppercase;text-align:right;position:relative;z-index:1;}
+    .book-art-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:3px;color:rgba(140,90,20,0.6);text-transform:uppercase;position:relative;z-index:1;}
+    .book-art-title{font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:#3a2200;letter-spacing:.5px;line-height:1.35;position:relative;z-index:1;}
+    .book-rule{height:1px;background:linear-gradient(90deg,rgba(180,130,40,0.4),transparent);position:relative;z-index:1;}
+    .book-art-text{font-family:'EB Garamond',serif;font-size:.82rem;line-height:1.75;color:rgba(50,30,5,0.75);position:relative;z-index:1;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;}
+    .book-keywords{display:flex;gap:4px;flex-wrap:wrap;position:relative;z-index:1;margin-top:auto;}
+    .book-kw{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:1.5px;color:rgba(140,90,20,0.65);text-transform:uppercase;padding:2px 7px;border:1px solid rgba(180,130,40,0.25);border-radius:1px;background:rgba(212,175,55,0.06);}
+    .book-read{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:2px;color:rgba(180,120,20,0.7);text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;position:relative;z-index:1;transition:color .2s;}
+    .book-wrap:hover .book-read{color:rgba(180,120,20,1);}
+    .book-read::after{content:'→';transition:transform .2s;}
+    .book-wrap:hover .book-read::after{transform:translateX(3px);}
+    .book-edge{position:absolute;bottom:-8px;left:4px;right:4px;height:8px;background:linear-gradient(180deg,rgba(30,20,0,0.7),rgba(10,5,0,0.9));border-radius:0 0 3px 3px;transform:translateZ(-4px);z-index:-1;}
+    .book-shadow{position:absolute;bottom:-20px;left:5%;right:5%;height:20px;background:radial-gradient(ellipse,rgba(0,0,0,0.6) 0%,transparent 70%);filter:blur(6px);pointer-events:none;}
+    .article-panel{max-width:900px;margin:4rem auto 0;padding:0 2rem;position:relative;z-index:3;opacity:0;pointer-events:none;transition:opacity .5s ease;max-height:0;overflow:hidden;}
+    .article-panel.open{opacity:1;pointer-events:all;max-height:none;overflow:visible;}
+    .art-panel-inner{background:linear-gradient(160deg,#f5efd4 0%,#ede0b8 100%);border:1px solid rgba(212,175,55,0.2);border-radius:3px;padding:3.5rem 4rem;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.8),0 0 0 1px rgba(212,175,55,0.1);}
+    .art-panel-inner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent,transparent 31px,rgba(180,150,80,0.1) 31px,rgba(180,150,80,0.1) 32px);pointer-events:none;}
+    .art-watermark{position:absolute;bottom:-20px;right:-20px;font-size:14rem;opacity:.04;transform:rotate(-15deg);pointer-events:none;line-height:1;}
+    .art-close{position:absolute;top:16px;right:16px;z-index:10;width:32px;height:32px;border:1px solid rgba(180,130,40,0.3);border-radius:50%;background:rgba(212,175,55,0.08);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .art-close:hover{background:rgba(212,175,55,0.2);border-color:rgba(180,130,40,0.6);}
+    .art-close::before,.art-close::after{content:'';position:absolute;width:12px;height:1px;background:rgba(100,60,10,0.7);}
+    .art-close::before{transform:rotate(45deg);}
+    .art-close::after{transform:rotate(-45deg);}
+    .art-header{margin-bottom:2.5rem;position:relative;z-index:1;}
+    .art-label{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:4px;color:rgba(140,90,20,0.5);text-transform:uppercase;display:block;margin-bottom:.8rem;}
+    .art-title{font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.5vw,1.7rem);font-weight:700;color:#2a1800;line-height:1.25;letter-spacing:.3px;margin-bottom:1.2rem;}
+    .art-rule{height:1.5px;background:linear-gradient(90deg,rgba(180,130,40,0.5),rgba(212,175,55,0.2),transparent);margin-bottom:1.2rem;}
+    .art-keywords{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2rem;}
+    .art-kw{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:1.5px;color:rgba(140,90,20,0.7);text-transform:uppercase;padding:3px 10px;border:1px solid rgba(180,130,40,0.25);border-radius:1px;background:rgba(212,175,55,0.08);}
+    .art-body{font-family:'EB Garamond',serif;font-size:clamp(1rem,1.6vw,1.15rem);line-height:2.1;color:rgba(40,20,0,0.8);position:relative;z-index:1;}
+    .art-body p{margin-bottom:1.4rem;text-indent:2em;}
+    .art-body p:first-child{text-indent:0;}
+    .art-body p:first-child::first-letter{font-family:'Cinzel Decorative',serif;font-size:3.5em;font-weight:700;color:#8a5c00;float:left;line-height:.75;margin:0.1em 0.1em 0 0;}
+    .art-placeholder{font-family:'EB Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(140,90,20,0.45);padding:1.5rem;border:1px dashed rgba(180,130,40,0.2);border-radius:2px;text-align:center;line-height:1.8;}
   </style>
 </head>
 <body>
@@ -293,10 +395,10 @@
       <div class="chapter" id="ch1">
         <div class="chapter-header"><span class="chapter-num">Chapter I</span><div class="chapter-line"></div><span class="chapter-title-label">Eleven Years</span></div>
         <div class="chapter-body">
-          <p class="dropcap">For eleven years I have lived inside the world of horses — stallions, warmbloods, creatures of pure instinct and ancient grace. They have slowly, mercilessly, remade me from the inside. Horsemanship was never about breaking them. It was never about force or domination. It was about learning to speak without words, to stand without fear, and to become the kind of man a thousand-pound animal chooses to trust with his life.</p>
+          <p class="dropcap">For eleven years I have lived inside the world of horses. Stallions, warmbloods, creatures of pure instinct and ancient grace. They have slowly, mercilessly, remade me from the inside. Horsemanship was never about breaking them. It was never about force or domination. It was about learning to speak without words, to stand without fear, and to become the kind of man a thousand pound animal chooses to trust with his life.</p>
           <p>Yet even after eleven years among them, the rest of the world still feels too narrow for me. Only in their shadow do I finally feel tall enough to breathe.</p>
-          <p>I am ordinary. Quiet. A man whose heart has never learned how to beat below 120 — a restless drum that keeps time with something it cannot name. Shame has walked beside me longer than any friend. Disgust — first whispered by others, then repeated endlessly inside my own mind — has followed me like dust rising behind a galloping horse on a dry trail. I have never belonged in rooms full of people. The only place the air ever felt truly breathable was when a horse stood close, ears soft, eyes half-closed, breathing with me as if we had known each other long before language existed.</p>
-          <p>For the first seven or eight years, I trained like a man trying to outrun his own worth. Head high. Steps perfect. Response instant. I was never cruel and never raised a hand in anger. But my fingers carried a hidden tightness — the desperate need to prove I was enough. The horses obeyed me. Yet they never truly melted into my presence. They never turned back after the work was done to rest their heavy heads against my chest as if I were home.</p>
+          <p>I am ordinary. Quiet. A man whose heart has never learned how to beat below 120, a restless drum that keeps time with something it cannot name. Shame has walked beside me longer than any friend. Disgust, first whispered by others and then repeated endlessly inside my own mind, has followed me like dust rising behind a galloping horse on a dry trail. I have never belonged in rooms full of people. The only place the air ever felt truly breathable was when a horse stood close, ears soft, eyes half closed, breathing with me as if we had known each other long before language existed.</p>
+          <p>For the first seven or eight years, I trained like a man trying to outrun his own worth. Head high. Steps perfect. Response instant. I was never cruel and never raised a hand in anger. But my fingers carried a hidden tightness, the desperate need to prove I was enough. The horses obeyed me. Yet they never truly melted into my presence. They never turned back after the work was done to rest their heavy heads against my chest as if I were home.</p>
         </div>
       </div>
       <div class="chapter-divider"><div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div></div>
@@ -307,20 +409,20 @@
           <p>Imported. Four years old. Barely schooled. A living storm wrapped in midnight muscle and raw sensitivity.</p>
           <p>He felt different from every horse I had worked with before. There was a depth in his eyes and a power in his presence that touched something deeper in me. I had handled difficult horses before. I had guided frightened students through their fears. But this stallion was different. He could not speak, yet he read me with a honesty that cut straight through every mask I wore. I could speak, yet I had spent years speaking only the language of control.</p>
           <div class="pullquote">The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.</div>
-          <p>We worked inside a small circle no wider than fifteen metres — built from bamboo poles and rusted iron, barely strong enough to hold a breeze, let alone a panicked stallion. One wrong move and he could shatter the fence or injure himself badly. That fear lived quietly in both of us every single day.</p>
-          <p>We were building the piaffe — that proud, suspended trot in place. Slow. Patient. Breath by breath. He felt every ounce of pressure I carried.</p>
+          <p>We worked inside a small circle no wider than fifteen metres, built from bamboo poles and rusted iron, barely strong enough to hold a breeze, let alone a panicked stallion. One wrong move and he could shatter the fence or injure himself badly. That fear lived quietly in both of us every single day.</p>
+          <p>We were building the piaffe, that proud, suspended trot in place. Slow. Patient. Breath by breath. He felt every ounce of pressure I carried.</p>
         </div>
       </div>
       <div class="chapter-divider"><div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div></div>
       <div class="chapter" id="ch3">
         <div class="chapter-header"><span class="chapter-num">Chapter III</span><div class="chapter-line"></div><span class="chapter-title-label">The Storm</span></div>
         <div class="chapter-body">
-          <p class="dropcap">He tried to run once. I stopped him firmly. He tried again. This time my hand tangled in the rope. He exploded forward and dragged me across the dirt like a broken doll. Someone else caught him and brought him to a stop. I stood up, dusted the earth from my skin, and kept working — not because I was brave, but because I still did not fully understand what was really happening between us.</p>
-          <p>Later that day I let him run free. I allowed him to empty everything he was carrying inside. When the storm finally passed, he walked back to me on his own. That day the lesson landed like a hoof to the chest: He was never fighting me. He was only begging for the space to be himself.</p>
-          <p>Another afternoon, I was trying harder than ever — following every rule, desperate to prove I could handle him. He reared once. Then again — closer, higher, more powerful. And something deep inside me finally snapped.</p>
-          <p>I shouted. I blamed him. I walked away. "I can't do this anymore."</p>
-          <p>I wasn't afraid of the horse. I was terrified of the man I was becoming in front of him. For the first time in eleven years, I truly believed I was finished with horses.</p>
-          <p>I don't know what kept me from leaving during those twenty painful days. Inside my head the voices were screaming — every insult I had ever swallowed, every doubt, every judgment. I felt small, exposed, and completely worthless.</p>
+          <p class="dropcap">He tried to run once. I stopped him firmly. He tried again. This time my hand tangled in the rope. He exploded forward and dragged me across the dirt like a broken doll. Someone else caught him and brought him to a stop. I stood up, dusted the earth from my skin, and kept working. Not because I was brave, but because I still did not fully understand what was really happening between us.</p>
+          <p>Later that day I let him run free. I allowed him to empty everything he was carrying inside. When the storm finally passed, he walked back to me on his own. That day the lesson landed like a hoof to the chest. He was never fighting me. He was only begging for the space to be himself.</p>
+          <p>Another afternoon, I was trying harder than ever, following every rule, desperate to prove I could handle him. He reared once. Then again, closer, higher, more powerful. And something deep inside me finally snapped.</p>
+          <p>I shouted. I blamed him. I walked away. I told myself I could not do this anymore.</p>
+          <p>I was not afraid of the horse. I was terrified of the man I was becoming in front of him. For the first time in eleven years, I truly believed I was finished with horses.</p>
+          <p>I do not know what kept me from leaving during those twenty painful days. Inside my head the voices were screaming, every insult I had ever swallowed, every doubt, every judgment. I felt small, exposed, and completely worthless.</p>
           <div class="pullquote">But I stayed.</div>
         </div>
       </div>
@@ -328,27 +430,27 @@
       <div class="chapter" id="ch4">
         <div class="chapter-header"><span class="chapter-num">Chapter IV</span><div class="chapter-line"></div><span class="chapter-title-label">The Surrender</span></div>
         <div class="chapter-body">
-          <p class="dropcap">I stopped performing. I stopped correcting. I simply watched — the horse, myself, and the silent space growing between us.</p>
+          <p class="dropcap">I stopped performing. I stopped correcting. I simply watched the horse, myself, and the silent space growing between us.</p>
           <p>When I finally stepped back into the circle, I did the one thing I had never truly done before. I stopped trying to fix him. I stayed close. Quiet. Present. And the world tilted on its axis.</p>
-          <p>Before he could even think of running, I felt the fear rise in my own body — that old familiar freeze. This time I did not move. I did not tighten. I did not try to control. I simply stayed.</p>
+          <p>Before he could even think of running, I felt the fear rise in my own body, that old familiar freeze. This time I did not move. I did not tighten. I did not try to control. I simply stayed.</p>
           <p>And he stayed too.</p>
-          <div class="pullquote">That was the moment the truth hit me like dawn after the longest night: A horse does not react to your hands first. He reacts to your soul. If I panic, he panics faster. If I am calm, he becomes calm. If I am honest, he offers me everything he has.</div>
-          <p>So I stopped training him the old way. I started understanding him instead. Every small honest effort — a pause, a soft look, a single willing step — I honoured it like the precious gift it was.</p>
+          <div class="pullquote">That was the moment the truth hit me like dawn after the longest night. A horse does not react to your hands first. He reacts to your soul. If I panic, he panics faster. If I am calm, he becomes calm. If I am honest, he offers me everything he has.</div>
+          <p>So I stopped training him the old way. I started understanding him instead. Every small honest effort, a pause, a soft look, a single willing step, I honoured it like the precious gift it was.</p>
           <p>He began to change on his own.</p>
-          <p>The piaffe came first in tiny sparks. Then in growing waves. Then in full, breathtaking power and beauty. When I returned after a few days away, I didn't have to teach him again. I simply stood there and showed him he was safe to try.</p>
-          <p>Within minutes, he offered it — proud, beautiful, and perfect.</p>
+          <p>The piaffe came first in tiny sparks. Then in growing waves. Then in full, breathtaking power and beauty. When I returned after a few days away, I did not have to teach him again. I simply stood there and showed him he was safe to try.</p>
+          <p>Within minutes, he offered it, proud, beautiful, and perfect.</p>
         </div>
       </div>
       <div class="chapter-divider"><div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div></div>
       <div class="chapter" id="ch5">
         <div class="chapter-header"><span class="chapter-num">Chapter V</span><div class="chapter-line"></div><span class="chapter-title-label">The Bond</span></div>
         <div class="chapter-body">
-          <p class="dropcap">Today, when he sees me, he calls out. Sometimes with a low nicker. Sometimes by offering the piaffe right there in the open. He runs to block my path. He leans his massive body into mine. He rests that great, heavy head on my chest, on my shoulder, in the open cradle of my palms — and lets out the deepest sigh of trust I have ever heard.</p>
+          <p class="dropcap">Today, when he sees me, he calls out. Sometimes with a low nicker. Sometimes by offering the piaffe right there in the open. He runs to block my path. He leans his massive body into mine. He rests that great, heavy head on my chest, on my shoulder, in the open cradle of my palms and lets out the deepest sigh of trust I have ever heard.</p>
           <p>Scratching has become our private language. Presence has become our unbreakable bond.</p>
-          <p>I thought I was training a black stallion. The truth is far more beautiful and far more humbling: He was training me.</p>
-          <p>Through him I learned what no book, no teacher, and no amount of years could ever teach with words: how to stay when every cell in my body wants to run, how to feel everything without being destroyed by it, and how to be calm without forcing calm.</p>
+          <p>I thought I was training a black stallion. The truth is far more beautiful and far more humbling. He was training me.</p>
+          <p>Through him I learned what no book, no teacher, and no amount of years could ever teach with words. How to stay when every cell in my body wants to run. How to feel everything without being destroyed by it. And how to be calm without forcing calm.</p>
           <p>I am still ordinary. Still uneasy in crowds. Still figuring out so much of this life.</p>
-          <p>But with a horse — especially with him — I am finally clear. And that has always been enough.</p>
+          <p>But with a horse, especially with him, I am finally clear. And that has always been enough.</p>
         </div>
       </div>
       <div class="chapter-divider"><div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div></div>
@@ -356,10 +458,10 @@
         <div class="closing-verse">
           <p>Eleven years of searching. One black stallion. One moment of complete surrender.</p>
           <p>In his dark, unblinking eyes I finally found the belonging I had chased my entire life.</p>
-          <p>He didn't just teach me how to train horses.<br>He taught me how to train myself.</p>
+          <p>He did not just teach me how to train horses.<br>He taught me how to train myself.</p>
           <p>And in the quiet space between his heartbeat and mine,<br>I stopped running from who I am.</p>
           <p><em>I am exactly where I belong.</em></p>
-          <p>And for the first time in my life — that is not just enough.</p>
+          <p>And for the first time in my life, that is not just enough.</p>
           <p><strong style="font-family:'Cinzel',serif;letter-spacing:4px;color:#E8C84A;font-size:1.1em;">It is everything.</strong></p>
           <span class="closing-symbol">🖤 🐴</span>
         </div>
@@ -377,14 +479,14 @@
       <div class="comp-ornament"><div class="corn-line"></div><div class="corn-gem"></div><div class="corn-line r"></div></div>
     </div>
     <div class="masonry">
-      <div class="horse-card card-tall" data-index="0"><div class="card-photo-wrap"><img class="card-photo" src="trex.jpg" alt="T-Rex" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(160deg,#1a0d00,#0d0800,#2a1500);">🐴</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 01</span><div class="card-name">T-Rex</div><div class="card-meta"><span class="card-tag">Hanoverian</span><span class="card-tag">Stallion</span><span class="card-tag">Age: 8</span></div><p class="card-excerpt">A living storm in midnight muscle. He didn't just test my horsemanship — he dismantled it, and rebuilt something truer in its place.</p><span class="card-read">Read His Story</span></div></div>
+      <div class="horse-card card-tall" data-index="0"><div class="card-photo-wrap"><img class="card-photo" src="trex.jpg" alt="T-Rex" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(160deg,#1a0d00,#0d0800,#2a1500);">🐴</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 01</span><div class="card-name">T-Rex</div><div class="card-meta"><span class="card-tag">Hanoverian</span><span class="card-tag">Stallion</span><span class="card-tag">Age: 8</span></div><p class="card-excerpt">A living storm in midnight muscle. He did not just test my horsemanship. He dismantled it and rebuilt something truer in its place.</p><span class="card-read">Read His Story</span></div></div>
       <div class="horse-card card-med" data-index="1"><div class="card-photo-wrap"><img class="card-photo" src="gladiator.jpg" alt="Gladiator" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(145deg,#120004,#0a0003,#1e0008);">🐎</div></div><div class="memorial-badge">In Memoriam</div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 02</span><div class="card-name">Gladiator</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 20</span><span class="card-tag memorial">Passed Away</span></div><p class="card-excerpt">Aggressive on the outside, bottomless on the inside. He taught me that fire and fragility have always lived in the same body.</p><span class="card-read">Read His Story</span></div></div>
       <div class="horse-card card-sq" data-index="2"><div class="card-photo-wrap"><img class="card-photo" src="xanthos.jpg" alt="Xanthos" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(150deg,#0a0e1a,#060b14,#121c2e);">🐴</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 03</span><div class="card-name">Xanthos</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 15</span><span class="card-tag">Gelding</span></div><p class="card-excerpt">Named after the immortal horse of Achilles. He carried that ancient weight in his stillness and his grace.</p><span class="card-read">Read His Story</span></div></div>
-      <div class="horse-card card-wide" data-index="3"><div class="card-photo-wrap"><img class="card-photo" src="rubin.jpg" alt="Rubin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(135deg,#0f0800,#1a1000,#0a0600);">🐎</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 04</span><div class="card-name">Rubin</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 10</span><span class="card-tag">Stallion</span></div><p class="card-excerpt">A gemstone of a horse — hard on the surface, luminous within. He made you earn every single step.</p><span class="card-read">Read His Story</span></div></div>
+      <div class="horse-card card-wide" data-index="3"><div class="card-photo-wrap"><img class="card-photo" src="rubin.jpg" alt="Rubin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(135deg,#0f0800,#1a1000,#0a0600);">🐎</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 04</span><div class="card-name">Rubin</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 10</span><span class="card-tag">Stallion</span></div><p class="card-excerpt">A gemstone of a horse, hard on the surface and luminous within. He made you earn every single step.</p><span class="card-read">Read His Story</span></div></div>
       <div class="horse-card card-tall" data-index="4"><div class="card-photo-wrap"><img class="card-photo" src="highsocity.jpg" alt="Highsocity" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(155deg,#0c0c00,#141400,#1a1a00);">🐴</div></div><div class="memorial-badge">In Memoriam</div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 05</span><div class="card-name">Highsocity</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 7</span><span class="card-tag memorial">Passed Away</span></div><p class="card-excerpt">Gone too soon, but never gone. She lived with an elegance that made the world stand still and watch.</p><span class="card-read">Read Her Story</span></div></div>
       <div class="horse-card card-med" data-index="5"><div class="card-photo-wrap"><img class="card-photo" src="yuvraj.jpg" alt="Yuvraj" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(140deg,#0e0800,#180d00,#100900);">🐎</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 06</span><div class="card-name">Yuvraj</div><div class="card-meta"><span class="card-tag">Indian Breed</span><span class="card-tag">Age: 20</span><span class="card-tag">Stallion</span></div><p class="card-excerpt">The prince. Twenty years of wisdom carried in a body that still moves like a young king claiming his land.</p><span class="card-read">Read His Story</span></div></div>
-      <div class="horse-card card-sq" data-index="6"><div class="card-photo-wrap"><img class="card-photo" src="horse7.jpg" alt="Arjun" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(150deg,#00100a,#000d07,#001a0f);">🐴</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 07</span><div class="card-name">Arjun</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 12</span><span class="card-tag">Gelding</span></div><p class="card-excerpt">Steady as a mountain, honest as silence. He never asked for much — only that you show up and mean it.</p><span class="card-read">Read His Story</span></div></div>
-      <div class="horse-card card-wide" data-index="7"><div class="card-photo-wrap"><img class="card-photo" src="horse8.jpg" alt="Storm" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(135deg,#08001a,#050010,#0d0025);">🐎</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 08</span><div class="card-name">Storm</div><div class="card-meta"><span class="card-tag">Thoroughbred</span><span class="card-tag">Age: 9</span><span class="card-tag">Mare</span></div><p class="card-excerpt">She arrived wild and left refined — though I suspect it was she who refined me, and not the other way around.</p><span class="card-read">Read Her Story</span></div></div>
+      <div class="horse-card card-sq" data-index="6"><div class="card-photo-wrap"><img class="card-photo" src="horse7.jpg" alt="Arjun" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(150deg,#00100a,#000d07,#001a0f);">🐴</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 07</span><div class="card-name">Arjun</div><div class="card-meta"><span class="card-tag">Warmblood</span><span class="card-tag">Age: 12</span><span class="card-tag">Gelding</span></div><p class="card-excerpt">Steady as a mountain, honest as silence. He never asked for much. Only that you show up and mean it.</p><span class="card-read">Read His Story</span></div></div>
+      <div class="horse-card card-wide" data-index="7"><div class="card-photo-wrap"><img class="card-photo" src="horse8.jpg" alt="Storm" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-photo-placeholder" style="display:none;background:linear-gradient(135deg,#08001a,#050010,#0d0025);">🐎</div></div><div class="card-corner"></div><div class="card-overlay"></div><div class="card-content"><span class="card-issue">Companion No. 08</span><div class="card-name">Storm</div><div class="card-meta"><span class="card-tag">Thoroughbred</span><span class="card-tag">Age: 9</span><span class="card-tag">Mare</span></div><p class="card-excerpt">She arrived wild and left refined, though I suspect it was she who refined me and not the other way around.</p><span class="card-read">Read Her Story</span></div></div>
     </div>
   </section>
 
@@ -409,1218 +511,534 @@
       <button class="story-close" id="storyClose"></button>
     </div>
   </div>
-  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chronicles — The Horseman's Journal</title>
-<style>
-/*
-  /* ─── CHRONICLES VIDEO HEADER ─── */
-.chronicles-hero{
-  position:relative;width:100%;height:100vh;min-height:580px;
-  overflow:hidden;background:#000;
-  display:flex;align-items:center;justify-content:center;
-}
-.chr-video{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;opacity:.45;z-index:1;
-  display:none; /* Remove this line when you add chronicles-bg.mp4 */
-}
-.chr-animated-bg{
-  position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse at 30% 60%,rgba(212,175,55,0.12) 0%,transparent 55%),
-    radial-gradient(ellipse at 75% 25%,rgba(100,40,0,0.2) 0%,transparent 50%),
-    radial-gradient(ellipse at 50% 100%,rgba(50,20,80,0.15) 0%,transparent 50%),
-    linear-gradient(180deg,#080400 0%,#000 100%);
-}
-.chr-particles{position:absolute;inset:0;z-index:2;pointer-events:none;}
-.chr-p{
-  position:absolute;border-radius:50%;
-  background:rgba(212,175,55,0.5);
-  animation:chrRise linear infinite;
-}
-@keyframes chrRise{
-  0%{transform:translateY(0) translateX(0);opacity:0;}
-  10%{opacity:1;}90%{opacity:.3;}
-  100%{transform:translateY(-100vh) translateX(var(--d));opacity:0;}
-}
-.chr-vignette{
-  position:absolute;inset:0;z-index:3;
-  background:radial-gradient(ellipse at 50% 50%,transparent 20%,rgba(0,0,0,0.8) 100%);
-}
-.chr-bar{position:absolute;left:0;right:0;height:50px;background:#000;z-index:4;}
-.chr-bar-top{top:0;}.chr-bar-bottom{bottom:0;}
-.chr-content{
-  position:relative;z-index:10;
-  display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:1.2rem;padding:0 2rem;
-}
-.chr-eyebrow{
-  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:7px;
-  color:rgba(212,175,55,0.5);text-transform:uppercase;
-  animation:fadeUp 1s ease forwards;opacity:0;animation-delay:.3s;
-}
-.chr-title{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(2.5rem,6vw,5rem);font-weight:700;
-  color:#fff;letter-spacing:3px;line-height:1;
-  text-shadow:0 0 60px rgba(212,175,55,0.5),0 0 120px rgba(212,175,55,0.2),0 4px 40px rgba(0,0,0,1);
-  animation:chrFloat 2s cubic-bezier(.16,1,.3,1) forwards;opacity:0;animation-delay:.6s;
-}
-.chr-title .gold{
-  color:#E8C84A;
-  text-shadow:0 0 40px rgba(212,175,55,1),0 0 100px rgba(212,175,55,0.4),0 4px 40px rgba(0,0,0,1);
-}
-.chr-div{display:flex;align-items:center;gap:1rem;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:1.1s;}
-.chr-dline{width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.5));}
-.chr-dline.r{background:linear-gradient(90deg,rgba(212,175,55,0.5),transparent);}
-.chr-dgem{width:6px;height:6px;background:#E8C84A;transform:rotate(45deg);box-shadow:0 0 10px rgba(212,175,55,1);}
-.chr-tagline{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:clamp(.9rem,1.8vw,1.15rem);
-  color:rgba(255,240,200,0.6);letter-spacing:1px;
-  max-width:500px;line-height:1.8;
-  animation:fadeUp 1s ease forwards;opacity:0;animation-delay:1.3s;
-}
-@keyframes chrFloat{0%{opacity:0;transform:translateY(60px) scale(.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
-@keyframes fadeUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
- 
-/* ─── HORSE INTRODUCTION ─── */
-.horse-intro{
-  position:relative;background:#000;
-  padding:7rem 2rem 6rem;overflow:hidden;
-}
-.horse-intro::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.05) 0%,transparent 60%),
-    radial-gradient(ellipse at 0% 100%,rgba(100,40,0,0.06) 0%,transparent 50%);
-  pointer-events:none;
-}
-.intro-inner{
-  max-width:860px;margin:0 auto;position:relative;z-index:2;
-  text-align:center;
-}
-.intro-badge{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:5px;
-  color:rgba(212,175,55,0.5);text-transform:uppercase;
-  margin-bottom:2.5rem;
-}
-.intro-badge::before,.intro-badge::after{
-  content:'';display:block;width:40px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(212,175,55,0.4));
-}
-.intro-badge::after{background:linear-gradient(90deg,rgba(212,175,55,0.4),transparent);}
-.intro-headline{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:700;
-  color:#E8C84A;letter-spacing:1px;line-height:1.2;
-  text-shadow:0 0 30px rgba(212,175,55,0.25);
-  margin-bottom:2.5rem;
-}
-.intro-body{
-  font-family:'EB Garamond',serif;
-  font-size:clamp(1.05rem,1.8vw,1.25rem);
-  color:rgba(240,230,200,0.75);line-height:2;
-  letter-spacing:.2px;margin-bottom:2rem;
-}
-.intro-body p{margin-bottom:1.5rem;}
-.intro-body p:first-child::first-letter{
-  font-family:'Cinzel Decorative',serif;font-size:3.6em;font-weight:700;
-  color:#E8C84A;float:left;line-height:.75;margin:0.1em 0.12em 0 0;
-  text-shadow:0 0 25px rgba(212,175,55,0.6);
-}
-.intro-ornament{
-  display:flex;align-items:center;justify-content:center;gap:1rem;
-  margin-top:3rem;
-}
-.iorn-line{flex:1;max-width:160px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3));}
-.iorn-line.r{background:linear-gradient(90deg,rgba(212,175,55,0.3),transparent);}
-.iorn-text{
-  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:4px;
-  color:rgba(212,175,55,0.35);text-transform:uppercase;white-space:nowrap;
-}
- 
-/* ─── CHRONICLES BOOKS SECTION ─── */
-.chronicles{
-  position:relative;background:#000;
-  padding:5rem 0 8rem;overflow:hidden;
-}
-.chronicles::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.03) 0%,transparent 60%);
-  pointer-events:none;
-}
- 
-/* Section header */
-.chr-sec-header{text-align:center;padding:0 2rem 4rem;position:relative;z-index:2;}
-.chr-sec-eyebrow{
-  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:6px;
-  color:rgba(212,175,55,0.4);text-transform:uppercase;
-  display:block;margin-bottom:1rem;
-}
-.chr-sec-title{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(1.8rem,4vw,3rem);font-weight:700;
-  color:#E8C84A;letter-spacing:2px;line-height:1.1;
-  text-shadow:0 0 30px rgba(212,175,55,0.2);margin-bottom:.8rem;
-}
-.chr-sec-sub{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:clamp(.9rem,1.5vw,1.05rem);
-  color:rgba(240,230,200,0.35);letter-spacing:.5px;
-}
- 
-/* Filter tabs */
-.chr-filters{
-  display:flex;align-items:center;justify-content:center;
-  gap:.6rem;flex-wrap:wrap;padding:0 2rem 3.5rem;
-  position:relative;z-index:2;
-}
-.chr-filter-btn{
-  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:2.5px;
-  color:rgba(212,175,55,0.45);text-transform:uppercase;
-  background:transparent;
-  border:1px solid rgba(212,175,55,0.15);
-  padding:9px 22px;border-radius:2px;
-  cursor:pointer;transition:all .3s;white-space:nowrap;
-}
-.chr-filter-btn:hover{
-  color:rgba(212,175,55,0.8);
-  border-color:rgba(212,175,55,0.35);
-  background:rgba(212,175,55,0.04);
-}
-.chr-filter-btn.active{
-  color:#0a0500;background:#E8C84A;
-  border-color:#E8C84A;
-  box-shadow:0 0 20px rgba(212,175,55,0.3);
-}
-.chr-filter-sep{
-  width:1px;height:16px;
-  background:rgba(212,175,55,0.15);
-}
- 
-/* Books grid */
-.books-grid{
-  max-width:1300px;margin:0 auto;
-  padding:0 2.5rem;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:3rem 2.5rem;
-  position:relative;z-index:2;
-}
-@media(max-width:1000px){.books-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:620px){.books-grid{grid-template-columns:1fr;}}
- 
-/* ─── THE 3D BOOK ─── */
-.book-wrap{
-  perspective:900px;
-  cursor:pointer;
-  opacity:0;transform:translateY(24px);
-  transition:opacity .7s ease,transform .7s ease;
-}
-.book-wrap.visible{opacity:1;transform:translateY(0);}
-.book-wrap.hidden{display:none;}
- 
-.book-3d{
-  position:relative;
-  transform-style:preserve-3d;
-  transform:rotateX(22deg) rotateY(-6deg);
-  transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s ease;
-  width:100%;
-}
-.book-wrap:hover .book-3d{
-  transform:rotateX(10deg) rotateY(-3deg) translateY(-8px);
-}
- 
-/* Book inner — the actual spread */
-.book-spread{
-  display:grid;grid-template-columns:1fr 8px 1fr;
-  width:100%;
-  border-radius:3px;
-  overflow:hidden;
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.9),
-    0 10px 25px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(212,175,55,0.12);
-  position:relative;
-}
- 
-/* Left page — photo */
-.book-left{
-  position:relative;overflow:hidden;
-  min-height:340px;background:#0d0800;
-}
-.book-left img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  display:block;
-  transition:transform .5s ease;
-  filter:brightness(.85) sepia(.1);
-}
-.book-wrap:hover .book-left img{transform:scale(1.04);}
-.book-left-placeholder{
-  width:100%;height:100%;min-height:340px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:4rem;opacity:.25;
-}
-/* Page curl shadow on right edge of left page */
-.book-left::after{
-  content:'';position:absolute;top:0;right:0;bottom:0;width:24px;
-  background:linear-gradient(90deg,transparent,rgba(0,0,0,0.5));
-  pointer-events:none;
-}
-/* Category ribbon on left page */
-.book-ribbon{
-  position:absolute;top:16px;left:0;z-index:3;
-  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:2px;
-  color:#0a0500;text-transform:uppercase;
-  background:#E8C84A;padding:4px 12px 4px 10px;
-  clip-path:polygon(0 0,100% 0,92% 50%,100% 100%,0 100%);
-  font-weight:600;
-}
-/* Article number on bottom-left */
-.book-num{
-  position:absolute;bottom:12px;left:12px;z-index:3;
-  font-family:'Cinzel Decorative',serif;font-size:2.2rem;font-weight:700;
-  color:rgba(255,255,255,0.08);line-height:1;
-  pointer-events:none;
-}
- 
-/* Spine */
-.book-spine{
-  background:linear-gradient(180deg,
-    rgba(212,175,55,0.6) 0%,
-    rgba(180,130,20,0.8) 30%,
-    rgba(212,175,55,0.5) 60%,
-    rgba(140,90,0,0.7) 100%
-  );
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
-.book-spine::before{
-  content:'';position:absolute;
-  top:10%;bottom:10%;left:50%;transform:translateX(-50%);
-  width:1px;background:rgba(255,255,255,0.15);
-}
- 
-/* Right page — parchment + text */
-.book-right{
-  position:relative;
-  background:linear-gradient(160deg,#f5efd4 0%,#ede0b8 40%,#e8d8a0 100%);
-  padding:1.4rem 1.4rem 1.2rem;
-  display:flex;flex-direction:column;gap:.7rem;
-  overflow:hidden;
-  min-height:340px;
-}
-/* Page lines */
-.book-right::before{
-  content:'';position:absolute;
-  left:0;right:0;top:0;bottom:0;
-  background:repeating-linear-gradient(
-    180deg,
-    transparent,transparent 27px,
-    rgba(180,150,80,0.12) 27px,
-    rgba(180,150,80,0.12) 28px
-  );
-  pointer-events:none;
-}
-/* Left margin line */
-.book-right::after{
-  content:'';position:absolute;
-  left:28px;top:0;bottom:0;width:1px;
-  background:rgba(200,100,100,0.2);
-  pointer-events:none;
-}
-/* Watermark */
-.book-watermark{
-  position:absolute;
-  bottom:-10px;right:-10px;
-  font-size:7rem;opacity:.05;
-  pointer-events:none;line-height:1;
-  transform:rotate(-15deg);
-  z-index:0;
-}
- 
-/* Right page content */
-.book-page-num{
-  font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:3px;
-  color:rgba(100,70,20,0.4);text-transform:uppercase;
-  text-align:right;position:relative;z-index:1;
-}
-.book-art-label{
-  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:3px;
-  color:rgba(140,90,20,0.6);text-transform:uppercase;
-  position:relative;z-index:1;
-}
-.book-art-title{
-  font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;
-  color:#3a2200;letter-spacing:.5px;line-height:1.35;
-  position:relative;z-index:1;
-}
-.book-rule{
-  height:1px;
-  background:linear-gradient(90deg,rgba(180,130,40,0.4),transparent);
-  position:relative;z-index:1;
-}
-.book-art-text{
-  font-family:'EB Garamond',serif;
-  font-size:.82rem;line-height:1.75;
-  color:rgba(50,30,5,0.75);
-  position:relative;z-index:1;
-  display:-webkit-box;
-  -webkit-line-clamp:5;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-.book-keywords{
-  display:flex;gap:4px;flex-wrap:wrap;
-  position:relative;z-index:1;margin-top:auto;
-}
-.book-kw{
-  font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:1.5px;
-  color:rgba(140,90,20,0.65);text-transform:uppercase;
-  padding:2px 7px;border:1px solid rgba(180,130,40,0.25);
-  border-radius:1px;background:rgba(212,175,55,0.06);
-}
-.book-read{
-  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:2px;
-  color:rgba(180,120,20,0.7);text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:5px;
-  position:relative;z-index:1;
-  transition:color .2s;
-}
-.book-wrap:hover .book-read{color:rgba(180,120,20,1);}
-.book-read::after{content:'→';transition:transform .2s;}
-.book-wrap:hover .book-read::after{transform:translateX(3px);}
- 
-/* Book bottom edge — thickness illusion */
-.book-edge{
-  position:absolute;bottom:-8px;left:4px;right:4px;height:8px;
-  background:linear-gradient(180deg,rgba(30,20,0,0.7),rgba(10,5,0,0.9));
-  border-radius:0 0 3px 3px;
-  transform:translateZ(-4px);
-  z-index:-1;
-}
-/* Shadow beneath book */
-.book-shadow{
-  position:absolute;bottom:-20px;left:5%;right:5%;height:20px;
-  background:radial-gradient(ellipse,rgba(0,0,0,0.6) 0%,transparent 70%);
-  filter:blur(6px);
-  pointer-events:none;
-}
- 
-/* ─── ARTICLE READER PANEL ─── */
-.article-panel{
-  max-width:900px;margin:4rem auto 0;padding:0 2rem;
-  position:relative;z-index:3;
-  opacity:0;pointer-events:none;
-  transition:opacity .5s ease;
-  max-height:0;overflow:hidden;
-}
-.article-panel.open{
-  opacity:1;pointer-events:all;
-  max-height:none;overflow:visible;
-}
- 
-.art-panel-inner{
-  background:linear-gradient(160deg,#f5efd4 0%,#ede0b8 100%);
-  border:1px solid rgba(212,175,55,0.2);
-  border-radius:3px;
-  padding:3.5rem 4rem;
-  position:relative;overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.8),0 0 0 1px rgba(212,175,55,0.1);
-}
-/* paper lines */
-.art-panel-inner::before{
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(180deg,transparent,transparent 31px,rgba(180,150,80,0.1) 31px,rgba(180,150,80,0.1) 32px);
-  pointer-events:none;
-}
-.art-watermark{
-  position:absolute;bottom:-20px;right:-20px;
-  font-size:14rem;opacity:.04;
-  transform:rotate(-15deg);pointer-events:none;line-height:1;
-}
-.art-close{
-  position:absolute;top:16px;right:16px;z-index:10;
-  width:32px;height:32px;
-  border:1px solid rgba(180,130,40,0.3);
-  border-radius:50%;background:rgba(212,175,55,0.08);
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.art-close:hover{background:rgba(212,175,55,0.2);border-color:rgba(180,130,40,0.6);}
-.art-close::before,.art-close::after{
-  content:'';position:absolute;width:12px;height:1px;background:rgba(100,60,10,0.7);
-}
-.art-close::before{transform:rotate(45deg);}
-.art-close::after{transform:rotate(-45deg);}
- 
-.art-header{margin-bottom:2.5rem;position:relative;z-index:1;}
-.art-label{
-  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:4px;
-  color:rgba(140,90,20,0.5);text-transform:uppercase;
-  display:block;margin-bottom:.8rem;
-}
-.art-title{
-  font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.5vw,1.7rem);font-weight:700;
-  color:#2a1800;line-height:1.25;letter-spacing:.3px;margin-bottom:1.2rem;
-}
-.art-rule{
-  height:1.5px;
-  background:linear-gradient(90deg,rgba(180,130,40,0.5),rgba(212,175,55,0.2),transparent);
-  margin-bottom:1.2rem;
-}
-.art-keywords{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2rem;}
-.art-kw{
-  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:1.5px;
-  color:rgba(140,90,20,0.7);text-transform:uppercase;
-  padding:3px 10px;border:1px solid rgba(180,130,40,0.25);
-  border-radius:1px;background:rgba(212,175,55,0.08);
-}
-.art-body{
-  font-family:'EB Garamond',serif;
-  font-size:clamp(1rem,1.6vw,1.15rem);line-height:2.1;
-  color:rgba(40,20,0,0.8);position:relative;z-index:1;
-}
-.art-body p{margin-bottom:1.4rem;text-indent:2em;}
-.art-body p:first-child{text-indent:0;}
-.art-body p:first-child::first-letter{
-  font-family:'Cinzel Decorative',serif;font-size:3.5em;font-weight:700;
-  color:#8a5c00;float:left;line-height:.75;margin:0.1em 0.1em 0 0;
-}
-.art-placeholder{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:.9rem;color:rgba(140,90,20,0.45);
-  padding:1.5rem;border:1px dashed rgba(180,130,40,0.2);
-  border-radius:2px;text-align:center;line-height:1.8;
-}
- 
-/* scroll reveal */
-@keyframes bookIn{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
-</style>
-</head>
-<body style="background:#000;">
- 
-<!-- =============================================
-     CHRONICLES HERO — video header with title
-============================================= -->
-<section class="chronicles-hero" id="chronicles">
- 
-  <!-- Save your video as chronicles-bg.mp4 in GitHub, then remove display:none from .chr-video in CSS -->
-  <video class="chr-video" autoplay muted loop playsinline>
-    <source src="chronicles-bg.mp4" type="video/mp4">
-  </video>
- 
-  <div class="chr-animated-bg"></div>
-  <div class="chr-particles" id="chrParticles"></div>
-  <div class="chr-vignette"></div>
-  <div class="chr-bar chr-bar-top"></div>
-  <div class="chr-bar chr-bar-bottom"></div>
- 
-  <div class="chr-content">
-    <p class="chr-eyebrow">The Horseman's Journal</p>
-    <h2 class="chr-title">Chron<span class="gold">icles</span></h2>
-    <div class="chr-div">
-      <div class="chr-dline"></div><div class="chr-dgem"></div><div class="chr-dline r"></div>
+
+  <!-- CHRONICLES HERO -->
+  <section class="chronicles-hero" id="chronicles">
+    <video class="chr-video" autoplay muted loop playsinline>
+      <source src="chronicles-bg.mp4" type="video/mp4">
+    </video>
+    <div class="chr-animated-bg"></div>
+    <div class="chr-particles" id="chrParticles"></div>
+    <div class="chr-vignette"></div>
+    <div class="chr-bar chr-bar-top"></div>
+    <div class="chr-bar chr-bar-bottom"></div>
+    <div class="chr-content">
+      <p class="chr-eyebrow">The Horseman's Journal</p>
+      <h2 class="chr-title">Chron<span class="gold">icles</span></h2>
+      <div class="chr-div">
+        <div class="chr-dline"></div><div class="chr-dgem"></div><div class="chr-dline r"></div>
+      </div>
+      <p class="chr-tagline">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
     </div>
-    <p class="chr-tagline">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
-  </div>
-</section>
- 
-<!-- =============================================
-     HORSE INTRODUCTION
-============================================= -->
-<section class="horse-intro" id="chronicles-intro">
-  <div class="intro-inner">
-    <div class="intro-badge">The Knowledge Within</div>
-    <h2 class="intro-headline">Before You Can Train a Horse,<br>You Must Understand One</h2>
-    <div class="intro-body">
-      <p>A horse is not a machine. It is not a vehicle to be steered, a tool to be used, or a problem to be solved. A horse is a living, feeling, perceiving creature that has spent sixty million years perfecting one single art: the art of survival. Every flicker of its ear, every shift of its weight, every sudden stillness or explosive movement is the expression of a mind that never stops reading the world for danger — and never stops watching you.</p>
-      <p>What you are about to read in these chronicles is not a training manual. It is not a collection of techniques or methods or step-by-step instructions. It is something older and quieter than that — an attempt to put into words what happens in the space between a human being and a horse when both of them, finally, stop pretending and begin to truly see each other.</p>
-      <p>These articles were not written at a desk. They were written in arenas, on dusty ground, in the aftermath of falls and breakthroughs and long, hard silences. They were written by a man who has spent eleven years being taught by animals that cannot speak — and learning that this is exactly why they are the best teachers in the world.</p>
+  </section>
+
+  <!-- HORSE INTRODUCTION -->
+  <section class="horse-intro" id="chronicles-intro">
+    <div class="intro-inner">
+      <div class="intro-badge">The Knowledge Within</div>
+      <h2 class="intro-headline">Before You Can Train a Horse,<br>You Must Understand One</h2>
+      <div class="intro-body">
+        <p>A horse is not a machine. It is not a vehicle to be steered, a tool to be used, or a problem to be solved. A horse is a living, feeling, perceiving creature that has spent sixty million years perfecting one single art: the art of survival. Every flicker of its ear, every shift of its weight, every sudden stillness or explosive movement is the expression of a mind that never stops reading the world for danger and never stops watching you.</p>
+        <p>What you are about to read in these chronicles is not a training manual. It is not a collection of techniques or methods or step by step instructions. It is something older and quieter than that. An attempt to put into words what happens in the space between a human being and a horse when both of them, finally, stop pretending and begin to truly see each other.</p>
+        <p>These articles were not written at a desk. They were written in arenas, on dusty ground, in the aftermath of falls and breakthroughs and long, hard silences. They were written by a man who has spent eleven years being taught by animals that cannot speak and learning that this is exactly why they are the best teachers in the world.</p>
+      </div>
+      <div class="intro-ornament">
+        <div class="iorn-line"></div>
+        <div class="iorn-text">Fifteen Articles · Three Paths · One Truth</div>
+        <div class="iorn-line r"></div>
+      </div>
     </div>
-    <div class="intro-ornament">
-      <div class="iorn-line"></div>
-      <div class="iorn-text">Fifteen Articles · Three Paths · One Truth</div>
-      <div class="iorn-line r"></div>
+  </section>
+
+  <!-- CHRONICLES BOOKS -->
+  <section class="chronicles" id="chronicles-books">
+    <div class="chr-sec-header">
+      <span class="chr-sec-eyebrow">The Written Record</span>
+      <h2 class="chr-sec-title">The Articles</h2>
+      <p class="chr-sec-sub">Select a path. Open a book. Begin.</p>
     </div>
-  </div>
-</section>
- 
-<!-- =============================================
-     CHRONICLES — 3D BOOKS WITH FILTER TABS
-============================================= -->
-<section class="chronicles" id="chronicles-books">
- 
-  <div class="chr-sec-header">
-    <span class="chr-sec-eyebrow">The Written Record</span>
-    <h2 class="chr-sec-title">The Articles</h2>
-    <p class="chr-sec-sub">Select a path. Open a book. Begin.</p>
-  </div>
- 
-  <div class="chr-filters">
-    <button class="chr-filter-btn active" data-filter="all">All Articles</button>
-    <div class="chr-filter-sep"></div>
-    <button class="chr-filter-btn" data-filter="foundational">Foundational</button>
-    <div class="chr-filter-sep"></div>
-    <button class="chr-filter-btn" data-filter="practical">Practical</button>
-    <div class="chr-filter-sep"></div>
-    <button class="chr-filter-btn" data-filter="edge">Your Unique Edge</button>
-  </div>
- 
-  <div class="books-grid" id="booksGrid">
- 
-    <!-- BOOK 1 -->
-    <div class="book-wrap" data-category="foundational" data-article="0">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article1.jpg" alt="Horse Psychology" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0d00,#0d0800);">🐴</div>
-            <div class="book-ribbon">Foundational</div>
-            <div class="book-num">01</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · I</div>
-            <div class="book-art-label">Understanding the Horse Mind</div>
-            <div class="book-art-title">Understanding Horse Psychology: How Horses Think and Perceive Humans</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind that never stops watching, never stops reading, and never stops preparing for the moment everything changes.</p>
-            <div class="book-keywords">
-              <span class="book-kw">horse psychology</span>
-              <span class="book-kw">how horses think</span>
-              <span class="book-kw">equine mindset</span>
+    <div class="chr-filters">
+      <button class="chr-filter-btn active" data-filter="all">All Articles</button>
+      <div class="chr-filter-sep"></div>
+      <button class="chr-filter-btn" data-filter="foundational">Foundational</button>
+      <div class="chr-filter-sep"></div>
+      <button class="chr-filter-btn" data-filter="practical">Practical</button>
+      <div class="chr-filter-sep"></div>
+      <button class="chr-filter-btn" data-filter="edge">Your Unique Edge</button>
+    </div>
+    <div class="books-grid" id="booksGrid">
+
+      <!-- BOOK 1 -->
+      <div class="book-wrap" data-category="foundational" data-article="0">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article1.jpg" alt="Horse Psychology" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0d00,#0d0800);">🐴</div>
+              <div class="book-ribbon">Foundational</div>
+              <div class="book-num">01</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div>
-        <div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 2 -->
-    <div class="book-wrap" data-category="foundational" data-article="1">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article2.jpg" alt="Prey Animal Instincts" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a0e1a,#060b14);">🐎</div>
-            <div class="book-ribbon">Foundational</div>
-            <div class="book-num">02</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · II</div>
-            <div class="book-art-label">The Primal Architecture</div>
-            <div class="book-art-title">Prey Animal Instincts in Horses: Why Fear Shapes Everything</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by nature. When you understand why a horse is afraid, you stop fighting fear and start working with it.</p>
-            <div class="book-keywords">
-              <span class="book-kw">prey animal instincts</span>
-              <span class="book-kw">flight response</span>
-              <span class="book-kw">horse fear triggers</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · I</div>
+              <div class="book-art-label">Understanding the Horse Mind</div>
+              <div class="book-art-title">Understanding Horse Psychology: How Horses Think and Perceive Humans</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind that never stops watching, never stops reading, and never stops preparing for the moment everything changes.</p>
+              <div class="book-keywords">
+                <span class="book-kw">horse psychology</span>
+                <span class="book-kw">how horses think</span>
+                <span class="book-kw">equine mindset</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div>
+          <div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 3 -->
-    <div class="book-wrap" data-category="foundational" data-article="2">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article3.jpg" alt="Trust vs Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0f0a00,#1a1000);">🐴</div>
-            <div class="book-ribbon">Foundational</div>
-            <div class="book-num">03</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · III</div>
-            <div class="book-art-label">The Central Question</div>
-            <div class="book-art-title">Trust vs Control in Horse Training: What Actually Works</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all exits are open. Only one of these is real horsemanship.</p>
-            <div class="book-keywords">
-              <span class="book-kw">trust vs control</span>
-              <span class="book-kw">natural horsemanship</span>
-              <span class="book-kw">horse training philosophy</span>
+
+      <!-- BOOK 2 -->
+      <div class="book-wrap" data-category="foundational" data-article="1">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article2.jpg" alt="Prey Animal Instincts" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a0e1a,#060b14);">🐎</div>
+              <div class="book-ribbon">Foundational</div>
+              <div class="book-num">02</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 4 -->
-    <div class="book-wrap" data-category="foundational" data-article="3">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article4.jpg" alt="Body Language" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#080012,#050009);">🐎</div>
-            <div class="book-ribbon">Foundational</div>
-            <div class="book-num">04</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · IV</div>
-            <div class="book-art-label">The Silent Vocabulary</div>
-            <div class="book-art-title">How to Read a Horse's Body Language (Beginner to Advanced)</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Horses speak in the language of the body — constantly, precisely, and honestly. Every ear position, every muscle, every shift of weight is a sentence. Learning to read it is the first step toward genuine communication.</p>
-            <div class="book-keywords">
-              <span class="book-kw">horse body language</span>
-              <span class="book-kw">horse ears meaning</span>
-              <span class="book-kw">signs of stress horses</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · II</div>
+              <div class="book-art-label">The Primal Architecture</div>
+              <div class="book-art-title">Prey Animal Instincts in Horses: Why Fear Shapes Everything</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by nature. When you understand why a horse is afraid, you stop fighting fear and start working with it.</p>
+              <div class="book-keywords">
+                <span class="book-kw">prey animal instincts</span>
+                <span class="book-kw">flight response</span>
+                <span class="book-kw">horse fear triggers</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 5 -->
-    <div class="book-wrap" data-category="foundational" data-article="4">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article5.jpg" alt="Human Mistakes" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#120800,#1e0f00);">🐴</div>
-            <div class="book-ribbon">Foundational</div>
-            <div class="book-num">05</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · V</div>
-            <div class="book-art-label">What We Get Wrong</div>
-            <div class="book-art-title">Common Human Mistakes with Horses (And Why Horses React)</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Most horses do not have problems. Most horses have people with problems that the horse is simply reflecting back. Understanding what we do wrong is the most useful education a horseman can receive.</p>
-            <div class="book-keywords">
-              <span class="book-kw">mistakes in horse training</span>
-              <span class="book-kw">why horses misbehave</span>
-              <span class="book-kw">training mistakes beginners</span>
+
+      <!-- BOOK 3 -->
+      <div class="book-wrap" data-category="foundational" data-article="2">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article3.jpg" alt="Trust vs Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0f0a00,#1a1000);">🐴</div>
+              <div class="book-ribbon">Foundational</div>
+              <div class="book-num">03</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 6 -->
-    <div class="book-wrap" data-category="practical" data-article="5">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article6.jpg" alt="Build Trust" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001008,#000a05);">🐎</div>
-            <div class="book-ribbon">Practical</div>
-            <div class="book-num">06</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · VI</div>
-            <div class="book-art-label">Step by Step</div>
-            <div class="book-art-title">How to Build Trust with a Horse (Step-by-Step Guide)</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Trust is not built in a single day or a single session. It is built in a thousand small honest moments — each one a brick, each one a promise kept. This is the guide to laying those bricks correctly.</p>
-            <div class="book-keywords">
-              <span class="book-kw">how to build trust</span>
-              <span class="book-kw">bonding with a horse</span>
-              <span class="book-kw">gain horse trust</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · III</div>
+              <div class="book-art-label">The Central Question</div>
+              <div class="book-art-title">Trust vs Control in Horse Training: What Actually Works</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all exits are open. Only one of these is real horsemanship.</p>
+              <div class="book-keywords">
+                <span class="book-kw">trust vs control</span>
+                <span class="book-kw">natural horsemanship</span>
+                <span class="book-kw">horse training philosophy</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 7 -->
-    <div class="book-wrap" data-category="practical" data-article="6">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article7.jpg" alt="Horse Not Listening" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0d0015,#080010);">🐴</div>
-            <div class="book-ribbon">Practical</div>
-            <div class="book-num">07</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · VII</div>
-            <div class="book-art-label">The Real Diagnosis</div>
-            <div class="book-art-title">Why Your Horse Doesn't Listen to You (Real Reasons Explained)</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">When a horse stops listening, most people think the horse has a problem. In eleven years, I have almost never found the problem to be in the horse. The answer always begins somewhere closer to home.</p>
-            <div class="book-keywords">
-              <span class="book-kw">horse not listening</span>
-              <span class="book-kw">horse training problems</span>
-              <span class="book-kw">why horse ignores commands</span>
+
+      <!-- BOOK 4 -->
+      <div class="book-wrap" data-category="foundational" data-article="3">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article4.jpg" alt="Body Language" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#080012,#050009);">🐎</div>
+              <div class="book-ribbon">Foundational</div>
+              <div class="book-num">04</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 8 -->
-    <div class="book-wrap" data-category="practical" data-article="7">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article8.jpg" alt="Calm Anxious Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001a10,#001208);">🐎</div>
-            <div class="book-ribbon">Practical</div>
-            <div class="book-num">08</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · VIII</div>
-            <div class="book-art-label">Finding Stillness</div>
-            <div class="book-art-title">How to Calm a Nervous or Anxious Horse</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">You cannot calm a horse by fighting its nervous system. You can only offer it something steady enough to anchor to. This is the art of becoming that anchor — and it begins long before you ever touch the rope.</p>
-            <div class="book-keywords">
-              <span class="book-kw">how to calm a horse</span>
-              <span class="book-kw">anxious horse behavior</span>
-              <span class="book-kw">nervous horse training</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · IV</div>
+              <div class="book-art-label">The Silent Vocabulary</div>
+              <div class="book-art-title">How to Read a Horse's Body Language (Beginner to Advanced)</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Horses speak in the language of the body, constantly, precisely, and honestly. Every ear position, every muscle, every shift of weight is a sentence. Learning to read it is the first step toward genuine communication.</p>
+              <div class="book-keywords">
+                <span class="book-kw">horse body language</span>
+                <span class="book-kw">horse ears meaning</span>
+                <span class="book-kw">signs of stress horses</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 9 -->
-    <div class="book-wrap" data-category="practical" data-article="8">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article9.jpg" alt="First Time Handling" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0a00,#120700);">🐴</div>
-            <div class="book-ribbon">Practical</div>
-            <div class="book-num">09</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · IX</div>
-            <div class="book-art-label">The First Meeting</div>
-            <div class="book-art-title">First Time Handling a Horse: What You Must Know</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">The first impression you make on a horse is written in its memory with indelible ink. There is no second first meeting. Everything you bring into that initial encounter — your speed, your tension, your breath — the horse will remember.</p>
-            <div class="book-keywords">
-              <span class="book-kw">first time horse tips</span>
-              <span class="book-kw">horse safety basics</span>
-              <span class="book-kw">beginner horse handling</span>
+
+      <!-- BOOK 5 -->
+      <div class="book-wrap" data-category="foundational" data-article="4">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article5.jpg" alt="Human Mistakes" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#120800,#1e0f00);">🐴</div>
+              <div class="book-ribbon">Foundational</div>
+              <div class="book-num">05</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 10 -->
-    <div class="book-wrap" data-category="practical" data-article="9">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article10.jpg" alt="Signs of Trust" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a001a,#060012);">🐎</div>
-            <div class="book-ribbon">Practical</div>
-            <div class="book-num">10</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · X</div>
-            <div class="book-art-label">Reading the Bond</div>
-            <div class="book-art-title">Signs Your Horse Trusts You (And Signs It Doesn't)</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">A horse's trust is not a feeling — it is a behaviour. And like all behaviour, it is visible, measurable, and honest. Here is what genuine trust looks like, and what its absence reveals about the work still to be done.</p>
-            <div class="book-keywords">
-              <span class="book-kw">signs a horse trusts you</span>
-              <span class="book-kw">horse bonding signs</span>
-              <span class="book-kw">horse trust behavior</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · V</div>
+              <div class="book-art-label">What We Get Wrong</div>
+              <div class="book-art-title">Common Human Mistakes with Horses (And Why Horses React)</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Most horses do not have problems. Most horses have people with problems that the horse is simply reflecting back. Understanding what we do wrong is the most useful education a horseman can receive.</p>
+              <div class="book-keywords">
+                <span class="book-kw">mistakes in horse training</span>
+                <span class="book-kw">why horses misbehave</span>
+                <span class="book-kw">training mistakes beginners</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 11 -->
-    <div class="book-wrap" data-category="edge" data-article="10">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article11.jpg" alt="What Horses Teach" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001014,#00080d);">🐴</div>
-            <div class="book-ribbon">Unique Edge</div>
-            <div class="book-num">11</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · XI</div>
-            <div class="book-art-label">The Mirror in the Arena</div>
-            <div class="book-art-title">What Horses Teach Us About Human Behavior</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">A horse has no ego, no agenda, no ability to lie. It can only respond to what is real. Spend enough time with horses and you will learn more about yourself than any therapist, any book, or any amount of quiet reflection could ever show you.</p>
-            <div class="book-keywords">
-              <span class="book-kw">what horses teach humans</span>
-              <span class="book-kw">lessons from horses</span>
-              <span class="book-kw">horse psychology humans</span>
+
+      <!-- BOOK 6 -->
+      <div class="book-wrap" data-category="practical" data-article="5">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article6.jpg" alt="Build Trust" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001008,#000a05);">🐎</div>
+              <div class="book-ribbon">Practical</div>
+              <div class="book-num">06</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 12 -->
-    <div class="book-wrap" data-category="edge" data-article="11">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article12.jpg" alt="Feel What a Horse Feels" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a1000,#120a00);">🐎</div>
-            <div class="book-ribbon">Unique Edge</div>
-            <div class="book-num">12</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · XII</div>
-            <div class="book-art-label">Presence & Intention</div>
-            <div class="book-art-title">To Feel What a Horse Feels: Understanding Presence and Intention</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Presence is not a concept. It is a physical state — the quality of being fully here, fully alive, fully available to what is happening in this exact second. Horses live there permanently. Most humans have forgotten the address.</p>
-            <div class="book-keywords">
-              <span class="book-kw">horse sensitivity to humans</span>
-              <span class="book-kw">connection with horses</span>
-              <span class="book-kw">horse energy intention</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · VI</div>
+              <div class="book-art-label">Step by Step</div>
+              <div class="book-art-title">How to Build Trust with a Horse (Step by Step Guide)</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Trust is not built in a single day or a single session. It is built in a thousand small honest moments, each one a brick, each one a promise kept. This is the guide to laying those bricks correctly.</p>
+              <div class="book-keywords">
+                <span class="book-kw">how to build trust</span>
+                <span class="book-kw">bonding with a horse</span>
+                <span class="book-kw">gain horse trust</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 13 -->
-    <div class="book-wrap" data-category="edge" data-article="12">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article13.jpg" alt="Horses React to Mind" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#00100a,#000d07);">🐴</div>
-            <div class="book-ribbon">Unique Edge</div>
-            <div class="book-num">13</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · XIII</div>
-            <div class="book-art-label">The Invisible Rein</div>
-            <div class="book-art-title">Why Horses React to Your Mind, Not Just Your Actions</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle in your body. A horse does not read your actions. It reads the thought behind them.</p>
-            <div class="book-keywords">
-              <span class="book-kw">do horses sense emotions</span>
-              <span class="book-kw">horse awareness</span>
-              <span class="book-kw">horse reaction to humans</span>
+
+      <!-- BOOK 7 -->
+      <div class="book-wrap" data-category="practical" data-article="6">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article7.jpg" alt="Horse Not Listening" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0d0015,#080010);">🐴</div>
+              <div class="book-ribbon">Practical</div>
+              <div class="book-num">07</div>
             </div>
-            <span class="book-read">Read Article</span>
-          </div>
-        </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
-      </div>
-    </div>
- 
-    <!-- BOOK 14 -->
-    <div class="book-wrap" data-category="edge" data-article="13">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article14.jpg" alt="Silence Energy Movement" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a0015,#060010);">🐎</div>
-            <div class="book-ribbon">Unique Edge</div>
-            <div class="book-num">14</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐎</div>
-            <div class="book-page-num">The Horseman's Journal · XIV</div>
-            <div class="book-art-label">The Ancient Language</div>
-            <div class="book-art-title">Silence, Energy, and Movement: The Language Horses Understand</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">There is a language older than words, older than sound, older than the first human who tried to name things. Horses speak it fluently. It is made of silence, of the quality of stillness, of the precise intention inside every movement. This article is an attempt to translate it.</p>
-            <div class="book-keywords">
-              <span class="book-kw">horse communication</span>
-              <span class="book-kw">non verbal horses</span>
-              <span class="book-kw">how horses communicate</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · VII</div>
+              <div class="book-art-label">The Real Diagnosis</div>
+              <div class="book-art-title">Why Your Horse Does Not Listen to You (Real Reasons Explained)</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">When a horse stops listening, most people think the horse has a problem. In eleven years, I have almost never found the problem to be in the horse. The answer always begins somewhere closer to home.</p>
+              <div class="book-keywords">
+                <span class="book-kw">horse not listening</span>
+                <span class="book-kw">horse training problems</span>
+                <span class="book-kw">why horse ignores commands</span>
+              </div>
+              <span class="book-read">Read Article</span>
             </div>
-            <span class="book-read">Read Article</span>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
       </div>
-    </div>
- 
-    <!-- BOOK 15 -->
-    <div class="book-wrap" data-category="edge" data-article="14">
-      <div class="book-3d">
-        <div class="book-spread">
-          <div class="book-left">
-            <img src="article15.jpg" alt="Philosophy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0800,#120600);">🐴</div>
-            <div class="book-ribbon">Unique Edge</div>
-            <div class="book-num">15</div>
-          </div>
-          <div class="book-spine"></div>
-          <div class="book-right">
-            <div class="book-watermark">🐴</div>
-            <div class="book-page-num">The Horseman's Journal · XV</div>
-            <div class="book-art-label">The Deepest Truth</div>
-            <div class="book-art-title">The Philosophy of Working with Horses (Not Against Them)</div>
-            <div class="book-rule"></div>
-            <p class="book-art-text">There are two ways to work with a horse. One way produces obedience. The other way produces partnership. They look similar from the outside. From the inside — from inside the horse — they feel completely different. Only one of them is real.</p>
-            <div class="book-keywords">
-              <span class="book-kw">natural horsemanship</span>
-              <span class="book-kw">ethical horse training</span>
-              <span class="book-kw">working with horses</span>
+
+      <!-- BOOK 8 -->
+      <div class="book-wrap" data-category="practical" data-article="7">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article8.jpg" alt="Calm Anxious Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001a10,#001208);">🐎</div>
+              <div class="book-ribbon">Practical</div>
+              <div class="book-num">08</div>
             </div>
-            <span class="book-read">Read Article</span>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · VIII</div>
+              <div class="book-art-label">Finding Stillness</div>
+              <div class="book-art-title">How to Calm a Nervous or Anxious Horse</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">You cannot calm a horse by fighting its nervous system. You can only offer it something steady enough to anchor to. This is the art of becoming that anchor and it begins long before you ever touch the rope.</p>
+              <div class="book-keywords">
+                <span class="book-kw">how to calm a horse</span>
+                <span class="book-kw">anxious horse behavior</span>
+                <span class="book-kw">nervous horse training</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
           </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
-        <div class="book-edge"></div><div class="book-shadow"></div>
+      </div>
+
+      <!-- BOOK 9 -->
+      <div class="book-wrap" data-category="practical" data-article="8">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article9.jpg" alt="First Time Handling" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0a00,#120700);">🐴</div>
+              <div class="book-ribbon">Practical</div>
+              <div class="book-num">09</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · IX</div>
+              <div class="book-art-label">The First Meeting</div>
+              <div class="book-art-title">First Time Handling a Horse: What You Must Know</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">The first impression you make on a horse is written in its memory with indelible ink. There is no second first meeting. Everything you bring into that initial encounter, your speed, your tension, your breath, the horse will remember.</p>
+              <div class="book-keywords">
+                <span class="book-kw">first time horse tips</span>
+                <span class="book-kw">horse safety basics</span>
+                <span class="book-kw">beginner horse handling</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+      <!-- BOOK 10 -->
+      <div class="book-wrap" data-category="practical" data-article="9">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article10.jpg" alt="Signs of Trust" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a001a,#060012);">🐎</div>
+              <div class="book-ribbon">Practical</div>
+              <div class="book-num">10</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · X</div>
+              <div class="book-art-label">Reading the Bond</div>
+              <div class="book-art-title">Signs Your Horse Trusts You (And Signs It Does Not)</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">A horse's trust is not a feeling. It is a behaviour. And like all behaviour, it is visible, measurable, and honest. Here is what genuine trust looks like, and what its absence reveals about the work still to be done.</p>
+              <div class="book-keywords">
+                <span class="book-kw">signs a horse trusts you</span>
+                <span class="book-kw">horse bonding signs</span>
+                <span class="book-kw">horse trust behavior</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+      <!-- BOOK 11 -->
+      <div class="book-wrap" data-category="edge" data-article="10">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article11.jpg" alt="What Horses Teach" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001014,#00080d);">🐴</div>
+              <div class="book-ribbon">Unique Edge</div>
+              <div class="book-num">11</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · XI</div>
+              <div class="book-art-label">The Mirror in the Arena</div>
+              <div class="book-art-title">What Horses Teach Us About Human Behavior</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">A horse has no ego, no agenda, no ability to lie. It can only respond to what is real. Spend enough time with horses and you will learn more about yourself than any therapist, any book, or any amount of quiet reflection could ever show you.</p>
+              <div class="book-keywords">
+                <span class="book-kw">what horses teach humans</span>
+                <span class="book-kw">lessons from horses</span>
+                <span class="book-kw">horse psychology humans</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+      <!-- BOOK 12 -->
+      <div class="book-wrap" data-category="edge" data-article="11">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article12.jpg" alt="Feel What a Horse Feels" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a1000,#120a00);">🐎</div>
+              <div class="book-ribbon">Unique Edge</div>
+              <div class="book-num">12</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · XII</div>
+              <div class="book-art-label">Presence and Intention</div>
+              <div class="book-art-title">To Feel What a Horse Feels: Understanding Presence and Intention</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Presence is not a concept. It is a physical state, the quality of being fully here, fully alive, fully available to what is happening in this exact second. Horses live there permanently. Most humans have forgotten the address.</p>
+              <div class="book-keywords">
+                <span class="book-kw">horse sensitivity to humans</span>
+                <span class="book-kw">connection with horses</span>
+                <span class="book-kw">horse energy intention</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+      <!-- BOOK 13 -->
+      <div class="book-wrap" data-category="edge" data-article="12">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article13.jpg" alt="Horses React to Mind" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#00100a,#000d07);">🐴</div>
+              <div class="book-ribbon">Unique Edge</div>
+              <div class="book-num">13</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · XIII</div>
+              <div class="book-art-label">The Invisible Rein</div>
+              <div class="book-art-title">Why Horses React to Your Mind and Not Just Your Actions</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle in your body. A horse does not read your actions. It reads the thought behind them.</p>
+              <div class="book-keywords">
+                <span class="book-kw">do horses sense emotions</span>
+                <span class="book-kw">horse awareness</span>
+                <span class="book-kw">horse reaction to humans</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+      <!-- BOOK 14 -->
+      <div class="book-wrap" data-category="edge" data-article="13">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article14.jpg" alt="Silence Energy Movement" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a0015,#060010);">🐎</div>
+              <div class="book-ribbon">Unique Edge</div>
+              <div class="book-num">14</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐎</div>
+              <div class="book-page-num">The Horseman's Journal · XIV</div>
+              <div class="book-art-label">The Ancient Language</div>
+              <div class="book-art-title">Silence, Energy, and Movement: The Language Horses Understand</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">There is a language older than words, older than sound, older than the first human who tried to name things. Horses speak it fluently. It is made of silence, of the quality of stillness, and of the precise intention inside every movement. This article is an attempt to translate it.</p>
+              <div class="book-keywords">
+                <span class="book-kw">horse communication</span>
+                <span class="book-kw">non verbal horses</span>
+                <span class="book-kw">how horses communicate</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+      <!-- BOOK 15 -->
+      <div class="book-wrap" data-category="edge" data-article="14">
+        <div class="book-3d">
+          <div class="book-spread">
+            <div class="book-left">
+              <img src="article15.jpg" alt="Philosophy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0800,#120600);">🐴</div>
+              <div class="book-ribbon">Unique Edge</div>
+              <div class="book-num">15</div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-right">
+              <div class="book-watermark">🐴</div>
+              <div class="book-page-num">The Horseman's Journal · XV</div>
+              <div class="book-art-label">The Deepest Truth</div>
+              <div class="book-art-title">The Philosophy of Working with Horses and Not Against Them</div>
+              <div class="book-rule"></div>
+              <p class="book-art-text">There are two ways to work with a horse. One way produces obedience. The other way produces partnership. They look similar from the outside. From the inside, from inside the horse, they feel completely different. Only one of them is real.</p>
+              <div class="book-keywords">
+                <span class="book-kw">natural horsemanship</span>
+                <span class="book-kw">ethical horse training</span>
+                <span class="book-kw">working with horses</span>
+              </div>
+              <span class="book-read">Read Article</span>
+            </div>
+          </div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ARTICLE READER PANEL -->
+    <div class="article-panel" id="articlePanel">
+      <div class="art-panel-inner">
+        <div class="art-watermark" id="artWatermark">🐴</div>
+        <button class="art-close" id="artClose"></button>
+        <div class="art-header">
+          <span class="art-label" id="artLabel"></span>
+          <h3 class="art-title" id="artTitle"></h3>
+          <div class="art-rule"></div>
+          <div class="art-keywords" id="artKeywords"></div>
+        </div>
+        <div class="art-body" id="artBody"></div>
       </div>
     </div>
- 
-  </div><!-- end books-grid -->
- 
-  <!-- ─── ARTICLE READER PANEL ─── -->
-  <div class="article-panel" id="articlePanel">
-    <div class="art-panel-inner">
-      <div class="art-watermark" id="artWatermark">🐴</div>
-      <button class="art-close" id="artClose"></button>
-      <div class="art-header">
-        <span class="art-label" id="artLabel"></span>
-        <h3 class="art-title" id="artTitle"></h3>
-        <div class="art-rule"></div>
-        <div class="art-keywords" id="artKeywords"></div>
-      </div>
-      <div class="art-body" id="artBody"></div>
-    </div>
-  </div>
- 
-</section>
-<!-- END CHRONICLES SECTION -->
- 
-<script>
-/* ─── Chronicles particles ─── */
-const cp = document.getElementById('chrParticles');
-if(cp){
-  for(let i=0;i<30;i++){
-    const p=document.createElement('div');
-    p.className='chr-p';
-    const sz=Math.random()*2.5+.5;
-    p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;bottom:${Math.random()*20}%;--d:${(Math.random()-0.5)*60}px;animation-duration:${Math.random()*10+8}s;animation-delay:${Math.random()*10}s;`;
-    cp.appendChild(p);
-  }
-}
- 
-/* ─── Video swap for chronicles ─── */
-const chrVideo = document.querySelector('.chr-video');
-if(chrVideo){
-  chrVideo.addEventListener('canplay',()=>{
-    chrVideo.style.display='block';
-    document.querySelector('.chr-animated-bg').style.opacity='0';
-  });
-}
- 
-/* ─── Article data ─── */
-const articles = [
-  {label:'Foundational · Article I',title:'Understanding Horse Psychology: How Horses Think and Perceive Humans',
-   keywords:['horse psychology','how horses think','horse behavior explained','prey animal behavior','equine mindset'],
-   body:`<p>Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is not simply to understand an animal — it is to understand a completely different architecture of mind, one built for a world where the cost of a single mistake is death and where the speed of perception is the only currency that matters.</p>
-   <p>Horses think in pictures. They think in patterns. They think in the language of energy and intention, a language so precise and so honest that it makes human communication look crude and unreliable by comparison. When a horse looks at you, it is not seeing a person. It is seeing a pattern of energy — reading your tension, your breath rate, the quality of your stillness, the direction of your gaze. Before you have spoken a word or taken a step, the horse has already formed an opinion.</p>
-   <p>This is not mysticism. This is biology. A prey animal that could not read other animals with extraordinary speed and accuracy did not survive long enough to become an ancestor. Every horse alive today is the descendant of the most perceptive, the most sensitive, the most acutely attuned readers of the world that ever lived.</p>
-   <p>To work with horses well, you must first understand this: they are not failing to understand you. You are failing to understand them. The horse is reading everything correctly. The question is whether you are giving it anything honest to read.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it below this placeholder when you are ready to publish. This section is live and formatted — all you need to do is replace this with your real writing.</div>`},
-  {label:'Foundational · Article II',title:'Prey Animal Instincts in Horses: Why Fear Shapes Everything',
-   keywords:['prey animal instincts horse','why horses are fearful','horse survival behavior','flight response in horses','equine instincts'],
-   body:`<p>Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by sixty million years of natural selection. When a horse spooks at a plastic bag, it is not being stupid. It is being exactly what it was designed to be — a creature whose survival depends on treating the unfamiliar as dangerous until proven otherwise.</p>
-   <p>The flight response in a horse is not a behaviour problem. It is the expression of a nervous system that is working perfectly. The question for the horseman is never how to eliminate that response — you cannot, and you should not try. The question is how to become the thing that the horse trusts more than it fears the unknown.</p>
-   <p>When you understand the biology of prey animal instincts — how the amygdala fires before the thinking brain has time to process, how the body floods with cortisol and adrenaline in milliseconds, how the horse's entire physiology is mobilised for escape in the time it takes you to blink — you stop being frustrated by fear behaviour and start having genuine compassion for what the horse is experiencing.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it below this placeholder when you are ready to publish.</div>`},
-  {label:'Foundational · Article III',title:'Trust vs Control in Horse Training: What Actually Works',
-   keywords:['horse training trust vs control','how to build trust with a horse','natural horsemanship basics','trust based training','horse behavior training methods'],
-   body:`<p>There is a question that every horseman must eventually answer, not with words but with choices made in the arena every single day: Do you want to control your horse, or do you want to be trusted by it? These are not the same goal. They do not produce the same horse. And they do not ask the same things of you as a person.</p>
-   <p>Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses you when all the exits are open. I have spent eleven years learning the difference, and I can tell you with absolute certainty: only one of these is real horsemanship. The other is something else — something that looks like horsemanship from the outside but has a hollow sound when you knock on it.</p>
-   <p>The horse that is controlled knows where the boundary is. The horse that trusts you does not need to find the boundary, because it has no desire to leave. These two horses live in completely different relationships with their humans, move differently, breathe differently, and look at the world differently. One is managing its captivity. The other has chosen its companionship.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Foundational · Article IV',title:'How to Read a Horse\'s Body Language (Beginner to Advanced)',
-   keywords:['horse body language','how to read horses','horse signals meaning','horse ears meaning','horse tail signals','signs of stress in horses'],
-   body:`<p>Horses speak in the language of the body — constantly, precisely, and honestly. They do not have the human luxury of saying one thing while meaning another. Every ear position, every muscle tension, every shift of weight, every flick of the tail is a sentence in a language that has no capacity for deception. Learning to read it is the single most important skill a horseman can develop.</p>
-   <p>The ears are the most readable part of a horse. Ears pointed forward indicate interest, attention, sometimes concern — the horse is focused on something ahead of it. Ears pinned flat back against the skull indicate aggression, pain, or extreme irritation. Soft ears, rotated slightly to the side and relaxed, indicate a horse that is calm and comfortable. One ear forward and one ear back indicates a horse that is splitting its attention between two things simultaneously — a skill humans can only envy.</p>
-   <p>Below the ears, read the eyes. A soft, rounded eye with a visible pupil and relaxed muscles around the socket indicates a relaxed horse. A hard, tight eye, showing white around the edges, indicates fear or anger. The muscles of the jaw, the set of the mouth, the tension in the lips — all of these carry information that a horseman learns to read the way a musician reads notes on a page.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Foundational · Article V',title:'Common Human Mistakes with Horses (And Why Horses React)',
-   keywords:['mistakes in horse training','why horses misbehave','horse behavior problems','human errors with horses','training mistakes beginners'],
-   body:`<p>Most horses do not have problems. Most horses have people — people with tension they are not aware of, with agendas the horse can feel but not interpret, with expectations that have nothing to do with the horse's reality in this moment. The horse is simply doing the most honest thing it can: reflecting the human back to themselves.</p>
-   <p>The most common mistake I see from people who are new to horses — and from many who have been working with them for years — is bringing the wrong quality of attention to the encounter. They arrive at the stable carrying the weight of their day. The deadline they missed, the argument they had, the anxiety about the session itself. They walk into the arena full of noise, and then they are confused when the horse does not settle.</p>
-   <p>A horse does not separate you from your context. It reads the whole of you — the tightness in your jaw, the speed of your breath, the quality of your footfall. When you are scattered, the horse is scattered. When you are tense, the horse is tense. This is not the horse being difficult. This is the horse being honest, which is the only thing it knows how to be.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Practical · Article VI',title:'How to Build Trust with a Horse (Step-by-Step Guide)',
-   keywords:['how to build trust with a horse','bonding with a horse','gain horse trust'],
-   body:`<p>Trust between a human and a horse is not a feeling. It is a behaviour. And like all behaviour, it is built through repetition — through the accumulation of a thousand small moments where you did what you said you would do, where you did not punish what you could not understand, where you stayed when it would have been easier to leave.</p>
-   <p>The first step is deceptively simple: stop trying to earn trust and start being trustworthy. These are different things. Trying to earn trust often involves performance — doing the things you think the horse will approve of, presenting yourself in a particular way, managing your image. Being trustworthy requires only one thing: consistency. The horse that sees the same person every single time, regardless of how the session is going, learns that this person is safe. And safety, for a prey animal, is the foundation of everything.</p>
-   <p>The second step is learning to read the horse's communication and respond to it honestly. When a horse expresses discomfort, acknowledge it. When a horse tries — even when the try is small and imperfect — reward it. When a horse needs space, give it space. The horse that learns its communication is heard and respected is a horse that will communicate more, try more, and trust more.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Practical · Article VII',title:'Why Your Horse Doesn\'t Listen to You (Real Reasons Explained)',
-   keywords:['horse not listening','why horse ignores commands','horse training problems'],
-   body:`<p>When a horse stops listening, the immediate human response is almost always to increase the pressure — to ask louder, to push harder, to repeat the same request with more force and greater frustration. This is the most natural thing in the world to do, and it is almost always the wrong thing.</p>
-   <p>A horse that is not listening is not defying you. It is telling you something. It is saying: I do not understand. Or: I am not ready. Or: I am in pain. Or, most commonly: I do not trust that what happens next will be safe for me. These are not acts of stubbornness. They are acts of honest communication from an animal that cannot use words.</p>
-   <p>In eleven years of working with horses, I have found three real reasons why horses stop responding. The first is clarity — the horse genuinely does not understand what is being asked. The second is physical — there is pain or discomfort making compliance impossible or frightening. The third is relational — the horse does not have sufficient trust in the person asking to be willing to try something uncertain. Solve the real problem, and the listening returns.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Practical · Article VIII',title:'How to Calm a Nervous or Anxious Horse',
-   keywords:['how to calm a horse','anxious horse behavior','nervous horse training'],
-   body:`<p>You cannot calm a horse by fighting its nervous system. The moment you escalate in response to a horse's anxiety — raising your voice, tightening your grip, moving faster, pushing harder — you have confirmed the horse's assessment of the situation. Something dangerous is happening. The evidence is right there in the energy of the person standing beside it.</p>
-   <p>To calm an anxious horse, you must first calm yourself. This sounds obvious. In practice, in the moment, with a five-hundred-kilogram animal moving on the edge of panic, it is one of the most difficult things a human being can be asked to do. But it is the only thing that works. Horses do not respond to reassuring words. They respond to calm bodies. Your breath rate, your muscle tension, the quality of your stillness — these are the real messages you are sending.</p>
-   <p>The technique is simple even if the execution is demanding: breathe out. Actively, deliberately, with awareness. When you exhale, your muscles soften and your heart rate drops. The horse feels this through the rope, through the pressure of your hand, through the simple quality of your presence beside it. One genuine breath from a genuinely calm human body communicates more than an hour of gentle talk.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Practical · Article IX',title:'First Time Handling a Horse: What You Must Know',
-   keywords:['how to handle a horse for beginners','first time horse tips','horse safety basics'],
-   body:`<p>The first impression you make on a horse is written in its memory with a permanence that no subsequent session can fully erase. There is no second first meeting. Everything you bring into that initial encounter — your speed, your energy, the tension in your hands, the quality of your breath — the horse will carry forward into every interaction that follows.</p>
-   <p>The most important thing to understand before you approach a horse for the first time is this: approach is everything. A horse's entire existence is organised around the detection of predator approach — the speed, the angle, the directness of another creature moving toward it. A human who walks straight at a horse, making direct eye contact, moving quickly, is broadcasting predator approach. The horse's body knows this before its conscious mind has processed a single thought.</p>
-   <p>Approach from the side, not the front. Move slowly, not because speed is inherently bad but because slowness communicates low arousal — a relaxed body moving with no urgency is a body that is not hunting. Avoid direct sustained eye contact on the approach. Let the horse see you before you are within striking distance. Allow it to come the last part of the way to you rather than closing all the distance yourself. These are not just safety protocols. They are the beginning of a conversation.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Practical · Article X',title:'Signs Your Horse Trusts You (And Signs It Doesn\'t)',
-   keywords:['signs a horse trusts you','horse bonding signs','horse trust behavior'],
-   body:`<p>A horse's trust is not invisible. It is not a feeling you have to guess at or a relationship quality you can only evaluate in retrospect. Trust, in a horse, is a behaviour — and behaviour is visible, readable, and honest. When you know what to look for, you will never again need to wonder whether you and your horse have a genuine connection or simply a functional working relationship.</p>
-   <p>The clearest sign of trust is voluntary approach. A horse that trusts you does not need to be caught. When you enter the field or the stable, it comes to you — not because it expects food, but because it finds your presence comfortable and desirable. This is the equivalent of a horse saying, clearly and without ambiguity: I choose to be here with you when I could be anywhere else.</p>
-   <p>A second sign is the quality of relaxation in your presence. A horse that trusts you will lower its head when you are near — a gesture of absolute physiological relaxation in a prey animal whose survival depends on keeping its head up to watch for danger. The lowered head is the horse's equivalent of a deep exhale. It means: I am safe here. You are enough.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Unique Edge · Article XI',title:'What Horses Teach Us About Human Behavior',
-   keywords:['what horses teach humans','horse psychology and humans','lessons from horses'],
-   body:`<p>A horse has no ego. It has no agenda beyond the immediate reality of this moment, this body, this encounter. It cannot pretend. It cannot perform. It can only respond to what is genuinely present. Spend enough time with horses and you will learn more about yourself — your real self, not the one you present to the world — than any other method of self-examination can reveal.</p>
-   <p>What horses teach us, above all, is that our internal state is not private. We walk through the world believing that what we feel on the inside is contained — that we can choose what we show to others, that we can perform competence while feeling inadequate, project calm while being anxious, display confidence while being afraid. Horses expose this belief as the useful fiction it has always been.</p>
-   <p>The horse does not see the performance. It sees what is underneath. It reads the cortisol in your body odour, the micro-tensions in your muscles, the quality of your breath, the rhythm of your heartbeat. All the things you have learned to hide from other humans — the horse has read them before you have crossed the stable yard. And then it shows you, honestly and without cruelty, exactly who walked in.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Unique Edge · Article XII',title:'To Feel What a Horse Feels: Understanding Presence and Intention',
-   keywords:['horse sensitivity to humans','horse energy and intention','connection with horses'],
-   body:`<p>Presence is not a concept. It is not a state of mind you can think your way into. It is a physical reality — a quality of being fully here, fully alive, fully available to what is happening in this exact moment rather than the last one or the next one. Horses live in presence permanently and completely. It is not an achievement for them. It is simply what they are.</p>
-   <p>Most humans have lost the ability to do this. We are almost never fully here. We are partly in the meeting we just left, partly in the obligation we have later, partly in the story we are telling ourselves about who we are and what we are doing and whether we are doing it correctly. We bring all of this into the arena. The horse feels every bit of it.</p>
-   <p>To truly understand what a horse feels in your presence, try this experiment: stand still beside your horse, close your eyes, and simply feel your own body. Feel your breath, your heartbeat, the subtle tensions in your face, your jaw, your hands, your belly. Feel the narrative running through your mind. Now ask yourself honestly: if you were a prey animal, if your survival depended on reading energy accurately, what would you make of the creature standing beside you?</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Unique Edge · Article XIII',title:'Why Horses React to Your Mind, Not Just Your Actions',
-   keywords:['do horses sense emotions','horse reaction to humans','horse awareness'],
-   body:`<p>Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle, every tendon, every subtle shift of weight in your body. A horse does not wait for the action. It reads the intention. By the time you have done something, the horse has already felt it coming.</p>
-   <p>This is not telepathy. This is something far more interesting and far more available than telepathy: it is the horse's extraordinary ability to read the micro-signals of a human body with a precision and speed that our conscious mind cannot match. When you think about stopping, your body prepares to stop — slightly, imperceptibly, in ways too subtle for human eyes to register. The horse registers them. When you think about turning, your gaze shifts, your weight shifts, your pelvis makes a microscopic rotation. The horse is already turning.</p>
-   <p>The implication of this is radical. It means that mental discipline — the quality of your thoughts, the clarity of your intentions, the absence of second-guessing and conflict in your mind — is not a philosophical nicety but a practical training tool. The horse that seems to read your mind is simply reading your body with more accuracy than you are reading it yourself.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Unique Edge · Article XIV',title:'Silence, Energy, and Movement: The Language Horses Understand',
-   keywords:['horse communication signals','how horses communicate','non verbal communication horses'],
-   body:`<p>There is a language older than any human tongue, older than the first word any ancestor of ours ever spoke into the darkness. It predates writing, predates agriculture, predates the moment our species decided that everything important must be named. Horses speak it fluently. Most humans have forgotten it exists, and those who work with horses well have simply remembered how to listen.</p>
-   <p>This language is made of silence. Of the quality of stillness — the difference between the stillness of a sleeping animal and the stillness of a predator that has found its prey. Of energy — the felt sense of aliveness in a body, the direction and quality of attention, the arousal level of the nervous system. Of movement — not just the direction and speed, but the weight and intention of movement, the confidence or hesitation in a footfall, the giving or taking quality of an approach.</p>
-   <p>When I teach people to work with horses, I spend the first hour teaching them to be still. Not quiet — still. The quality of your stillness is more communicative to a horse than the quality of your voice. A still body with focused attention says: I am here, I am present, I am not going anywhere. This is one of the most reassuring messages a human can send to a prey animal that spends its life scanning for threat.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
-  {label:'Unique Edge · Article XV',title:'The Philosophy of Working with Horses (Not Against Them)',
-   keywords:['natural horsemanship philosophy','working with horses not against','ethical horse training'],
-   body:`<p>There are two ways to work with a horse. They look similar from the outside, especially to the uninitiated observer standing at the fence watching a horse and rider move together through a series of complex exercises with apparent ease and harmony. But from the inside — from inside the horse — they feel completely different. And the horse always knows the difference, even if the audience does not.</p>
-   <p>The first way is the way of force and management. It is not necessarily brutal. It does not require cruelty or excessive punishment. It can be perfectly professional, technically correct, and produce impressive results in competition arenas. But its foundation is control — the human's agenda, the human's timeline, the human's definition of what the horse should do and when it should do it. The horse in this system learns to manage its existence within the boundaries of what is permitted. It may be content. It is not free.</p>
-   <p>The second way is the way of genuine partnership. It begins not with what you want the horse to do but with understanding what the horse is. It requires that you bring more curiosity than certainty, more listening than instruction, more patience than agenda. It produces a horse that is not performing for you — it is participating with you. The difference is everything. Partnership requires two willing participants. Everything else, however graceful or technically accomplished, is something less.</p>
-   <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`}
-];
- 
-/* ─── Filter buttons ─── */
-document.querySelectorAll('.chr-filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.chr-filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.book-wrap').forEach(bk=>{
-      const match = f==='all' || bk.dataset.category===f;
-      bk.classList.toggle('hidden',!match);
-    });
-    // close article panel on filter change
-    closeArticle();
-  });
-});
- 
-/* ─── Open/close article ─── */
-const panel = document.getElementById('articlePanel');
-let openArticleIndex = -1;
- 
-function openArticle(i){
-  const a = articles[i];
-  openArticleIndex = i;
-  document.getElementById('artLabel').textContent = a.label;
-  document.getElementById('artTitle').textContent = a.title;
-  document.getElementById('artKeywords').innerHTML = a.keywords.map(k=>`<span class="art-kw">${k}</span>`).join('');
-  document.getElementById('artBody').innerHTML = a.body;
-  document.getElementById('artWatermark').textContent = i<5?'🐴':i<10?'🐎':'🐴';
-  panel.classList.add('open');
-  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
-}
-function closeArticle(){
-  panel.classList.remove('open');
-  openArticleIndex=-1;
-}
-document.getElementById('artClose').addEventListener('click', closeArticle);
- 
-document.querySelectorAll('.book-wrap').forEach((bk,i)=>{
-  bk.addEventListener('click',()=>{
-    if(openArticleIndex===i){ closeArticle(); return; }
-    openArticle(parseInt(bk.dataset.article));
-  });
-});
- 
-/* ─── Book scroll reveal ─── */
-const bookObs = new IntersectionObserver(entries=>{
-  entries.forEach((e,idx)=>{
-    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),idx*100);
-  });
-},{threshold:0.08});
-document.querySelectorAll('.book-wrap').forEach(b=>bookObs.observe(b));
-</script>
- 
-</body>
-</html>
- 
-<script>
+
+  </section>
+
+  <script>
     /* Stars */
     const starsEl=document.getElementById('stars');
     for(let i=0;i<130;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;animation-duration:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;starsEl.appendChild(s);}
@@ -1633,17 +1051,184 @@ document.querySelectorAll('.book-wrap').forEach(b=>bookObs.observe(b));
     const chObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
     document.querySelectorAll('.chapter').forEach(c=>chObserver.observe(c));
 
+    /* Chronicles particles */
+    const cp = document.getElementById('chrParticles');
+    if(cp){
+      for(let i=0;i<30;i++){
+        const p=document.createElement('div');
+        p.className='chr-p';
+        const sz=Math.random()*2.5+.5;
+        p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;bottom:${Math.random()*20}%;--d:${(Math.random()-0.5)*60}px;animation-duration:${Math.random()*10+8}s;animation-delay:${Math.random()*10}s;`;
+        cp.appendChild(p);
+      }
+    }
+
+    /* Chronicles video swap */
+    const chrVideo = document.querySelector('.chr-video');
+    if(chrVideo){
+      chrVideo.addEventListener('canplay',()=>{
+        chrVideo.style.display='block';
+        document.querySelector('.chr-animated-bg').style.opacity='0';
+      });
+    }
+
+    /* Article data */
+    const articles = [
+      {label:'Foundational · Article I',title:'Understanding Horse Psychology: How Horses Think and Perceive Humans',
+       keywords:['horse psychology','how horses think','horse behavior explained','prey animal behavior','equine mindset'],
+       body:`<p>Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is not simply to understand an animal. It is to understand a completely different architecture of mind, one built for a world where the cost of a single mistake is death and where the speed of perception is the only currency that matters.</p>
+       <p>Horses think in pictures. They think in patterns. They think in the language of energy and intention, a language so precise and so honest that it makes human communication look crude and unreliable by comparison. When a horse looks at you, it is not seeing a person. It is seeing a pattern of energy, reading your tension, your breath rate, the quality of your stillness, the direction of your gaze. Before you have spoken a word or taken a step, the horse has already formed an opinion.</p>
+       <p>This is not mysticism. This is biology. A prey animal that could not read other animals with extraordinary speed and accuracy did not survive long enough to become an ancestor. Every horse alive today is the descendant of the most perceptive, the most sensitive, the most acutely attuned readers of the world that ever lived.</p>
+       <p>To work with horses well, you must first understand this: they are not failing to understand you. You are failing to understand them. The horse is reading everything correctly. The question is whether you are giving it anything honest to read.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it below this placeholder when you are ready to publish. This section is live and formatted. All you need to do is replace this with your real writing.</div>`},
+      {label:'Foundational · Article II',title:'Prey Animal Instincts in Horses: Why Fear Shapes Everything',
+       keywords:['prey animal instincts horse','why horses are fearful','horse survival behavior','flight response in horses','equine instincts'],
+       body:`<p>Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by sixty million years of natural selection. When a horse spooks at a plastic bag, it is not being stupid. It is being exactly what it was designed to be, a creature whose survival depends on treating the unfamiliar as dangerous until proven otherwise.</p>
+       <p>The flight response in a horse is not a behaviour problem. It is the expression of a nervous system that is working perfectly. The question for the horseman is never how to eliminate that response. You cannot, and you should not try. The question is how to become the thing that the horse trusts more than it fears the unknown.</p>
+       <p>When you understand the biology of prey animal instincts, how the amygdala fires before the thinking brain has time to process, how the body floods with cortisol and adrenaline in milliseconds, how the horse's entire physiology is mobilised for escape in the time it takes you to blink, you stop being frustrated by fear behaviour and start having genuine compassion for what the horse is experiencing.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it below this placeholder when you are ready to publish.</div>`},
+      {label:'Foundational · Article III',title:'Trust vs Control in Horse Training: What Actually Works',
+       keywords:['horse training trust vs control','how to build trust with a horse','natural horsemanship basics','trust based training','horse behavior training methods'],
+       body:`<p>There is a question that every horseman must eventually answer, not with words but with choices made in the arena every single day. Do you want to control your horse, or do you want to be trusted by it? These are not the same goal. They do not produce the same horse. And they do not ask the same things of you as a person.</p>
+       <p>Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses you when all the exits are open. I have spent eleven years learning the difference, and I can tell you with absolute certainty: only one of these is real horsemanship. The other is something else, something that looks like horsemanship from the outside but has a hollow sound when you knock on it.</p>
+       <p>The horse that is controlled knows where the boundary is. The horse that trusts you does not need to find the boundary, because it has no desire to leave. These two horses live in completely different relationships with their humans, move differently, breathe differently, and look at the world differently. One is managing its captivity. The other has chosen its companionship.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Foundational · Article IV',title:'How to Read a Horse\'s Body Language (Beginner to Advanced)',
+       keywords:['horse body language','how to read horses','horse signals meaning','horse ears meaning','horse tail signals','signs of stress in horses'],
+       body:`<p>Horses speak in the language of the body, constantly, precisely, and honestly. They do not have the human luxury of saying one thing while meaning another. Every ear position, every muscle tension, every shift of weight, every flick of the tail is a sentence in a language that has no capacity for deception. Learning to read it is the single most important skill a horseman can develop.</p>
+       <p>The ears are the most readable part of a horse. Ears pointed forward indicate interest, attention and sometimes concern. The horse is focused on something ahead of it. Ears pinned flat back against the skull indicate aggression, pain, or extreme irritation. Soft ears, rotated slightly to the side and relaxed, indicate a horse that is calm and comfortable. One ear forward and one ear back indicates a horse that is splitting its attention between two things simultaneously, a skill humans can only envy.</p>
+       <p>Below the ears, read the eyes. A soft, rounded eye with a visible pupil and relaxed muscles around the socket indicates a relaxed horse. A hard, tight eye showing white around the edges indicates fear or anger. The muscles of the jaw, the set of the mouth, the tension in the lips. All of these carry information that a horseman learns to read the way a musician reads notes on a page.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Foundational · Article V',title:'Common Human Mistakes with Horses (And Why Horses React)',
+       keywords:['mistakes in horse training','why horses misbehave','horse behavior problems','human errors with horses','training mistakes beginners'],
+       body:`<p>Most horses do not have problems. Most horses have people, people with tension they are not aware of, with agendas the horse can feel but not interpret, with expectations that have nothing to do with the horse's reality in this moment. The horse is simply doing the most honest thing it can: reflecting the human back to themselves.</p>
+       <p>The most common mistake I see from people who are new to horses, and from many who have been working with them for years, is bringing the wrong quality of attention to the encounter. They arrive at the stable carrying the weight of their day. The deadline they missed, the argument they had, the anxiety about the session itself. They walk into the arena full of noise, and then they are confused when the horse does not settle.</p>
+       <p>A horse does not separate you from your context. It reads the whole of you, the tightness in your jaw, the speed of your breath, the quality of your footfall. When you are scattered, the horse is scattered. When you are tense, the horse is tense. This is not the horse being difficult. This is the horse being honest, which is the only thing it knows how to be.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Practical · Article VI',title:'How to Build Trust with a Horse (Step by Step Guide)',
+       keywords:['how to build trust with a horse','bonding with a horse','gain horse trust'],
+       body:`<p>Trust between a human and a horse is not a feeling. It is a behaviour. And like all behaviour, it is built through repetition, through the accumulation of a thousand small moments where you did what you said you would do, where you did not punish what you could not understand, where you stayed when it would have been easier to leave.</p>
+       <p>The first step is deceptively simple: stop trying to earn trust and start being trustworthy. These are different things. Trying to earn trust often involves performance, doing the things you think the horse will approve of, presenting yourself in a particular way, managing your image. Being trustworthy requires only one thing: consistency. The horse that sees the same person every single time, regardless of how the session is going, learns that this person is safe. And safety, for a prey animal, is the foundation of everything.</p>
+       <p>The second step is learning to read the horse's communication and respond to it honestly. When a horse expresses discomfort, acknowledge it. When a horse tries, even when the try is small and imperfect, reward it. When a horse needs space, give it space. The horse that learns its communication is heard and respected is a horse that will communicate more, try more, and trust more.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Practical · Article VII',title:'Why Your Horse Does Not Listen to You (Real Reasons Explained)',
+       keywords:['horse not listening','why horse ignores commands','horse training problems'],
+       body:`<p>When a horse stops listening, the immediate human response is almost always to increase the pressure, to ask louder, to push harder, to repeat the same request with more force and greater frustration. This is the most natural thing in the world to do, and it is almost always the wrong thing.</p>
+       <p>A horse that is not listening is not defying you. It is telling you something. It is saying: I do not understand. Or: I am not ready. Or: I am in pain. Or, most commonly: I do not trust that what happens next will be safe for me. These are not acts of stubbornness. They are acts of honest communication from an animal that cannot use words.</p>
+       <p>In eleven years of working with horses, I have found three real reasons why horses stop responding. The first is clarity, the horse genuinely does not understand what is being asked. The second is physical, there is pain or discomfort making compliance impossible or frightening. The third is relational, the horse does not have sufficient trust in the person asking to be willing to try something uncertain. Solve the real problem, and the listening returns.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Practical · Article VIII',title:'How to Calm a Nervous or Anxious Horse',
+       keywords:['how to calm a horse','anxious horse behavior','nervous horse training'],
+       body:`<p>You cannot calm a horse by fighting its nervous system. The moment you escalate in response to a horse's anxiety, raising your voice, tightening your grip, moving faster, pushing harder, you have confirmed the horse's assessment of the situation. Something dangerous is happening. The evidence is right there in the energy of the person standing beside it.</p>
+       <p>To calm an anxious horse, you must first calm yourself. This sounds obvious. In practice, in the moment, with a five hundred kilogram animal moving on the edge of panic, it is one of the most difficult things a human being can be asked to do. But it is the only thing that works. Horses do not respond to reassuring words. They respond to calm bodies. Your breath rate, your muscle tension, the quality of your stillness. These are the real messages you are sending.</p>
+       <p>The technique is simple even if the execution is demanding: breathe out. Actively, deliberately, with awareness. When you exhale, your muscles soften and your heart rate drops. The horse feels this through the rope, through the pressure of your hand, through the simple quality of your presence beside it. One genuine breath from a genuinely calm human body communicates more than an hour of gentle talk.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Practical · Article IX',title:'First Time Handling a Horse: What You Must Know',
+       keywords:['how to handle a horse for beginners','first time horse tips','horse safety basics'],
+       body:`<p>The first impression you make on a horse is written in its memory with a permanence that no subsequent session can fully erase. There is no second first meeting. Everything you bring into that initial encounter, your speed, your energy, the tension in your hands, the quality of your breath, the horse will carry forward into every interaction that follows.</p>
+       <p>The most important thing to understand before you approach a horse for the first time is this: approach is everything. A horse's entire existence is organised around the detection of predator approach, the speed, the angle, the directness of another creature moving toward it. A human who walks straight at a horse, making direct eye contact, moving quickly, is broadcasting predator approach. The horse's body knows this before its conscious mind has processed a single thought.</p>
+       <p>Approach from the side, not the front. Move slowly, not because speed is inherently bad but because slowness communicates low arousal. A relaxed body moving with no urgency is a body that is not hunting. Avoid direct sustained eye contact on the approach. Let the horse see you before you are within striking distance. Allow it to come the last part of the way to you rather than closing all the distance yourself. These are not just safety protocols. They are the beginning of a conversation.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Practical · Article X',title:'Signs Your Horse Trusts You (And Signs It Does Not)',
+       keywords:['signs a horse trusts you','horse bonding signs','horse trust behavior'],
+       body:`<p>A horse's trust is not invisible. It is not a feeling you have to guess at or a relationship quality you can only evaluate in retrospect. Trust, in a horse, is a behaviour. And behaviour is visible, readable, and honest. When you know what to look for, you will never again need to wonder whether you and your horse have a genuine connection or simply a functional working relationship.</p>
+       <p>The clearest sign of trust is voluntary approach. A horse that trusts you does not need to be caught. When you enter the field or the stable, it comes to you, not because it expects food, but because it finds your presence comfortable and desirable. This is the equivalent of a horse saying, clearly and without ambiguity: I choose to be here with you when I could be anywhere else.</p>
+       <p>A second sign is the quality of relaxation in your presence. A horse that trusts you will lower its head when you are near, a gesture of absolute physiological relaxation in a prey animal whose survival depends on keeping its head up to watch for danger. The lowered head is the horse's equivalent of a deep exhale. It means: I am safe here. You are enough.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Unique Edge · Article XI',title:'What Horses Teach Us About Human Behavior',
+       keywords:['what horses teach humans','horse psychology and humans','lessons from horses'],
+       body:`<p>A horse has no ego. It has no agenda beyond the immediate reality of this moment, this body, this encounter. It cannot pretend. It cannot perform. It can only respond to what is genuinely present. Spend enough time with horses and you will learn more about yourself, your real self and not the one you present to the world, than any other method of self examination can reveal.</p>
+       <p>What horses teach us, above all, is that our internal state is not private. We walk through the world believing that what we feel on the inside is contained, that we can choose what we show to others, that we can perform competence while feeling inadequate, project calm while being anxious, display confidence while being afraid. Horses expose this belief as the useful fiction it has always been.</p>
+       <p>The horse does not see the performance. It sees what is underneath. It reads the cortisol in your body odour, the micro tensions in your muscles, the quality of your breath, the rhythm of your heartbeat. All the things you have learned to hide from other humans, the horse has read them before you have crossed the stable yard. And then it shows you, honestly and without cruelty, exactly who walked in.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Unique Edge · Article XII',title:'To Feel What a Horse Feels: Understanding Presence and Intention',
+       keywords:['horse sensitivity to humans','horse energy and intention','connection with horses'],
+       body:`<p>Presence is not a concept. It is not a state of mind you can think your way into. It is a physical reality, a quality of being fully here, fully alive, fully available to what is happening in this exact moment rather than the last one or the next one. Horses live in presence permanently and completely. It is not an achievement for them. It is simply what they are.</p>
+       <p>Most humans have lost the ability to do this. We are almost never fully here. We are partly in the meeting we just left, partly in the obligation we have later, partly in the story we are telling ourselves about who we are and what we are doing and whether we are doing it correctly. We bring all of this into the arena. The horse feels every bit of it.</p>
+       <p>To truly understand what a horse feels in your presence, try this experiment: stand still beside your horse, close your eyes, and simply feel your own body. Feel your breath, your heartbeat, the subtle tensions in your face, your jaw, your hands, your belly. Feel the narrative running through your mind. Now ask yourself honestly: if you were a prey animal, if your survival depended on reading energy accurately, what would you make of the creature standing beside you?</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Unique Edge · Article XIII',title:'Why Horses React to Your Mind and Not Just Your Actions',
+       keywords:['do horses sense emotions','horse reaction to humans','horse awareness'],
+       body:`<p>Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle, every tendon, every subtle shift of weight in your body. A horse does not wait for the action. It reads the intention. By the time you have done something, the horse has already felt it coming.</p>
+       <p>This is not telepathy. This is something far more interesting and far more available than telepathy. It is the horse's extraordinary ability to read the micro signals of a human body with a precision and speed that our conscious mind cannot match. When you think about stopping, your body prepares to stop, slightly, imperceptibly, in ways too subtle for human eyes to register. The horse registers them. When you think about turning, your gaze shifts, your weight shifts, your pelvis makes a microscopic rotation. The horse is already turning.</p>
+       <p>The implication of this is radical. It means that mental discipline, the quality of your thoughts, the clarity of your intentions, the absence of second guessing and conflict in your mind, is not a philosophical nicety but a practical training tool. The horse that seems to read your mind is simply reading your body with more accuracy than you are reading it yourself.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Unique Edge · Article XIV',title:'Silence, Energy, and Movement: The Language Horses Understand',
+       keywords:['horse communication signals','how horses communicate','non verbal communication horses'],
+       body:`<p>There is a language older than any human tongue, older than the first word any ancestor of ours ever spoke into the darkness. It predates writing, predates agriculture, predates the moment our species decided that everything important must be named. Horses speak it fluently. Most humans have forgotten it exists, and those who work with horses well have simply remembered how to listen.</p>
+       <p>This language is made of silence. Of the quality of stillness, the difference between the stillness of a sleeping animal and the stillness of a predator that has found its prey. Of energy, the felt sense of aliveness in a body, the direction and quality of attention, the arousal level of the nervous system. Of movement, not just the direction and speed, but the weight and intention of movement, the confidence or hesitation in a footfall, the giving or taking quality of an approach.</p>
+       <p>When I teach people to work with horses, I spend the first hour teaching them to be still. Not quiet but still. The quality of your stillness is more communicative to a horse than the quality of your voice. A still body with focused attention says: I am here, I am present, I am not going anywhere. This is one of the most reassuring messages a human can send to a prey animal that spends its life scanning for threat.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`},
+      {label:'Unique Edge · Article XV',title:'The Philosophy of Working with Horses and Not Against Them',
+       keywords:['natural horsemanship philosophy','working with horses not against','ethical horse training'],
+       body:`<p>There are two ways to work with a horse. They look similar from the outside, especially to the uninitiated observer standing at the fence watching a horse and rider move together through a series of complex exercises with apparent ease and harmony. But from the inside, from inside the horse, they feel completely different. And the horse always knows the difference, even if the audience does not.</p>
+       <p>The first way is the way of force and management. It is not necessarily brutal. It does not require cruelty or excessive punishment. It can be perfectly professional, technically correct, and produce impressive results in competition arenas. But its foundation is control, the human's agenda, the human's timeline, the human's definition of what the horse should do and when it should do it. The horse in this system learns to manage its existence within the boundaries of what is permitted. It may be content. It is not free.</p>
+       <p>The second way is the way of genuine partnership. It begins not with what you want the horse to do but with understanding what the horse is. It requires that you bring more curiosity than certainty, more listening than instruction, more patience than agenda. It produces a horse that is not performing for you. It is participating with you. The difference is everything. Partnership requires two willing participants. Everything else, however graceful or technically accomplished, is something less.</p>
+       <div class="art-placeholder">📖 Your full article text goes here. Paste it when you are ready to publish.</div>`}
+    ];
+
+    /* Filter buttons */
+    document.querySelectorAll('.chr-filter-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.chr-filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.book-wrap').forEach(bk=>{
+          const match = f==='all' || bk.dataset.category===f;
+          bk.classList.toggle('hidden',!match);
+        });
+        closeArticle();
+      });
+    });
+
+    /* Open/close article */
+    const panel = document.getElementById('articlePanel');
+    let openArticleIndex = -1;
+
+    function openArticle(i){
+      const a = articles[i];
+      openArticleIndex = i;
+      document.getElementById('artLabel').textContent = a.label;
+      document.getElementById('artTitle').textContent = a.title;
+      document.getElementById('artKeywords').innerHTML = a.keywords.map(k=>`<span class="art-kw">${k}</span>`).join('');
+      document.getElementById('artBody').innerHTML = a.body;
+      document.getElementById('artWatermark').textContent = i<5?'🐴':i<10?'🐎':'🐴';
+      panel.classList.add('open');
+      setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
+    }
+    function closeArticle(){
+      panel.classList.remove('open');
+      openArticleIndex=-1;
+    }
+    document.getElementById('artClose').addEventListener('click', closeArticle);
+
+    document.querySelectorAll('.book-wrap').forEach((bk,i)=>{
+      bk.addEventListener('click',()=>{
+        if(openArticleIndex===parseInt(bk.dataset.article)){ closeArticle(); return; }
+        openArticle(parseInt(bk.dataset.article));
+      });
+    });
+
+    /* Book scroll reveal */
+    const bookObs = new IntersectionObserver(entries=>{
+      entries.forEach((e,idx)=>{
+        if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),idx*100);
+      });
+    },{threshold:0.08});
+    document.querySelectorAll('.book-wrap').forEach(b=>bookObs.observe(b));
+
     /* Companions */
     const horses=[
-      {issue:'Companion No. 01',name:'T-Rex',breed:'Hanoverian',age:'8',gender:'Stallion',photo:'trex.jpg',memorial:false,story:`<p>He arrived imported, four years old, barely schooled — a living storm wrapped in midnight muscle and raw sensitivity. Every horse I had worked with before had been preparation for this one, though I did not know it yet.</p><div class="story-quote">The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.</div><p>We built the piaffe together inside a bamboo circle no wider than fifteen metres. He felt every ounce of pressure I carried. When I stopped trying to fix him and simply stayed — present, honest, unguarded — he offered me everything. Today when he sees me, he calls out. He didn't just teach me how to train horses. He taught me how to train myself.</p>`},
-      {issue:'Companion No. 02',name:'Gladiator',breed:'Warmblood',age:'20',gender:'Stallion',photo:'gladiator.jpg',memorial:true,story:`<p>Gladiator arrived wearing his name like armour — aggressive on the outside, coiled and sharp. But underneath that fire lived something ancient and tender, a sensitivity so deep it frightened him as much as it frightened everyone around him.</p><div class="story-quote">He taught me that fire and fragility have always lived in the same body — in horses, and in men.</div><p>Twenty years of life lived at full intensity, and he burned every single day of it bright. He is gone now. But I feel him every time a horse tests me and I choose to stay.</p>`},
-      {issue:'Companion No. 03',name:'Xanthos',breed:'Warmblood',age:'15',gender:'Gelding',photo:'xanthos.jpg',memorial:false,story:`<p>Xanthos — named after the immortal horse of Achilles, the one who could speak and who wept at his rider's fate. From the first day, this horse carried a mythic quality in his stillness.</p><div class="story-quote">He didn't move like a horse being ridden. He moved like a horse choosing to carry you — and the difference is everything.</div><p>Fifteen years and still carrying wisdom in his body that words cannot translate. He is the kind of horse that reminds you why you chose this life in the first place.</p>`},
-      {issue:'Companion No. 04',name:'Rubin',breed:'Warmblood',age:'10',gender:'Stallion',photo:'rubin.jpg',memorial:false,story:`<p>Rubin. A gemstone of a name for a horse who made you work to find his brilliance. He was not easy in the beginning — layered, complex, a horse who required patience before he would show you anything real.</p><div class="story-quote">The horses that make you earn their trust always give you something more precious than the ones who offer it freely.</div><p>When Rubin finally let you in, what you found was luminous. A mind as sharp as his body, and a willingness that felt like a gift.</p>`},
-      {issue:'Companion No. 05',name:'Highsocity',breed:'Warmblood',age:'7',gender:'Mare',photo:'highsocity.jpg',memorial:true,story:`<p>Seven years. That is all she had, and yet she lived those seven years with an elegance that most creatures never find in a lifetime. Highsocity moved through the world as though she had been born knowing something the rest of us were still searching for.</p><div class="story-quote">She taught me about grace — the kind that costs nothing and means everything.</div><p>She is gone. She is not forgotten. Not for a single day.</p>`},
-      {issue:'Companion No. 06',name:'Yuvraj',breed:'Indian Breed',age:'20',gender:'Stallion',photo:'yuvraj.jpg',memorial:false,story:`<p>Yuvraj means prince, and he has worn that title without vanity for twenty years. There is a quality to old horses that young ones cannot manufacture — a gravity, a patience, a knowing that settles into their eyes like still water.</p><div class="story-quote">Twenty years of living had not made him slow. It had made him true.</div><p>At twenty, he still moves like a king. He reminds me every day that wisdom is simply patience that has stayed long enough to become real.</p>`},
-      {issue:'Companion No. 07',name:'Arjun',breed:'Warmblood',age:'12',gender:'Gelding',photo:'horse7.jpg',memorial:false,story:`<p>If T-Rex was the storm, Arjun was the mountain. Twelve years old, steady as stone, honest in a way that asked nothing dramatic of you — only that you show up and mean it.</p><div class="story-quote">The quiet horses teach the deepest lessons, because they simply live patience and wait for you to understand.</div><p>Some teachers shout. Arjun simply stood and waited until I was worth standing beside.</p>`},
-      {issue:'Companion No. 08',name:'Storm',breed:'Thoroughbred',age:'9',gender:'Mare',photo:'horse8.jpg',memorial:false,story:`<p>She arrived wild — a Thoroughbred mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined — though I suspect it was she who refined me, and not the other way around.</div><p>Working with Storm was working with weather. You didn't control it. You learned to move inside it with respect.</p>`}
+      {issue:'Companion No. 01',name:'T-Rex',breed:'Hanoverian',age:'8',gender:'Stallion',photo:'trex.jpg',memorial:false,story:`<p>He arrived imported, four years old, barely schooled. A living storm wrapped in midnight muscle and raw sensitivity. Every horse I had worked with before had been preparation for this one, though I did not know it yet.</p><div class="story-quote">The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.</div><p>We built the piaffe together inside a bamboo circle no wider than fifteen metres. He felt every ounce of pressure I carried. When I stopped trying to fix him and simply stayed, present, honest, unguarded, he offered me everything. Today when he sees me, he calls out. He did not just teach me how to train horses. He taught me how to train myself.</p>`},
+      {issue:'Companion No. 02',name:'Gladiator',breed:'Warmblood',age:'20',gender:'Stallion',photo:'gladiator.jpg',memorial:true,story:`<p>Gladiator arrived wearing his name like armour. Aggressive on the outside, coiled and sharp. But underneath that fire lived something ancient and tender, a sensitivity so deep it frightened him as much as it frightened everyone around him.</p><div class="story-quote">He taught me that fire and fragility have always lived in the same body, in horses and in men.</div><p>Twenty years of life lived at full intensity, and he burned every single day of it bright. He is gone now. But I feel him every time a horse tests me and I choose to stay.</p>`},
+      {issue:'Companion No. 03',name:'Xanthos',breed:'Warmblood',age:'15',gender:'Gelding',photo:'xanthos.jpg',memorial:false,story:`<p>Xanthos, named after the immortal horse of Achilles, the one who could speak and who wept at his rider's fate. From the first day, this horse carried a mythic quality in his stillness.</p><div class="story-quote">He did not move like a horse being ridden. He moved like a horse choosing to carry you and the difference is everything.</div><p>Fifteen years and still carrying wisdom in his body that words cannot translate. He is the kind of horse that reminds you why you chose this life in the first place.</p>`},
+      {issue:'Companion No. 04',name:'Rubin',breed:'Warmblood',age:'10',gender:'Stallion',photo:'rubin.jpg',memorial:false,story:`<p>Rubin. A gemstone of a name for a horse who made you work to find his brilliance. He was not easy in the beginning, layered, complex, a horse who required patience before he would show you anything real.</p><div class="story-quote">The horses that make you earn their trust always give you something more precious than the ones who offer it freely.</div><p>When Rubin finally let you in, what you found was luminous. A mind as sharp as his body, and a willingness that felt like a gift.</p>`},
+      {issue:'Companion No. 05',name:'Highsocity',breed:'Warmblood',age:'7',gender:'Mare',photo:'highsocity.jpg',memorial:true,story:`<p>Seven years. That is all she had, and yet she lived those seven years with an elegance that most creatures never find in a lifetime. Highsocity moved through the world as though she had been born knowing something the rest of us were still searching for.</p><div class="story-quote">She taught me about grace, the kind that costs nothing and means everything.</div><p>She is gone. She is not forgotten. Not for a single day.</p>`},
+      {issue:'Companion No. 06',name:'Yuvraj',breed:'Indian Breed',age:'20',gender:'Stallion',photo:'yuvraj.jpg',memorial:false,story:`<p>Yuvraj means prince, and he has worn that title without vanity for twenty years. There is a quality to old horses that young ones cannot manufacture, a gravity, a patience, a knowing that settles into their eyes like still water.</p><div class="story-quote">Twenty years of living had not made him slow. It had made him true.</div><p>At twenty, he still moves like a king. He reminds me every day that wisdom is simply patience that has stayed long enough to become real.</p>`},
+      {issue:'Companion No. 07',name:'Arjun',breed:'Warmblood',age:'12',gender:'Gelding',photo:'horse7.jpg',memorial:false,story:`<p>If T-Rex was the storm, Arjun was the mountain. Twelve years old, steady as stone, honest in a way that asked nothing dramatic of you. Only that you show up and mean it.</p><div class="story-quote">The quiet horses teach the deepest lessons, because they simply live patience and wait for you to understand.</div><p>Some teachers shout. Arjun simply stood and waited until I was worth standing beside.</p>`},
+      {issue:'Companion No. 08',name:'Storm',breed:'Thoroughbred',age:'9',gender:'Mare',photo:'horse8.jpg',memorial:false,story:`<p>She arrived wild. A Thoroughbred mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined, though I suspect it was she who refined me and not the other way around.</div><p>Working with Storm was working with weather. You did not control it. You learned to move inside it with respect.</p>`}
     ];
+
     let ci=0;
     function openStory(i){ci=i;render();document.getElementById('storyOverlay').classList.add('open');document.body.style.overflow='hidden';}
     function closeStory(){document.getElementById('storyOverlay').classList.remove('open');document.body.style.overflow='';}
