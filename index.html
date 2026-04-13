@@ -3,16 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Horseman's Journal</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Navigation + Hero (Exact Copy)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#000;font-family:'Raleway',sans-serif;overflow-x:hidden;position:relative;}
+
+    /* ORBS (kept exactly as in your original) */
+    .orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(60px);z-index:0;}
+    .orb1{width:300px;height:300px;background:rgba(212,175,55,0.12);top:-80px;left:10%;}
+    .orb2{width:250px;height:250px;background:rgba(180,80,255,0.1);top:20%;right:5%;}
+    .orb3{width:200px;height:200px;background:rgba(0,150,255,0.08);bottom:10%;left:30%;}
+
+    /* ==================== NAVBAR ==================== */
+    .navbar-wrapper{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:1.5rem 2rem 0;}
+    .scene{perspective:700px;perspective-origin:50% 60%;width:100%;max-width:1020px;}
+    .nav3d{position:relative;transform-style:preserve-3d;transform:rotateX(28deg) rotateY(0deg);transition:transform .5s cubic-bezier(.23,1,.32,1);height:64px;}
+    .nav3d:hover{transform:rotateX(8deg) rotateY(2deg);}
+    .face{position:absolute;border-radius:18px;}
+    .face-top{inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.12) 0%,rgba(212,175,55,0.06) 40%,rgba(255,255,255,0.04) 100%);border:1px solid rgba(212,175,55,0.45);border-bottom-color:rgba(212,175,55,0.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),inset 0 -1px 0 rgba(0,0,0,0.2),0 0 60px rgba(212,175,55,0.06);z-index:4;}
+    .face-back{inset:0;background:rgba(212,175,55,0.04);border:1px solid rgba(212,175,55,0.2);transform:translateZ(-36px);z-index:1;}
+    .face-bottom-wall{left:18px;right:18px;bottom:-36px;height:36px;background:linear-gradient(180deg,rgba(212,175,55,0.18) 0%,rgba(100,60,0,0.08) 60%,rgba(0,0,0,0.02) 100%);border-left:1px solid rgba(212,175,55,0.15);border-right:1px solid rgba(212,175,55,0.15);border-bottom:1px solid rgba(212,175,55,0.1);border-radius:0 0 12px 12px;transform-origin:top center;transform:rotateX(-90deg);z-index:2;}
+    .face-top-wall{left:18px;right:18px;top:-5px;height:5px;background:linear-gradient(180deg,rgba(255,255,255,0.3),rgba(212,175,55,0.2));border-radius:18px 18px 0 0;transform-origin:bottom center;transform:rotateX(90deg);z-index:3;}
+    .face-left-wall{top:4px;bottom:4px;left:-36px;width:36px;background:linear-gradient(90deg,rgba(0,0,0,0.0) 0%,rgba(212,175,55,0.1) 100%);border:1px solid rgba(212,175,55,0.1);border-radius:12px 0 0 12px;transform-origin:right center;transform:rotateY(-90deg);z-index:2;}
+    .face-right-wall{top:4px;bottom:4px;right:-36px;width:36px;background:linear-gradient(270deg,rgba(0,0,0,0.0) 0%,rgba(212,175,55,0.1) 100%);border:1px solid rgba(212,175,55,0.1);border-radius:0 12px 12px 0;transform-origin:left center;transform:rotateY(90deg);z-index:2;}
+    .nav-content{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;transform:translateZ(1px);}
+    .brand{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:#E8C84A;letter-spacing:1.5px;text-transform:uppercase;line-height:1.25;text-shadow:0 0 24px rgba(212,175,55,0.8),0 0 60px rgba(212,175,55,0.3);flex-shrink:0;text-decoration:none;}
+    .brand small{display:block;font-size:.52rem;letter-spacing:4px;color:rgba(212,175,55,0.4);font-weight:400;margin-top:1px;}
+    .links{display:flex;gap:.05rem;list-style:none;}
+    .links li a{display:block;font-size:.62rem;font-weight:600;letter-spacing:2px;color:rgba(255,240,180,0.5);text-decoration:none;padding:6px 8px;border-radius:8px;transition:all .25s;text-shadow:0 1px 3px rgba(0,0,0,0.8);position:relative;white-space:nowrap;}
+    .links li a:hover{color:#FFF8DC;background:rgba(255,255,255,0.07);text-shadow:0 0 16px rgba(212,175,55,0.9),0 0 40px rgba(212,175,55,0.4);}
+    .portal-scene{perspective:300px;flex-shrink:0;}
+    .portal-btn{position:relative;transform-style:preserve-3d;transform:rotateX(22deg);transition:transform .25s;display:inline-block;border:none;background:transparent;padding:0;cursor:pointer;}
+    .portal-btn:hover{transform:rotateX(5deg) translateY(-2px);}
+    .portal-btn:active{transform:rotateX(30deg) translateY(2px);}
+    .portal-top{display:block;padding:8px 18px;background:linear-gradient(135deg,rgba(255,255,255,0.22) 0%,rgba(212,175,55,0.35) 50%,rgba(180,120,0,0.25) 100%);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,0.7);border-bottom-color:rgba(212,175,55,0.2);border-radius:100px;font-family:'Raleway',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:2.5px;color:#FFF8DC;text-shadow:0 0 12px rgba(212,175,55,0.9);position:relative;z-index:3;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,0.35);}
+    .portal-wall{position:absolute;inset:0;background:linear-gradient(180deg,rgba(140,90,0,0.6),rgba(60,30,0,0.4));border-radius:100px;transform:translateZ(-14px);z-index:2;border:1px solid rgba(120,70,0,0.5);}
+    .portal-glow{position:absolute;inset:-4px;border-radius:100px;background:transparent;box-shadow:0 0 20px rgba(212,175,55,0.4),0 0 60px rgba(212,175,55,0.15);transform:translateZ(-7px);z-index:1;}
+
+    /* ==================== HERO ==================== */
+    .hero{position:relative;width:100%;height:100vh;min-height:620px;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.6;z-index:1;display:none;}
+    .horse-bg{position:absolute;inset:0;z-index:0;transition:opacity 1.5s ease;}
+    .sky{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#1a0a2e 0%,#0d0618 35%,#000 100%);}
+    .stars{position:absolute;inset:0;pointer-events:none;}
+    .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle linear infinite;}
+    @keyframes twinkle{0%,100%{opacity:.15;}50%{opacity:1;}}
+    .moon{position:absolute;top:80px;right:15%;width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff9e6,#e8c84a 40%,#c4922a 100%);box-shadow:0 0 40px rgba(212,175,55,0.5),0 0 120px rgba(212,175,55,0.2);z-index:2;}
+    .moonbeam{position:absolute;top:0;right:calc(15% + 14px);width:2px;height:42%;background:linear-gradient(180deg,rgba(212,175,55,0.0),rgba(212,175,55,0.12));filter:blur(10px);transform:scaleX(28);transform-origin:top center;z-index:2;}
+    .ground{position:absolute;bottom:0;left:0;right:0;height:36%;background:linear-gradient(180deg,transparent 0%,rgba(30,10,0,0.5) 20%,#0d0500 55%,#080300 100%);z-index:3;}
+    .ground-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.25),transparent);}
+    .dust{position:absolute;bottom:28%;left:0;right:0;height:120px;background:linear-gradient(180deg,transparent 0%,rgba(180,120,40,0.04) 30%,rgba(180,100,20,0.12) 70%,rgba(120,60,0,0.18) 100%);filter:blur(12px);z-index:4;animation:dustDrift 8s ease-in-out infinite;}
+    .dust2{position:absolute;bottom:22%;left:-10%;right:-10%;height:80px;background:rgba(140,80,20,0.08);filter:blur(20px);z-index:4;animation:dustDrift2 12s ease-in-out infinite;}
+    @keyframes dustDrift{0%,100%{transform:translateX(0);}50%{transform:translateX(1%);}}
+    @keyframes dustDrift2{0%,100%{transform:translateX(0);}50%{transform:translateX(-2%);}}
+    .horse-layer{position:absolute;inset:0;z-index:5;pointer-events:none;}
+    @keyframes gallop1{0%{transform:translateX(-200px) scaleX(1);}49%{transform:translateX(110%) scaleX(1);}50%{transform:translateX(110%) scaleX(-1);}100%{transform:translateX(-200px) scaleX(-1);}}
+    @keyframes gallop2{0%{transform:translateX(110%) scaleX(-1);}49%{transform:translateX(-200px) scaleX(-1);}50%{transform:translateX(-200px) scaleX(1);}100%{transform:translateX(110%) scaleX(1);}}
+    @keyframes gallop3{0%{transform:translateX(-300px) scaleX(1);}49%{transform:translateX(120%) scaleX(1);}50%{transform:translateX(120%) scaleX(-1);}100%{transform:translateX(-300px) scaleX(-1);}}
+    .h{position:absolute;bottom:28%;transform-origin:bottom center;}
+    .h1{left:0;animation:gallop1 18s linear infinite;bottom:30%;opacity:.7;}
+    .h2{left:0;animation:gallop2 22s linear infinite;bottom:30%;animation-delay:-6s;opacity:.55;}
+    .h3{left:0;animation:gallop3 26s linear infinite;bottom:31%;animation-delay:-12s;opacity:.45;}
+    .h4{left:0;animation:gallop1 14s linear infinite;bottom:29%;animation-delay:-4s;opacity:.8;}
+    .h5{left:0;animation:gallop2 30s linear infinite;bottom:30.5%;animation-delay:-18s;opacity:.35;}
+    .horse-hero{position:absolute;bottom:28%;left:50%;transform:translateX(-50%);z-index:6;opacity:.15;filter:drop-shadow(0 0 40px rgba(212,175,55,0.4));}
+    .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 25%,rgba(0,0,0,0.75) 100%);z-index:7;}
+    .vignette-bottom{position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(0deg,#000 0%,transparent 100%);z-index:7;}
+    .vignette-top{position:absolute;top:0;left:0;right:0;height:20%;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,transparent 100%);z-index:7;}
+    .color-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(212,175,55,0.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(180,60,0,0.15) 0%,transparent 50%),rgba(0,0,0,0.3);z-index:8;}
+    .bar{position:absolute;left:0;right:0;height:56px;background:#000;z-index:15;}
+    .bar-top{top:0;}.bar-bottom{bottom:0;}
+    .hero-content{position:relative;z-index:20;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.1rem;padding:0 2rem;animation:gentleFloat 7s ease-in-out infinite;animation-delay:3.5s;}
+    @keyframes gentleFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    .hero-pre{font-family:'Raleway',sans-serif;font-size:.65rem;letter-spacing:7px;color:rgba(212,175,55,0.55);text-transform:uppercase;animation:fadeUp 1.2s ease forwards;opacity:0;animation-delay:.4s;}
+    .hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,4rem);font-weight:900;color:#fff;letter-spacing:2px;line-height:1.1;text-shadow:0 0 60px rgba(212,175,55,0.5),0 0 120px rgba(212,175,55,0.2),0 4px 40px rgba(0,0,0,1);animation:floatUp 1.8s cubic-bezier(.16,1,.3,1) forwards;opacity:0;animation-delay:.8s;}
+    .hero-title .gold{color:#E8C84A;text-shadow:0 0 40px rgba(212,175,55,1),0 0 100px rgba(212,175,55,0.5),0 4px 40px rgba(0,0,0,1);}
+    .hero-divider{display:flex;align-items:center;gap:1rem;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:1.4s;}
+    .dline{width:70px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.5));}
+    .dline.r{background:linear-gradient(90deg,rgba(212,175,55,0.5),transparent);}
+    .dgem{width:5px;height:5px;background:#E8C84A;transform:rotate(45deg);box-shadow:0 0 10px rgba(212,175,55,1);}
+    .hero-tagline{font-family:'Cinzel',serif;font-size:clamp(.65rem,1.4vw,.9rem);font-weight:400;color:rgba(255,240,200,0.7);letter-spacing:2.5px;text-transform:uppercase;max-width:500px;line-height:2;text-shadow:0 2px 20px rgba(0,0,0,1);animation:fadeUp 1s ease forwards;opacity:0;animation-delay:1.7s;}
+    .hero-cta{display:flex;gap:1rem;margin-top:.4rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:2.1s;}
+    .cta-primary{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:3px;font-weight:600;color:#0a0500;background:linear-gradient(135deg,#E8C84A,#c4922a);border:none;padding:14px 32px;border-radius:2px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 30px rgba(212,175,55,0.4);transition:all .3s;}
+    .cta-primary:hover{box-shadow:0 0 60px rgba(212,175,55,0.7);transform:translateY(-2px);}
+    .cta-secondary{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:3px;font-weight:600;color:rgba(212,175,55,0.8);background:transparent;border:1px solid rgba(212,175,55,0.35);padding:13px 32px;border-radius:2px;cursor:pointer;text-transform:uppercase;transition:all .3s;}
+    .cta-secondary:hover{border-color:rgba(212,175,55,0.8);color:#E8C84A;}
+    @keyframes floatUp{0%{opacity:0;transform:translateY(50px) scale(.94);}100%{opacity:1;transform:translateY(0) scale(1);}}
+    @keyframes fadeUp{0%{opacity:0;transform:translateY(18px);}100%{opacity:1;transform:translateY(0);}}
+    .scroll-hint{position:absolute;bottom:68px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:5px;animation:fadeUp 1s ease forwards;opacity:0;animation-delay:2.8s;}
+    .scroll-mouse{width:20px;height:32px;border:1px solid rgba(212,175,55,0.35);border-radius:10px;position:relative;}
+    .scroll-mouse::before{content:'';position:absolute;top:5px;left:50%;transform:translateX(-50%);width:2px;height:5px;background:rgba(212,175,55,0.6);border-radius:2px;animation:scrollDot 1.8s ease-in-out infinite;}
+    @keyframes scrollDot{0%{opacity:1;transform:translateX(-50%) translateY(0);}100%{opacity:0;transform:translateX(-50%) translateY(10px);}}
+    .scroll-label{font-family:'Raleway',sans-serif;font-size:.55rem;letter-spacing:3px;color:rgba(212,175,55,0.25);text-transform:uppercase;}
+  </style>
 </head>
 <body>
 
+  <!-- ORBS (exactly as in your code) -->
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR (exactly the same as your code) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -44,7 +138,7 @@
     </div>
   </div>
 
-  <!-- HERO -->
+  <!-- HERO (exactly the same as your code) -->
   <section class="hero" id="genesis">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="hero-bg.mp4" type="video/mp4">
@@ -68,9 +162,12 @@
         <div class="h h5"><svg width="50" height="38" viewBox="0 0 50 38"><path d="M25,34 C19,34 12,32 8,28 C4,24 4,19 6,15 C8,11 10,8 13,7 C15,6 15,5 15,3 C16,2 15,0 17,0 C18,-1 19,1 19,2 C19,4 19,5 20,6 C22,7 23,6 25,6 C27,6 28,6 30,6 C32,7 33,9 34,11 C35,13 35,15 36,17 C37,19 39,21 40,23 C41,26 41,29 40,32 C39,34 36,36 33,36 Z M12,32 L11,38 M17,33 L16,38 M30,33 L31,38 M36,32 L37,38" stroke="rgba(180,120,20,0.5)" stroke-width="1.8" fill="rgba(120,70,5,0.45)" stroke-linecap="round"/></svg></div>
       </div>
     </div>
-    <div class="vignette"></div><div class="vignette-bottom"></div><div class="vignette-top"></div>
+    <div class="vignette"></div>
+    <div class="vignette-bottom"></div>
+    <div class="vignette-top"></div>
     <div class="color-overlay"></div>
-    <div class="bar bar-top"></div><div class="bar bar-bottom"></div>
+    <div class="bar bar-top"></div>
+    <div class="bar bar-bottom"></div>
     <div class="hero-content">
       <p class="hero-pre">Welcome to the world of</p>
       <h1 class="hero-title">The <span class="gold">Horseman's</span><br>Journal</h1>
@@ -84,28 +181,27 @@
     <div class="scroll-hint"><div class="scroll-mouse"></div><span class="scroll-label">Scroll</span></div>
   </section>
 
-  <!-- GENESIS / AWAKENING -->
-  <section class="genesis" id="awakening">
-    <!-- (All your Genesis HTML is here - same as before) -->
-    <div class="genesis-header">
-      <span class="genesis-eyebrow">The Story Behind the Journal</span>
-      <div class="header-ornament"><div class="orn-line"></div><div class="orn-gem"></div><div class="orn-line r"></div></div>
-      <h2 class="genesis-title">Genesis</h2>
-      <span class="genesis-author">by Praveen Kumar</span>
-    </div>
-    <div class="chapters">
-      <!-- All your chapters (ch1 to ch6) stay exactly the same -->
-      <!-- I kept them all here - no changes -->
-      <div class="chapter" id="ch1"> ... (your full chapter content) ... </div>
-      <!-- ... all other chapters ... -->
-    </div>
-    <div class="genesis-bottom-fade"></div>
-  </section>
+  <script>
+    /* Stars (exactly as in your original code) */
+    const starsEl = document.getElementById('stars');
+    if (starsEl) {
+      for (let i = 0; i < 130; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        const sz = Math.random() * 2 + 0.5;
+        s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;animation-duration:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;
+        starsEl.appendChild(s);
+      }
+    }
 
-  <!-- COMPANIONS, STORY OVERLAY, CHRONICLES, ESSAYS etc. are all included below in the full version -->
-
-  <!-- (The rest of your sections - Companions, Chronicles, Articles, Essays - are all kept exactly as you had them) -->
-
-  <script src="main.js"></script>
+    /* Video fallback (exactly as in your original) */
+    const video = document.querySelector('.hero-video');
+    if (video) {
+      video.addEventListener('canplay', () => {
+        video.style.display = 'block';
+        document.querySelector('.horse-bg').style.opacity = '0';
+      });
+    }
+  </script>
 </body>
 </html>
