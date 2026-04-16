@@ -6,6 +6,249 @@
   <title>The Horseman's Journal</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/hero.css">
+  <style>
+    /* WELCOME SECTION */
+    .welcome {
+      position: relative;
+      background: #000;
+      padding: 8rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    .welcome::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .welcome-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .welcome-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 6px;
+      color: rgba(212, 175, 55, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .welcome-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #E8C84A;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+    }
+
+    .welcome-text {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: rgba(240, 230, 200, 0.7);
+      line-height: 2;
+      letter-spacing: .3px;
+      margin-bottom: 1.5rem;
+    }
+
+    .welcome-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem auto;
+    }
+
+    .wel-line {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4));
+    }
+
+    .wel-line.r {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.4), transparent);
+    }
+
+    .wel-gem {
+      width: 6px;
+      height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+    }
+
+    /* EXPLORE SECTION */
+    .explore {
+      position: relative;
+      background: #000;
+      padding: 5rem 2rem 8rem;
+      overflow: hidden;
+    }
+
+    .explore::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.04) 0%, transparent 55%), radial-gradient(ellipse at 80% 50%, rgba(120, 50, 0, 0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .explore-header {
+      text-align: center;
+      margin-bottom: 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .explore-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 6px;
+      color: rgba(212, 175, 55, 0.45);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .explore-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      color: #E8C84A;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      text-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+    }
+
+    .explore-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .explore-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(20, 15, 10, 0.8) 0%, rgba(10, 8, 5, 0.9) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      cursor: pointer;
+      transition: all .5s cubic-bezier(.23, 1, .32, 1);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      text-decoration: none;
+      display: block;
+    }
+
+    .explore-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .explore-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(180, 120, 0, 0.2));
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity .5s;
+      z-index: -1;
+      filter: blur(12px);
+    }
+
+    .explore-card:hover::before {
+      opacity: 1;
+    }
+
+    .explore-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 60px rgba(212, 175, 55, 0.15);
+    }
+
+    .explore-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+      display: block;
+    }
+
+    .explore-card-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-weight: 700;
+      color: #E8C84A;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .explore-card-desc {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(.95rem, 1.5vw, 1.05rem);
+      color: rgba(240, 230, 200, 0.6);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .explore-card-link {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.7);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .3s;
+    }
+
+    .explore-card-link::after {
+      content: '→';
+      font-size: .8rem;
+      transition: transform .3s;
+    }
+
+    .explore-card:hover .explore-card-link {
+      color: #E8C84A;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    }
+
+    .explore-card:hover .explore-card-link::after {
+      transform: translateX(6px);
+    }
+
+    /* Special gradient for Essays card */
+    .explore-card.essays-card {
+      background: linear-gradient(160deg, rgba(20, 10, 40, 0.6) 0%, rgba(10, 5, 20, 0.8) 100%);
+      border-color: rgba(180, 100, 255, 0.2);
+    }
+
+    .explore-card.essays-card::before {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(180, 100, 255, 0.3), rgba(77, 208, 225, 0.3));
+    }
+
+    .explore-card.essays-card:hover {
+      border-color: rgba(180, 100, 255, 0.4);
+    }
+  </style>
 </head>
 <body>
 
@@ -84,24 +327,92 @@
     <div class="scroll-hint"><div class="scroll-mouse"></div><span class="scroll-label">Scroll</span></div>
   </section>
 
+  <!-- WELCOME SECTION -->
+  <section class="welcome">
+    <div class="welcome-inner">
+      <span class="welcome-eyebrow">A Journey Through Eleven Years</span>
+      <h2 class="welcome-title">Where Horsemanship Meets Philosophy</h2>
+      <p class="welcome-text">
+        This is not a training manual. It is not a collection of techniques. This is a journal of transformation, written in dust, silence, and the breath of horses. Eleven years of learning to speak a language older than words. Eleven years of being taught by animals that cannot speak, and learning that this is exactly why they are the best teachers in the world.
+      </p>
+      <div class="welcome-divider">
+        <div class="wel-line"></div>
+        <div class="wel-gem"></div>
+        <div class="wel-line r"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE SECTION -->
+  <section class="explore">
+    <div class="explore-header">
+      <p class="explore-eyebrow">Begin Your Journey</p>
+      <h2 class="explore-title">Explore the Journal</h2>
+    </div>
+    <div class="explore-grid">
+      
+      <!-- Genesis Card -->
+      <a href="genesis.html" class="explore-card">
+        <span class="explore-icon">📖</span>
+        <h3 class="explore-card-title">Genesis</h3>
+        <p class="explore-card-desc">The origin story. Eleven years. One black stallion. One moment of complete surrender. The beginning of everything.</p>
+        <span class="explore-card-link">Read the Story</span>
+      </a>
+
+      <!-- Companions Card -->
+      <a href="companions.html" class="explore-card">
+        <span class="explore-icon">🐴</span>
+        <h3 class="explore-card-title">Companions</h3>
+        <p class="explore-card-desc">Eight horses. Eight stories. Each one a mirror, a teacher, a gift written in silence and shaped by time.</p>
+        <span class="explore-card-link">Meet Them</span>
+      </a>
+
+      <!-- Chronicles Card -->
+      <a href="chronicles.html" class="explore-card">
+        <span class="explore-icon">📚</span>
+        <h3 class="explore-card-title">Chronicles</h3>
+        <p class="explore-card-desc">Fifteen articles on horse psychology, trust, presence, and the philosophy of working with horses instead of against them.</p>
+        <span class="explore-card-link">Explore Articles</span>
+      </a>
+
+      <!-- Essays Card -->
+      <a href="essays.html" class="explore-card essays-card">
+        <span class="explore-icon">✍️</span>
+        <h3 class="explore-card-title">Essays</h3>
+        <p class="explore-card-desc">Personal reflections on writing, time, silence, and the quiet spaces where thoughts become words.</p>
+        <span class="explore-card-link">Read Essays</span>
+      </a>
+
+    </div>
+  </section>
+
   <script src="js/global.js"></script>
   <script>
     /* Hero-specific: stars generation */
-    const starsEl=document.getElementById('stars');
-    for(let i=0;i<130;i++){
-      const s=document.createElement('div');
-      s.className='star';
-      const sz=Math.random()*2+0.5;
-      s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;animation-duration:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 130; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const sz = Math.random() * 2 + 0.5;
+      s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random() * 65}%;left:${Math.random() * 100}%;animation-duration:${Math.random() * 4 + 2}s;animation-delay:${Math.random() * 5}s;`;
       starsEl.appendChild(s);
     }
 
     /* Video swap */
-    const video=document.querySelector('.hero-video');
-    video.addEventListener('canplay',()=>{
-      video.style.display='block';
-      document.querySelector('.horse-bg').style.opacity='0';
+    const video = document.querySelector('.hero-video');
+    video.addEventListener('canplay', () => {
+      video.style.display = 'block';
+      document.querySelector('.horse-bg').style.opacity = '0';
     });
+
+    /* Explore cards scroll reveal */
+    const exploreObs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 150);
+      });
+    }, {threshold: 0.15});
+
+    document.querySelectorAll('.explore-card').forEach(c => exploreObs.observe(c));
   </script>
 
 </body>
