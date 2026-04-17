@@ -706,6 +706,186 @@
   pointer-events: none;
 }
 
+/* ARTICLE PANEL */
+.article-panel {
+  max-width: 900px;
+  margin: 4rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.article-panel.open {
+  opacity: 1;
+  pointer-events: all;
+  max-height: none;
+  overflow: visible;
+}
+
+.art-panel-inner {
+  background: linear-gradient(160deg, #f5efd4 0%, #ede0b8 100%);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 3px;
+  padding: 3.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.art-panel-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, transparent, transparent 31px, rgba(180, 150, 80, 0.1) 31px, rgba(180, 150, 80, 0.1) 32px);
+  pointer-events: none;
+}
+
+.art-watermark {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 14rem;
+  opacity: .04;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.art-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(180, 130, 40, 0.3);
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+}
+
+.art-close:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: rgba(180, 130, 40, 0.6);
+}
+
+.art-close::before,
+.art-close::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 1px;
+  background: rgba(100, 60, 10, 0.7);
+}
+
+.art-close::before {
+  transform: rotate(45deg);
+}
+
+.art-close::after {
+  transform: rotate(-45deg);
+}
+
+.art-header {
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.art-label {
+  font-family: 'Cinzel', serif;
+  font-size: .55rem;
+  letter-spacing: 4px;
+  color: rgba(140, 90, 20, 0.5);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: .8rem;
+}
+
+.art-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+  font-weight: 700;
+  color: #2a1800;
+  line-height: 1.25;
+  letter-spacing: .3px;
+  margin-bottom: 1.2rem;
+}
+
+.art-rule {
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(180, 130, 40, 0.5), rgba(212, 175, 55, 0.2), transparent);
+  margin-bottom: 1.2rem;
+}
+
+.art-keywords {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.art-kw {
+  font-family: 'Cinzel', serif;
+  font-size: .52rem;
+  letter-spacing: 1.5px;
+  color: rgba(140, 90, 20, 0.7);
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid rgba(180, 130, 40, 0.25);
+  border-radius: 1px;
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.art-body {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 2.1;
+  color: rgba(40, 20, 0, 0.8);
+  position: relative;
+  z-index: 1;
+}
+
+.art-body p {
+  margin-bottom: 1.4rem;
+  text-indent: 2em;
+}
+
+.art-body p:first-child {
+  text-indent: 0;
+}
+
+.art-body p:first-child::first-letter {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3.5em;
+  font-weight: 700;
+  color: #8a5c00;
+  float: left;
+  line-height: .75;
+  margin: 0.1em 0.1em 0 0;
+}
+
+.art-placeholder {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: .9rem;
+  color: rgba(140, 90, 20, 0.45);
+  padding: 1.5rem;
+  border: 1px dashed rgba(180, 130, 40, 0.2);
+  border-radius: 2px;
+  text-align: center;
+  line-height: 1.8;
+}
+
 /* ═══════════════════════════════════════════════════
    ARTICLE PANEL — ENHANCED READING EXPERIENCE
    Append this block to the END of chronicles.css
