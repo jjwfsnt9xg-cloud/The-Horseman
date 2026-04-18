@@ -112,9 +112,8 @@ const articles = [
 
     ]
   },
-  
   /* ─────────────────────────────────────────────
-     ARTICLES 2–15  (your text goes in html: '')
+     ARTICLES 2–15  (paste your text in the html: '' sections)
   ───────────────────────────────────────────── */
   {
     label: 'Foundational · Article II',
@@ -127,11 +126,218 @@ const articles = [
         <p><span class="rdrop">F</span>ear is not a character flaw in a horse. It is the most finely built survival system ever created by sixty million years of nature. When a horse spooks at a plastic bag, it is not being stupid. It is being exactly what it was made to be — a creature whose life depends on treating the unfamiliar as dangerous until proven otherwise.</p>
         <p>The flight response is not a behavior problem. It is a nervous system working perfectly. The question for the horseman is never how to remove that response. You cannot, and you should not try. The question is how to become the thing the horse trusts more than it fears the unknown.</p>
         <p>When you understand the biology — how the fear center fires before the thinking brain has time to process, how stress chemicals flood the body in milliseconds, how the entire horse prepares for escape in the time it takes you to blink — you stop being frustrated by fear. You start having real compassion for what the horse is living through.</p>
+        <!-- PASTE YOUR ARTICLE II TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Foundational · Article III',
+    title: 'Trust vs Control in Horse Training: What Actually Works',
+    tagline: 'Control gives you obedience. Trust gives you a horse that chooses you.',
+    keywords: ['horse training trust vs control','how to build trust with a horse','natural horsemanship basics','trust based training','horse behavior training methods'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article III', html: `
+        <p><span class="rdrop">T</span>here is a question every horseman must eventually answer — not with words, but with choices made in the arena every single day. Do you want to control your horse, or do you want to be trusted by it? These are not the same goal. They do not produce the same horse. And they do not ask the same things of you as a person.</p>
+        <p>Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all the exits are open. I have spent eleven years learning the difference. Only one of these is real horsemanship. The other looks like it from the outside, but has a hollow sound when you knock on it.</p>
+        <p>The horse that is controlled knows where the boundary is. The horse that trusts you has no desire to find the boundary, because it has no desire to leave. One is managing its captivity. The other has chosen its companionship.</p>
+        <!-- PASTE YOUR ARTICLE III TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Foundational · Article IV',
+    title: "How to Read a Horse's Body Language (Beginner to Advanced)",
+    tagline: 'Every flick of an ear is a sentence. Learn to read the language.',
+    keywords: ['horse body language','how to read horses','horse signals meaning','horse ears meaning','horse tail signals','signs of stress in horses'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article IV', html: `
+        <p><span class="rdrop">H</span>orses speak in the language of the body — constantly, precisely, and honestly. They do not have the human ability to say one thing while meaning another. Every ear position, every muscle, every shift of weight, every flick of the tail is a sentence in a language that has no room for deception. Learning to read it is the single most important skill a horseman can develop.</p>
+        <p>The ears are the most readable part of a horse. Forward means interest and focus. Pinned flat back means pain, deep irritation, or a clear warning. Soft and relaxed to the side means calm and comfortable. One forward, one back means the horse is splitting its attention between two things — a skill humans can only envy.</p>
+        <p>Below the ears, read the eyes. A soft, rounded eye with relaxed muscles around it means calm. A hard, tight eye with white showing at the edges means fear or anger. The jaw, the mouth, the lips — all of it carries information that a horseman learns to read the way a musician reads notes.</p>
+        <!-- PASTE YOUR ARTICLE IV TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Foundational · Article V',
+    title: 'Common Human Mistakes with Horses (And Why Horses React)',
+    tagline: 'Most horses do not have problems. Most horses have people.',
+    keywords: ['mistakes in horse training','why horses misbehave','horse behavior problems','human errors with horses','training mistakes beginners'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article V', html: `
+        <p><span class="rdrop">M</span>ost horses do not have problems. Most horses have people — people with tension they are not aware of, with plans the horse can feel but not understand, with expectations that have nothing to do with the horse's reality in this moment. The horse is doing the most honest thing it can: showing you exactly what you are giving it.</p>
+        <p>The most common mistake I see — from beginners and experienced riders alike — is bringing the wrong quality of presence to the encounter. They arrive carrying the weight of their day. The argument, the deadline, the anxiety about the session itself. They walk into the arena full of noise, and then they are confused when the horse does not settle.</p>
+        <p>A horse does not separate you from your context. It reads the whole of you — the tightness in your jaw, the speed of your breath, the quality of your step. When you are scattered, the horse is scattered. When you are tense, the horse is tense. This is not the horse being difficult. This is the horse being honest.</p>
+        <!-- PASTE YOUR ARTICLE V TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Practical · Article VI',
+    title: 'How to Build Trust with a Horse (Step by Step Guide)',
+    tagline: 'Trust is not a feeling. It is a thousand small promises kept.',
+    keywords: ['how to build trust with a horse','bonding with a horse','gain horse trust'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article VI', html: `
+        <p><span class="rdrop">T</span>rust between a human and a horse is not a feeling. It is a behavior. And like all behavior, it is built through repetition — through a thousand small moments where you did what you said you would, where you did not punish what you could not understand, where you stayed when it would have been easier to leave.</p>
+        <p>The first step is deceptively simple: stop trying to earn trust and start being trustworthy. Being trustworthy requires only one thing: consistency. The horse that sees the same person every single time, no matter how the session is going, learns that this person is safe. And safety is the foundation of everything.</p>
+        <p>The second step is learning to hear the horse's communication and answer it honestly. When it shows discomfort, acknowledge it. When it tries — even imperfectly — reward it. When it needs space, give space. The horse that learns its voice is heard will trust more, try more, and give more.</p>
+        <!-- PASTE YOUR ARTICLE VI TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Practical · Article VII',
+    title: 'Why Your Horse Does Not Listen to You (Real Reasons Explained)',
+    tagline: 'A horse that will not listen is not defying you. It is talking to you.',
+    keywords: ['horse not listening','why horse ignores commands','horse training problems'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article VII', html: `
+        <p><span class="rdrop">W</span>hen a horse stops listening, the natural human response is to push harder, ask louder, repeat with more force. This is the most natural thing in the world to do. And it is almost always wrong.</p>
+        <p>A horse that is not listening is not defying you. It is telling you something. It is saying: I do not understand. Or: I am not ready. Or: I am in pain. Or, most often: I do not trust that what happens next will be safe for me. These are not acts of stubbornness. They are honest messages from an animal that cannot use words.</p>
+        <p>In eleven years with horses, I have found three real reasons why horses stop responding. The first is clarity — the horse does not understand what is being asked. The second is physical — there is pain or discomfort. The third is relational — there is not enough trust to try something uncertain. Solve the real problem, and the listening always returns.</p>
+        <!-- PASTE YOUR ARTICLE VII TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Practical · Article VIII',
+    title: 'How to Calm a Nervous or Anxious Horse',
+    tagline: 'You cannot fight a nervous system. You can only offer it something steadier.',
+    keywords: ['how to calm a horse','anxious horse behavior','nervous horse training'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article VIII', html: `
+        <p><span class="rdrop">Y</span>ou cannot calm a horse by fighting its nervous system. The moment you escalate — raising your voice, tightening your grip, moving faster — you confirm what the horse already feared. Something dangerous is happening. The proof is right there in the person standing beside it.</p>
+        <p>To calm an anxious horse, you must first calm yourself. In practice, with a five hundred kilogram animal on the edge of panic, this is one of the hardest things a human being can do. But it is the only thing that works. Horses do not respond to reassuring words. They respond to calm bodies. Your breath rate, your muscle tension, the quality of your stillness — these are the real messages you are sending.</p>
+        <p>The method is simple, even if the execution is hard: breathe out. Actively, deliberately, with full awareness. When you exhale, your muscles soften and your heart rate drops. The horse feels this through the rope, through your hand, through the simple quality of your presence. One genuine breath from a genuinely calm body communicates more than an hour of gentle talk.</p>
+        <!-- PASTE YOUR ARTICLE VIII TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Practical · Article IX',
+    title: 'First Time Handling a Horse: What You Must Know',
+    tagline: 'There is no second first meeting. What you bring to that moment, the horse will remember.',
+    keywords: ['how to handle a horse for beginners','first time horse tips','horse safety basics'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article IX', html: `
+        <p><span class="rdrop">T</span>he first impression you make on a horse is written in its memory with a permanence no later session can fully erase. There is no second first meeting. Everything you bring — your speed, your energy, the tension in your hands, the quality of your breath — the horse will carry forward into every interaction that follows.</p>
+        <p>The most important thing to understand before you approach a horse for the first time is this: approach is everything. A horse's entire existence is built around detecting how a predator moves. A human who walks straight at a horse, making direct eye contact, moving fast, is sending a predator signal. The horse's body knows this before its mind has processed a single thought.</p>
+        <p>Approach from the side, not the front. Move slowly. A relaxed body with no urgency is a body that is not hunting. Let the horse see you before you are close. Allow it to come the last part of the way toward you. These are not just safety rules. They are the beginning of a conversation.</p>
+        <!-- PASTE YOUR ARTICLE IX TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Practical · Article X',
+    title: 'Signs Your Horse Trusts You (And Signs It Does Not)',
+    tagline: 'Trust in a horse is not invisible. It is a behavior. And behavior can be read.',
+    keywords: ['signs a horse trusts you','horse bonding signs','horse trust behavior'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article X', html: `
+        <p><span class="rdrop">A</span> horse's trust is not invisible. It is not a feeling you guess at or evaluate in hindsight. Trust, in a horse, is a behavior. And behavior is visible, readable, and honest. When you know what to look for, you will never again wonder whether what you have with your horse is real connection or simply a working arrangement.</p>
+        <p>The clearest sign of trust is voluntary approach. A horse that trusts you does not need to be caught. When you enter the field or the stable, it comes to you — not for food, but because your presence is comfortable and wanted. This is the horse saying clearly: I choose to be here with you when I could be anywhere else.</p>
+        <p>The second sign is the quality of relaxation in your presence. A horse that trusts you will lower its head when you are near — a gesture of complete physical relaxation from an animal whose survival depends on keeping its head up. The lowered head is a deep exhale. It means: I am safe here. You are enough.</p>
+        <!-- PASTE YOUR ARTICLE X TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Unique Edge · Article XI',
+    title: 'What Horses Teach Us About Human Behavior',
+    tagline: 'Spend enough time with horses and you will learn more about yourself than any mirror can show.',
+    keywords: ['what horses teach humans','horse psychology and humans','lessons from horses'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article XI', html: `
+        <p><span class="rdrop">A</span> horse has no ego. It has no agenda beyond what is real right now. It cannot pretend. It cannot perform. It can only respond to what is genuinely present. Spend enough time with horses and you will learn more about your real self — not the one you show the world — than any other method of self-understanding can offer.</p>
+        <p>What horses teach us above all is that our inner state is not private. We walk through the world believing we can perform competence while feeling inadequate, project calm while being anxious. Horses expose this belief as the comfortable fiction it has always been.</p>
+        <p>The horse does not see the performance. It sees what is underneath. It reads the stress in your body, the tiny tensions in your muscles, the quality of your breath. Everything you have learned to hide from other humans, the horse has already read. And then it shows you — honestly, without cruelty — exactly who walked in.</p>
+        <!-- PASTE YOUR ARTICLE XI TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Unique Edge · Article XII',
+    title: 'To Feel What a Horse Feels: Understanding Presence and Intention',
+    tagline: 'Horses live where most humans only visit — fully inside the present moment.',
+    keywords: ['horse sensitivity to humans','horse energy and intention','connection with horses'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article XII', html: `
+        <p><span class="rdrop">P</span>resence is not a concept. It is not a state you can think your way into. It is a physical reality — the quality of being fully here, fully alive, fully available to what is happening in this exact moment. Horses live in presence permanently. It is not something they achieve. It is simply what they are.</p>
+        <p>Most humans have lost the ability to do this. We are almost never fully here. We are partly in the meeting we just left, partly in the obligation ahead. We bring all of this into the arena. The horse feels every bit of it.</p>
+        <p>To understand what a horse feels in your presence, try this: stand still beside it, close your eyes, and feel your own body. Feel your breath, your heartbeat, the tensions in your face, your jaw, your hands. Now ask yourself honestly — if your survival depended on reading energy accurately, what would you make of the creature standing beside you?</p>
+        <!-- PASTE YOUR ARTICLE XII TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Unique Edge · Article XIII',
+    title: 'Why Horses React to Your Mind and Not Just Your Actions',
+    tagline: 'Before your hand moves, your mind has already moved. The horse felt it first.',
+    keywords: ['do horses sense emotions','horse reaction to humans','horse awareness'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article XIII', html: `
+        <p><span class="rdrop">B</span>efore your hand moves, your mind has already moved. Before your leg gives the signal, your intention has already broadcast itself through every muscle, every small shift of weight in your body. A horse does not wait for the action. It reads the intention. By the time you have done something, the horse has already felt it coming.</p>
+        <p>This is not telepathy. This is the horse's extraordinary ability to read the tiny signals of a human body with a precision our conscious mind cannot match. When you think about stopping, your body prepares to stop — slightly, invisibly. The horse registers it. When you think about turning, your gaze shifts, your weight shifts. The horse is already turning.</p>
+        <p>This means that the quality of your thoughts — the clarity of your intentions, the absence of doubt and inner conflict — is not a philosophical nicety but a real and practical training tool. The horse that seems to read your mind is simply reading your body with more accuracy than you are reading it yourself.</p>
+        <!-- PASTE YOUR ARTICLE XIII TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Unique Edge · Article XIV',
+    title: 'Silence, Energy, and Movement: The Language Horses Understand',
+    tagline: 'There is a language older than words. Horses speak it fluently. Most humans have forgotten it exists.',
+    keywords: ['horse communication signals','how horses communicate','non verbal communication horses'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article XIV', html: `
+        <p><span class="rdrop">T</span>here is a language older than any human tongue — older than the first word our ancestors ever spoke into the dark. It came before writing, before the moment our species decided everything important must be named. Horses speak it fluently. Most humans have forgotten it exists. Those who work well with horses have simply remembered how to listen.</p>
+        <p>This language is made of silence — the quality of stillness, the difference between an animal at rest and a predator waiting to strike. It is made of energy — the felt sense of aliveness in a body, the direction of attention. It is made of movement — not just direction and speed, but the weight and intention behind every step. The confidence or hesitation in a footfall.</p>
+        <p>When I teach people to work with horses, I spend the first hour teaching them to be still. Not quiet — still. The quality of your stillness speaks more clearly to a horse than the quality of your voice. A still body with focused attention says: I am here. I am present. I am not going anywhere. This is one of the most reassuring things a human can offer a prey animal that spends its life scanning for threat.</p>
+        <!-- PASTE YOUR ARTICLE XIV TEXT HERE AS MORE <p> PARAGRAPHS -->
+      `}
+    ]
+  },
+
+  {
+    label: 'Unique Edge · Article XV',
+    title: 'The Philosophy of Working with Horses and Not Against Them',
+    tagline: 'There are two ways to work with a horse. Only one of them is real.',
+    keywords: ['natural horsemanship philosophy','working with horses not against','ethical horse training'],
+    pages: [
+      { type: 'title' },
+      { type: 'text', section: 'Article XV', html: `
+        <p><span class="rdrop">T</span>here are two ways to work with a horse. They look similar from the outside — a horse and rider moving together with apparent ease and harmony. But from inside the horse, they feel completely different. And the horse always knows the difference, even when the audience does not.</p>
+        <p>The first way is the way of control and management. It is not necessarily cruel. It can be technically correct, professionally delivered, and produce impressive results. But its foundation is the human's agenda, the human's timeline. The horse learns to manage its life within the edges of what is permitted. It may be content. But it is not free.</p>
+        <p>The second way is the way of real partnership. It begins not with what you want the horse to do, but with understanding what the horse is. It asks for more curiosity than certainty, more listening than instruction. It produces a horse that is not performing for you — it is participating with you. Partnership requires two willing participants. Everything else, however graceful, is something less.</p>
+        <!-- PASTE YOUR ARTICLE XV TEXT HERE AS MORE <p> PARAGRAPHS -->
       `}
     ]
   }
-
-  // ... Articles 3-15 follow the same structure
 
 ];
 
@@ -201,7 +407,7 @@ function buildTextHTML(pg, pgNum, total) {
   </div>`;
 }
 
-function buildQuoteHTML(pg) {
+function buildQuoteHTML(pg, pgNum, total) {
   return `<div class="rd-quote-page">
     <div class="rd-qp-rule"></div>
     <div class="rd-tp-ornament">
@@ -226,7 +432,7 @@ function renderPage(art, idx) {
   if (pg.type === 'title')   html = buildTitleHTML(art);
   if (pg.type === 'section') html = buildSectionHTML(pg);
   if (pg.type === 'text')    html = buildTextHTML(pg, idx, total);
-  if (pg.type === 'quote')   html = buildQuoteHTML(pg);
+  if (pg.type === 'quote')   html = buildQuoteHTML(pg, idx, total);
 
   body.classList.remove('rd-fade-in');
   void body.offsetWidth;
@@ -234,8 +440,8 @@ function renderPage(art, idx) {
   body.classList.add('rd-fade-in');
 
   /* nav state */
-  inner.querySelector('.rd-nav-left').classList.toggle('rd-nav-disabled', idx === 0);
-  inner.querySelector('.rd-nav-right').classList.toggle('rd-nav-disabled', idx === total - 1);
+  inner.querySelector('.rd-nav-left').classList.toggle('rd-nav-hidden', idx === 0);
+  inner.querySelector('.rd-nav-right').classList.toggle('rd-nav-hidden', idx === total - 1);
 
   /* progress */
   const pct = total > 1 ? (idx / (total - 1)) * 100 : 0;
@@ -244,7 +450,7 @@ function renderPage(art, idx) {
 
   /* ink reveal on text pages */
   if (pg.type === 'text') {
-    setTimeout(() => inkReveal(body), 100);
+    inkReveal(body);
   }
 
   curPage = idx;
@@ -254,16 +460,7 @@ function inkReveal(container) {
   container.querySelectorAll('p').forEach(p => {
     if (p.dataset.inked) return;
     p.dataset.inked = '1';
-    const parts = [];
-    p.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        const wrapped = node.textContent.replace(/(\S+)/g, '<span class="rd-ink">$1</span>');
-        parts.push(wrapped);
-      } else if (node.nodeType === Node.ELEMENT_NODE) {
-        parts.push(node.outerHTML);
-      }
-    });
-    p.innerHTML = parts.join('');
+    p.innerHTML = p.innerHTML.replace(/(\S+)/g, '<span class="rd-ink">$1</span>');
   });
   setTimeout(() => {
     container.querySelectorAll('.rd-ink:not(.rd-ink-on)').forEach((w, i) => {
@@ -297,6 +494,7 @@ function openArticle(i) {
   curPage = 0;
 
   const inner = panel.querySelector('.art-panel-inner');
+  inner.style.cssText = 'user-select:none;-webkit-user-select:none;position:relative;overflow:hidden;';
 
   inner.innerHTML = `
     <canvas class="rd-wm-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.03;"></canvas>
@@ -311,15 +509,19 @@ function openArticle(i) {
       <div class="rd-book-shadow"></div>
     </div>
 
+    <button class="rd-nav-left rd-nav-hidden" aria-label="Previous page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="rd-nav-right" aria-label="Next page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
     <div class="rd-bottom-bar">
       <div class="rd-progress-track"><div class="rd-progress-fill"></div></div>
       <div class="rd-bottom-row">
         <button class="rd-close-btn" id="rdClose">✕ Close</button>
         <div class="rd-page-counter"></div>
-        <div class="rd-bottom-nav">
-          <button class="rd-nav-left rd-nav-disabled" aria-label="Previous page">← Previous</button>
-          <button class="rd-nav-right" aria-label="Next page">Next →</button>
-        </div>
+        <div class="rd-art-title-sm">${art.label}</div>
       </div>
     </div>
   `;
@@ -331,6 +533,8 @@ function openArticle(i) {
     if (curPage < art.pages.length - 1) renderPage(art, curPage + 1);
   });
   inner.querySelector('#rdClose').addEventListener('click', closeArticle);
+
+  panel.addEventListener('contextmenu', e => e.preventDefault());
 
   panel.classList.add('open');
   drawWatermark(inner);
