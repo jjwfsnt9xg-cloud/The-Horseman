@@ -891,6 +891,151 @@
    Append this block to the END of chronicles.css
    ═══════════════════════════════════════════════════ */
 
+/* Copy / select protection */
+.art-panel-inner,
+.art-body,
+#artBody {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Ink-reveal words — hidden until scrolled into view */
+.ink-word {
+  display: inline;
+  opacity: 0;
+  filter: blur(4px);
+  transition: opacity 0s, filter 0s;
+  will-change: opacity, filter;
+}
+
+.ink-word.ink-on {
+  opacity: 1;
+  filter: blur(0px);
+  transition: opacity 0.45s ease, filter 0.6s ease;
+}
+
+/* Article sub-headings */
+.art-subheading {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #7a5a18;
+  text-transform: uppercase;
+  margin: 2.8rem 0 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(180, 130, 40, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.art-subheading::before {
+  content: '✦';
+  font-size: 0.55rem;
+  color: rgba(212, 175, 55, 0.5);
+  margin-right: 0.6em;
+  vertical-align: middle;
+}
+
+/* Section divider between poetic opening and main article */
+.art-section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.art-sdline {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(180, 130, 40, 0.4), transparent);
+}
+
+.art-sdgem {
+  width: 7px;
+  height: 7px;
+  background: #c9a030;
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+  flex-shrink: 0;
+}
+
+/* Closing pull-quote */
+.art-closing-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: rgba(100, 65, 10, 0.75);
+  text-align: center;
+  padding: 2rem 2rem;
+  margin: 2.5rem 0 0;
+  border-top: 1px solid rgba(180, 130, 40, 0.2);
+  border-bottom: 1px solid rgba(180, 130, 40, 0.2);
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.art-closing-quote::before {
+  content: '\201C';
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3rem;
+  color: rgba(212, 175, 55, 0.25);
+  line-height: 0;
+  vertical-align: -0.6em;
+  margin-right: 0.15em;
+}
+
+.art-closing-quote::after {
+  content: '\201D';
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3rem;
+  color: rgba(212, 175, 55, 0.25);
+  line-height: 0;
+  vertical-align: -0.6em;
+  margin-left: 0.15em;
+}
+
+/* Placeholder style (for articles not yet published) */
+.art-placeholder {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(140, 90, 20, 0.45);
+  padding: 1.5rem;
+  border: 1px dashed rgba(180, 130, 40, 0.2);
+  border-radius: 2px;
+  text-align: center;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+/* Watermark canvas sits behind all content */
+.art-wm-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 3px;
+}
+
+/* Ensure all art-body children sit above watermark */
+.art-body > *,
+.art-panel-inner > .art-header,
+.art-panel-inner > .art-close,
+.art-panel-inner > .art-watermark {
+  position: relative;
+  z-index: 1;
+}
+
 /* ═══════════════════════════════════════════════════════
    BOOK READER SYSTEM — append to END of chronicles.css
    (replace any previous chronicles-additions.css content)
