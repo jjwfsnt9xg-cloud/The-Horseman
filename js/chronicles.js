@@ -26,59 +26,101 @@ const articles = [
     title: 'Understanding Horse Psychology: How Horses Think and Perceive Humans',
     keywords: ['horse psychology', 'how horses think', 'horse behavior explained', 'prey animal behavior', 'equine mindset'],
     body: `
-      <p>To feel what a horse feels is to first understand that you are noise. You arrive trailing the scent of purpose, your pockets full of plans, your mind a cacophony of what was and what will be. You walk with the heavy footfalls of a predator, an animal that does not need to listen before it moves. To the horse, you are a storm on the horizon of their senses. They see the shape of you, but they feel the intention, the hurry, the jagged edges of a mind that never rests. And in your presence, they become what they have always been: a statue carved from a single question — Am I safe?</p>
-
-      <p>To connect with them is to decide to become silent. Not just in your voice, but in your soul. You must consciously unburden yourself, letting your agenda fall to the dust like a heavy coat. You stand at the edge of their space and learn to simply be. You begin to breathe. Not the shallow, forgotten breaths of a busy life, but deep, slow tides of air that announce to every listening cell in their body that you are not a threat. You are just a creature, breathing.</p>
-
-      <p>And that is when the world changes. You stop seeing with your eyes and start feeling with your skin. You feel the cool kiss of the wind on your cheek and understand it is the same wind that is rustling the mane on their neck. You hear the distant drone of a car not as an annoyance, but as a sound that pricks their ears and passes. You feel the solid earth beneath your feet and know they feel it too, a shared foundation. You are no longer a man and a horse. You are two bodies in a field, sharing the same small slice of existence.</p>
-
-      <p>This is when the mirror appears. The horse, in its profound and silent honesty, begins to show you to yourself. If you carry tension, a tight jaw from unspoken words, a knot of worry in your gut — they will show it to you. They will hold their own body tight, their head high, their muscles coiled. They will not go near the storm inside of you. If you carry a hidden grief, a well of sadness you have refused to acknowledge, they will grow still and soft, their dark, deep eye becoming a pool of liquid sorrow that reflects your own. They absorb your truth and show it back to you without a word of judgment.</p>
-
-      <p>They have lived in fear. They understand the hum of hypervigilance, the way a body can be a prison of held-back energy. And when they see it in you, they do not run. They recognise it. It is a language they were born speaking.</p>
-
-      <p>The moment of connection, when it finally comes, is not a grand event. It is a surrender. It is the slow, deliberate exhale you have been holding. It is the horse, feeling that release, letting out its own shuddering sigh in response. It is the quiet step they take toward you, not because you asked, but because you finally became a place of peace. It is the soft, searching muzzle that touches your arm, a question asked without sound. And in that touch, a universe of trust is exchanged. You are no longer a predator. You have been accepted. You are, for a moment, part of the herd. You are safe, and so are they.</p>
-
-      <p>To walk away from that is to feel the noise of the world rush back in, but you are different now. You are more solid, more present. You carry the stillness of the field inside you. You have been seen by an ancient soul, and in their honesty, you have been given a chance to honestly see yourself. You have learned that the deepest communication requires no words at all, only a shared and silent breath.</p>
-
-      <div class="art-section-divider"><div class="art-sdline"></div><div class="art-sdgem"></div><div class="art-sdline"></div></div>
-
-      <p>Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is not simply to understand an animal. It is to understand a completely different architecture of mind, one built for a world where the cost of a single mistake is death and where the speed of perception is the only currency that matters.</p>
-
-      <p>Horses think in pictures. They think in patterns. They think in the language of energy and intention, a language so precise and so honest that it makes human communication look crude and unreliable by comparison. When a horse looks at you, it is not seeing a person. It is seeing a pattern of energy, reading your tension, your breath rate, the quality of your stillness, the direction of your gaze. Before you have spoken a word or taken a step, the horse has already formed an opinion.</p>
-
-      <p>This is not mysticism. This is biology. A prey animal that could not read other animals with extraordinary speed and accuracy did not survive long enough to become an ancestor. Every horse alive today is the descendant of the most perceptive, the most sensitive, the most acutely attuned readers of the world that ever lived.</p>
-
-      <p>To work with horses well, you must first understand this: they are not failing to understand you. You are failing to understand them. The horse is reading everything correctly. The question is whether you are giving it anything honest to read.</p>
-
-      <h4 class="art-subheading">The Psychology of Prey Animals — and What It Teaches Us</h4>
-
-      <p>A horse's entire nervous system is built around a single question: Am I safe? It is not "Is this interesting?" or "Is this rewarding?" It is, always and above all else, about safety. In the open landscapes where horses evolved, the cost of getting that answer wrong, even once, was death. There were no second chances for the horse that lingered too long, investigated too closely, or trusted too easily.</p>
-
-      <p>This is not a flaw. It is wisdom encoded in flesh and bone.</p>
-
-      <h4 class="art-subheading">What It Means to Live as Prey</h4>
-
-      <p>A predator can afford curiosity. It can move toward an unknown sound with little personal risk. That is a luxury a horse has never known. For a horse, every strange sound is a potential threat, and its life has taught it that survival depends on treating it as such. Whether the danger is a lion in the grass or a sudden movement from a human, the response is the same: the body tenses, the breath holds, and every instinct screams, run.</p>
-
-      <p>This is not a choice; it is a physical reality. It is the wisdom of an animal that understands vulnerability deep in its bones. This shapes everything. The wide-set eyes providing nearly 350 degrees of vision, the ears that rotate independently, the hair-trigger startle that fires before the conscious mind can engage. It is the source of their deep, instinctual need to be part of a herd — because to be alone is to be exposed, but to be together is to be protected.</p>
-
-      <p>Understanding this is the beginning of true empathy in horsemanship. The horse that bolts from a flapping plastic bag is not being foolish, disobedient, or stubborn. It is a prey animal doing exactly what millions of years of evolution have designed it to do: survive.</p>
-
-      <h4 class="art-subheading">The Herd and the Instinct for Safety</h4>
-
-      <p>Horses are not solitary creatures. They live in herds because a herd offers safety in numbers — more eyes, more ears, and more warning time. Within these herds are social hierarchies, but they are not the brutal, dominance-based structures we once imagined. Studies of feral horses reveal complex relationships built on mutual protection, grooming, and companionship.</p>
-
-      <p>When you see a horse standing at the edge of a pasture, neck stretched and gaze fixed on the horizon, it is performing essential work for the herd. It is the sentinel. When a horse learns to trust you, it accepts you into its herd. It includes you in its circle of safety and allows you to be the one watching the horizon. This is not submission; it is a profound sense of belonging.</p>
-
-      <h4 class="art-subheading">What Horses Teach Us</h4>
-
-      <p>Here is what I have learned in over a decade with horses: people who carry trauma often share a silent understanding with prey animals. It is in the hypervigilance, the constant scan of a room, the held breath. It is in the feeling that true relaxation is dangerous because it means letting down your guard.</p>
-
-      <p>A horse will never judge this. It recognises it. Something extraordinary happens when a person who has been living in a state of chronic vigilance stands quietly beside a thousand-pound animal that is, in that moment, also learning to trust. They breathe each other in. They exhale together. And in that shared stillness, they find something close to peace.</p>
-
-      <p>A horse is not a therapist. But a horse is always honest. And sometimes, that honesty — offered without judgment or agenda — is exactly what healing requires.</p>
-
-      <div class="art-closing-quote">The horse is a mirror to your soul.</div>
+<p>To feel what a horse feels is to first understand that you are noise. You arrive trailing the scent of purpose, your pockets full of plans, your mind a cacophony of what was and what will be. You walk with the heavy footfalls of a predator, an animal that does not need to listen before it moves. To the horse, you are a storm on the horizon of their senses. They see the shape of you, but they feel the intention — the hurry, the jagged edges of a mind that never rests. And in your presence, they become what they have always been: a statue carved from a single question — Am I safe?</p>
+ 
+  <p>To connect with them is to decide to become silent. Not just in your voice, but in your soul. You must consciously unburden yourself, letting your agenda fall to the dust like a heavy coat. You stand at the edge of their space and learn to simply be. You begin to breathe. Not the shallow, forgotten breaths of a busy life, but deep, slow tides of air that announce to every listening cell in their body that you are not a threat. You are just a creature, breathing.</p>
+ 
+  <p>And that is when the world changes. You stop seeing with your eyes and start feeling with your skin. You feel the cool kiss of the wind on your cheek and understand it is the same wind that is rustling the mane on their neck. You hear the distant drone of a car not as an annoyance, but as a sound that pricks their ears and passes. You feel the solid earth beneath your feet and know they feel it too — a shared foundation. You are no longer a man and a horse. You are two bodies in a field, sharing the same small slice of existence.</p>
+ 
+  <p>This is when the mirror appears. The horse, in its profound and silent honesty, begins to show you to yourself. If you carry tension — a tight jaw, a knot of worry in your gut — they will show it to you. They will hold their own body tight, their head high, their muscles coiled. They will not go near the storm inside of you. If you carry a hidden grief, a well of sadness you have refused to face, they will grow still and soft, their dark eye becoming a pool of sorrow that reflects your own. They absorb your truth and show it back to you without a word of judgment.</p>
+ 
+  <p>They have lived in fear. They understand the hum of hypervigilance, the way a body can be a prison of held-back energy. And when they see it in you, they do not run. They recognise it. It is a language they were born speaking.</p>
+ 
+  <p>The moment of connection, when it finally comes, is not a grand event. It is a surrender. It is the slow, deliberate exhale you have been holding. It is the horse, feeling that release, letting out its own shuddering sigh in response. It is the quiet step they take toward you — not because you asked, but because you finally became a place of peace. It is the soft, searching muzzle that touches your arm, a question asked without sound. And in that touch, a universe of trust is exchanged. You are no longer a predator. You have been accepted. You are, for a moment, part of the herd. You are safe, and so are they.</p>
+ 
+  <p>To walk away from that is to feel the noise of the world rush back in, but you are different now. You are more solid, more present. You carry the stillness of the field inside you. You have been seen by an ancient soul, and in their honesty, you have been given a chance to honestly see yourself. You have learned that the deepest communication requires no words at all — only a shared and silent breath.</p>
+ 
+  <div class="art-section-divider"><div class="art-sdline"></div><div class="art-sdgem"></div><div class="art-sdline"></div></div>
+ 
+  <p>Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is not simply to understand an animal. It is to understand a completely different architecture of mind — one built for a world where the cost of a single mistake is death and where the speed of reading the world is the only thing that matters.</p>
+ 
+  <p>Horses think in pictures. They think in patterns. They think in the language of energy and intention — a language so precise and so honest that it makes human communication look crude by comparison. When a horse looks at you, it is not seeing a person. It is seeing a pattern of energy, reading your tension, your breath rate, the quality of your stillness, the direction of your gaze. Before you have spoken a word or taken a step, the horse has already formed an opinion.</p>
+ 
+  <p>This is not mysticism. This is biology. A prey animal that could not read other animals with speed and accuracy did not survive long enough to become an ancestor. Every horse alive today is the child of the most perceptive, the most sensitive, the most finely tuned readers of the world that ever lived.</p>
+ 
+  <p>To work with horses well, you must first understand this: they are not failing to understand you. You are failing to understand them. The horse is reading everything correctly. The question is whether you are giving it anything honest to read.</p>
+ 
+  <div class="art-section-divider"><div class="art-sdline"></div><div class="art-sdgem"></div><div class="art-sdline"></div></div>
+ 
+  <h4 class="art-subheading">How Horses Think</h4>
+ 
+  <p>Horses do not think in sentences. They do not sort their thoughts into groups, reasons, or explanations. They think in pictures, in feelings, in what is happening right now. A horse that was once scared by a white plastic bag does not remember that plastic bags are scary. It remembers the exact feeling of that moment: the sudden movement, the sound, the rush of fear, the need to run. When it sees another white plastic bag, it does not think this reminds me of that time. It simply feels the same feeling, and the body moves.</p>
+ 
+  <p>This is not stupidity. This is a kind of intelligence so sharp, so finely made, that it has kept horses alive for millions of years. A prey animal that had to stop and think — that had to figure out whether the sound in the bushes was dangerous or safe — did not survive long enough to have young. The horses that remain are the children of those who felt danger and moved before the thinking mind could even catch up.</p>
+ 
+  <p>When you work with a horse, you are not working with an animal that reasons the way humans reason. You cannot explain to a horse why something is safe. You cannot tell it that the needle will help, that the trailer leads somewhere good, that the bit in its mouth is not a predator's teeth. The horse reads the world through different eyes entirely. It reads energy. It reads tension. It reads the tiny signals in your body that you do not even know you are sending.</p>
+ 
+  <p>Before you move, the horse has already felt you want to move. Before you pull the rein, the horse has felt the pull in your hand, in your breath, in the small shift of your weight. This is not magic. This is biology. The horse's survival has always needed it to read the world faster than the world can hurt it. And you, standing beside that horse, are part of the world it is reading.</p>
+ 
+  <p>It means that your thoughts are not private. Your fear, your anger, your rush, your doubt — all of it shows in your body in ways the horse reads before you have even noticed them yourself. The horse that seems difficult is often simply giving back what you are giving. And the rider who learns to quiet their own mind — to become truly calm rather than acting calm — finds that the horse changes in that same moment.</p>
+ 
+  <div class="art-closing-quote">You cannot teach a horse with words. You can only speak to it with what you are.</div>
+ 
+  <div class="art-section-divider"><div class="art-sdline"></div><div class="art-sdgem"></div><div class="art-sdline"></div></div>
+ 
+  <h4 class="art-subheading">Horse Behavior Explained</h4>
+ 
+  <p>Horse behavior is never random. It is always meaningful. The hard part for humans is that the meaning is not always clear, and the behavior is often seen through human eyes that have nothing to do with how horses truly experience the world.</p>
+ 
+  <p>When a horse pins its ears, people say it is angry. When it pulls away, people say it is stubborn. When it spooks, people say it is overreacting. But anger, stubbornness, and overreaction are human ideas placed on an animal that does not have them. A horse is not angry when it pins its ears. It is showing that it feels uncomfortable, drawing a line, or expressing stress. A horse that pulls away is not being stubborn. It is saying clearly: I do not feel safe doing what you are asking. And a horse that spooks is not overreacting. It is doing exactly what sixty million years of nature built it to do — move fast when danger appears.</p>
+ 
+  <p>Most problem behaviors in horses are not problems with the horse. They are problems with the relationship, the space, the training method, or the human's ability to read what the horse is saying. A horse that bites was not born mean. It learned, at some point, that biting is the only message strong enough to make a human stop doing something painful or frightening. A horse that will not walk into a trailer is not being difficult. It is being honest about its fear of tight spaces — and the fact that every part of it is saying that walking into a small metal box is dangerous.</p>
+ 
+  <p>The most useful change a horseman can make is to stop asking how do I make this horse stop doing this, and start asking what is this horse trying to tell me. Because once you understand what the horse is saying, the behavior often resolves on its own. The horse that bites stops biting when it learns that softer messages are heard and respected. The horse that will not load learns to trust enough to try. The spooky horse becomes calmer when the human becomes a steady, safe presence instead of another source of worry.</p>
+ 
+  <p>Horses are not machines. They are living, feeling beings with preferences, limits, and emotional lives. They form bonds. They grieve. They play. They have friends and rivals. They feel joy and fear and frustration and relief. The rider who learns to see the horse as it truly is — not as a tool or a project — finds that the horse offers far more than obedience. It offers real partnership. And that partnership, when it is real, changes everything.</p>
+ 
+  <div class="art-closing-quote">The horse that misbehaves is not the problem. It is the question. And the answer always begins with you.</div>
+ 
+  <div class="art-section-divider"><div class="art-sdline"></div><div class="art-sdgem"></div><div class="art-sdline"></div></div>
+ 
+  <h4 class="art-subheading">Prey Animal Behavior</h4>
+ 
+  <p>To understand a horse, you must first understand what it means to be prey.</p>
+ 
+  <p>A predator can take chances. A predator that checks out a strange sound and finds nothing has lost nothing. It has time to watch, to think, to decide. Because the predator is not being hunted. The predator is the hunter.</p>
+ 
+  <p>A prey animal does not have this time. For a horse, waiting can mean death. A horse that pauses to figure out whether that movement in the grass is wind or a lion does not live long enough to make better choices next time. The horses that survived — the ones whose bloodlines carry on today — are the ones that ran first and asked questions later. They trusted their gut. They turned fear into fast movement. They treated the unfamiliar as dangerous until proven safe.</p>
+ 
+  <p>This history lives in every horse you will ever meet. It is written into their nervous system, coded in their DNA, shown in every behavior that humans find frustrating or confusing. The horse that spooks at a plastic bag is not being stupid. It is being a horse. The horse that will not walk past the dark corner of the arena is not being stubborn. It is listening to a feeling that has kept its family alive for millions of years.</p>
+ 
+  <p>The flight response is not a flaw. It is the most finely made survival tool ever built by nature. When a horse feels danger, its body moves in split seconds. The heart rate spikes. Fear floods the system. The muscles tighten. The eyes go wide. The brain drops everything else and focuses on one question: where is the exit? This is not a choice. This is a need built deep into the body. And the human who stands beside that horse, frustrated that it will not simply calm down, is asking the impossible. You cannot reason with a nervous system in survival mode.</p>
+ 
+  <p>But here is what you can do. You can become the thing the horse trusts more than it fears the unknown. You can be so steady, so calm, so consistent, that your presence becomes a source of safety rather than stress. You can learn to read the early signs of rising fear — the tight muscles, the high head, the wide nostrils, the locked stare — and answer those signs with patience, with space, with the time the horse needs to settle.</p>
+ 
+  <p>The horseman who fights the prey animal nature will fight forever. The horseman who works with it, who understands it, who respects it, finds that fear is not a wall. It is simply information. And when that information is truly heard, the horse can finally let go.</p>
+ 
+  <div class="art-closing-quote">Fear in a horse is not a fault. It is a memory older than language — and it deserves your respect, not your frustration.</div>
+ 
+  <div class="art-section-divider"><div class="art-sdline"></div><div class="art-sdgem"></div><div class="art-sdline"></div></div>
+ 
+  <h4 class="art-subheading">Equine Mindset</h4>
+ 
+  <p>A horse lives in the present moment with a fullness that most humans will never know. It is not worrying about tomorrow. It is not replaying yesterday. It is here — now — fully living in this breath, this step, this meeting. This is not wisdom. This is simply what it means to be a horse.</p>
+ 
+  <p>The equine mindset is built around a few basic truths. Safety comes first. Connection to the herd matters deeply. Movement is life. Standing still without reason is risky. Trust must be earned. And the quality of your presence matters more than any word you speak.</p>
+ 
+  <p>When you walk toward a horse, it is reading you before you are ten feet away. It is checking your energy, your intention, your emotional state. Are you calm or worried? Sure or unsure? Present or somewhere else entirely? The horse does not care what you say. It cares what you are. And if what you are is scattered, tight, or disconnected, the horse will show that back to you with perfect honesty.</p>
+ 
+  <p>This is why horsemanship is as much about knowing yourself as it is about knowing horses. You cannot hide from a horse. You cannot fake being present. You cannot act calm while your nervous system is screaming. The horse knows. It always knows. And it will answer what is real — not what you are pretending.</p>
+ 
+  <p>The equine mindset also carries within it a deep capacity for forgiveness. Horses do not hold grudges. They do not replay past hurts or plan revenge. If you make a mistake, if you lose your temper, if you handle something badly, the horse will give you another chance. It will meet you fresh in the next moment — willing to try again, as long as you are willing to be honest.</p>
+ 
+  <p>This is the gift horses offer. Not just their strength, their beauty, their willingness to carry us. But their complete, uncompromising honesty. They show us who we are. They reflect back our tension, our rush, our fear. And they also reflect back our calm, our patience, our presence. They teach us that the quality of the connection depends entirely on the quality of what we bring.</p>
+ 
+  <p>And in teaching us that, they teach us something far more valuable than horsemanship. They teach us how to be human.</p>
+ 
+  <div class="art-closing-quote">The horse does not ask you to be perfect. It only asks you to be real. And in being real, you become, at last, someone worth trusting.</div>
     `
   },
   {
