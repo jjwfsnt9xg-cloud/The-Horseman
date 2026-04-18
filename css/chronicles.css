@@ -1507,3 +1507,49 @@
   .rd-text-body { font-size: 1.08rem; }
   .rd-book-spine { width: 12px; left: 18px; }
 }
+/* ── DROP CAP STYLING ── */
+.rdrop {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3.5em;
+  font-weight: 700;
+  color: #E8C84A;
+  float: left;
+  line-height: 0.85;
+  margin: 0.05em 0.12em 0 0;
+  text-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+}
+
+/* ── BOTTOM NAVIGATION (SIMPLE DESIGN) ── */
+.rd-bottom-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.rd-nav-left,
+.rd-nav-right {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: rgba(212, 175, 55, 0.8);
+  background: rgba(20, 15, 10, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.rd-nav-left:hover,
+.rd-nav-right:hover {
+  color: #E8C84A;
+  border-color: rgba(212, 175, 55, 0.6);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.rd-nav-left.rd-nav-disabled,
+.rd-nav-right.rd-nav-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
