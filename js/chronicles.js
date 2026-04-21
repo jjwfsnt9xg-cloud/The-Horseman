@@ -113,16 +113,7 @@ const articles = [
     tagline: 'The flight response is not a flaw. It is sixty million years of wisdom.',
     keywords: ['prey animal instincts horse','why horses are fearful','horse survival behavior','flight response in horses','equine instincts'],
     pages: [
-      { type: 'title' },
-      { type: 'text', section: 'Article II', html: `
-        <p><span class="rd-dropcap">F</span>ear is not a character flaw in a horse. It is the most finely built survival system ever created by sixty million years of nature. When a horse spooks at a plastic bag, it is not being stupid. It is being exactly what it was made to be — a creature whose life depends on treating the unfamiliar as dangerous until proven otherwise.</p>
-        <p>The flight response is not a behavior problem. It is a nervous system working perfectly. The question for the horseman is never how to remove that response. You cannot, and you should not try. The question is how to become the thing the horse trusts more than it fears the unknown.</p>
-        <p>When you understand the biology how the fear center fires before the thinking brain has time to process, how stress chemicals flood the body in milliseconds, how the entire horse prepares for escape in the time it takes you to blink — you stop being frustrated by fear. You start having real compassion for what the horse is living through.</p>
-        <!-- PASTE YOUR ARTICLE II TEXT HERE AS MORE <p> PARAGRAPHS -->
-      `}
-    ]
-  },
-
+      
       { type: 'title' },
 
       /* ── OPENING ── */
