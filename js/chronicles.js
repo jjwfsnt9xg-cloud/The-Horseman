@@ -187,7 +187,11 @@ const articles = [
         <p>Desensitisation is not about eliminating the horse's sensitivity. A sensitive horse is a gift — it is responsive, aware, and capable of extraordinary communication. The goal is not a dull horse that does not react. The goal is a horse whose trust in you is stronger than its fear of the unfamiliar. That horse will still feel fear. It will always feel fear. But it will look to you before it runs. And in that look is everything horsemanship is built on.</p>
       `},
 
-      { type: 'quote', text: 'A horse that trusts you does not stop being afraid. It simply decides that being near you is worth the risk. Honour that decision with everything you have.' },  
+      { type: 'quote', text: 'A horse that trusts you does not stop being afraid. It simply decides that being near you is worth the risk. Honour that decision with everything you have.' },
+      
+    ]
+  },
+  
   {
     label: 'Foundational · Article III',
     title: 'Trust vs Control in Horse Training: What Actually Works',
