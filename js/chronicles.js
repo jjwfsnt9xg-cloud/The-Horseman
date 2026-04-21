@@ -191,7 +191,10 @@ const articles = [
       
     ]
   },
-  
+
+   /* ─────────────────────────────────────────────
+     ARTICLES 3–15  (paste your text in the html: '' sections)
+  ───────────────────────────────────────────── */  
   {
     label: 'Foundational · Article III',
     title: 'Trust vs Control in Horse Training: What Actually Works',
