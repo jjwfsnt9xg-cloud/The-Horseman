@@ -123,6 +123,80 @@ const articles = [
     ]
   },
 
+      { type: 'title' },
+
+      /* ── OPENING ── */
+      { type: 'text', section: 'Why Fear Shapes Everything', html: `
+        <p><span class="rdrop">T</span>here is a sound that every horse alive knows before it is born. Not heard through the ears, but felt in the blood — a sound older than any language, older than the first human hand that ever reached toward a horse's neck. It is the sound of something moving in the grass when the grass should be still. It is the sound of threat. And the body of the horse — every muscle, every nerve, every breath — has been shaped by millions of years to answer that sound with one single, absolute response: run.</p>
+        <p>This is not a choice the horse makes. It is not a decision that passes through reason or reflection. By the time the thinking part of the brain has processed what the eyes have seen, the body is already moving. The legs are already carrying the horse away from what frightened it. This is not a flaw in the horse's design. This is the design working exactly as it was built to work.</p>
+        <p>And yet, every day, humans stand beside horses and feel frustration at this response. They pull harder on the rope. They raise their voice. They push the horse toward the thing it fears, convinced that repetition is the answer. They have mistaken the most sophisticated survival system ever built by nature for a problem to be corrected.</p>
+        <p>It is not a problem. It is the horse. And until you understand it, you will never truly reach the animal standing in front of you.</p>
+      `},
+
+      /* ── SECTION: THE AMYGDALA ── */
+      { type: 'section', heading: 'The Brain That Runs Before It Thinks', sub: 'The fear response fires in milliseconds. Reason arrives too late.' },
+
+      { type: 'text', section: 'The Brain That Runs Before It Thinks', html: `
+        <p><span class="rdrop">D</span>eep inside the horse's brain, buried beneath layers of more recent evolution, sits a small almond-shaped structure called the amygdala. It is the oldest part of the emotional brain. It does not think. It does not weigh consequences. It does not consider whether the white plastic bag by the arena fence has ever hurt a horse before. It simply receives information from the senses and, in the span of twelve milliseconds, fires a signal that floods the entire body with adrenaline and cortisol.</p>
+        <p>Twelve milliseconds. That is faster than the blink of a human eye. That is faster than the conscious mind can process a single thought. By the time the horse's rational brain — the part that, with training, can learn that plastic bags are safe — has even begun to process the visual information, the body is already in a full physiological state of emergency.</p>
+        <p>Heart rate doubles. Sometimes triples. Blood is diverted away from the digestive system and toward the large muscle groups of the legs. The pupils dilate. The nostrils flare. The entire body becomes, in an instant, a machine optimised for one single purpose: escape.</p>
+        <p>This is called the fight-or-flight response, and in the horse it is almost exclusively flight. Unlike a predator, which may stand its ground and fight when cornered, the horse's first, second, and third instinct is always to put distance between itself and the threat. Speed is safety. Distance is survival. This is sixty million years of successful living encoded into every cell of the animal's body.</p>
+        <p>When you understand this biology — truly understand it, not just intellectually but with genuine empathy — you stop asking why the horse is behaving this way. You start asking something far more useful: what can I offer this horse that its nervous system will accept as safe?</p>
+      `},
+
+      { type: 'quote', text: 'The horse does not spook to frustrate you. It spooks because every ancestor that did not spook is no longer alive to have descendants.' },
+
+      /* ── SECTION: THE SENSES ── */
+      { type: 'section', heading: 'Built to Detect Danger', sub: 'Every part of the horse is a precision instrument tuned for survival.' },
+
+      { type: 'text', section: 'Built to Detect Danger', html: `
+        <p><span class="rdrop">T</span>he horse's body is not simply an animal that runs fast. It is a living detection system of extraordinary precision, every part of it engineered over millions of years to gather information about the environment and assess it for threat.</p>
+        <p>The eyes are set on the sides of the skull, giving the horse a visual field of approximately 350 degrees. It can see almost everything around it simultaneously, with only two small blind spots — directly in front of its nose and directly behind its tail. A predator approaches from behind. A horse that cannot see behind itself is a horse that will not survive. This is why horses startle so violently when touched suddenly in a blind spot. The nervous system registers the unexpected contact and responds before the conscious mind has any say in the matter.</p>
+        <p>The ears rotate independently, each one capable of turning nearly 180 degrees to track a sound source without the horse moving its head. A horse listening to something behind it while watching something in front is not being distracted. It is doing exactly what its biology demands — gathering information from multiple directions simultaneously, building a complete picture of its environment. When both ears lock forward onto a single point, every experienced horseman learns to pay attention. The horse has found something that concerns it. The wise response is not to push forward. It is to pause and let the horse process.</p>
+        <p>The nostrils can detect scents at concentrations far below what any human nose can register. Horses have been documented detecting the presence of a predator — not the sight or sound, but the scent alone — from distances of several hundred metres in the right wind conditions. When a horse lifts its head and flares its nostrils at something you cannot see or smell, it is not imagining things. It is reading information from the environment that you simply do not have access to.</p>
+        <p>The whiskers around the muzzle are not decorative. They are sensory organs, capable of detecting changes in airflow and the proximity of objects in low light. Horses that have their whiskers clipped — a practice still common in competitive equestrian disciplines — lose a significant part of their environmental sensing ability. They become, in a very real sense, partially blind in the dark.</p>
+      `},
+
+      { type: 'quote', text: 'When the horse tells you something is wrong, believe it. It is reading a world you cannot fully see.' },
+
+      /* ── SECTION: MEMORY OF FEAR ── */
+      { type: 'section', heading: 'How Horses Remember Fear', sub: 'One bad moment can last a lifetime. One honest moment of safety can begin to undo it.' },
+
+      { type: 'text', section: 'How Horses Remember Fear', html: `
+        <p><span class="rdrop">F</span>ear memory in horses is not stored the way human memories are stored. Humans encode memories with context — they remember not just what happened, but where, when, with whom, and how they felt about it afterward. Time passes and the memory softens. Details blur. The emotional charge of a frightening event gradually diminishes as the brain files it away and moves forward.</p>
+        <p>This is not how the horse's brain works. Fear memories in horses are stored with extraordinary precision in the amygdala — and they are stored for life. A horse that was badly frightened in a horse trailer at age three will remember that fear at age twenty. Not as a story it tells itself, but as a full-body sensory experience that is re-triggered the moment the right stimulus appears. The smell of diesel fumes. The sound of a metal ramp. The feeling of reduced light and enclosed space. Any one of these can unlock the entire original terror in an instant.</p>
+        <p>This is why punishment is so damaging in horse training. When a human punishes a horse for displaying fear — hitting it, shouting at it, forcing it toward the thing that frightens it — they are not teaching the horse that the thing is safe. They are adding a second layer of threat to an already frightened nervous system. The horse now has two things to fear: the original stimulus and the human beside it. The fear becomes deeper, more complex, and far harder to resolve.</p>
+        <p>But the same principle that makes fear memory so persistent can also be used to create safety memory. Every time a horse is allowed to approach something frightening at its own pace, in its own time, and is not punished for hesitating — every time it discovers for itself that the scary thing did not harm it — a new memory is laid down alongside the old one. Not replacing it, but offering an alternative. Over time, with patience and consistency, the safety memory can become stronger than the fear memory. The horse learns, not because it was told, but because it was given the space to discover.</p>
+        <p>This process cannot be rushed. It cannot be forced. It can only be offered, again and again, until the horse chooses to trust what the evidence is showing it. That is desensitisation done honestly. Not flooding the horse with the frightening thing until it gives up resisting, but walking beside it, slowly, as it learns that the world is safer than its instincts have always told it.</p>
+      `},
+
+      { type: 'quote', text: 'You cannot argue a horse out of its fear. You can only give it enough safe experiences to outweigh the ones that were not.' },
+
+      /* ── SECTION: THE HERD ── */
+      { type: 'section', heading: 'Safety in Numbers', sub: 'The lone horse is the vulnerable horse. The herd is not a social preference — it is survival.' },
+
+      { type: 'text', section: 'Safety in Numbers', html: `
+        <p><span class="rdrop">I</span>n the wild, a horse alone is a horse in danger. Not because solitude itself is dangerous, but because every second a horse is without companions, it is bearing the full weight of vigilance alone. There are no other eyes watching the horizon. No other ears turning toward that sound in the distance. No other nose catching a scent on the wind. The solitary horse must be alert to everything, always, without rest.</p>
+        <p>This is why isolation is one of the most psychologically damaging things that can be done to a horse. Stabled horses kept without visual or physical contact with other horses show measurable increases in stress hormones, stereotypic behaviors — weaving, crib-biting, box walking — and heightened reactivity. They are not being difficult. They are expressing the profound biological distress of an animal whose survival system is screaming that it is in danger.</p>
+        <p>Within a herd, the vigilance is shared. Studies of feral horse groups have shown that while one horse grazes with its head down, others maintain watch. The pattern rotates naturally, without instruction, without hierarchy dictating who watches when. It is a distributed safety system, each horse contributing its senses to a collective awareness that no single animal could maintain alone.</p>
+        <p>This herd instinct is the key to understanding why horses are so profoundly affected by the emotional state of the humans around them. In the absence of horse companions, many horses will transfer their herd bonding to humans, other species, or even objects. They are not being foolish or sentimental. They are doing what their biology requires — finding something to be part of, something to trust, something that makes standing still in the world feel survivable.</p>
+        <p>When you earn the trust of a horse, you are not merely earning its affection. You are being accepted into its safety system. It is allowing you to be the one it turns to when something frightens it — the one whose stillness or calm it uses to calibrate its own response. That is not a small thing. For a prey animal, allowing another creature into its circle of trust is the most significant decision it can make. It is staking its survival on you.</p>
+      `},
+
+      { type: 'quote', text: 'When a horse turns to you in fear instead of running from you, you have become its herd. That is the whole of horsemanship.' },
+
+      /* ── SECTION: WORKING WITH FEAR ── */
+      { type: 'section', heading: 'Working With Fear, Not Against It', sub: 'The horseman who fights the prey animal will fight forever. The one who works with it will find a partner.' },
+
+      { type: 'text', section: 'Working With Fear, Not Against It', html: `
+        <p><span class="rdrop">T</span>he single most important shift a horseman can make is to stop experiencing the horse's fear as an obstacle and start experiencing it as information. Fear in a horse is not stubbornness. It is not disrespect. It is not a training problem to be solved with more pressure. It is the horse communicating, as clearly and honestly as it is capable of communicating, that something in its environment has registered as unsafe.</p>
+        <p>Your job is not to convince the horse that its fear is wrong. Your job is to become so consistent, so calm, and so trustworthy, that the horse's nervous system begins to use your energy as a reference point. This is called social referencing — the same phenomenon that causes a young child to look at a parent's face to determine whether a new situation is safe or frightening. Horses do this constantly. When something startles them, the first thing many horses do is look at the human beside them. What they are asking is: are you afraid? If the human's body tightens, if the breath shortens, if the grip on the rope increases — the horse receives confirmation that danger is present. If the human breathes out, softens, and does not escalate — the horse receives a different message. Perhaps this is not as dangerous as it felt.</p>
+        <p>This is why your own nervous system is the most important piece of equipment you bring to any session with a horse. Not the saddle, not the bridle, not the training method. Your breath rate. Your muscle tension. The quality of your stillness. These are the things the horse is reading, and these are the things that will determine whether the session goes toward trust or away from it.</p>
+        <p>Learn to read the early signs of rising fear — the high head, the tightening of the muscles along the neck and back, the shortening of the stride, the eye that begins to show white at the edges, the tail that lifts and stiffens. These are not the explosion. These are the warning before the explosion. The horseman who responds to these early signals with patience, with space, with a calm exhale and a moment of stillness, will rarely meet the explosion. The horseman who pushes through them will meet it every time.</p>
+        <p>Desensitisation is not about eliminating the horse's sensitivity. A sensitive horse is a gift — it is responsive, aware, and capable of extraordinary communication. The goal is not a dull horse that does not react. The goal is a horse whose trust in you is stronger than its fear of the unfamiliar. That horse will still feel fear. It will always feel fear. But it will look to you before it runs. And in that look is everything horsemanship is built on.</p>
+      `},
+
+      { type: 'quote', text: 'A horse that trusts you does not stop being afraid. It simply decides that being near you is worth the risk. Honour that decision with everything you have.' },  
   {
     label: 'Foundational · Article III',
     title: 'Trust vs Control in Horse Training: What Actually Works',
