@@ -1,220 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hero Section with 3D Parallax</title>
-<style>
-  /* Reset and base styles */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Horseman's Journal</title>
 
-  body {
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-  }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 
-  /* Hero section styling */
-  .hero {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  /* Video background styling */
-  .hero-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-
-  /* Background elements for parallax */
-  #stars, #moon, #ground {
-    position: absolute;
-    will-change: transform;
-    transition: transform 0.2s ease-out;
-  }
-
-  /* Stars background - optional, can be replaced with an image or SVG */
-  #stars {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(white, transparent 70%), radial-gradient(white, transparent 70%);
-    background-repeat: repeat;
-    background-size: 100px 100px;
-    z-index: 0;
-  }
-
-  /* Moon styling */
-  #moon {
-    top: 50px;
-    right: 100px;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, #f0f0f0, #ccc);
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255,255,255,0.5);
-    z-index: 1;
-  }
-
-  /* Ground styling */
-  #ground {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to top, #654321, transparent);
-    z-index: 2;
-  }
-
-  /* Content styles */
-  .hero-content {
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    color: #fff;
-    z-index: 3;
-  }
-
-  .hero-pre {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-  }
-
-  .hero-title {
-    font-size: 3em;
-    font-weight: bold;
-    margin-bottom: 1em;
-  }
-
-  .hero-title .gold {
-    color: gold;
-  }
-
-  .hero-divider {
-    display: flex;
-    align-items: center;
-    margin: 1em 0;
-  }
-
-  .dline {
-    width: 50px;
-    height: 2px;
-    background: #fff;
-  }
-
-  .dgem {
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    margin: 0 10px;
-    border-radius: 50%;
-  }
-
-  .dline.r {
-    margin-left: 10px;
-  }
-
-  .hero-tagline {
-    font-size: 1.2em;
-    margin-bottom: 2em;
-  }
-
-  .hero-cta button {
-    padding: 1em 2em;
-    margin: 0 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .cta-primary {
-    background-color: #ffcc00;
-    color: #000;
-  }
-
-  .cta-secondary {
-    background-color: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-  }
-
-  /* Scroll hint style */
-  .scroll-hint {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 0.9em;
-    color: #fff;
-  }
-</style>
+  <link rel="stylesheet" href="hero.css" />
 </head>
 <body>
 
-<section class="hero" id="genesis">
-  <!-- Video background -->
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
-  </video>
+  <!-- Three.js renders here — fullscreen behind everything -->
+  <canvas id="hero-canvas"></canvas>
 
-  <!-- Background elements for parallax -->
-  <div class="stars" id="stars"></div>
-  <div class="moon" id="moon"></div>
-  <div class="ground" id="ground"></div>
+  <!-- Text overlay on top of the 3D scene -->
+  <section class="hero" id="genesis">
+    <div class="hero-content">
+      <p class="hero-pre">Welcome to the world of</p>
 
-  <!-- Hero Content -->
-  <div class="hero-content">
-    <p class="hero-pre">Welcome to the world of</p>
-    <h1 class="hero-title">The <span class="gold">Horseman's</span><br>Journal</h1>
-    <div class="hero-divider">
-      <div class="dline"></div>
-      <div class="dgem"></div>
-      <div class="dline r"></div>
+      <h1 class="hero-title">
+        The <span class="gold">Horseman's</span><br />Journal
+      </h1>
+
+      <div class="hero-divider">
+        <div class="dline"></div>
+        <div class="dgem"></div>
+        <div class="dline"></div>
+      </div>
+
+      <p class="hero-tagline">
+        Where legends are written, stories ride eternal<br />
+        and every word echoes through the ages
+      </p>
+
+      <div class="hero-cta">
+        <button class="cta-primary" onclick="window.location.href='genesis.html'">
+          Enter the Journey
+        </button>
+        <button class="cta-secondary" onclick="window.location.href='chronicles.html'">
+          Explore the World
+        </button>
+      </div>
     </div>
-    <p class="hero-tagline">Where legends are written, stories ride eternal<br>and every word echoes through the ages</p>
-    <div class="hero-cta">
-      <button class="cta-primary" onclick="window.location.href='genesis.html'">Enter the Journey</button>
-      <button class="cta-secondary" onclick="window.location.href='chronicles.html'">Explore the World</button>
+
+    <!-- Animated scroll indicator -->
+    <div class="scroll-hint">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-label">Scroll</span>
     </div>
-  </div>
+  </section>
 
-  <!-- Scroll hint -->
-  <div class="scroll-hint">
-    <div class="scroll-mouse"></div>
-    <span class="scroll-label">Scroll</span>
-  </div>
-</section>
-
-<!-- JavaScript for parallax effect -->
-<script>
-  document.addEventListener('mousemove', (e) => {
-    const { innerWidth, innerHeight } = window;
-    const offsetX = 0.5 - e.clientX / innerWidth;
-    const offsetY = 0.5 - e.clientY / innerHeight;
-
-    document.querySelector('#stars').style.transform = \`translate(\${offsetX * 20}px, \${offsetY * 20}px)\`;
-    document.querySelector('#moon').style.transform = \`translate(\${offsetX * 15}px, \${offsetY * 15}px)\`;
-    document.querySelector('#ground').style.transform = \`translate(\${offsetX * 10}px, \${offsetY * 10}px)\`;
-  });
-</script>
-
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="hero.js"></script>
 </body>
 </html>
