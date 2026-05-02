@@ -1,72 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Website with 3D Cube</title>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Horseman | Immersive 3D Journey</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Hero Section -->
-  <section style="text-align:center; padding:50px; background:#f0f0f0;">
-    <h1>Welcome to My Website</h1>
-    <p>This is your hero section.</p>
-  </section>
-  
-  <!-- Container for 3D scene -->
-  <div id="three-container" style="width:100%; height:400px; margin-top:20px;"></div>
-  
-  <!-- 3D scene script -->
-  <script>
-    // Initialize scene, camera, renderer
-    const scene = new THREE.Scene();
+  <canvas id="starfield" aria-hidden="true"></canvas>
 
-    const container = document.getElementById('three-container');
+  <header class="top-nav">
+    <a class="brand" href="#hero">THE HORSEMAN</a>
+    <nav>
+      <a href="#lineage">Lineage</a>
+      <a href="#arena">Arena</a>
+      <a href="#memory">Memory</a>
+      <a href="#oath">Oath</a>
+    </nav>
+  </header>
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      container.clientWidth / 400,
-      0.1,
-      1000
-    );
+  <main>
+    <section id="hero" class="panel hero-panel">
+      <div class="glass tilt-card">
+        <p class="kicker">PRAVEEN KUMAR</p>
+        <h1>The Horseman</h1>
+        <p>A fragile human outside. A horse within.</p>
+        <a class="cta" href="#lineage">Begin Ride</a>
+      </div>
+      <div class="horse-shadow"></div>
+    </section>
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(container.clientWidth, 400);
-    container.appendChild(renderer.domElement);
+    <section id="lineage" class="panel layer-panel">
+      <h2>Lineage Chamber</h2>
+      <p>Move your cursor. Depth shifts as legacy wakes.</p>
+      <div class="depth-stack">
+        <div class="layer l1">Instinct</div>
+        <div class="layer l2">Discipline</div>
+        <div class="layer l3">Loyalty</div>
+      </div>
+    </section>
 
-    // Create a cube geometry and material
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffcc00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    <section id="arena" class="panel track-panel">
+      <h2>Arena of Velocity</h2>
+      <p>Scroll to drive the energy ring and surge forward.</p>
+      <div class="ring-wrap">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-inner"></div>
+        <div class="ring-core">RIDE</div>
+      </div>
+    </section>
 
-    // Add lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(2, 2, 2);
-    scene.add(pointLight);
+    <section id="memory" class="panel memory-panel">
+      <h2>Memory Vault</h2>
+      <div class="cards">
+        <article class="memory-card tilt-card">
+          <h3>First Gallop</h3>
+          <p>Fear turns to rhythm as hoofbeats align with heartbeat.</p>
+        </article>
+        <article class="memory-card tilt-card">
+          <h3>Broken Rain</h3>
+          <p>Storm and dust become one horizon, one command.</p>
+        </article>
+        <article class="memory-card tilt-card">
+          <h3>Silent Bond</h3>
+          <p>No reins. No words. Direction comes from trust.</p>
+        </article>
+      </div>
+    </section>
 
-    // Position the camera
-    camera.position.z = 3;
+    <section id="oath" class="panel oath-panel">
+      <div class="oath-content">
+        <h2>The Oath</h2>
+        <p>"Some horses are trained. Some train the human."</p>
+        <a class="cta secondary" href="#hero">Ride Again</a>
+      </div>
+    </section>
+  </main>
 
-    // Animate
-    function animate() {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // Responsive resize
-    window.addEventListener('resize', () => {
-      const width = container.clientWidth;
-      renderer.setSize(width, 400);
-      camera.aspect = width / 400;
-      camera.updateProjectionMatrix();
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
