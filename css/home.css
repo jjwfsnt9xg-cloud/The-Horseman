@@ -1,0 +1,89 @@
+body {
+  background: #0a0a0a;
+  color: #eee;
+  font-family: Georgia, serif;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.nav a {
+  margin-left: 20px;
+  color: #c2a36b;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #c2a36b;
+  margin: 10px;
+  text-decoration: none;
+  color: #c2a36b;
+}
+
+/* ABOUT */
+.about {
+  padding: 100px 20px;
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+/* JOURNEY */
+.journey {
+  padding: 120px 20px;
+  perspective: 1200px;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.panel {
+  height: 220px;
+  background: #111;
+  border: 1px solid #333;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+}
+
+.panel:hover {
+  transform: rotateY(8deg) rotateX(4deg) scale(1.05);
+}
