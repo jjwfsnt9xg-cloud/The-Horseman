@@ -301,3 +301,148 @@ body {
     transform: translateY(0) scale(1);
   }
 }
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3rem;
+  color: #E8C84A;
+  text-shadow: 0 0 40px rgba(212,175,55,.6);
+}
+
+.hero p {
+  color: rgba(255,255,255,.6);
+  margin-top: 10px;
+}
+
+/* SECTION BASE */
+.section {
+  padding: 120px 8%;
+  position: relative;
+  z-index: 2;
+}
+
+.section h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: #E8C84A;
+  margin-bottom: 10px;
+}
+
+.section-sub {
+  color: rgba(255,255,255,.5);
+  margin-bottom: 40px;
+}
+
+/* ================= 3D BOOKS ================= */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+  gap: 30px;
+}
+
+.book {
+  perspective: 800px;
+}
+
+.book-inner {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  transform-style: preserve-3d;
+  transition: transform .6s;
+}
+
+.book:hover .book-inner {
+  transform: rotateY(180deg);
+}
+
+.book-front, .book-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-family: 'Cinzel', serif;
+  backface-visibility: hidden;
+}
+
+.book-front {
+  background: linear-gradient(135deg,#1a1a1a,#2a2a2a);
+  color: #E8C84A;
+  border: 1px solid rgba(212,175,55,.3);
+}
+
+.book-back {
+  background: #000;
+  transform: rotateY(180deg);
+}
+
+/* ================= HORSES ================= */
+.horse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 30px;
+}
+
+.horse-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(212,175,55,.2);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .4s;
+}
+
+.horse-card:hover {
+  transform: translateY(-10px);
+}
+
+.horse-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.horse-info {
+  padding: 15px;
+}
+
+.horse-info h3 {
+  color: #E8C84A;
+}
+
+/* ================= AWAKENING ================= */
+.awakening-content {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.awakening-text {
+  flex: 1;
+}
+
+.awakening-media {
+  flex: 1;
+}
+
+.awakening video {
+  width: 100%;
+  border-radius: 14px;
+}
+
+/* ================= ABOUT ================= */
+.about {
+  max-width: 700px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.7;
+}
