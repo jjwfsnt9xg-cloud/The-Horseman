@@ -1,1203 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Horseman's Journal</title>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hero Section with 3D Parallax</title>
+<style>
+  /* Reset and base styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    /* ═══════════════════════════════════════
-       ABOUT ME — warm light, second section
-    ═══════════════════════════════════════ */
-    .about-me {
-      position: relative;
-      background: linear-gradient(160deg, #faf6ee 0%, #f2e8d4 40%, #ede0c0 100%);
-      padding: 7rem 2rem 7rem;
-      overflow: hidden;
-    }
-    .about-me::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 10% 50%, rgba(212,175,55,0.06) 0%, transparent 55%),
-        radial-gradient(ellipse at 90% 20%, rgba(180,130,40,0.05) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .about-me::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5) 30%, #E8C84A 50%, rgba(212,175,55,0.5) 70%, transparent);
-    }
-    .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-    @media (max-width: 860px) {
-      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
-    }
-    .about-portrait-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-    .about-portrait-frame {
-      position: relative;
-      width: 280px;
-      height: 340px;
-    }
-    .about-portrait-frame::before {
-      content: '';
-      position: absolute;
-      top: -10px; left: -10px; right: 10px; bottom: 10px;
-      border: 1px solid rgba(212,175,55,0.3);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .about-portrait-frame::after {
-      content: '';
-      position: absolute;
-      top: 10px; left: 10px; right: -10px; bottom: -10px;
-      background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(180,130,40,0.08));
-      z-index: -1;
-    }
-    .about-portrait-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      position: relative;
-      z-index: 1;
-      filter: sepia(0.12) contrast(1.05);
-    }
-    .about-portrait-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(145deg, #e8d5a0, #d4b870);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-    .about-portrait-placeholder svg { opacity: 0.35; }
-    .about-portrait-placeholder-text {
-      font-family: 'Cinzel', serif;
-      font-size: .55rem;
-      letter-spacing: 3px;
-      color: rgba(100,70,10,0.5);
-      text-transform: uppercase;
-    }
-    .about-name-block { text-align: center; }
-    .about-name {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.3rem,2.5vw,1.8rem);
-      font-weight: 600;
-      color: #3a2200;
-      letter-spacing: 2px;
-      margin-bottom: .4rem;
-    }
-    .about-title-line {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: clamp(.95rem,1.5vw,1.1rem);
-      color: rgba(140,90,20,0.7);
-      margin-bottom: 1rem;
-    }
-    .about-years-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Cinzel', serif;
-      font-size: .55rem;
-      letter-spacing: 3px;
-      color: rgba(140,90,20,0.6);
-      text-transform: uppercase;
-      border: .5px solid rgba(180,130,40,0.25);
-      padding: 6px 16px;
-      background: rgba(212,175,55,0.07);
-    }
-    .about-years-badge::before,
-    .about-years-badge::after { content: '✦'; font-size: .45rem; color: rgba(212,175,55,0.6); }
-    .about-section-badge {
-      font-family: 'Cinzel', serif;
-      font-size: .58rem;
-      letter-spacing: 6px;
-      color: rgba(180,130,40,0.55);
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-    }
-    .about-section-badge::after {
-      content: '';
-      flex: 1; max-width: 60px;
-      height: .5px;
-      background: rgba(180,130,40,0.3);
-    }
-    .about-heading {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.5rem,3vw,2.2rem);
-      font-weight: 700;
-      color: #2a1800;
-      line-height: 1.25;
-      letter-spacing: .5px;
-      margin-bottom: 2rem;
-    }
-    .about-heading span { color: #8a5c00; }
-    .about-body {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(1.05rem,1.8vw,1.18rem);
-      color: rgba(50,28,5,0.78);
-      line-height: 2;
-      letter-spacing: .01em;
-    }
-    .about-body p { margin-bottom: 1.4rem; }
-    .about-body p:first-child::first-letter {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 3.2em;
-      font-weight: 700;
-      color: #8a5c00;
-      float: left;
-      line-height: .75;
-      margin: .1em .1em 0 0;
-    }
-    .about-philosophy {
-      margin-top: 2rem;
-      padding: 1.5rem 2rem;
-      border-left: 2px solid rgba(212,175,55,0.4);
-      background: rgba(212,175,55,0.05);
-    }
-    .about-philosophy-text {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1rem,1.8vw,1.15rem);
-      color: rgba(100,65,10,0.75);
-      line-height: 1.8;
-    }
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    .about-stat {
-      text-align: center;
-      padding: 1.2rem 1rem;
-      border: .5px solid rgba(180,130,40,0.18);
-      background: rgba(212,175,55,0.04);
-    }
-    .about-stat-num {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.5rem,2.5vw,2rem);
-      font-weight: 700;
-      color: #8a5c00;
-      line-height: 1;
-      margin-bottom: .4rem;
-    }
-    .about-stat-label {
-      font-family: 'Cinzel', serif;
-      font-size: .5rem;
-      letter-spacing: 2px;
-      color: rgba(140,90,20,0.55);
-      text-transform: uppercase;
-      line-height: 1.4;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+  }
 
-    /* ═══════════════════════════════════════
-       WELCOME — transition section
-    ═══════════════════════════════════════ */
-    .welcome {
-      position: relative;
-      background: #000;
-      padding: 7rem 2rem 5rem;
-      overflow: hidden;
-    }
-    .welcome::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .welcome-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    .welcome-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem;
-      letter-spacing: 6px;
-      color: rgba(212,175,55,0.5);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      display: inline-block;
-    }
-    .welcome-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2rem,4vw,3rem);
-      font-weight: 700;
-      color: #E8C84A;
-      letter-spacing: 2px;
-      line-height: 1.2;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 40px rgba(212,175,55,0.3);
-    }
-    .welcome-text {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(1.05rem,1.8vw,1.2rem);
-      color: rgba(240,230,200,0.7);
-      line-height: 2;
-      letter-spacing: .3px;
-      margin-bottom: 1.5rem;
-    }
-    .welcome-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 3rem auto;
-    }
-    .wel-line { width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4)); }
-    .wel-line.r { background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent); }
-    .wel-gem { width: 6px; height: 6px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 10px rgba(212,175,55,0.8); }
+  /* Hero section styling */
+  .hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
 
-    /* ═══════════════════════════════════════
-       EXPLORE — 3 cards only (no Essays)
-    ═══════════════════════════════════════ */
-    .explore {
-      position: relative;
-      background: #000;
-      padding: 2rem 2rem 8rem;
-      overflow: hidden;
-    }
-    .explore::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 50%, rgba(120,50,0,0.05) 0%, transparent 55%);
-      pointer-events: none;
-    }
-    .explore-header { text-align: center; margin-bottom: 5rem; position: relative; z-index: 2; }
-    .explore-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem;
-      letter-spacing: 6px;
-      color: rgba(212,175,55,0.45);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .explore-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2rem,4.5vw,3.5rem);
-      font-weight: 700;
-      color: #E8C84A;
-      letter-spacing: 2px;
-      line-height: 1.1;
-      text-shadow: 0 0 40px rgba(212,175,55,0.25);
-    }
-    .explore-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-    @media (max-width: 800px) {
-      .explore-grid { grid-template-columns: 1fr; }
-    }
-    .explore-card {
-      position: relative;
-      background: linear-gradient(160deg, rgba(20,15,10,0.8) 0%, rgba(10,8,5,0.9) 100%);
-      border: 1px solid rgba(212,175,55,0.15);
-      border-radius: 8px;
-      padding: 2.5rem 2rem;
-      cursor: pointer;
-      transition: all .5s cubic-bezier(.23,1,.32,1);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-      text-decoration: none;
-      display: block;
-    }
-    .explore-card.visible { opacity: 1; transform: translateY(0); }
-    .explore-card::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(180,120,0,0.2));
-      border-radius: 8px;
-      opacity: 0;
-      transition: opacity .5s;
-      z-index: -1;
-      filter: blur(12px);
-    }
-    .explore-card:hover::before { opacity: 1; }
-    .explore-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(212,175,55,0.4);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 60px rgba(212,175,55,0.15);
-    }
-    .explore-icon { font-size: 3.5rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 20px rgba(212,175,55,0.4)); display: block; }
-    .explore-card-title { font-family: 'Cinzel', serif; font-size: clamp(1.2rem,2.2vw,1.6rem); font-weight: 700; color: #E8C84A; letter-spacing: 1px; line-height: 1.2; margin-bottom: 1rem; text-shadow: 0 2px 15px rgba(212,175,55,0.3); }
-    .explore-card-desc { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.95rem,1.5vw,1.05rem); color: rgba(240,230,200,0.6); line-height: 1.8; margin-bottom: 1.5rem; }
-    .explore-card-link { font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 3px; color: rgba(212,175,55,0.7); text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; transition: all .3s; }
-    .explore-card-link::after { content: '→'; font-size: .8rem; transition: transform .3s; }
-    .explore-card:hover .explore-card-link { color: #E8C84A; text-shadow: 0 0 20px rgba(212,175,55,0.6); }
-    .explore-card:hover .explore-card-link::after { transform: translateX(6px); }
+  /* Video background styling */
+  .hero-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
 
-    /* ═══════════════════════════════════════
-       ESSAYS & VERSES — dedicated artistic section
-    ═══════════════════════════════════════ */
-    .verses-section {
-      position: relative;
-      background: #000;
-      overflow: hidden;
-      padding: 0;
-    }
+  /* Background elements for parallax */
+  #stars, #moon, #ground {
+    position: absolute;
+    will-change: transform;
+    transition: transform 0.2s ease-out;
+  }
 
-    /* Full-width painterly background */
-    .verses-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(120,50,180,0.18) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 70%, rgba(212,175,55,0.12) 0%, transparent 45%),
-        radial-gradient(ellipse at 50% 50%, rgba(40,10,80,0.3) 0%, transparent 65%),
-        radial-gradient(ellipse at 70% 20%, rgba(180,80,20,0.1) 0%, transparent 40%),
-        linear-gradient(160deg, #080310 0%, #0d0820 40%, #050208 100%);
-    }
+  /* Stars background - optional, can be replaced with an image or SVG */
+  #stars {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(white, transparent 70%), radial-gradient(white, transparent 70%);
+    background-repeat: repeat;
+    background-size: 100px 100px;
+    z-index: 0;
+  }
 
-    /* Painted strokes SVG background */
-    .verses-painting {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      opacity: .18;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  /* Moon styling */
+  #moon {
+    top: 50px;
+    right: 100px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #f0f0f0, #ccc);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    z-index: 1;
+  }
 
-    .verses-vignette {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0,0,0,0.65) 100%);
-    }
+  /* Ground styling */
+  #ground {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #654321, transparent);
+    z-index: 2;
+  }
 
-    .verses-inner {
-      position: relative;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 600px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+  /* Content styles */
+  .hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    z-index: 3;
+  }
 
-    @media (max-width: 860px) {
-      .verses-inner { grid-template-columns: 1fr; }
-    }
+  .hero-pre {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+  }
 
-    /* Left — the painting / art side */
-    .verses-art-side {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5rem 3rem;
-      overflow: hidden;
-    }
+  .hero-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
 
-    .verses-art-frame {
-      position: relative;
-      width: 320px;
-      height: 420px;
-      flex-shrink: 0;
-    }
+  .hero-title .gold {
+    color: gold;
+  }
 
-    /* Outer ornamental frame */
-    .verses-art-frame::before {
-      content: '';
-      position: absolute;
-      inset: -16px;
-      border: 1px solid rgba(180,100,255,0.2);
-      pointer-events: none;
-    }
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    margin: 1em 0;
+  }
 
-    .verses-art-frame::after {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border: .5px solid rgba(212,175,55,0.15);
-      pointer-events: none;
-    }
+  .dline {
+    width: 50px;
+    height: 2px;
+    background: #fff;
+  }
 
-    /* Corner ornaments */
-    .vaf-corner {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-color: rgba(212,175,55,0.5);
-      border-style: solid;
-      z-index: 2;
-    }
-    .vaf-corner.tl { top: -16px; left: -16px; border-width: 1.5px 0 0 1.5px; }
-    .vaf-corner.tr { top: -16px; right: -16px; border-width: 1.5px 1.5px 0 0; }
-    .vaf-corner.bl { bottom: -16px; left: -16px; border-width: 0 0 1.5px 1.5px; }
-    .vaf-corner.br { bottom: -16px; right: -16px; border-width: 0 1.5px 1.5px 0; }
+  .dgem {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    margin: 0 10px;
+    border-radius: 50%;
+  }
 
-    .verses-painting-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+  .dline.r {
+    margin-left: 10px;
+  }
 
-    /* Right — text side */
-    .verses-text-side {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 5rem 4rem 5rem 3rem;
-    }
+  .hero-tagline {
+    font-size: 1.2em;
+    margin-bottom: 2em;
+  }
 
-    .verses-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem;
-      letter-spacing: 6px;
-      color: rgba(180,100,255,0.5);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+  .hero-cta button {
+    padding: 1em 2em;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-    .verses-eyebrow::after {
-      content: '';
-      width: 40px;
-      height: .5px;
-      background: rgba(180,100,255,0.3);
-    }
+  .cta-primary {
+    background-color: #ffcc00;
+    color: #000;
+  }
 
-    .verses-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.8rem,3.5vw,2.8rem);
-      font-weight: 700;
-      color: #f0e0ff;
-      letter-spacing: 1px;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 40px rgba(180,100,255,0.3), 0 0 80px rgba(212,175,55,0.1);
-    }
+  .cta-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+  }
 
-    .verses-subtitle {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1rem,1.8vw,1.2rem);
-      color: rgba(200,170,240,0.5);
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
+  /* Scroll hint style */
+  .scroll-hint {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em;
+    color: #fff;
+  }
 
-    .verses-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 2.5rem;
-    }
-    .verses-dline { flex: 1; max-width: 80px; height: .5px; background: linear-gradient(90deg, rgba(180,100,255,0.3), transparent); }
-    .verses-gem { width: 6px; height: 6px; background: linear-gradient(135deg, #c084fc, #E8C84A); transform: rotate(45deg); box-shadow: 0 0 10px rgba(180,100,255,0.6); flex-shrink: 0; }
-
-    .verses-description {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(1rem,1.7vw,1.12rem);
-      color: rgba(220,200,240,0.65);
-      line-height: 2;
-      margin-bottom: 3rem;
-    }
-
-    .verses-description p { margin-bottom: 1rem; }
-
-    .verses-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 3rem;
-    }
-
-    .verses-tag {
-      font-family: 'Cinzel', serif;
-      font-size: .52rem;
-      letter-spacing: 2px;
-      color: rgba(180,100,255,0.55);
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border: .5px solid rgba(180,100,255,0.2);
-      background: rgba(180,100,255,0.05);
-    }
-
-    .verses-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-family: 'Cinzel', serif;
-      font-size: .62rem;
-      letter-spacing: 4px;
-      color: rgba(212,175,55,0.7);
-      text-transform: uppercase;
-      border: 1px solid rgba(212,175,55,0.2);
-      padding: 14px 32px;
-      background: transparent;
-      cursor: pointer;
-      transition: all .35s;
-      text-decoration: none;
-      width: fit-content;
-    }
-
-    .verses-cta:hover {
-      color: #E8C84A;
-      border-color: rgba(212,175,55,0.5);
-      background: rgba(212,175,55,0.06);
-      box-shadow: 0 0 40px rgba(212,175,55,0.1);
-    }
-
-    .verses-cta-arrow { transition: transform .3s; }
-    .verses-cta:hover .verses-cta-arrow { transform: translateX(6px); }
-
-    /* ═══════════════════════════════════════
-       SERVICES
-    ═══════════════════════════════════════ */
-    .services {
-      position: relative;
-      background: #000;
-      padding: 7rem 2rem 8rem;
-      overflow: hidden;
-    }
-    .services::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.06) 0%, transparent 55%),
-        radial-gradient(ellipse at 0% 100%, rgba(100,40,0,0.06) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .services-header { text-align: center; margin-bottom: 5rem; position: relative; z-index: 2; }
-    .sec-eyebrow { font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 6px; color: rgba(212,175,55,0.45); text-transform: uppercase; display: block; margin-bottom: 1rem; }
-    .sec-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; color: #E8C84A; letter-spacing: 2px; text-shadow: 0 0 30px rgba(212,175,55,0.2); margin-bottom: .8rem; }
-    .sec-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.95rem,1.6vw,1.1rem); color: rgba(240,230,200,0.4); }
-    .services-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.5rem; position: relative; z-index: 2; }
-    .service-card {
-      position: relative;
-      background: linear-gradient(160deg, rgba(20,14,5,0.9) 0%, rgba(10,7,2,0.95) 100%);
-      border: 1px solid rgba(212,175,55,0.12);
-      padding: 2.5rem 2rem;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease, border-color .4s, box-shadow .4s;
-    }
-    .service-card.visible { opacity: 1; transform: translateY(0); }
-    .service-card:hover { border-color: rgba(212,175,55,0.35); box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 40px rgba(212,175,55,0.08); }
-    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent); opacity: 0; transition: opacity .4s; }
-    .service-card:hover::before { opacity: 1; }
-    .service-num { font-family: 'Cinzel Decorative', serif; font-size: 2.5rem; font-weight: 700; color: rgba(212,175,55,0.08); line-height: 1; margin-bottom: 1rem; }
-    .service-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; filter: drop-shadow(0 0 12px rgba(212,175,55,0.3)); }
-    .service-name { font-family: 'Cinzel', serif; font-size: clamp(.9rem,1.6vw,1.1rem); font-weight: 600; color: #E8C84A; letter-spacing: 1px; margin-bottom: 1rem; line-height: 1.3; }
-    .service-desc { font-family: 'EB Garamond', serif; font-size: clamp(.95rem,1.5vw,1.05rem); color: rgba(220,200,160,0.6); line-height: 1.9; margin-bottom: 1.5rem; }
-    .service-detail { font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 2px; color: rgba(212,175,55,0.38); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-    .service-detail::before { content: ''; width: 20px; height: .5px; background: rgba(212,175,55,0.3); }
-    .services-note { max-width: 600px; margin: 4rem auto 0; text-align: center; position: relative; z-index: 2; }
-    .services-note-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(1rem,1.6vw,1.1rem); color: rgba(212,175,55,0.35); line-height: 1.8; }
-
-    /* ═══════════════════════════════════════
-       FAQ
-    ═══════════════════════════════════════ */
-    .faq {
-      position: relative;
-      background: linear-gradient(160deg, #f5f0e6 0%, #ede4cc 50%, #e8dcc0 100%);
-      padding: 7rem 2rem 7rem;
-      overflow: hidden;
-    }
-    .faq::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.05) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(180,130,40,0.04) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .faq::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5) 30%, #E8C84A 50%, rgba(212,175,55,0.5) 70%, transparent); }
-    .faq-header { text-align: center; margin-bottom: 5rem; position: relative; z-index: 2; }
-    .faq-eyebrow { font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 6px; color: rgba(180,130,40,0.5); text-transform: uppercase; display: block; margin-bottom: 1rem; }
-    .faq-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; color: #3a2200; letter-spacing: 2px; margin-bottom: .8rem; }
-    .faq-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.95rem,1.6vw,1.1rem); color: rgba(100,65,20,0.55); }
-    .faq-grid { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; position: relative; z-index: 2; }
-    .faq-item { border-bottom: .5px solid rgba(180,130,40,0.2); overflow: hidden; opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-    .faq-item.visible { opacity: 1; transform: translateY(0); }
-    .faq-item:first-child { border-top: .5px solid rgba(180,130,40,0.2); }
-    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 1.6rem 0; cursor: pointer; gap: 1.5rem; }
-    .faq-q-text { font-family: 'Cinzel', serif; font-size: clamp(.8rem,1.5vw,.95rem); font-weight: 600; color: #2a1800; letter-spacing: .5px; line-height: 1.4; flex: 1; }
-    .faq-toggle { width: 28px; height: 28px; border: .5px solid rgba(180,130,40,0.3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .3s; background: rgba(212,175,55,0.06); }
-    .faq-toggle svg { transition: transform .35s ease; color: rgba(140,90,20,0.6); }
-    .faq-item.open .faq-toggle svg { transform: rotate(45deg); color: #8a5c00; }
-    .faq-item.open .faq-toggle { background: rgba(212,175,55,0.12); border-color: rgba(180,130,40,0.5); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .45s cubic-bezier(.4,0,.2,1), padding .3s ease; padding: 0; }
-    .faq-item.open .faq-answer { max-height: 400px; padding-bottom: 1.6rem; }
-    .faq-a-text { font-family: 'EB Garamond', serif; font-size: clamp(1rem,1.7vw,1.1rem); color: rgba(50,28,5,0.72); line-height: 1.95; padding-right: 3rem; }
-
-    /* ═══════════════════════════════════════
-       TESTIMONIALS
-    ═══════════════════════════════════════ */
-    .testimonials { position: relative; background: #000; padding: 7rem 2rem 8rem; overflow: hidden; }
-    .testimonials::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(212,175,55,0.04) 0%, transparent 60%); pointer-events: none; }
-    .testimonials-header { text-align: center; margin-bottom: 5rem; position: relative; z-index: 2; }
-    .test-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 2rem; position: relative; z-index: 2; }
-    .test-card { background: linear-gradient(160deg, rgba(18,13,4,0.9) 0%, rgba(10,7,2,0.95) 100%); border: 1px solid rgba(212,175,55,0.1); padding: 2.5rem 2rem; position: relative; opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .test-card.visible { opacity: 1; transform: translateY(0); }
-    .test-quote-mark { font-family: 'Cinzel Decorative', serif; font-size: 4rem; color: rgba(212,175,55,0.12); line-height: .8; margin-bottom: .5rem; }
-    .test-card.placeholder { border-style: dashed; border-color: rgba(212,175,55,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 220px; }
-    .test-placeholder-icon { font-size: 2rem; opacity: .25; margin-bottom: 1rem; }
-    .test-placeholder-text { font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 3px; color: rgba(212,175,55,0.2); text-transform: uppercase; line-height: 1.8; }
-    .test-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(1rem,1.7vw,1.12rem); color: rgba(220,200,160,0.65); line-height: 1.9; margin-bottom: 1.8rem; }
-    .test-author { display: flex; align-items: center; gap: 12px; }
-    .test-author-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(180,130,40,0.1)); border: .5px solid rgba(212,175,55,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: .7rem; color: rgba(212,175,55,0.5); flex-shrink: 0; }
-    .test-author-name { font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: 2px; color: rgba(212,175,55,0.6); text-transform: uppercase; }
-    .test-author-role { font-family: 'EB Garamond', serif; font-style: italic; font-size: .9rem; color: rgba(212,175,55,0.3); }
-    .test-cta { text-align: center; margin-top: 4rem; position: relative; z-index: 2; }
-    .test-cta-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(1rem,1.7vw,1.15rem); color: rgba(212,175,55,0.35); margin-bottom: 1.5rem; line-height: 1.7; }
-    .test-cta-btn { font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 4px; color: rgba(212,175,55,0.6); text-transform: uppercase; border: 1px solid rgba(212,175,55,0.2); padding: 12px 32px; background: transparent; cursor: pointer; transition: all .3s; display: inline-block; text-decoration: none; }
-    .test-cta-btn:hover { color: #E8C84A; border-color: rgba(212,175,55,0.5); background: rgba(212,175,55,0.06); box-shadow: 0 0 30px rgba(212,175,55,0.12); }
-
-  </style>
+</style>
 </head>
 <body>
 
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
+<section class="hero" id="genesis">
+  <!-- Video background -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
 
-  <!-- NAVBAR -->
-  <div class="navbar-wrapper">
-    <div class="scene">
-      <nav class="nav3d">
-        <div class="face face-back"></div>
-        <div class="face face-bottom-wall"></div>
-        <div class="face face-top-wall"></div>
-        <div class="face face-left-wall"></div>
-        <div class="face face-right-wall"></div>
-        <div class="face face-top"></div>
-        <div class="nav-content">
-          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
-          <ul class="links">
-            <li><a href="index.html">GENESIS</a></li>
-            <li><a href="genesis.html">AWAKENING</a></li>
-            <li><a href="chronicles.html">CHRONICLES</a></li>
-            <li><a href="companions.html">COMPANIONS</a></li>
-            <li><a href="essays.html">VERSES</a></li>
-          </ul>
-          <div class="portal-scene">
-            <button class="portal-btn">
-              <span class="portal-glow"></span>
-              <span class="portal-wall"></span>
-              <span class="portal-top">PORTAL ✦</span>
-            </button>
-          </div>
-        </div>
-      </nav>
+  <!-- Background elements for parallax -->
+  <div class="stars" id="stars"></div>
+  <div class="moon" id="moon"></div>
+  <div class="ground" id="ground"></div>
+
+  <!-- Hero Content -->
+  <div class="hero-content">
+    <p class="hero-pre">Welcome to the world of</p>
+    <h1 class="hero-title">The <span class="gold">Horseman's</span><br>Journal</h1>
+    <div class="hero-divider">
+      <div class="dline"></div>
+      <div class="dgem"></div>
+      <div class="dline r"></div>
+    </div>
+    <p class="hero-tagline">Where legends are written, stories ride eternal<br>and every word echoes through the ages</p>
+    <div class="hero-cta">
+      <button class="cta-primary" onclick="window.location.href='genesis.html'">Enter the Journey</button>
+      <button class="cta-secondary" onclick="window.location.href='chronicles.html'">Explore the World</button>
     </div>
   </div>
 
-  <!-- 1. HERO -->
-  <section class="hero" id="genesis">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="hero-bg.mp4" type="video/mp4">
-    </video>
-    <div class="horse-bg">
-      <div class="sky"></div>
-      <div class="stars" id="stars"></div>
-      <div class="moon"></div>
-      <div class="moonbeam"></div>
-      <div class="ground"><div class="ground-line"></div></div>
-      <div class="dust"></div>
-      <div class="dust2"></div>
-      <div class="horse-layer">
-        <div class="horse-hero">
-          <svg width="320" height="260" viewBox="0 0 320 260" fill="none"><path d="M160,240 C140,240 100,235 80,220 C60,205 55,190 50,175 C45,160 40,145 38,130 C36,115 38,100 42,88 C46,76 52,68 58,62 C64,56 70,54 76,52 C82,50 84,48 86,42 C88,36 86,28 88,22 C90,16 96,12 102,12 C108,12 112,16 114,22 C116,28 114,36 116,40 C118,44 124,46 130,46 C136,46 142,44 148,42 C154,40 158,38 164,36 C170,34 178,34 184,36 C190,38 196,44 200,50 C204,56 206,64 208,72 C210,80 210,88 212,96 C214,104 218,110 224,116 C230,122 238,126 244,132 C250,138 254,146 256,154 C258,162 256,172 252,180 C248,188 242,194 234,198 C226,202 216,202 210,204 C204,206 202,210 200,216 C198,222 198,230 196,236 C194,242 190,244 184,244 C178,244 176,240 172,238 C168,236 164,236 160,240 Z" fill="rgba(255,255,255,0.9)"/><path d="M100,220 L96,258 M116,224 L112,258 M176,222 L174,258 M192,218 L194,258" stroke="rgba(255,255,255,0.9)" stroke-width="8" stroke-linecap="round"/><path d="M52,175 C40,172 28,168 20,160 C12,152 14,140 20,132 C26,124 36,120 44,122" stroke="rgba(255,255,255,0.9)" stroke-width="6" stroke-linecap="round" fill="none"/></svg>
-        </div>
-        <div class="h h1"><svg width="110" height="80" viewBox="0 0 110 80"><path d="M55,72 C45,72 28,70 20,62 C12,54 12,44 14,36 C16,28 20,22 26,18 C29,16 30,14 31,10 C32,6 30,2 33,1 C36,0 38,2 38,6 C38,10 37,13 39,14 C42,15 46,14 50,13 C54,12 58,12 62,13 C66,14 69,16 71,20 C73,24 73,28 75,32 C77,36 80,38 83,42 C86,46 87,52 86,57 C85,62 82,66 78,68 C74,70 68,70 65,71 C62,72 60,73 58,73 Z M28,68 L26,80 M38,70 L36,80 M68,70 L68,80 M78,68 L80,80" stroke="rgba(212,175,55,0.9)" stroke-width="3" fill="rgba(212,175,55,0.85)" stroke-linecap="round"/></svg></div>
-        <div class="h h2"><svg width="80" height="60" viewBox="0 0 80 60"><path d="M40,54 C32,54 20,52 14,46 C8,40 8,32 10,26 C12,20 16,16 20,13 C22,12 23,10 23,7 C24,4 22,1 25,0 C27,-1 29,1 29,4 C29,8 28,10 30,11 C32,12 35,11 38,10 C41,9 44,9 47,10 C50,11 52,13 54,16 C56,19 56,23 57,26 C58,30 61,32 63,36 C65,40 65,45 63,49 C61,53 57,55 53,56 C50,57 46,56 44,56 Z M20,52 L18,60 M28,54 L26,60 M50,54 L50,60 M58,52 L60,60" stroke="rgba(180,130,30,0.8)" stroke-width="2.5" fill="rgba(160,110,20,0.7)" stroke-linecap="round"/></svg></div>
-        <div class="h h3"><svg width="65" height="50" viewBox="0 0 65 50"><path d="M32,44 C25,44 16,42 11,37 C6,32 6,25 8,20 C10,15 13,12 17,10 C19,9 19,7 20,5 C20,3 19,1 21,0 C23,-1 24,1 24,3 C24,6 23,8 25,9 C27,10 29,9 31,8 C33,7 35,7 38,8 C41,9 43,11 44,13 C46,16 46,19 47,22 C48,25 50,27 52,30 C54,33 54,38 52,41 C51,44 48,46 45,47 C42,48 38,47 36,47 Z M16,42 L15,50 M22,43 L21,50 M40,43 L41,50 M47,42 L48,50" stroke="rgba(200,150,40,0.6)" stroke-width="2" fill="rgba(140,90,10,0.55)" stroke-linecap="round"/></svg></div>
-        <div class="h h4"><svg width="95" height="70" viewBox="0 0 95 70"><path d="M48,64 C38,64 24,62 16,55 C8,48 8,38 10,30 C12,22 17,17 22,13 C25,11 26,9 27,6 C28,3 26,0 29,0 C32,-1 34,2 34,5 C34,9 33,11 35,13 C38,14 42,13 45,12 C49,11 52,11 56,12 C60,13 63,15 65,19 C67,23 67,28 69,32 C71,36 75,39 77,44 C79,49 79,55 77,59 C75,64 70,67 65,68 C61,69 56,68 53,68 Z M22,60 L20,70 M32,63 L30,70 M60,63 L61,70 M69,61 L71,70" stroke="rgba(220,160,30,0.85)" stroke-width="2.8" fill="rgba(190,130,10,0.8)" stroke-linecap="round"/></svg></div>
-        <div class="h h5"><svg width="50" height="38" viewBox="0 0 50 38"><path d="M25,34 C19,34 12,32 8,28 C4,24 4,19 6,15 C8,11 10,8 13,7 C15,6 15,5 15,3 C16,2 15,0 17,0 C18,-1 19,1 19,2 C19,4 19,5 20,6 C22,7 23,6 25,6 C27,6 28,6 30,6 C32,7 33,9 34,11 C35,13 35,15 36,17 C37,19 39,21 40,23 C41,26 41,29 40,32 C39,34 36,36 33,36 Z M12,32 L11,38 M17,33 L16,38 M30,33 L31,38 M36,32 L37,38" stroke="rgba(180,120,20,0.5)" stroke-width="1.8" fill="rgba(120,70,5,0.45)" stroke-linecap="round"/></svg></div>
-      </div>
-    </div>
-    <div class="vignette"></div><div class="vignette-bottom"></div><div class="vignette-top"></div>
-    <div class="color-overlay"></div>
-    <div class="bar bar-top"></div><div class="bar bar-bottom"></div>
-    <div class="hero-content">
-      <p class="hero-pre">Welcome to the world of</p>
-      <h1 class="hero-title">The <span class="gold">Horseman's</span><br>Journal</h1>
-      <div class="hero-divider"><div class="dline"></div><div class="dgem"></div><div class="dline r"></div></div>
-      <p class="hero-tagline">Where legends are written, stories ride eternal<br>and every word echoes through the ages</p>
-      <div class="hero-cta">
-        <button class="cta-primary" onclick="window.location.href='genesis.html'">Enter the Journey</button>
-        <button class="cta-secondary" onclick="window.location.href='chronicles.html'">Explore the World</button>
-      </div>
-    </div>
-    <div class="scroll-hint"><div class="scroll-mouse"></div><span class="scroll-label">Scroll</span></div>
-  </section>
+  <!-- Scroll hint -->
+  <div class="scroll-hint">
+    <div class="scroll-mouse"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
 
-  <!-- 2. ABOUT ME -->
-  <section class="about-me" id="about">
-    <div class="about-inner">
-      <div class="about-portrait-col">
-        <div class="about-portrait-frame">
-          <!-- Replace src with your actual photo when ready -->
-          <!-- <img class="about-portrait-img" src="praveen.jpg" alt="Praveen Kumar"> -->
-          <div class="about-portrait-placeholder">
-            <svg width="80" height="92" viewBox="0 0 260 300" fill="none">
-              <g stroke="#8a5c00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M130 55 Q118 70 112 90 Q107 108 112 124 Q117 138 128 144 Q138 150 148 144 Q158 136 160 121 Q162 104 156 88 Q150 72 138 59 Q134 55 130 55Z"/>
-                <path d="M112 90 Q100 83 88 77 Q76 72 68 77 Q62 83 66 93 Q72 101 84 103 Q96 105 108 100"/>
-                <path d="M156 88 Q168 82 180 77 Q192 73 198 79 Q202 87 196 95 Q188 103 176 103 Q164 103 156 97"/>
-                <path d="M128 144 Q120 161 116 181 Q113 196 115 211 Q117 224 122 228"/>
-                <path d="M148 144 Q154 161 156 181 Q158 196 155 211 Q152 224 148 230"/>
-                <path d="M122 228 Q118 244 116 261 Q114 276 118 284"/>
-                <path d="M148 230 Q152 246 152 263 Q152 278 148 286"/>
-              </g>
-            </svg>
-            <span class="about-portrait-placeholder-text">Your photo here</span>
-          </div>
-        </div>
-        <div class="about-name-block">
-          <div class="about-name">Praveen Kumar</div>
-          <div class="about-title-line">Horseman · Trainer · Author</div>
-          <div class="about-years-badge">Eleven Years · Across India</div>
-        </div>
-        <div class="about-stats">
-          <div class="about-stat">
-            <div class="about-stat-num">11</div>
-            <div class="about-stat-label">Years with Horses</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-num">8+</div>
-            <div class="about-stat-label">Horses Worked With</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-num">100%</div>
-            <div class="about-stat-label">Trust Based Methods</div>
-          </div>
-        </div>
-      </div>
-      <div class="about-text-col">
-        <div class="about-section-badge">About Me</div>
-        <h2 class="about-heading">Not a Trainer.<br>A <span>Student of Horses.</span></h2>
-        <div class="about-body">
-          <p>Eleven years ago, a black stallion changed everything. Not through a lesson I planned, but through a moment of complete stillness — a moment where I finally stopped trying to be heard and started trying to listen. That moment became the foundation of everything I do today.</p>
-          <p>I am Praveen Kumar, and I travel across India to work with horses and the people who love them. I do not use fear, force, or dominance. I use understanding. Every method I apply is built on one principle: the horse is never the problem. The horse is always the honest answer to a question the human has not yet learned to ask.</p>
-          <p>My work covers trust-based natural horsemanship, behavioural rehabilitation for horses labelled difficult or dangerous, and starting young horses in a way that builds genuine willingness. I work with children discovering horses for the first time, adults rebuilding their confidence, experienced riders whose horses have stopped cooperating, and horse owners who simply want to understand why their animal behaves the way it does.</p>
-        </div>
-        <div class="about-philosophy">
-          <p class="about-philosophy-text">"I do not come to your stable with a programme. I come with patience, with presence, and with eleven years of learning that the horse is always right — and the only question worth asking is whether we are honest enough to hear what it is telling us."</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- JavaScript for parallax -->
+<script>
+  document.addEventListener('mousemove', (e) => {
+    const { innerWidth, innerHeight } = window;
+    const offsetX = 0.5 - e.clientX / innerWidth;
+    const offsetY = 0.5 - e.clientY / innerHeight;
 
-  <!-- 3. WELCOME / TRANSITION -->
-  <section class="welcome">
-    <div class="welcome-inner">
-      <span class="welcome-eyebrow">A Journey Through Eleven Years</span>
-      <h2 class="welcome-title">Where Horsemanship Meets Philosophy</h2>
-      <p class="welcome-text">
-        This is not a training manual. It is not a collection of techniques. This is a journal of transformation, written in dust, silence, and the breath of horses. Eleven years of learning to speak a language older than words. Eleven years of being taught by animals that cannot speak, and learning that this is exactly why they are the best teachers in the world.
-      </p>
-      <div class="welcome-divider">
-        <div class="wel-line"></div>
-        <div class="wel-gem"></div>
-        <div class="wel-line r"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. EXPLORE THE JOURNAL (3 cards — no Essays) -->
-  <section class="explore">
-    <div class="explore-header">
-      <p class="explore-eyebrow">Begin Your Journey</p>
-      <h2 class="explore-title">Explore the Journal</h2>
-    </div>
-    <div class="explore-grid">
-      <a href="genesis.html" class="explore-card">
-        <span class="explore-icon">📖</span>
-        <h3 class="explore-card-title">Genesis</h3>
-        <p class="explore-card-desc">The origin story. Eleven years. One black stallion. One moment of complete surrender. The beginning of everything.</p>
-        <span class="explore-card-link">Read the Story</span>
-      </a>
-      <a href="companions.html" class="explore-card">
-        <span class="explore-icon">🐴</span>
-        <h3 class="explore-card-title">Companions</h3>
-        <p class="explore-card-desc">Eight horses. Eight stories. Each one a mirror, a teacher, a gift written in silence and shaped by time.</p>
-        <span class="explore-card-link">Meet Them</span>
-      </a>
-      <a href="chronicles.html" class="explore-card">
-        <span class="explore-icon">📚</span>
-        <h3 class="explore-card-title">Chronicles</h3>
-        <p class="explore-card-desc">Fifteen articles on horse psychology, trust, presence, and the philosophy of working with horses instead of against them.</p>
-        <span class="explore-card-link">Explore Articles</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 5. ESSAYS & VERSES — dedicated painterly section -->
-  <section class="verses-section" id="verses">
-    <div class="verses-canvas"></div>
-
-    <!-- Painted background SVG -->
-    <svg class="verses-painting" viewBox="0 0 1400 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="rg1" cx="30%" cy="40%" r="50%">
-          <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="rg2" cx="75%" cy="60%" r="45%">
-          <stop offset="0%" stop-color="#E8C84A" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#E8C84A" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="1400" height="600" fill="url(#rg1)"/>
-      <rect width="1400" height="600" fill="url(#rg2)"/>
-      <!-- Abstract brushstroke shapes -->
-      <ellipse cx="200" cy="180" rx="340" ry="120" fill="rgba(120,50,200,0.12)" transform="rotate(-18,200,180)"/>
-      <ellipse cx="1100" cy="420" rx="280" ry="90" fill="rgba(212,175,55,0.1)" transform="rotate(12,1100,420)"/>
-      <ellipse cx="700" cy="300" rx="500" ry="160" fill="rgba(80,20,140,0.1)" transform="rotate(-5,700,300)"/>
-      <path d="M0 400 Q 350 200 700 350 Q 1050 500 1400 300 L1400 600 L0 600 Z" fill="rgba(30,10,60,0.25)"/>
-      <path d="M0 500 Q 400 380 800 450 Q 1100 520 1400 400 L1400 600 L0 600 Z" fill="rgba(10,5,30,0.3)"/>
-      <!-- Fine constellation lines -->
-      <g stroke="rgba(212,175,55,0.15)" stroke-width="0.5" fill="rgba(212,175,55,0.3)">
-        <circle cx="120" cy="80" r="1.5"/><circle cx="240" cy="140" r="1"/>
-        <circle cx="380" cy="60" r="1.2"/><circle cx="1050" cy="90" r="1"/>
-        <circle cx="1200" cy="160" r="1.5"/><circle cx="1320" cy="80" r="1"/>
-        <circle cx="900" cy="520" r="1.2"/><circle cx="1100" cy="490" r="1"/>
-        <line x1="120" y1="80" x2="240" y2="140"/>
-        <line x1="240" y1="140" x2="380" y2="60"/>
-        <line x1="1050" y1="90" x2="1200" y2="160"/>
-        <line x1="1200" y1="160" x2="1320" y2="80"/>
-        <line x1="900" y1="520" x2="1100" y2="490"/>
-      </g>
-    </svg>
-
-    <div class="verses-vignette"></div>
-
-    <div class="verses-inner">
-
-      <!-- Left: painterly art frame with horse -->
-      <div class="verses-art-side">
-        <div class="verses-art-frame">
-          <div class="vaf-corner tl"></div>
-          <div class="vaf-corner tr"></div>
-          <div class="vaf-corner bl"></div>
-          <div class="vaf-corner br"></div>
-          <svg class="verses-painting-canvas" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background wash -->
-            <rect width="320" height="420" fill="rgba(20,5,40,0.9)"/>
-            <ellipse cx="160" cy="210" rx="180" ry="240" fill="rgba(100,30,180,0.15)"/>
-            <ellipse cx="80" cy="100" rx="120" ry="80" fill="rgba(212,175,55,0.08)"/>
-            <ellipse cx="240" cy="350" rx="100" ry="70" fill="rgba(180,100,255,0.08)"/>
-            <!-- Abstract brush strokes behind horse -->
-            <path d="M60 380 Q 160 320 260 380 Q 300 400 320 420 L0 420 Z" fill="rgba(10,3,25,0.8)"/>
-            <path d="M0 300 Q 80 260 160 280 Q 240 300 320 260 L320 420 L0 420 Z" fill="rgba(8,2,20,0.6)"/>
-            <!-- Fine dotted star field -->
-            <g fill="rgba(255,240,200,0.4)">
-              <circle cx="30" cy="25" r="0.8"/><circle cx="85" cy="15" r="1.2"/>
-              <circle cx="150" cy="35" r="0.7"/><circle cx="210" cy="20" r="1"/>
-              <circle cx="280" cy="40" r="0.8"/><circle cx="55" cy="60" r="0.6"/>
-              <circle cx="290" cy="70" r="1"/><circle cx="190" cy="55" r="0.7"/>
-              <circle cx="310" cy="110" r="0.8"/><circle cx="20" cy="130" r="0.7"/>
-            </g>
-            <!-- Connection lines between stars -->
-            <g stroke="rgba(212,175,55,0.12)" stroke-width="0.4">
-              <line x1="85" y1="15" x2="150" y2="35"/>
-              <line x1="150" y1="35" x2="210" y2="20"/>
-              <line x1="30" y1="25" x2="85" y2="15"/>
-            </g>
-            <!-- Horse in gold -->
-            <g stroke="#E8C84A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7" transform="translate(80,100) scale(0.62)">
-              <path d="M130 55 Q118 70 112 90 Q107 108 112 124 Q117 138 128 144 Q138 150 148 144 Q158 136 160 121 Q162 104 156 88 Q150 72 138 59 Q134 55 130 55Z"/>
-              <path d="M112 90 Q100 83 88 77 Q76 72 68 77 Q62 83 66 93 Q72 101 84 103 Q96 105 108 100"/>
-              <path d="M156 88 Q168 82 180 77 Q192 73 198 79 Q202 87 196 95 Q188 103 176 103 Q164 103 156 97"/>
-              <path d="M128 144 Q120 161 116 181 Q113 196 115 211 Q117 224 122 228"/>
-              <path d="M148 144 Q154 161 156 181 Q158 196 155 211 Q152 224 148 230"/>
-              <path d="M122 228 Q118 244 116 261 Q114 276 118 284"/>
-              <path d="M148 230 Q152 246 152 263 Q152 278 148 286"/>
-              <path d="M116 261 Q112 278 110 294 Q108 308 112 316"/>
-              <path d="M152 263 Q154 280 154 296 Q154 311 150 319"/>
-              <path d="M68 77 Q56 67 45 57 Q36 48 34 37 Q33 27 40 23 Q48 20 56 25 Q64 31 68 41 Q72 53 68 67"/>
-              <path d="M130 55 Q128 42 126 29 Q124 15 120 5"/>
-              <path d="M135 53 Q140 43 146 33 Q152 23 156 17"/>
-            </g>
-            <!-- Bottom ornament -->
-            <g transform="translate(160,395)">
-              <line x1="-40" y1="0" x2="-8" y2="0" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
-              <rect x="-4" y="-4" width="8" height="8" fill="rgba(212,175,55,0.5)" transform="rotate(45)"/>
-              <line x1="8" y1="0" x2="40" y2="0" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
-            </g>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Right: text -->
-      <div class="verses-text-side">
-        <div class="verses-eyebrow">Essays &amp; Reflections</div>
-        <h2 class="verses-title">Verses</h2>
-        <div class="verses-divider">
-          <div class="verses-dline"></div>
-          <div class="verses-gem"></div>
-          <div class="verses-dline"></div>
-        </div>
-        <div class="verses-description">
-          <p>Not every truth can be written as instruction. Some things must be felt before they can be named — and named before they can be fully understood. Verses is the space where that happens.</p>
-          <p>Personal essays on silence, on time, on the strange education that comes from spending years in the company of animals that do not speak. Reflections that belong to the space between horsemanship and philosophy, where the two are indistinguishable from each other.</p>
-        </div>
-        <div class="verses-tags">
-          <span class="verses-tag">Personal Essays</span>
-          <span class="verses-tag">Reflections</span>
-          <span class="verses-tag">Philosophy</span>
-          <span class="verses-tag">Silence</span>
-          <span class="verses-tag">The Written Word</span>
-        </div>
-        <a href="essays.html" class="verses-cta">
-          Enter the Verses <span class="verses-cta-arrow">→</span>
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 6. SERVICES -->
-  <section class="services" id="services">
-    <div class="services-header">
-      <span class="sec-eyebrow">What I Offer</span>
-      <h2 class="sec-title">On-Site Sessions Across India</h2>
-      <p class="sec-sub">I travel to you. Your horse stays where it feels safe.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <span class="service-icon">🤝</span>
-        <h3 class="service-name">Trust-Based Natural Horsemanship</h3>
-        <p class="service-desc">Building a real relationship between horse and human — not obedience through pressure, but partnership through honest communication. Suitable for all horses, all levels, all ages.</p>
-        <div class="service-detail">Foundation Sessions Available</div>
-      </div>
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <span class="service-icon">🧠</span>
-        <h3 class="service-name">Behavioural Rehabilitation</h3>
-        <p class="service-desc">For horses that bite, bolt, refuse, spook, or have been labelled dangerous. Every difficult behaviour has a reason. Finding that reason is where the work begins. No force. No punishment. No shortcuts.</p>
-        <div class="service-detail">Assessment Included</div>
-      </div>
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <span class="service-icon">🌱</span>
-        <h3 class="service-name">Starting Young Horses</h3>
-        <p class="service-desc">The first experiences a horse has with humans shape everything that follows. I start young horses slowly, honestly, and with deep respect for the animal's natural pace — building a foundation that lasts a lifetime.</p>
-        <div class="service-detail">Full Starting Programme</div>
-      </div>
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <span class="service-icon">👨‍👩‍👧</span>
-        <h3 class="service-name">Rider and Owner Coaching</h3>
-        <p class="service-desc">For children discovering horses for the first time, adults rebuilding confidence, and experienced riders whose partnership with their horse has stopped working. The horse reflects what we bring. I help you understand what you are bringing.</p>
-        <div class="service-detail">All Ages Welcome</div>
-      </div>
-    </div>
-    <div class="services-note">
-      <p class="services-note-text">All sessions are conducted at your location. I travel to stables, farms, and private properties across India. Sessions are designed around your horse's specific needs — not a fixed programme.</p>
-    </div>
-  </section>
-
-  <!-- 7. FAQ -->
-  <section class="faq" id="faq">
-    <div class="faq-header">
-      <span class="faq-eyebrow">Common Questions</span>
-      <h2 class="faq-title">Real Answers for Real Problems</h2>
-      <p class="faq-sub">The questions I hear most from horse owners across India.</p>
-    </div>
-    <div class="faq-grid">
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">My horse is aggressive and bites. Is it dangerous and can it be fixed?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">A horse that bites is not dangerous — it is communicating. Biting is almost always a last resort, used only when every softer signal has been ignored or punished. Before a horse bites, it has already pinned its ears, tensed its body, and given a dozen other warnings that were either not seen or not respected. The fix is not punishment. It is learning to read what the horse was saying before it reached the point of biting — and then responding to those earlier signals honestly. In eleven years, I have never met an aggressive horse. I have met many horses in pain or horses whose communication was never listened to.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">My horse refuses to load into a trailer no matter what I try. What can I do?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">Trailer refusal is one of the most common problems I am called to address, and it is almost entirely a fear problem rather than a stubbornness problem. The horse is not refusing to be difficult. It is refusing because walking into a small, dark, enclosed metal box goes against every survival instinct it has. Forcing it in with ropes or whips confirms to the horse that the trailer is exactly as dangerous as it feared. The solution is a slow, systematic process of building positive association with the trailer over several sessions. With the right approach, most horses will load willingly within a few days to a week.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">My horse is extremely spooky and bolts at small things. How do I make it calmer?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">A spooky horse is almost always a horse that does not fully trust the human beside it. When a horse truly trusts you, it looks to you when something frightens it — using your calmness to calibrate its own response. A horse that bolts has decided, for good reason, that you are not a reliable source of safety. The work is in becoming steadier yourself — quieting your own nervous system, breathing deliberately, and learning to read the early warning signs of rising anxiety so you can help the horse settle before it explodes.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">Is natural horsemanship suitable for horses in India, where conditions are different?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">Completely. The principles of trust-based horsemanship are not cultural — they are biological. A horse's nervous system, fear response, and communication signals are identical whether the horse lives in Rajasthan, Maharashtra, or Uttarakhand. In India, many horses have had extensive experience with forceful handling, which means the first work is often simply demonstrating that not every human interaction will be painful or frightening. Horses here respond to patient, honest handling exactly as they do anywhere else in the world. Often faster, because the contrast with what they have known is so significant.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">My child wants to learn riding. How do I know if a trainer is right for them?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">Watch how the trainer treats the horse, not just how they treat your child. A trainer who is rough, impatient, or dismissive with the horse will eventually be the same with a child who struggles. The right trainer will spend time helping your child understand the horse before they ever get into the saddle — because a child who understands how a horse thinks will be safer, calmer, and more confident than one who has simply been told where to put their heels.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">How long does it take to fix a problem behaviour in a horse?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">It depends on how long the problem has been there, and how willing the human is to change alongside the horse. A horse owner who genuinely commits to changing how they handle their horse will see results far faster than one who wants the horse to change while they stay the same. What I can tell you is that real, lasting change is always possible. I have not yet met a horse that was beyond reach — only horses that had not yet found a human patient enough to reach them.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">Do I need any experience with horses before working with you?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">None at all. In some ways, less experience is easier to work with than years of habits that do not serve the horse. Whether you have never touched a horse or have been riding for twenty years, we begin from the same place: understanding how the horse experiences the world, and building a relationship from that understanding outward. The only requirement is genuine curiosity and the willingness to be honest — with the horse and with yourself.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">
-          <span class="faq-q-text">My horse was fine for years and has suddenly started misbehaving. Why?</span>
-          <div class="faq-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="faq-answer"><p class="faq-a-text">A sudden change in behaviour is almost always either a physical problem or a change in the horse's environment or handling. Before anything else, rule out pain — a saddle that no longer fits, dental issues, back soreness, hoof problems. Horses do not misbehave out of nowhere. The most important first step is a thorough physical check by a good vet, followed by an honest assessment of whether anything has changed in how the horse is being handled, worked, or stabled.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. TESTIMONIALS -->
-  <section class="testimonials" id="testimonials">
-    <div class="testimonials-header">
-      <span class="sec-eyebrow">Words from the Field</span>
-      <h2 class="sec-title">What People Say</h2>
-      <p class="sec-sub">From students, parents, and horse owners across India.</p>
-    </div>
-    <div class="test-grid">
-      <div class="test-card placeholder">
-        <div class="test-placeholder-icon">✦</div>
-        <div class="test-placeholder-text">Student testimonial<br>coming soon</div>
-      </div>
-      <div class="test-card placeholder">
-        <div class="test-placeholder-icon">✦</div>
-        <div class="test-placeholder-text">Parent testimonial<br>coming soon</div>
-      </div>
-      <div class="test-card placeholder">
-        <div class="test-placeholder-icon">✦</div>
-        <div class="test-placeholder-text">Horse owner testimonial<br>coming soon</div>
-      </div>
-      <!--
-        WHEN YOU HAVE REAL TESTIMONIALS, REPLACE A PLACEHOLDER CARD WITH:
-        <div class="test-card">
-          <div class="test-quote-mark">"</div>
-          <p class="test-text">Write the testimonial here exactly as the person said it.</p>
-          <div class="test-author">
-            <div class="test-author-avatar">AK</div>
-            <div>
-              <div class="test-author-name">Arjun Kapoor</div>
-              <div class="test-author-role">Horse owner, Pune</div>
-            </div>
-          </div>
-        </div>
-      -->
-    </div>
-    <div class="test-cta">
-      <p class="test-cta-text">Worked with Praveen Kumar? Share your experience.</p>
-      <a href="mailto:your@email.com" class="test-cta-btn">Send Your Testimonial</a>
-    </div>
-  </section>
-
-  <script src="js/global.js"></script>
-  <script>
-    /* Stars */
-    const starsEl = document.getElementById('stars');
-    for (let i = 0; i < 130; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      const sz = Math.random() * 2 + 0.5;
-      s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;animation-duration:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;
-      starsEl.appendChild(s);
-    }
-
-    /* Video swap */
-    const video = document.querySelector('.hero-video');
-    video.addEventListener('canplay', () => {
-      video.style.display = 'block';
-      document.querySelector('.horse-bg').style.opacity = '0';
-    });
-
-    /* Scroll reveals */
-    const makeObs = (selector, threshold = 0.1) => {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach((e, i) => {
-          if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 120);
-        });
-      }, {threshold});
-      document.querySelectorAll(selector).forEach(el => obs.observe(el));
-    };
-
-    makeObs('.explore-card', 0.15);
-    makeObs('.service-card');
-    makeObs('.test-card');
-
-    /* FAQ reveal */
-    const faqObs = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
-      });
-    }, {threshold: 0.05});
-    document.querySelectorAll('.faq-item').forEach(f => faqObs.observe(f));
-
-    /* FAQ accordion */
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const item = q.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-      });
-    });
-  </script>
+    document.querySelector('#stars').style.transform = \`translate(\${offsetX * 20}px, \${offsetY * 20}px)\`;
+    document.querySelector('#moon').style.transform = \`translate(\${offsetX * 15}px, \${offsetY * 15}px)\`;
+    document.querySelector('#ground').style.transform = \`translate(\${offsetX * 10}px, \${offsetY * 10}px)\`;
+  });
+</script>
 
 </body>
 </html>
