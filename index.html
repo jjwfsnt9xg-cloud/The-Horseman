@@ -1,82 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Horseman | Immersive 3D Journey</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Horseman's Journal</title>
+  <link rel="stylesheet" href="css/hero.css" />
 </head>
 <body>
-  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-  <header class="top-nav">
-    <a class="brand" href="#hero">THE HORSEMAN</a>
-    <nav>
-      <a href="#lineage">Lineage</a>
-      <a href="#arena">Arena</a>
-      <a href="#memory">Memory</a>
-      <a href="#oath">Oath</a>
+  <!-- NAVBAR -->
+  <header class="navbar-wrapper">
+    <nav class="nav3d">
+      <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+      <ul class="links">
+        <li><a href="index.html">GENESIS</a></li>
+        <li><a href="genesis.html">AWAKENING</a></li>
+        <li><a href="chronicles.html">CHRONICLES</a></li>
+        <li><a href="companions.html">COMPANIONS</a></li>
+        <li><a href="essays.html">VERSES</a></li>
+      </ul>
+      <button class="portal-btn" type="button">PORTAL ✦</button>
     </nav>
   </header>
 
-  <main>
-    <section id="hero" class="panel hero-panel">
-      <div class="glass tilt-card">
-        <p class="kicker">PRAVEEN KUMAR</p>
-        <h1>The Horseman</h1>
-        <p>A fragile human outside. A horse within.</p>
-        <a class="cta" href="#lineage">Begin Ride</a>
-      </div>
-      <div class="horse-shadow"></div>
-    </section>
+  <!-- HERO -->
+  <section class="hero" id="genesis">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="hero-bg.mp4" type="video/mp4" />
+    </video>
 
-    <section id="lineage" class="panel layer-panel">
-      <h2>Lineage Chamber</h2>
-      <p>Move your cursor. Depth shifts as legacy wakes.</p>
-      <div class="depth-stack">
-        <div class="layer l1">Instinct</div>
-        <div class="layer l2">Discipline</div>
-        <div class="layer l3">Loyalty</div>
-      </div>
-    </section>
+    <div class="hero-fallback"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-vignette"></div>
+    <div class="stars" id="stars"></div>
+    <div class="mist mist-1"></div>
+    <div class="mist mist-2"></div>
 
-    <section id="arena" class="panel track-panel">
-      <h2>Arena of Velocity</h2>
-      <p>Scroll to drive the energy ring and surge forward.</p>
-      <div class="ring-wrap">
-        <div class="ring ring-outer"></div>
-        <div class="ring ring-inner"></div>
-        <div class="ring-core">RIDE</div>
-      </div>
-    </section>
+    <div class="hero-3d-wrap" id="hero3d">
+      <div class="hero-content">
+        <p class="hero-pre">Welcome to the world of</p>
+        <h1 class="hero-title">The <span class="gold">Horseman's</span><br />Journal</h1>
 
-    <section id="memory" class="panel memory-panel">
-      <h2>Memory Vault</h2>
-      <div class="cards">
-        <article class="memory-card tilt-card">
-          <h3>First Gallop</h3>
-          <p>Fear turns to rhythm as hoofbeats align with heartbeat.</p>
-        </article>
-        <article class="memory-card tilt-card">
-          <h3>Broken Rain</h3>
-          <p>Storm and dust become one horizon, one command.</p>
-        </article>
-        <article class="memory-card tilt-card">
-          <h3>Silent Bond</h3>
-          <p>No reins. No words. Direction comes from trust.</p>
-        </article>
-      </div>
-    </section>
+        <div class="hero-divider">
+          <div class="dline"></div>
+          <div class="dgem"></div>
+          <div class="dline r"></div>
+        </div>
 
-    <section id="oath" class="panel oath-panel">
-      <div class="oath-content">
-        <h2>The Oath</h2>
-        <p>"Some horses are trained. Some train the human."</p>
-        <a class="cta secondary" href="#hero">Ride Again</a>
-      </div>
-    </section>
-  </main>
+        <p class="hero-tagline">
+          Where legends are written, stories ride eternal<br />
+          and every word echoes through the ages
+        </p>
 
-  <script src="app.js"></script>
+        <div class="hero-cta">
+          <button class="cta-primary" onclick="window.location.href='genesis.html'">Enter the Journey</button>
+          <button class="cta-secondary" onclick="window.location.href='chronicles.html'">Explore the World</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-mouse"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- WELCOME SECTION -->
+  <section class="welcome">
+    <div class="welcome-inner">
+      <span class="welcome-eyebrow">A Journey Through Eleven Years</span>
+      <h2 class="welcome-title">Where Horsemanship Meets Philosophy</h2>
+      <p class="welcome-text">
+        This is not a training manual. It is not a collection of techniques. This is a journal of transformation, written in dust, silence, and the breath of horses. Eleven years of learning to speak a language older than words.
+      </p>
+      <div class="welcome-divider">
+        <div class="wel-line"></div>
+        <div class="wel-gem"></div>
+        <div class="wel-line r"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE SECTION -->
+  <section class="explore">
+    <div class="explore-header">
+      <p class="explore-eyebrow">Begin Your Journey</p>
+      <h2 class="explore-title">Explore the Journal</h2>
+    </div>
+
+    <div class="explore-grid">
+      <a href="genesis.html" class="explore-card">
+        <span class="explore-icon">📖</span>
+        <h3 class="explore-card-title">Genesis</h3>
+        <p class="explore-card-desc">The origin story. Eleven years. One black stallion. One moment of complete surrender.</p>
+        <span class="explore-card-link">Read the Story</span>
+      </a>
+
+      <a href="companions.html" class="explore-card">
+        <span class="explore-icon">🐴</span>
+        <h3 class="explore-card-title">Companions</h3>
+        <p class="explore-card-desc">Eight horses. Eight stories. Each one a mirror, a teacher, a gift shaped by time.</p>
+        <span class="explore-card-link">Meet Them</span>
+      </a>
+
+      <a href="chronicles.html" class="explore-card">
+        <span class="explore-icon">📚</span>
+        <h3 class="explore-card-title">Chronicles</h3>
+        <p class="explore-card-desc">Articles on horse psychology, trust, presence, and the philosophy of partnership.</p>
+        <span class="explore-card-link">Explore Articles</span>
+      </a>
+
+      <a href="essays.html" class="explore-card essays-card">
+        <span class="explore-icon">✍️</span>
+        <h3 class="explore-card-title">Essays</h3>
+        <p class="explore-card-desc">Personal reflections on writing, time, silence, and the quiet spaces where words emerge.</p>
+        <span class="explore-card-link">Read Essays</span>
+      </a>
+    </div>
+  </section>
+
+  <script src="js/hero.js"></script>
 </body>
 </html>
