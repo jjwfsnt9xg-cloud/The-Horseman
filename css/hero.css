@@ -1,160 +1,281 @@
-/* Reset and base styles */
-* {
+/* ============================================================
+   HERO.CSS  —  The Horseman's Journal
+   ============================================================ */
+
+/* ---- Reset ---- */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
-}
-
-/* Hero section styling */
-.hero {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Video background styling */
-.hero-video {
-  position: absolute;
-  top: 0; 
-  left: 0;
+/* ---- Base ---- */
+html, body {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  overflow: hidden;
+  font-family: 'Crimson Text', Georgia, serif;
+  background: #06030f;
 }
 
-/* Background elements for parallax */
-#stars, #moon, #ground {
-  position: absolute;
-  will-change: transform;
-  transition: transform 0.2s ease-out;
-}
-
-/* Stars background - optional, can be replaced with an image or SVG */
-#stars {
+/* ---- Three.js Canvas ---- */
+#hero-canvas {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(white, transparent 70%), radial-gradient(white, transparent 70%);
-  background-repeat: repeat;
-  background-size: 100px 100px;
   z-index: 0;
+  display: block;
 }
 
-/* Moon styling */
-#moon {
-  top: 50px;
-  right: 100px;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle, #f0f0f0, #ccc);
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255,255,255,0.5);
-  z-index: 1;
-}
-
-/* Ground styling */
-#ground {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  background: linear-gradient(to top, #654321, transparent);
-  z-index: 2;
-}
-
-/* Content styles */
-.hero-content {
+/* ---- Hero Section (text overlay) ---- */
+.hero {
   position: relative;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none; /* let mouse pass through to canvas */
+}
+
+/* Re-enable pointer events only on buttons */
+.hero-cta,
+.hero-cta button {
+  pointer-events: all;
+}
+
+/* ---- Hero Content ---- */
+.hero-content {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 20px;
   color: #fff;
-  z-index: 3;
+
+  /* entrance animation */
+  animation: fadeInUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Pre-title ---- */
 .hero-pre {
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  letter-spacing: 0.18em;
+  color: rgba(255, 230, 170, 0.85);
+  margin-bottom: 0.6em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+  animation: fadeInUp 1.4s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ---- Main Title ---- */
 .hero-title {
-  font-size: 3em;
-  font-weight: bold;
-  margin-bottom: 1em;
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow:
+    0 0 40px rgba(255, 200, 80, 0.3),
+    0 4px 30px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.3em;
+  animation: fadeInUp 1.4s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-title .gold {
-  color: gold;
+  color: #f5c842;
+  text-shadow:
+    0 0 60px rgba(245, 200, 66, 0.6),
+    0 0 20px rgba(245, 200, 66, 0.4),
+    0 4px 30px rgba(0, 0, 0, 0.9);
 }
 
+/* ---- Divider ---- */
 .hero-divider {
   display: flex;
   align-items: center;
-  margin: 1em 0;
+  justify-content: center;
+  gap: 12px;
+  margin: 0.8em 0 1em;
+  animation: fadeInUp 1.4s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .dline {
-  width: 50px;
-  height: 2px;
-  background: #fff;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(245, 200, 66, 0.7), transparent);
 }
 
 .dgem {
-  width: 10px;
-  height: 10px;
-  background: #fff;
-  margin: 0 10px;
+  width: 8px;
+  height: 8px;
+  background: #f5c842;
   border-radius: 50%;
+  box-shadow: 0 0 10px rgba(245, 200, 66, 0.8);
 }
 
-.dline.r {
-  margin-left: 10px;
-}
-
+/* ---- Tagline ---- */
 .hero-tagline {
-  font-size: 1.2em;
-  margin-bottom: 2em;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: rgba(255, 235, 200, 0.9);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
+  margin-bottom: 2.2em;
+  animation: fadeInUp 1.4s 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- CTA Buttons ---- */
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 1.4s 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-cta button {
-  padding: 1em 2em;
-  margin: 0 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
+  padding: 0.85em 2.2em;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* shimmer effect on hover */
+.hero-cta button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.hero-cta button:hover::after {
+  left: 150%;
 }
 
 .cta-primary {
-  background-color: #ffcc00;
-  color: #000;
+  background: linear-gradient(135deg, #f5c842, #d4a017);
+  color: #1a0a00;
+  border: none;
+  box-shadow: 0 4px 24px rgba(245, 200, 66, 0.35);
+}
+
+.cta-primary:hover {
+  background: linear-gradient(135deg, #ffe066, #f5c842);
+  box-shadow: 0 6px 32px rgba(245, 200, 66, 0.55);
+  transform: translateY(-2px);
+}
+
+.cta-primary:active {
+  transform: translateY(0);
 }
 
 .cta-secondary {
-  background-color: transparent;
-  border: 2px solid #fff;
+  background: transparent;
   color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
 }
 
-/* Scroll hint style */
+.cta-secondary:hover {
+  border-color: #f5c842;
+  color: #f5c842;
+  box-shadow: 0 4px 24px rgba(245, 200, 66, 0.2);
+  transform: translateY(-2px);
+}
+
+.cta-secondary:active {
+  transform: translateY(0);
+}
+
+/* ---- Scroll Hint ---- */
 .scroll-hint {
   position: absolute;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.9em;
-  color: #fff;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeInUp 1.4s 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.scroll-mouse {
+  width: 24px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  animation: scrollWheel 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+  0%   { opacity: 1;   transform: translateY(0); }
+  60%  { opacity: 0.2; transform: translateY(10px); }
+  100% { opacity: 1;   transform: translateY(0); }
+}
+
+.scroll-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-cta button {
+    width: 220px;
+  }
+
+  .dline {
+    width: 40px;
+  }
 }
