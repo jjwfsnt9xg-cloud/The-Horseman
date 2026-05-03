@@ -3,48 +3,97 @@ body {
   font-family: 'Cormorant Garamond', serif;
   background: #000;
   color: #f4efe6;
-}
-
-/* NAV */
-.nav3d {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 40px;
-  z-index: 100;
+  overflow-x: hidden;
 }
 
 /* HERO */
-.hero {
+.genesis-hero {
   height: 100vh;
-  background: url('../storm.jpg') center/cover no-repeat;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   transform-style: preserve-3d;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/storm.jpg') center/cover no-repeat;
+  transform: scale(1.1);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
 }
 
+/* HORSES */
+.horse {
+  position: absolute;
+  width: 400px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.horse-1 {
+  left: 10%;
+  top: 20%;
+}
+
+.horse-2 {
+  right: 10%;
+  bottom: 10%;
+}
+
+/* TEXT */
 .hero-content {
   position: relative;
   text-align: center;
-  transform: translateZ(80px);
+  transform: translateZ(120px);
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+}
+
+.hero-content h2 {
+  color: #c2a36b;
+  margin-top: 20px;
 }
 
 /* CONTENT */
-.content {
-  padding: 100px 20px;
+.genesis-content {
+  padding: 120px 20px;
 }
 
 .block {
   max-width: 700px;
-  margin: 100px auto;
+  margin: 120px auto;
   text-align: center;
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+}
+
+/* SHOW */
+.block.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* PARTICLES */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #c2a36b;
+  opacity: 0.5;
 }
