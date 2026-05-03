@@ -1,64 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Genesis — The Horseman's Journal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Genesis — The Horseman's Journal</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+  <!-- MAIN NAVBAR STYLE -->
+  <link rel="stylesheet" href="css/hero.css" />
 
-<link rel="stylesheet" href="css/genesis.css">
+  <!-- GENESIS STYLE -->
+  <link rel="stylesheet" href="css/genesis.css" />
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<header class="nav3d">
-  <a href="index.html" class="brand">The Horseman's Journal</a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="genesis.html">Genesis</a>
-    <a href="chronicles.html">Chronicles</a>
-    <a href="companions.html">Companions</a>
-    <a href="essays.html">Essays</a>
-  </nav>
-</header>
+  <!-- ORBS (same as main page) -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-<!-- HERO -->
-<section class="hero" id="hero3d">
-  <div class="hero-overlay"></div>
+  <!-- NAVBAR (EXACT COPY) -->
+  <header class="navbar-wrapper">
+    <nav class="nav3d">
+      <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+      <ul class="links">
+        <li><a href="index.html">GENESIS</a></li>
+        <li><a href="genesis.html">AWAKENING</a></li>
+        <li><a href="chronicles.html">CHRONICLES</a></li>
+        <li><a href="companions.html">COMPANIONS</a></li>
+        <li><a href="essays.html">VERSES</a></li>
+      </ul>
+      <button class="portal-btn" type="button">PORTAL ✦</button>
+    </nav>
+  </header>
 
-  <div class="hero-content">
-    <h1>I do not train horses</h1>
-    <h2>I work with them until they no longer feel the need to resist</h2>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="genesis-hero" id="hero3d">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
 
-<!-- CONTENT -->
-<section class="content">
+    <!-- HORSE LAYERS -->
+    <img src="images/horse1.png" class="horse horse-1">
+    <img src="images/horse2.png" class="horse horse-2">
+
+    <div class="hero-content">
+      <h1>I do not train horses</h1>
+      <h2>I work with them until they no longer feel the need to resist</h2>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="genesis-content">
 
   <div class="block">
     <h2>The Work</h2>
-    <p>For over eleven years, I have worked with horses in a way that does not rely on force, domination, or mechanical repetition. What I do is not about control. It is about understanding the horse in the moment.</p>
+    <p>
+      For over eleven years, I have worked with horses in a way that does not rely on force, domination, or mechanical repetition.
+      I did not begin with a philosophy. I began like most people do—trying to make things work, trying to control outcomes,
+      trying to get the horse to respond correctly.
+    </p>
+
+    <p>
+      Over time, that approach stopped making sense. What I do now is not about making a horse perform.
+      It is about understanding what the horse is experiencing in each moment—what it feels, what it anticipates,
+      and why it reacts the way it does.
+    </p>
+
+    <p>
+      Every behaviour, whether calm or explosive, comes from a place that can be observed and understood.
+      My work is built around that understanding.
+    </p>
   </div>
 
   <div class="block">
     <h2>The Shift</h2>
-    <p>Instead of asking how to make a horse obey, I began asking why it resists. That change shaped everything I do today.</p>
+    <p>
+      There was a point where the usual methods stopped working—not because they failed to produce results,
+      but because they failed to produce clarity.
+    </p>
+
+    <p>
+      I began to notice that a horse could comply and still remain tense, disconnected, or uncertain.
+      The behaviour would look correct, but something underneath it remained unresolved.
+    </p>
+
+    <p>
+      Instead of asking, “How do I get the horse to do this?”, the question became:
+      <strong>“Why does the horse feel the need to resist in the first place?”</strong>
+    </p>
+
+    <p>
+      Everything I do now comes from that shift.
+    </p>
   </div>
 
   <div class="block">
     <h2>How I Work</h2>
-    <p>I reduce pressure, observe behaviour, and allow the horse to process. The goal is not obedience. The goal is clarity.</p>
+
+    <p>
+      Most approaches to training respond to resistance by increasing pressure.
+      Sometimes this works. But often, it only suppresses the visible behaviour
+      while leaving the cause untouched.
+    </p>
+
+    <p>
+      When a horse resists, I do not immediately correct it. I observe it.
+      I reduce unnecessary pressure. I allow space for the horse to process instead of react.
+      I focus on removing confusion rather than overpowering it.
+    </p>
+
+    <p>
+      This does not always look impressive in the moment. It is slower in the beginning.
+      But it produces something far more stable:
+    </p>
+
+    <p><strong>A horse that understands, rather than a horse that complies.</strong></p>
+  </div>
+
+  <div class="block">
+    <h2>Core Principles</h2>
+
+    <p><strong>1. A horse must be able to think before it can learn.</strong><br>
+    If the horse is overwhelmed, no amount of pressure will create clarity.</p>
+
+    <p><strong>2. Behaviour is information, not disobedience.</strong><br>
+    Every reaction shows you something about the horse’s internal state.</p>
+
+    <p><strong>3. Willingness is more valuable than obedience.</strong><br>
+    A correct response given freely is fundamentally different from one that is forced.</p>
   </div>
 
   <div class="block">
     <h2>Experience</h2>
-    <p>Stallions, reactive horses, and unstable behaviours are not problems to fix. They are patterns to understand.</p>
+
+    <p>
+      Over the past eleven years, I have worked with a range of horses across different temperaments and conditions—
+      stallions, highly reactive horses, and individuals with deeply ingrained behavioural patterns.
+    </p>
+
+    <p>
+      Much of my work has involved fear-based reactions, rearing, escalation, and horses that have been misunderstood
+      or pushed too far.
+    </p>
+
+    <p>
+      These are not unusual cases. They are simply situations where the underlying issue has not been addressed.
+    </p>
+  </div>
+
+  <div class="block">
+    <h2>What I Offer</h2>
+
+    <p>
+      I do not offer shortcuts, and I do not promise instant results.
+    </p>
+
+    <p>
+      What I offer is a way of working that prioritizes clarity over control,
+      stability over speed, and understanding over repetition.
+    </p>
+
+    <p>
+      If someone comes to me, they should expect a process—not a quick solution.
+    </p>
+  </div>
+
+  <div class="block">
+    <h2>What Horses Taught Me</h2>
+
+    <p>
+      There was a time I believed I was confident, even fearless.
+      That belief does not survive long when you stand next to a thousand-kilogram animal
+      that can read every inconsistency in you.
+    </p>
+
+    <p>
+      Horses do not respond to what you say.
+      They respond to what you are.
+    </p>
+
+    <p>
+      They forced me to confront fear, hesitation, and lack of clarity in a way nothing else could.
+      Over time, the work became less about technique and more about presence.
+    </p>
+  </div>
+
+  <div class="block">
+    <h2>Boundary</h2>
+
+    <p>
+      I do not work with dominance-based or suppression-based handling.
+    </p>
+
+    <p>
+      A horse cannot find clarity through a handler who is internally conflicted or externally aggressive.
+      Emotional steadiness is not optional in this work—it is the foundation of it.
+    </p>
+  </div>
+
+  <div class="block">
+    <h2>Closing</h2>
+
+    <p>
+      A horse does not need to be made obedient.
+      It needs to feel safe enough to respond.
+    </p>
+
+    <p><strong>That is where my work begins.</strong></p>
   </div>
 
 </section>
 
-<script src="js/genesis.js"></script>
+  <script src="js/genesis.js"></script>
 </body>
 </html>
