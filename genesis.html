@@ -1,305 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — The Horseman's Journal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genesis — The Horseman's Journal</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;900&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="about.css" />
+<link rel="stylesheet" href="css/genesis.css">
 </head>
+
 <body>
 
-  <!-- Ambient background layers -->
-  <div class="bg-canvas" aria-hidden="true">
-    <div class="bg-orb bg-orb--1"></div>
-    <div class="bg-orb bg-orb--2"></div>
-    <div class="bg-orb bg-orb--3"></div>
-    <div class="bg-grain"></div>
-    <div class="bg-vignette"></div>
+<!-- NAVBAR -->
+<header class="nav3d">
+  <a href="index.html" class="brand">The Horseman's Journal</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="genesis.html">Genesis</a>
+    <a href="chronicles.html">Chronicles</a>
+    <a href="companions.html">Companions</a>
+    <a href="essays.html">Essays</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero3d">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>I do not train horses</h1>
+    <h2>I work with them until they no longer feel the need to resist</h2>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="content">
+
+  <div class="block">
+    <h2>The Work</h2>
+    <p>For over eleven years, I have worked with horses in a way that does not rely on force, domination, or mechanical repetition. What I do is not about control. It is about understanding the horse in the moment.</p>
   </div>
 
-  <!-- Cursor glow (JS appends this) -->
+  <div class="block">
+    <h2>The Shift</h2>
+    <p>Instead of asking how to make a horse obey, I began asking why it resists. That change shaped everything I do today.</p>
+  </div>
 
-  <!-- ── NAVIGATION ── -->
-  <header class="nav" role="banner">
-    <a href="index.html" class="nav__brand">The Horseman's Journal</a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="genesis.html">Genesis</a>
-      <a href="chronicles.html">Chronicles</a>
-      <a href="companions.html">Companions</a>
-      <a href="essays.html">Essays</a>
-    </nav>
-    <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
+  <div class="block">
+    <h2>How I Work</h2>
+    <p>I reduce pressure, observe behaviour, and allow the horse to process. The goal is not obedience. The goal is clarity.</p>
+  </div>
 
-  <main class="page" id="about">
+  <div class="block">
+    <h2>Experience</h2>
+    <p>Stallions, reactive horses, and unstable behaviours are not problems to fix. They are patterns to understand.</p>
+  </div>
 
-    <!-- ══════════════════════════════════════════
-         HERO — Opening statement
-    ═══════════════════════════════════════════ -->
-    <section class="hero-block" id="heroWrap">
-      <div class="hero-block__inner reveal">
-        <div class="eyebrow">
-          <span class="eyebrow__gem">✦</span>
-          <span>Natural Horsemanship</span>
-          <span class="eyebrow__gem">✦</span>
-        </div>
+</section>
 
-        <h1 class="hero-block__title">
-          I do not train horses<br />
-          <em>to obey.</em>
-        </h1>
-
-        <p class="hero-block__sub">
-          I work with them until they no longer feel the need to resist.
-        </p>
-
-        <div class="ornament-rule" aria-hidden="true">
-          <svg viewBox="0 0 320 18" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <line x1="0" y1="9" x2="126" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
-            <rect x="143" y="2" width="12" height="12" transform="rotate(45 149 8)" stroke="currentColor" stroke-width="1"/>
-            <line x1="172" y1="9" x2="320" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.45"/>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         CHAPTER I — The turning point
-    ═══════════════════════════════════════════ -->
-    <section class="chapter" id="ch1">
-      <div class="chapter__label reveal">
-        <span class="chapter__numeral">I</span>
-        <span class="chapter__name">The Moment That Changed Everything</span>
-      </div>
-
-      <div class="chapter__body">
-        <p class="drop-cap reveal">
-          It happened inside a fifteen-metre circle with a Hanoverian stallion.
-          I had handled difficult horses before — kicks, bolts, near-misses.
-          But nothing had reached me the way this did.
-        </p>
-
-        <p class="reveal">
-          He rose onto his hind legs and walked toward me. Slowly. Not in a panic,
-          not in aggression — deliberately. In that moment I had no control over
-          the situation. There was nothing left but truth between us.
-        </p>
-
-        <blockquote class="pull-quote reveal">
-          <div class="pull-quote__mark">"</div>
-          <p>It was not just fear I felt.<br />It was clarity — the clearest I had ever been.</p>
-        </blockquote>
-
-        <p class="reveal">
-          I stepped away from horses for twenty days. When I came back, I was
-          different. For the first time I could feel tension before it became movement,
-          and fear before it became reaction. That gap — between stimulus and response —
-          is where everything I now do begins.
-        </p>
-
-        <div class="marker-card reveal">
-          That was the moment I stopped trying to make horses do things,
-          and started learning how to make it safe for them to choose.
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         FULL-WIDTH PHILOSOPHY PULL
-    ═══════════════════════════════════════════ -->
-    <div class="wide-pull reveal" aria-hidden="false">
-      <p>Horses are honest.<br /><em>They only resist what does not make sense to them.</em></p>
-    </div>
-
-    <!-- ══════════════════════════════════════════
-         CHAPTER II — The method
-    ═══════════════════════════════════════════ -->
-    <section class="chapter" id="ch2">
-      <div class="chapter__label reveal">
-        <span class="chapter__numeral">II</span>
-        <span class="chapter__name">Working Without Escalation</span>
-      </div>
-
-      <div class="chapter__body">
-        <p class="reveal">
-          Most conventional training responds to resistance with increased pressure.
-          It can produce results — but it often produces suppression rather than understanding.
-          The horse complies, but the root cause of the behaviour stays buried.
-        </p>
-
-        <!-- Contrast table -->
-        <div class="contrast-table reveal">
-          <div class="contrast-table__col contrast-table__col--left">
-            <span class="contrast-table__heading">Conventional approach</span>
-            <ul>
-              <li><em>Resistance</em> → Increase pressure</li>
-              <li><em>Hesitation</em> → Push through it</li>
-              <li><em>Reaction</em> → Apply more control</li>
-            </ul>
-            <p class="contrast-table__note">This can work. It rarely teaches.</p>
-          </div>
-          <div class="contrast-table__divider" aria-hidden="true"></div>
-          <div class="contrast-table__col contrast-table__col--right">
-            <span class="contrast-table__heading">My approach</span>
-            <ul>
-              <li><em>Resistance</em> → Reduce pressure, observe</li>
-              <li><em>Hesitation</em> → Create space to think</li>
-              <li><em>Reaction</em> → Find the cause, not the symptom</li>
-            </ul>
-            <p class="contrast-table__note">Slower at first. Far more stable long-term.</p>
-          </div>
-        </div>
-
-        <!-- Three principles -->
-        <p class="section-intro reveal">Everything I do rests on three principles:</p>
-
-        <div class="principles">
-          <div class="principle reveal-item">
-            <span class="principle__num">I</span>
-            <div class="principle__text">
-              <strong>Remove unnecessary pressure</strong>
-              <p>A horse that is overwhelmed cannot think. Before you can teach, you have to create calm.</p>
-            </div>
-          </div>
-          <div class="principle reveal-item">
-            <span class="principle__num">II</span>
-            <div class="principle__text">
-              <strong>Allow expression without escalation</strong>
-              <p>When a horse acts out, that behaviour is information. Shutting it down hides what you need to see.</p>
-            </div>
-          </div>
-          <div class="principle reveal-item">
-            <span class="principle__num">III</span>
-            <div class="principle__text">
-              <strong>Reinforce willingness, not compliance</strong>
-              <p>A horse that offers the correct response on its own is fundamentally different from one that was forced into it.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         PRACTICE CASE
-    ═══════════════════════════════════════════ -->
-    <section class="case-panel reveal">
-      <div class="case-panel__label">In Practice</div>
-      <div class="case-panel__body">
-        <p class="case-panel__lead">
-          One warmblood mare I worked with would lock into a corner of the arena
-          and rush every time she approached it. Traditional correction made her worse.
-        </p>
-        <p>
-          I stopped correcting her. Instead I reduced every form of pressure I was adding —
-          position, energy, expectation. I simply became consistent and quiet in her presence.
-          Within three weeks she began to regulate herself without any intervention from me.
-        </p>
-        <div class="case-panel__quote">
-          When confusion is removed and the handler is stable,
-          <span>the horse begins to offer the right answer on its own.</span>
-        </div>
-      </div>
-      <div class="case-panel__bg-word" aria-hidden="true">PRACTICE</div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         CHAPTER III — Experience
-    ═══════════════════════════════════════════ -->
-    <section class="chapter" id="ch3">
-      <div class="chapter__label reveal">
-        <span class="chapter__numeral">III</span>
-        <span class="chapter__name">Experience</span>
-      </div>
-
-      <div class="stats-row reveal">
-        <div class="stat">
-          <span class="stat__num"><span class="count-up" data-target="11">0</span><sup>+</sup></span>
-          <span class="stat__unit">Years</span>
-          <span class="stat__desc">Hands-on work with horses across varied environments</span>
-        </div>
-        <div class="stat__divider" aria-hidden="true"></div>
-        <div class="stat">
-          <span class="stat__num"><span class="count-up" data-target="16">0</span><sup>+</sup></span>
-          <span class="stat__unit">Horses</span>
-          <span class="stat__desc">Including stallions, warmbloods, thoroughbreds, and reactive types</span>
-        </div>
-      </div>
-
-      <div class="tags-block reveal">
-        <div class="tags-group">
-          <span class="tags-group__label">Specialisations</span>
-          <div class="tags-group__tags">
-            <span class="tag">Flight response &amp; fear-driven behaviour</span>
-            <span class="tag">Rearing patterns and escalation</span>
-            <span class="tag">Groundwork for dressage foundation</span>
-            <span class="tag">Behavioural rehabilitation</span>
-          </div>
-        </div>
-        <div class="tags-group">
-          <span class="tags-group__label">Breeds &amp; Types</span>
-          <div class="tags-group__tags">
-            <span class="tag">Warmbloods</span>
-            <span class="tag">Thoroughbreds</span>
-            <span class="tag">Stallions</span>
-            <span class="tag">Highly reactive horses</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         LESSON PANEL — What horses taught me
-    ═══════════════════════════════════════════ -->
-    <section class="lesson-panel reveal">
-      <div class="lesson-panel__left">
-        <span class="lesson-panel__label">What Horses Taught Me</span>
-        <p>
-          I spent years believing I was fearless. Standing at 54 kilograms beside
-          a thousand-kilogram animal changed that — permanently.
-        </p>
-        <p>
-          This work forced me to face fear, self-doubt, and the honest question of
-          whether I was actually capable. Horses do not allow you to pretend.
-        </p>
-      </div>
-      <div class="lesson-panel__right reveal">
-        <div class="truth-lines">
-          <p class="truth-lines__line">Real strength is not physical.</p>
-          <p class="truth-lines__line truth-lines__line--gold">
-            It is the ability to remain clear and grounded<br />
-            when everything around you is not.
-          </p>
-        </div>
-        <p class="lesson-panel__close">
-          Horses do not respond to force.<br />
-          They respond to that stability.
-        </p>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         CLOSING BOUNDARY STATEMENT
-    ═══════════════════════════════════════════ -->
-    <div class="boundary reveal">
-      <div class="boundary__inner">
-        <p>
-          I do not work with dominance-based or suppression-based handling.
-          A horse cannot find clarity through a handler who is internally conflicted.
-          Emotional steadiness is not an optional quality in this work — it is the foundation of it.
-        </p>
-      </div>
-    </div>
-
-  </main>
-
-  <script src="about.js"></script>
+<script src="js/genesis.js"></script>
 </body>
 </html>
