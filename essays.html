@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <style>
-    /* RESET */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -25,24 +24,24 @@
     .orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(100px);
+      filter: blur(120px);
       pointer-events: none;
       z-index: 0;
     }
     .orb1 {
       width: 55vw; height: 55vw;
       top: -15vh; right: -15vw;
-      background: radial-gradient(circle, rgba(130, 100, 220, 0.12), transparent);
+      background: radial-gradient(circle, rgba(130, 100, 220, 0.10), transparent);
     }
     .orb2 {
       width: 45vw; height: 45vw;
       bottom: -10vh; left: -20vw;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.06), transparent);
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.05), transparent);
     }
     .orb3 {
       width: 35vw; height: 35vw;
       top: 50vh; left: 40vw;
-      background: radial-gradient(circle, rgba(160, 140, 220, 0.05), transparent);
+      background: radial-gradient(circle, rgba(160, 140, 220, 0.04), transparent);
     }
 
     /* ═══════════════════════════════════════════════
@@ -58,7 +57,6 @@
       pointer-events: none;
     }
     .navbar-wrapper * { pointer-events: auto; }
-
     .scene {
       perspective: 700px;
       perspective-origin: 50% 60%;
@@ -73,9 +71,7 @@
       height: 64px;
     }
     .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-
     .face { position: absolute; border-radius: 18px; }
-
     .face-top {
       inset: 0;
       background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(212,175,55,0.06) 40%, rgba(255,255,255,0.04) 100%);
@@ -240,77 +236,161 @@
     }
 
     /* ═══════════════════════════════════════════════
-       VERSES HEADER
+       CINEMATIC MOUNTAIN HERO
     ═══════════════════════════════════════════════ */
-    .verses-header {
-      text-align: center;
-      padding: 10rem 2rem 4rem;
+    .verses-hero {
       position: relative;
-      z-index: 2;
-    }
-    .verses-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem;
-      letter-spacing: 7px;
-      color: rgba(180, 160, 220, 0.5);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .verses-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 3px;
-      line-height: 1.1;
-      text-shadow: 0 0 50px rgba(160, 130, 220, 0.3), 0 0 100px rgba(212, 175, 55, 0.15);
-      margin-bottom: 1.2rem;
-    }
-    .verses-title .gold {
-      color: #E8C84A;
-      text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
-    }
-    .verses-divider {
+      width: 100%;
+      height: 100vh;
+      min-height: 700px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
     }
-    .v-dline {
-      width: 80px;
+
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, transparent 20%, rgba(6,4,10,0.7) 80%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: 8px;
+      color: rgba(212, 175, 55, 0.5);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: .3s;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 4px;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 80px rgba(212, 175, 55, 0.3), 0 0 160px rgba(160, 130, 220, 0.2), 0 4px 60px rgba(0, 0, 0, 0.6);
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: .5s;
+    }
+
+    .hero-title .gold {
+      color: #E8C84A;
+      text-shadow: 0 0 60px rgba(212, 175, 55, 0.8), 0 0 120px rgba(212, 175, 55, 0.3);
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: .7s;
+    }
+    .hero-dline {
+      width: 90px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(180, 160, 220, 0.4));
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5));
     }
-    .v-dline.r {
-      background: linear-gradient(90deg, rgba(180, 160, 220, 0.4), transparent);
+    .hero-dline.r {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.5), transparent);
     }
-    .v-dgem {
-      width: 6px; height: 6px;
+    .hero-dgem {
+      width: 8px; height: 8px;
       background: #E8C84A;
       transform: rotate(45deg);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.4);
     }
-    .verses-tagline {
+
+    .hero-tagline {
       font-family: 'EB Garamond', serif;
       font-style: italic;
-      font-size: clamp(.95rem, 1.6vw, 1.15rem);
-      color: rgba(210, 195, 240, 0.55);
-      letter-spacing: .5px;
-      max-width: 550px;
+      font-size: clamp(.95rem, 1.8vw, 1.2rem);
+      color: rgba(220, 205, 240, 0.6);
+      letter-spacing: .6px;
+      max-width: 580px;
       margin: 0 auto;
       line-height: 1.8;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: .9s;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUpDown 2.5s ease-in-out infinite;
+    }
+    .hero-scroll span {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: 5px;
+      color: rgba(212, 175, 55, 0.45);
+      text-transform: uppercase;
+    }
+    .hero-scroll svg {
+      width: 18px;
+      stroke: rgba(212, 175, 55, 0.45);
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(24px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUpDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.35; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
     }
 
     /* ═══════════════════════════════════════════════
        CUBE GRID
     ═══════════════════════════════════════════════ */
     .cubes-section {
-      padding: 2rem 2rem 8rem;
+      padding: 4rem 2rem 8rem;
       position: relative;
       z-index: 2;
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto;
     }
     .cubes-grid {
@@ -319,14 +399,13 @@
       gap: 3.5rem 3rem;
       perspective: 1000px;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .cubes-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
     }
-    @media (max-width: 560px) {
+    @media (max-width: 580px) {
       .cubes-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
-    /* ── CUBE WRAPPER ── */
     .cube-wrap {
       perspective: 800px;
       cursor: pointer;
@@ -339,7 +418,6 @@
       transform: translateY(0);
     }
 
-    /* ── 3D CUBE ── */
     .cube-3d {
       position: relative;
       width: 100%;
@@ -352,20 +430,17 @@
       transform: rotateX(-6deg) rotateY(-10deg) translateY(-6px);
     }
 
-    /* ── CUBE FACES ── */
     .cube-face {
       position: absolute;
       inset: 0;
       border-radius: 14px;
       backface-visibility: hidden;
     }
-
-    /* TOP FACE — Indigo glass */
     .cube-face-top {
-      background: linear-gradient(145deg, rgba(90, 70, 160, 0.55), rgba(50, 35, 100, 0.7));
+      background: linear-gradient(145deg, rgba(70, 50, 140, 0.55), rgba(40, 25, 90, 0.7));
       border: 1.5px solid rgba(180, 160, 220, 0.35);
       backdrop-filter: blur(6px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 0 40px rgba(130, 100, 220, 0.25);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 0 40px rgba(130, 100, 220, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -375,19 +450,14 @@
       z-index: 3;
       transform: translateZ(0);
     }
-
-    /* FRONT EDGE — Dark depth */
     .cube-face-front {
-      background: linear-gradient(180deg, rgba(40, 25, 80, 0.9), rgba(20, 10, 50, 0.95));
+      background: linear-gradient(180deg, rgba(30, 18, 65, 0.9), rgba(15, 8, 40, 0.95));
       border: 1px solid rgba(140, 120, 200, 0.2);
       transform: translateZ(-26px);
       z-index: 1;
-      border-radius: 14px;
     }
-
-    /* BOTTOM EDGE */
     .cube-face-bottom {
-      background: linear-gradient(180deg, rgba(30, 18, 60, 0.8), rgba(15, 8, 35, 0.9));
+      background: linear-gradient(180deg, rgba(25, 14, 50, 0.8), rgba(12, 6, 28, 0.9));
       border-left: 1px solid rgba(140, 120, 200, 0.15);
       border-right: 1px solid rgba(140, 120, 200, 0.15);
       border-bottom: 1px solid rgba(140, 120, 200, 0.1);
@@ -399,10 +469,8 @@
       transform: rotateX(-90deg);
       z-index: 2;
     }
-
-    /* LEFT EDGE */
     .cube-face-left {
-      background: linear-gradient(90deg, rgba(25, 14, 55, 0.85), rgba(40, 25, 80, 0.7));
+      background: linear-gradient(90deg, rgba(20, 10, 45, 0.85), rgba(35, 20, 70, 0.7));
       border: 1px solid rgba(140, 120, 200, 0.12);
       width: 28px;
       left: -28px;
@@ -412,10 +480,8 @@
       transform: rotateY(-90deg);
       z-index: 2;
     }
-
-    /* RIGHT EDGE */
     .cube-face-right {
-      background: linear-gradient(270deg, rgba(25, 14, 55, 0.85), rgba(40, 25, 80, 0.7));
+      background: linear-gradient(270deg, rgba(20, 10, 45, 0.85), rgba(35, 20, 70, 0.7));
       border: 1px solid rgba(140, 120, 200, 0.12);
       width: 28px;
       right: -28px;
@@ -426,7 +492,6 @@
       z-index: 2;
     }
 
-    /* ── CUBE CONTENT (on top face) ── */
     .cube-icon {
       font-size: 2.4rem;
       margin-bottom: 1rem;
@@ -436,9 +501,9 @@
     }
     .cube-label {
       font-family: 'Cinzel', serif;
-      font-size: .5rem;
+      font-size: .48rem;
       letter-spacing: 4px;
-      color: rgba(212, 175, 55, 0.55);
+      color: rgba(212, 175, 55, 0.5);
       text-transform: uppercase;
       margin-bottom: .6rem;
       position: relative;
@@ -446,7 +511,7 @@
     }
     .cube-title {
       font-family: 'Cinzel', serif;
-      font-size: .85rem;
+      font-size: .82rem;
       font-weight: 600;
       color: #e8ddf8;
       letter-spacing: .5px;
@@ -466,9 +531,9 @@
     }
     .cube-excerpt {
       font-family: 'EB Garamond', serif;
-      font-size: .72rem;
+      font-size: .7rem;
       line-height: 1.6;
-      color: rgba(200, 185, 230, 0.55);
+      color: rgba(200, 185, 230, 0.5);
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -478,9 +543,9 @@
     }
     .cube-read {
       font-family: 'Cinzel', serif;
-      font-size: .5rem;
+      font-size: .48rem;
       letter-spacing: 3px;
-      color: rgba(212, 175, 55, 0.5);
+      color: rgba(212, 175, 55, 0.45);
       text-transform: uppercase;
       margin-top: auto;
       padding-top: .6rem;
@@ -489,23 +554,21 @@
       transition: color .3s;
     }
     .cube-wrap:hover .cube-read {
-      color: rgba(212, 175, 55, 0.9);
+      color: rgba(212, 175, 55, 0.85);
     }
-
-    /* ── SHADOW UNDER CUBE ── */
     .cube-shadow {
       position: absolute;
       bottom: -30px;
       left: 10%;
       right: 10%;
       height: 30px;
-      background: radial-gradient(ellipse, rgba(100, 70, 180, 0.25) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(90, 60, 160, 0.2) 0%, transparent 70%);
       filter: blur(10px);
       pointer-events: none;
     }
 
     /* ═══════════════════════════════════════════════
-       ESSAY OVERLAY (READER)
+       ESSAY READER OVERLAY
     ═══════════════════════════════════════════════ */
     .essay-overlay {
       position: fixed;
@@ -528,18 +591,23 @@
       background: linear-gradient(160deg, #0e0a1a 0%, #1a1230 50%, #0c0818 100%);
       border: 1px solid rgba(180, 160, 220, 0.2);
       border-radius: 16px;
-      padding: 3rem 3.5rem;
-      max-width: 700px;
-      width: 90%;
-      max-height: 85vh;
+      max-width: 780px;
+      width: 92%;
+      max-height: 88vh;
       overflow-y: auto;
       position: relative;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.08);
     }
-    .essay-close {
-      position: absolute;
-      top: 16px; right: 16px;
-      z-index: 10;
+    .essay-reader::-webkit-scrollbar { width: 3px; }
+    .essay-reader::-webkit-scrollbar-track { background: rgba(0,0,0,.2); }
+    .essay-reader::-webkit-scrollbar-thumb { background: rgba(212,175,55,.25); border-radius: 2px; }
+
+    .rd-close {
+      position: sticky;
+      top: 16px;
+      float: right;
+      margin-right: 16px;
+      z-index: 20;
       width: 32px; height: 32px;
       border: 1px solid rgba(180,160,220,0.3);
       border-radius: 50%;
@@ -550,51 +618,177 @@
       justify-content: center;
       transition: all .2s;
     }
-    .essay-close:hover {
+    .rd-close:hover {
       background: rgba(180,140,240,0.2);
       border-color: rgba(180,160,220,0.6);
     }
-    .essay-close::before,
-    .essay-close::after {
+    .rd-close::before,
+    .rd-close::after {
       content: '';
       position: absolute;
       width: 12px; height: 1px;
       background: rgba(200,180,230,0.7);
     }
-    .essay-close::before { transform: rotate(45deg); }
-    .essay-close::after { transform: rotate(-45deg); }
-    .essay-reader-title {
+    .rd-close::before { transform: rotate(45deg); }
+    .rd-close::after { transform: rotate(-45deg); }
+
+    .rd-content {
+      padding: 2rem 3.5rem 4rem;
+    }
+
+    .rd-title-block {
+      text-align: center;
+      padding: 1rem 0 3rem;
+      border-bottom: .5px solid rgba(212,175,55,.1);
+      margin-bottom: 2.5rem;
+    }
+    .rd-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 1.2rem;
+    }
+    .rd-oln {
+      flex: 1;
+      max-width: 80px;
+      height: .5px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,.4));
+    }
+    .rd-oln-r {
+      background: linear-gradient(90deg, rgba(212,175,55,.4), transparent);
+    }
+    .rd-gem {
+      width: 7px; height: 7px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(212,175,55,.8);
+    }
+    .rd-label {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      font-weight: 600;
+      font-size: .55rem;
+      letter-spacing: 5px;
+      color: rgba(212,175,55,.35);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: .8rem;
+    }
+    .rd-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
       color: #E8C84A;
       letter-spacing: 1px;
-      margin-bottom: 2rem;
-      padding-right: 2rem;
-      text-shadow: 0 0 20px rgba(212,175,55,0.2);
+      line-height: 1.25;
+      text-shadow: 0 0 30px rgba(212,175,55,.25);
+      margin-bottom: 1rem;
     }
-    .essay-reader-text {
+    .rd-tagline {
       font-family: 'EB Garamond', serif;
-      font-size: 1.1rem;
-      line-height: 2;
-      color: rgba(220,210,240,0.8);
+      font-style: italic;
+      font-size: .95rem;
+      color: rgba(200,180,230,.45);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
-    .essay-reader-text p {
-      margin-bottom: 1.3rem;
+
+    .rd-section-block {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-top: .5px solid rgba(212,175,55,.06);
+      border-bottom: .5px solid rgba(212,175,55,.06);
+      margin: 2rem 0;
     }
-    .essay-reader-text p:first-child::first-letter {
+    .rd-section-heading {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 600;
+      color: #e0d0f0;
+      letter-spacing: 1px;
+      margin-bottom: .4rem;
+    }
+    .rd-section-sub {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: .9rem;
+      color: rgba(200,180,220,.35);
+    }
+
+    .rd-text-block {
+      padding: 1.2rem 0;
+    }
+    .rd-text-body {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      line-height: 2.1;
+      color: rgba(225,215,240,.78);
+      letter-spacing: .01em;
+    }
+    .rd-text-body p {
+      margin-bottom: 1.5rem;
+      text-indent: 2em;
+    }
+    .rd-text-body p:first-child {
+      text-indent: 0;
+    }
+    .rd-dropcap {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 3.2em;
+      font-size: 3.4em;
       font-weight: 700;
       color: #c9a030;
       float: left;
       line-height: .7;
-      margin: .08em .1em 0 0;
+      margin: .06em .1em 0 0;
+      text-shadow: 0 0 20px rgba(212,175,55,.35);
     }
 
-    /* ═══════════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════════ */
+    .rd-quote-block {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .rd-quote-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: rgba(225,200,150,.65);
+      line-height: 1.9;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .rd-quote-text::before { content: '\201C'; font-size: 2em; color: rgba(212,175,55,.2); margin-right: .05em; line-height: 0; vertical-align: -.4em; }
+    .rd-quote-text::after { content: '\201D'; font-size: 2em; color: rgba(212,175,55,.2); margin-left: .05em; line-height: 0; vertical-align: -.4em; }
+
+    .rd-end-block {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-top: .5px solid rgba(212,175,55,.1);
+      margin-top: 2rem;
+    }
+    .rd-end-label {
+      font-family: 'Cinzel', serif;
+      font-size: .52rem;
+      letter-spacing: 4px;
+      color: rgba(212,175,55,.25);
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .rd-end-byline {
+      font-family: 'Cinzel', serif;
+      font-size: .48rem;
+      letter-spacing: 3px;
+      color: rgba(212,175,55,.15);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 680px) {
+      .rd-content { padding: 1.5rem 1.5rem 3rem; }
+      .rd-title { font-size: 1.2rem; }
+      .rd-text-body { font-size: 1rem; }
+      .hero-title { font-size: 2.2rem; }
+    }
     @media (max-width: 860px) {
       .navbar-wrapper { padding: 0.8rem 1rem 0; }
       .nav3d { height: 56px; transform: rotateX(15deg); }
@@ -602,13 +796,10 @@
       .links { gap: 0; }
       .links li a { font-size: .52rem; padding: 4px 5px; letter-spacing: 1px; }
       .portal-top { font-size: .55rem; padding: 6px 12px; }
-      .verses-header { padding: 8rem 1.5rem 3rem; }
-      .essay-reader { padding: 2rem 1.5rem; }
     }
     @media (max-width: 520px) {
       .brand small { display: none; }
       .links li a { font-size: .45rem; padding: 3px 4px; }
-      .cube-3d { transform: rotateX(-10deg) rotateY(-14deg); }
     }
   </style>
 </head>
@@ -618,7 +809,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR (IDENTICAL TO CHRONICLES) -->
+  <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -649,251 +840,428 @@
     </div>
   </div>
 
-  <!-- VERSES HEADER -->
-  <section class="verses-header">
-    <span class="verses-eyebrow">Words from the Heart</span>
-    <h2 class="verses-title">Ver<span class="gold">ses</span></h2>
-    <div class="verses-divider">
-      <div class="v-dline"></div>
-      <div class="v-dgem"></div>
-      <div class="v-dline v-dline r"></div>
+  <!-- CINEMATIC MOUNTAIN HERO -->
+  <section class="verses-hero" id="versesHero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Words from the Heart</span>
+      <h1 class="hero-title">Ver<span class="gold">ses</span></h1>
+      <div class="hero-divider">
+        <div class="hero-dline"></div>
+        <div class="hero-dgem"></div>
+        <div class="hero-dline hero-dline r"></div>
+      </div>
+      <p class="hero-tagline">Where thoughts become poetry, silence becomes voice, and the unspoken finds its shape in words.</p>
     </div>
-    <p class="verses-tagline">Where thoughts become poetry, silence becomes voice, and the unspoken finds its shape in words.</p>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
   </section>
 
   <!-- CUBE GRID -->
   <section class="cubes-section">
     <div class="cubes-grid" id="cubesGrid">
 
-      <!-- CUBE 1 -->
-      <div class="cube-wrap" data-essay="0">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">🤝</div>
-            <div class="cube-label">Verse I</div>
-            <div class="cube-title">A Bond Beyond Words</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">In the quiet space between heartbeats, where language ends and understanding begins...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="0"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🛏️</div><div class="cube-label">Verse I</div>
+          <div class="cube-title">Within These Walls</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">These four walls do not stay because they care. They stay because they are built to...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
 
-      <!-- CUBE 2 -->
-      <div class="cube-wrap" data-essay="1">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">⏳</div>
-            <div class="cube-label">Verse II</div>
-            <div class="cube-title">The Unyielding March</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">Time does not pause. It does not negotiate. It simply moves forward, indifferent to our readiness...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="1"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">⏳</div><div class="cube-label">Verse II</div>
+          <div class="cube-title">The Unyielding March</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">The harshest lie adulthood ever forces down your throat is that you must keep going...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
 
-      <!-- CUBE 3 -->
-      <div class="cube-wrap" data-essay="2">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">🕯️</div>
-            <div class="cube-label">Verse III</div>
-            <div class="cube-title">The Funeral I Attend Every Day</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">There are losses that announce themselves with ceremony. And then there are the quiet deaths...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="2"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🕯️</div><div class="cube-label">Verse III</div>
+          <div class="cube-title">The Funeral I Attend Every Day</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">I felt it before I opened my eyes. Not the morning. Not the light. I felt him...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
 
-      <!-- CUBE 4 -->
-      <div class="cube-wrap" data-essay="3">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">💫</div>
-            <div class="cube-label">Verse IV</div>
-            <div class="cube-title">The Flickering</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">I sit in my room and it is quiet. A different kind of quiet than I used to know...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="3"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">💔</div><div class="cube-label">Verse IV</div>
+          <div class="cube-title">It Hurts</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">It hurts in a way that makes my body feel unsafe. Not just sad. Unsafe...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
 
-      <!-- CUBE 5 -->
-      <div class="cube-wrap" data-essay="4">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">🎭</div>
-            <div class="cube-label">Verse V</div>
-            <div class="cube-title">The Primitive Beneath</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">If you watch people long enough, really watch them without soft filters, something unsettling becomes clear...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="4"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">💫</div><div class="cube-label">Verse V</div>
+          <div class="cube-title">The Flickering</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">I sit in my room and it is quiet. Not the good quiet. The kind that empties...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
 
-      <!-- CUBE 6 -->
-      <div class="cube-wrap" data-essay="5">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">🛏️</div>
-            <div class="cube-label">Verse VI</div>
-            <div class="cube-title">Within These Walls</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">I was flat on the bed. The ceiling familiar, the silence heavy, the hours endless...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="5"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🔇</div><div class="cube-label">Verse VI</div>
+          <div class="cube-title">I Hate My Voice</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">I hate my voice. I hate it so much I can feel the hate squeezing my throat shut...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
 
-      <!-- CUBE 7 -->
-      <div class="cube-wrap" data-essay="6">
-        <div class="cube-3d">
-          <div class="cube-face cube-face-front"></div>
-          <div class="cube-face cube-face-bottom"></div>
-          <div class="cube-face cube-face-left"></div>
-          <div class="cube-face cube-face-right"></div>
-          <div class="cube-face cube-face-top">
-            <div class="cube-icon">✍️</div>
-            <div class="cube-label">Verse VII</div>
-            <div class="cube-title">I Miss My Writing</div>
-            <div class="cube-rule"></div>
-            <p class="cube-excerpt">I never thought I would say that, but I do. There was a time when words came to me without effort...</p>
-            <span class="cube-read">Read Verse</span>
-          </div>
+      <div class="cube-wrap" data-essay="6"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🎭</div><div class="cube-label">Verse VII</div>
+          <div class="cube-title">The Primitive Beneath</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">If you watch people long enough, without the soft filters, something unsettling reveals itself...</p>
+          <span class="cube-read">Read Verse</span>
         </div>
-        <div class="cube-shadow"></div>
-      </div>
+      </div><div class="cube-shadow"></div></div>
+
+      <div class="cube-wrap" data-essay="7"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🔥</div><div class="cube-label">Verse VIII</div>
+          <div class="cube-title">To the One I Loved Into Becoming</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">You never saw me clearly. I need to say that first. Before the grace. Before the letting go...</p>
+          <span class="cube-read">Read Verse</span>
+        </div>
+      </div><div class="cube-shadow"></div></div>
+
+      <div class="cube-wrap" data-essay="8"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">✦</div><div class="cube-label">Verse IX</div>
+          <div class="cube-title">To You, the One I'll Recognize</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">I do not know your name yet. I have not heard your laugh. But I feel the space where you will fit...</p>
+          <span class="cube-read">Read Verse</span>
+        </div>
+      </div><div class="cube-shadow"></div></div>
+
+      <div class="cube-wrap" data-essay="9"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🩸</div><div class="cube-label">Verse X</div>
+          <div class="cube-title">The Knife</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">I was flat on the bed like roadkill baking in the sun. The dark did not creep in. It slammed...</p>
+          <span class="cube-read">Read Verse</span>
+        </div>
+      </div><div class="cube-shadow"></div></div>
+
+      <div class="cube-wrap" data-essay="10"><div class="cube-3d">
+        <div class="cube-face cube-face-front"></div><div class="cube-face cube-face-bottom"></div>
+        <div class="cube-face cube-face-left"></div><div class="cube-face cube-face-right"></div>
+        <div class="cube-face cube-face-top">
+          <div class="cube-icon">🤝</div><div class="cube-label">Verse XI</div>
+          <div class="cube-title">A Bond Beyond Words</div><div class="cube-rule"></div>
+          <p class="cube-excerpt">I did not find them. I was found. By something that does not speak...</p>
+          <span class="cube-read">Read Verse</span>
+        </div>
+      </div><div class="cube-shadow"></div></div>
 
     </div>
   </section>
 
-  <!-- ESSAY OVERLAY -->
+  <!-- ESSAY READER OVERLAY -->
   <div class="essay-overlay" id="essayOverlay">
-    <div class="essay-reader">
-      <button class="essay-close" id="essayClose"></button>
-      <h2 class="essay-reader-title" id="essayReaderTitle"></h2>
-      <div class="essay-reader-text" id="essayReaderText"></div>
+    <div class="essay-reader" id="essayReader">
+      <button class="rd-close" id="rdClose"></button>
+      <div class="rd-content" id="rdContent"></div>
     </div>
   </div>
 
   <script>
-    // ── ESSAY DATA ──
-    const essays = [
-      {
-        title: "A Bond Beyond Words",
-        text: `<p>In the quiet space between heartbeats, where language ends and understanding begins, something extraordinary takes root. It is not measured in words exchanged or time spent together. It is felt in the silence that does not need filling, in the glance that says everything, in the presence that makes solitude impossible even when you are alone.</p>
-        <p>I have spent years watching connections form between beings who share no common tongue. A horse and its handler. Two souls from different species, different worlds, different ways of perceiving reality itself. And yet something passes between them — something real, something tangible, something that defies every attempt to reduce it to mere instinct or conditioning.</p>
-        <p>This bond is not taught. It is discovered. It is not built through repetition alone but through a quality of attention that most of us have forgotten how to give. When you truly see another being — not as a tool, not as a project, not as a reflection of your own needs — something shifts. The walls between self and other become thinner. The illusion of separation wavers. And for a moment, you understand that connection is not something we create. It is something we remember.</p>`
-      },
-      {
-        title: "The Unyielding March",
-        text: `<p>Time does not pause. It does not negotiate. It does not look back at what it has crushed or wait for those who have fallen behind. It simply moves forward, indifferent to our readiness, our grief, our desperate attempts to hold onto moments that are already dissolving into memory.</p>
-        <p>I think about this often in the arena. A horse does not waste a single second regretting the stride it just took or worrying about the one ahead. It lives entirely inside the present footfall, the current breath, the immediate sensation of being alive. This is not ignorance. This is wisdom of the deepest kind — a wisdom we traded away when we learned to think about time instead of living inside it.</p>
-        <p>The unyielding march is not cruel. It is simply true. And perhaps the only sane response is to stop marching alongside it as if we were reluctant conscripts and start moving with it as willing participants. To be where we are. To feel what we feel now, not what we felt then or might feel later. The horse already knows this. It is waiting for us to catch up.</p>`
-      },
-      {
-        title: "The Funeral I Attend Every Day",
-        text: `<p>There are losses that announce themselves with ceremony. They come with caskets and condolences, with black clothes and quiet voices, with the ritual acknowledgment that something precious has been taken. And then there are the quiet deaths — the ones no one marks, no one names, no one even notices are happening until the absence has become too large to ignore.</p>
-        <p>I attend these funerals daily. The death of a version of myself I never became. The loss of a possibility I was too afraid to pursue. The quiet burial of a dream I stopped feeding because the world told me it was impractical. These funerals have no flowers. No eulogies. Just the slow, private grief of watching pieces of yourself disappear into the ground of ordinary life.</p>
-        <p>But here is what I have learned: attending the funeral is not the same as being buried. You can stand at the graveside of what might have been and still turn back toward what is. You can mourn without becoming the mourning. The horse that loses its companion does not stop grazing. It grieves, deeply and visibly, and then it continues. Not because it has forgotten, but because life asks to be lived even in the shadow of loss.</p>`
-      },
-      {
-        title: "The Flickering",
-        text: `<p>I sit in my room and it is quiet. A different kind of quiet than I used to know. Not the peaceful quiet of a mind at rest, but the hollow quiet of a room waiting for something that no longer arrives. The walls are the same. The light is the same. But something has changed, and I cannot name it.</p>
-        <p>This is the flickering. The sense that the world is just slightly less solid than it was yesterday. That the edges of things have begun to blur. That the colours are just a shade dimmer than they should be. It is not depression, exactly. It is not sadness in any way I know how to describe. It is more like watching a film where the projector bulb is slowly dying, and no one else in the theatre seems to notice.</p>
-        <p>Horses feel this too. I have seen them stand at the edge of their field, staring at nothing, their bodies present but something behind their eyes gone somewhere else entirely. They do not explain it. They do not need to. They simply live through it, as all creatures must live through the flickering, trusting that the light will hold long enough to find the other side.</p>`
-      },
-      {
-        title: "The Primitive Beneath",
-        text: `<p>If you watch people long enough — really watch them, without the soft filters we usually apply — something unsettling becomes clear. Beneath the manners, beneath the carefully constructed personas, beneath the education and the sophistication and the moral reasoning, there is something older. Something that does not negotiate. Something that wants what it wants with a directness that civilisation has only partially managed to paper over.</p>
-        <p>I do not say this as judgment. The primitive beneath is not evil. It is simply real. It is the part of us that existed before we learned to perform ourselves for others. The part that remembers what it felt like to need something so badly that the need itself became a kind of violence. The part that loves without strategy and hates without justification.</p>
-        <p>Horses live from this place constantly. They do not pretend. They do not soften their needs to make them more palatable. When a horse wants something, it moves toward it. When it fears something, it moves away. There is no calculation, no image management, no careful positioning for social advantage. There is only the raw, honest, sometimes uncomfortable truth of what is actually happening inside. I think this is why we are drawn to them. They remind us of something we lost.</p>`
-      },
-      {
-        title: "Within These Walls",
-        text: `<p>I was flat on the bed. The ceiling familiar, the silence heavy, the hours endless. Outside, the world continued without me — people moving, lives unfolding, the ordinary noise of existence carrying on as if my stillness meant nothing. And in that room, within those walls, I learned something that no teacher had ever taught me.</p>
-        <p>Confinement is not always physical. Sometimes the walls are made of fear. Sometimes they are built from exhaustion, from grief, from the slow accumulation of days that all feel the same. You can be free to move and still be imprisoned. You can have every door open and still be unable to walk through any of them. The worst cages are the ones we cannot see.</p>
-        <p>A horse in a stall experiences this in ways we rarely consider. We see the hay, the water, the shelter. We do not see the absence of horizon, the loss of movement, the slow erosion of something essential that withers when it cannot run. Within these walls, whether made of wood or made of sorrow, the soul contracts. And the only way out is to remember that walls — even the ones we built ourselves — can be dismantled, one brick at a time.</p>`
-      },
-      {
-        title: "I Miss My Writing",
-        text: `<p>I never thought I would say that, but I do. There was a time when words came to me without effort — not always good words, not always words worth keeping, but words nonetheless. They flowed through me like water through an open channel, and I did not question where they came from or whether they would continue. I simply wrote.</p>
-        <p>Then something changed. The channel narrowed. The water slowed. I sat down to write and found nothing waiting for me — just the blank page and the terrible silence of a mind that had forgotten how to speak to itself. I grieved this loss more than I expected to. Writing had been my companion, my confessor, my way of making sense of a world that rarely made sense on its own.</p>
-        <p>What I have learned — slowly, painfully, over many empty mornings — is that writing does not leave. It waits. It is patient in ways I am not. It does not demand consistency or brilliance or even coherence. It only asks that you show up, again and again, even when nothing comes. Especially when nothing comes. Because the showing up is the writing. The words are just the evidence that you were there.</p>`
+    // ═══════════════════════════════════════════════
+    // CINEMATIC MOUNTAIN LANDSCAPE
+    // ═══════════════════════════════════════════════
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    let mouseX = 0.5, mouseY = 0.5;
+    let particles = [];
+    let time = 0;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    document.getElementById('versesHero').addEventListener('mousemove', (e) => {
+      mouseX = e.clientX / window.innerWidth;
+      mouseY = e.clientY / window.innerHeight;
+    });
+
+    // Initialize gold particles
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * 1.4 - 0.2,
+        y: Math.random() * 1.2,
+        size: Math.random() * 1.8 + 0.4,
+        speed: Math.random() * 0.3 + 0.08,
+        opacity: Math.random() * 0.5 + 0.15,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    function generateMountains(layers, baseY, amp, colorBase, colorPeak, offsetX) {
+      const points = [];
+      const steps = 80;
+      for (let i = 0; i <= steps; i++) {
+        const nx = i / steps;
+        const x = nx * W;
+        let y = baseY - amp * (
+          Math.sin(nx * Math.PI * 1.7 + offsetX * 2.1) * 0.6 +
+          Math.sin(nx * Math.PI * 3.4 + offsetX * 1.3) * 0.25 +
+          Math.sin(nx * Math.PI * 5.8 + offsetX * 0.8) * 0.1 +
+          Math.sin(nx * Math.PI * 9.2 + offsetX * 0.5) * 0.05
+        );
+        y += Math.sin(nx * 0.6 + offsetX) * amp * 0.15;
+        y = Math.min(y, baseY);
+        points.push({ x, y });
       }
+      return points;
+    }
+
+    function drawMountains(points, colorBottom, colorTop, alpha) {
+      const grad = ctx.createLinearGradient(0, H * 0.35, 0, H);
+      grad.addColorStop(0, colorTop);
+      grad.addColorStop(1, colorBottom);
+      ctx.fillStyle = grad;
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, H);
+      points.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.lineTo(W, H);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawGoldEdge(points, thickness, alpha) {
+      ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+      ctx.lineWidth = thickness;
+      ctx.shadowColor = `rgba(212,175,55,${alpha * 1.2})`;
+      ctx.shadowBlur = thickness * 4;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    function drawParticles() {
+      particles.forEach(p => {
+        const px = p.x * W;
+        const py = p.y * H + Math.sin(time * p.speed * 0.7 + p.phase) * 12;
+        const alpha = p.opacity * (0.5 + 0.5 * Math.sin(time * 0.04 + p.phase));
+        ctx.fillStyle = `rgba(232,200,74,${alpha})`;
+        ctx.shadowColor = `rgba(232,200,74,${alpha})`;
+        ctx.shadowBlur = 3;
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+    }
+
+    function drawMist(y, height, alpha) {
+      const grad = ctx.createLinearGradient(0, y, 0, y + height);
+      grad.addColorStop(0, `rgba(180,160,210,0)`);
+      grad.addColorStop(0.5, `rgba(180,150,200,${alpha})`);
+      grad.addColorStop(1, `rgba(180,160,210,0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, y, W, height);
+    }
+
+    function drawStars() {
+      const starCount = 80;
+      for (let i = 0; i < starCount; i++) {
+        const sx = (Math.sin(i * 127.1 + 311.7) * 0.5 + 0.5) * W;
+        const sy = (Math.cos(i * 269.5 + 183.3) * 0.5 + 0.5) * H * 0.5;
+        const twinkle = 0.3 + 0.7 * Math.abs(Math.sin(time * 0.015 + i * 2.7));
+        const alpha = twinkle * (0.15 + 0.25 * (1 - sy / (H * 0.5)));
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(sx, sy, 0.4 + twinkle * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function renderMountains() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Sky gradient
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+      skyGrad.addColorStop(0, '#08061a');
+      skyGrad.addColorStop(0.4, '#0c0a24');
+      skyGrad.addColorStop(0.75, '#0e0b20');
+      skyGrad.addColorStop(1, '#060410');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      drawStars();
+
+      const parallaxX = (mouseX - 0.5) * 30;
+
+      // Far mountains
+      const farMountains = generateMountains(3, H * 0.48, H * 0.28, 'rgba(25,18,55,1)', 'rgba(40,28,75,1)', parallaxX * 0.2);
+      drawMountains(farMountains, '#0f0a28', '#1a1040', 0.85);
+      drawGoldEdge(farMountains, 0.8, 0.08);
+
+      // Mid mountains
+      const midMountains = generateMountains(2, H * 0.58, H * 0.34, 'rgba(18,12,42,1)', 'rgba(30,20,65,1)', parallaxX * 0.5 + 1.5);
+      drawMountains(midMountains, '#0c0722', '#140e35', 0.9);
+      drawGoldEdge(midMountains, 1.4, 0.14);
+
+      // Foreground mountains
+      const fgMountains = generateMountains(1, H * 0.72, H * 0.38, 'rgba(10,6,28,1)', 'rgba(20,14,48,1)', parallaxX * 0.9 + 3.2);
+      drawMountains(fgMountains, '#060410', '#0e0828', 0.95);
+      drawGoldEdge(fgMountains, 2.2, 0.22);
+
+      // Mist layers
+      drawMist(H * 0.55, H * 0.18, 0.025 + Math.sin(time * 0.02) * 0.008);
+      drawMist(H * 0.62, H * 0.12, 0.018);
+      drawMist(H * 0.44, H * 0.14, 0.015);
+
+      drawParticles();
+    }
+
+    function animateMountains() {
+      time++;
+      particles.forEach(p => {
+        p.y -= p.speed * 0.08;
+        if (p.y < -0.15) { p.y = 1.1 + Math.random() * 0.15; p.x = Math.random() * 1.4 - 0.2; }
+      });
+      renderMountains();
+      requestAnimationFrame(animateMountains);
+    }
+    animateMountains();
+
+    // ═══════════════════════════════════════════════
+    // ESSAYS DATA
+    // ═══════════════════════════════════════════════
+    const essays = [
+      { icon:'🛏️', label:'Verse I', title:'Within These Walls', tagline:'These four walls do not stay because they care.', text:`<p><span class="rd-dropcap">L</span>et me kill the lie before it breathes.</p><p>These four walls do not stay because they care. They stay because they are built to. Nailed into place. Cemented into obligation. If they had legs, they would have left before the first tear hit the floor. Just like everyone else. Just like every hand that promised <em>I am here</em> and then was not. Walls do not make promises. That is their only honesty. They stand there, mute, cold, indifferent witnesses to a man coming apart in a room nobody remembers exists.</p><p>When the lights go out and the last pale line of day slides off the ceiling and the dark rushes in like floodwater, these walls stop being walls. They become mirrors. Not the kind that show your face. The kind that show your insides. Every thought I have choked down. Every poison I swallowed to keep the peace. Every scream I folded into silence and tucked behind my ribs. They drag it out. They hold it up. They play it back at a volume my skull was never built to hold.</p><p>My heart does not beat in here. It detonates. Every pulse a fist thrown from inside my own chest, knuckles against rib cage, over and over. Not to keep me alive. To punish me for still being alive.</p><p>I am shrinking. Not metaphorically. Physically. My chest has concaved. There is a weight on it that has no mass but has texture — wet, cold, dense, like someone filled my lungs with river mud and left me to breathe through it. Every inhale is a negotiation with a body that has already started the paperwork on giving up.</p><p>The road outside is alive. And it hates me. Not personally. Worse. Indifferently. It screams past this room with its horns and its engines and its people laughing, talking, existing with this disgusting ease, like oxygen is not a luxury, like waking up is not a war.</p><p>Love died here. Not in a fight. Not in a scream. In a whisper. In a bed that still had two dents in the pillow when only one head was left to make them. Love did not walk out. Love evaporated. One molecule at a time.</p><p>And laughter — I remember laughter. I remember the shape of it in my throat, the way it used to climb through my chest and break out of me like something escaping. Now it dies on the vine. Stillborn. A sound that starts and chokes before it reaches air.</p><p>These walls know me the way a coroner knows a body. Not with love. With familiarity. They have studied the geography of my collapse. Mapped every crack without lifting a finger.</p><p>What is left of me is not a person. It is a wound. Open. Wet. Where the skin has not just been broken. It has been removed. Peeled back in strips, slowly, over years, by hands that looked like love, by voices that sounded like safety, until the layer underneath — the one that was never meant to see light — is exposed. And the air finds it. And the cold finds it. And every heartbeat sends a pulse through it that is not a pulse. It is a scream translated into the language of the body.</p><p>I will stay. Not because I am brave. Not because I am waiting. Because the version of me that could leave — that could stand up, open a door, walk into light and survive the exposure — that version died in this room. Quietly. Without ceremony. Without a witness except these walls, who absorbed the sound of it and said nothing.</p><p>Here is the truth that will break your teeth if you bite down on it: I do not know if this is what dying feels like or if this is what being the last living nerve in a dead body feels like.</p><p>And the walls keep closing. Millimeter by millimeter. Patient as grief. Quiet as the moment before the body is found. And one day there will not be enough of me left to feel them touch. And the room will finally be empty. And the walls will stand there. The way they always have. The way they always will. Holding nothing. Remembering everything. Saying nothing.</p>` },
+
+      { icon:'⏳', label:'Verse II', title:'The Unyielding March', tagline:'The harshest lie adulthood ever forces down your throat.', text:`<p><span class="rd-dropcap">T</span>he harshest lie adulthood ever forces down your throat is that you must keep going.</p><p>Not that it gets better. Not that there is a reason. Just — keep going. Like that is an answer. Like that is anything other than a sentence dressed up as advice, handed down by people who have never had to dig their own fingers into the earth just to drag themselves from one hour to the next.</p><p>You wake up and the first thing you feel — before thought, before memory, before the day has a name — is the weight. Not on you. In you. Stitched into the tissue. Grown into the bone. A heaviness so deep it does not feel like something you are carrying anymore. It feels like something you are made of.</p><p>Your eyes are crusted shut. Not with sleep. With the salt of tears you do not remember crying. Your mouth tastes like metal. Like rust. Like you have been chewing on the bars of something all night and your teeth are the only things that have not given up yet.</p><p>But the day does not ask if you are ready. The day does not care.</p><p>You stand in the bathroom and look at the mirror and the mirror looks back and neither of you recognizes the other. The face there — your face — is not a face anymore. It is a mask that forgot it was wearing a man underneath. The eyes are open but they are not looking. They are enduring. Flat. Dull as stones at the bottom of a river that stopped moving years ago.</p><p>And you shave. You shave. You drag a blade across your own throat every morning and the absurdity of it — the ritual maintenance of a body you would vacate in a heartbeat if you knew how — never stops being grotesque. You dress a corpse every morning and walk it into the world and call it coping.</p><p>"I am good." Two words. The most expensive lie in the human language. Every time those syllables leave your mouth, something behind your sternum tears.</p><p>And the hopelessness — God, the hopelessness. It is not an emotion. Emotions pass. This does not pass. This lives. This has roots. It grew into you the way a vine grows into a wall — slowly, patiently, finding every crack, pushing deeper year by year until you cannot remove it without bringing the whole structure down.</p><p>Every step forward feels like wading through tar. Every forced smile is a fresh wound. Every night is a replay of the same empty dark. You beg for sleep. Not rest. Absence. A gap in the tape.</p><p>You wait for the collapse. You wait for it like a mercy. Like a ceasefire. But even that does not come. The body is a traitor. It keeps beating. It keeps breathing. It keeps dragging you forward through days that have no color and no weight and no meaning.</p><p>No one talks about this part. They talk about the fight. They talk about the climb. They talk about warriors and survivors and the phoenix and the ashes. But the truth is that sometimes it does not get better. Sometimes the weight is permanent. Sometimes the dark is structural. Sometimes hope is not late. It is not lost. It is not hiding. It died. Quietly. In a room just like yours.</p><p>There is no light. Not at the end of the tunnel. Not at the bottom of the pit. There is just this — this straight, black, infinite line that you walk because walking is what the body does when the mind has stopped giving it directions.</p><p>Tomorrow will be the same. Not similar. The same. The same weight. The same dark. The same taste of rust and ash. The same hands that shake when no one is looking. The same lie.</p><p>And the march continues. Not because you choose it. Not because you believe in it. Because stopping requires something you no longer have. So you march. Unyielding. Not because you will not yield. Because you already have — completely, totally, down to the last molecule of resistance — and the marching is just what is left when a person has yielded everything and the body still will not stop.</p>` },
+
+      { icon:'🕯️', label:'Verse III', title:'The Funeral I Attend Every Day', tagline:'I felt it before I opened my eyes.', text:`<p><span class="rd-dropcap">I</span> felt it before I opened my eyes.</p><p>Not the morning. Not the light. Not the sound of a world starting up outside. I felt him. The absence of him. The exact weight and temperature of a body that used to be here and is not — pressed into the mattress like a fossil, like the bed remembered what my brain was still trying to kill. And my hand — my stupid, treasonous hand — reached across before I could stop it. Reached into the cold side. Reached into the nothing.</p><p>The pain did not start in my chest. That is the lie. The pain started in my throat. High. Tight. A closing. Like a hand pressing — two fingers against the trachea, steady, patient, pushing everything I had swallowed — every word I did not say, every scream I traded for silence — upward, compacting it into the narrowest passage in my body. It felt exactly like swallowing broken glass. I could feel the edges. I could feel the angles dragging against the soft tissue, not cutting clean but tearing.</p><p>And then I got up. Because that is what the living do. That is the obscenity of it. The glass in the throat. The blade in the ribs. The fossil in the bed. And you get up. You put your feet on a cold floor and you stand in a body that has been gutted and you walk to a mirror and you look at a face that should be destroyed — that should be visibly, unmistakably ruined — and it is not. It looks normal.</p><p>Seeing him with someone else is not jealousy. I need to kill that word before it cheapens what this is. This is autopsy. This is me standing upright, walking, breathing, performing the full pantomime of a functional human being while something inside me is being opened. Methodically. Clinically. Every organ examined under a light I did not consent to. And the examiner is the sight of them together.</p><p>I was the rehearsal. The draft. The practice run. The body he used to map his own desire. Every gentle thing he learned — every soft word, every moment of tenderness that almost passed for love — he learned it on me. Through me. My patience was his classroom. My devotion was his textbook. My body was the lab where he practiced being close to another man until he got good enough to be close to the right one.</p><p>I keep telling myself to let go. I say it like a prayer. But my brain — my stupid, loyal, devastated brain — looks at me with the eyes of a dog that has been told to leave the only person who ever touched it with something other than force. It cannot. The wiring will not allow it.</p><p>It hurts because I wanted him. Not the shadow. Not the potential. Him. The real, flawed, incomplete, terrified him. I wanted to be the place where that man was brave enough to stop running.</p><p>But maybe this fire is not here to destroy me. Maybe it is burning away the lie I called love. The desperate, starving, half-blind lie that said <em>this is enough</em> when it was not. I am done on my knees. I am grieving. Not him. The dream of him. The version I built from scraps of his best moments. That version was beautiful. And he was mine. And he never existed.</p><p>Let it hurt. Let it scream through every nerve. Let it empty. Every drop. One day I will read this again and feel relief instead of fire.</p>` },
+
+      { icon:'💔', label:'Verse IV', title:'It Hurts', tagline:'It hurts in a way that makes my body feel unsafe.', text:`<p><span class="rd-dropcap">I</span>t hurts in a way that makes my body feel unsafe.</p><p>Not just sad. Unsafe. My chest feels tight like something is sitting on it. My hands go cold. My stomach twists like it is bracing for bad news that already happened. I cannot eat. I cannot sleep. I cannot focus on anything for more than a few seconds before your face appears next to hers. And the image will not leave.</p><p>Seeing you with someone else feels like being erased while still alive. Like watching myself become irrelevant in real time. Like I was something temporary — a placeholder you kept warm until something better arrived. Was I that easy to replace? Was I that forgettable?</p><p>It hurts because I remember the way you looked at me. And now I see that same look given to someone else. Do you know what that does to a sensitive heart? It makes it question its own memory. It makes it doubt its own reality.</p><p>You were comfortable. I was committed. You were exploring. I was investing. You were passing time. I was building a future in my head.</p><p>I feel betrayed — not because you owed me something officially, but because you made me feel chosen. You made me feel safe. And now my body does not know how to unlearn that.</p><p>It hurts in a humiliating way. In a shrinking way. In a way that makes me want to disappear. And still — I do not hate you. That is the cruel part. I do not want revenge. I just want this ache to stop.</p><p>Your presence makes me feel small because I can sense the imbalance. I cared more. I felt deeper. I stayed longer in the emotional space than you ever intended to.</p><p>I am grieving the version of you that only existed in the way I hoped. The softness I felt around you. The way my heart slowed when you were near. The future I imagined without even meaning to.</p><p>And the hardest part? I still want you sometimes. Even knowing you are not right for me. Even knowing you cannot meet me where I stand. My heart has not caught up to my mind.</p><p>So I burn. Quietly. Privately. Trying to convince myself that someone who makes me feel this small cannot possibly be the love I deserve.</p><p>Maybe this pain is not punishment. Maybe it is withdrawal. From the hope. From the illusion. From the attachment to someone who was never fully mine. It hurts because I loved sincerely. And sincerity feels stupid when it is not returned. But one day this same depth will be met. And this ache will just be proof that I am capable of loving in a way that is real.</p><p>For now, though — it hurts. And I am tired of pretending it does not.</p>` },
+
+      { icon:'💫', label:'Verse V', title:'The Flickering', tagline:'I sit in my room and it is quiet. Not the good quiet.', text:`<p><span class="rd-dropcap">I</span> sit in my room and it is quiet.</p><p>Not the good quiet. Not the kind that rests you. The kind that empties — that pulls everything out of the air until what is left is not silence but a vacuum. And I am remembering. Not because I chose to. The remembering starts on its own, like a machine I cannot reach, housed behind a wall I cannot access.</p><p>It starts like broken film. Flickering. Stuttering. Frames out of order — a face, a room, a sentence that left my mouth years ago and has been living in my body ever since, curled up behind my stomach like a parasite.</p><p>And the embarrassment does not creep. It breaks. Like a wave. My face flushes. My ears burn. My hands go to my head — fingers in hair, palms over eyes, the body trying to physically block the image. It does not work. It has never worked.</p><p>I see myself trying too hard. Smiling too much — the smile that is not a smile, the smile that is a shield. Agreeing when I wanted to disagree. Making myself available when I was already empty. Laughing a little louder so I would be liked. Shrinking a little smaller so I would fit.</p><p>I was not being kind. I was bargaining for acceptance with the only currency I had: myself. And the exchange rate was always the same — a piece of me for a moment of inclusion.</p><p>They do not remember those moments. Why would they? The moments were nothing. A conversation at a party. A text exchange. A Tuesday. But I remember. I remember every single one. And they live in me like shrapnel — too small to see, too deep to remove.</p><p>I gave so much value to others. My time. My energy. My softness. My presence. And somewhere in the giving, I forgot to keep some for myself. I forgot that I needed my own approval. My own loyalty. My own protection.</p><p>What breaks me is not the past. The past is done. What breaks me is the way I keep punishing myself for surviving it. Because that is what it was. Survival. Every smile that was too wide — survival. Every agreement that betrayed my truth — survival. Every time I shrank — survival. The organism doing what it does when it perceives threat: adapt, minimize, become whatever the environment requires.</p><p>And sometimes I wish I could go back. Not to change it. To hold him. The younger version of me. To take his face in my hands and say: <em>You were just trying to be loved. You did not know it was supposed to be free. You did not know love was not supposed to cost you your own shape. You did not deserve this cruelty. Not from them. Not from the world. And not — especially not — from yourself.</em></p>` },
+
+      { icon:'🔇', label:'Verse VI', title:'I Hate My Voice', tagline:'I hate my voice. I hate it so much I can feel the hate squeezing my throat shut.', text:`<p><span class="rd-dropcap">I</span> hate my voice. I hate it. I hate it so much I can feel the hate squeezing my throat shut before I even try to speak.</p><p>I type one word and I already want to smash my fingers for letting it happen. I said something. Wrong. Stupid. Too much. Not enough. Needy. Desperate. Weak. Pathetic. Broken. I said something and now I am disgusting.</p><p>I have to fix it. I have to explain. I have to prove I am not the worthless thing the words just proved I am. I have to apologize for existing. For thinking. For daring to think my thoughts could be worth hearing.</p><p>And explaining makes it worse. Every "no, I meant" is me admitting I am too stupid to say anything right. Every clarification is another confession that I am defective. Every apology is me carving another piece off whatever dignity I pretended I still had.</p><p>So I choke it. I swallow it. I bury it in the inbox where it cannot hurt anyone except me. And then I hate myself for being a coward. For being too weak to speak. For being too weak to stay silent. For being too weak to do anything except hate the thing rotting inside my chest.</p><p>I am disgusting for wanting to be heard. I am disgusting for thinking my words could matter. I am disgusting for still trying. I am disgusting for stopping. I am disgusting for existing in a way that requires words or silence or any evidence at all.</p><p>I stay quiet because silence is the only thing that does not prove how worthless I am. But the quiet is killing me. It is thick with everything I am too pathetic to say. It is rotting me from the inside while I pretend it is safety.</p><p>I hate myself for the silence. I hate myself for the words that never make it out. I hate myself for the words that do. I hate myself for breathing too loud. I hate myself for existing.</p><p>And the hate is the only thing that feels honest anymore. So I keep the knife pressed to my own throat. And I stay quiet. Because at least when I am silent, I am only killing myself slowly — not splattering the mess on someone else.</p><p>And even that feels like too much to ask forgiveness for.</p>` },
+
+      { icon:'🎭', label:'Verse VII', title:'The Primitive Beneath', tagline:'If you watch people long enough, something unsettling reveals itself.', text:`<p><span class="rd-dropcap">I</span>f you watch people long enough — truly watch them, without the soft filters — something quietly unsettling reveals itself. Much of what we call morality, loyalty, even love, rests on top of something far older and far more primitive.</p><p>Underneath the language, humans are still animals negotiating survival. We are simply very articulate animals.</p><p>People are kind when kindness costs them little. People are loyal while loyalty still benefits them. People stay close as long as the relationship continues to feed something they need — security, admiration, companionship, identity. The moment the cost rises too high, the mind begins its quiet calculations. It is not evil. It is adaptation.</p><p>Betrayal stops feeling shocking once you see this clearly. It begins to feel inevitable. Not because everyone is malicious, but because everyone is fragile. Everyone has limits to how much discomfort they will carry for someone else. Everyone has a threshold.</p><p>We like to believe love is powerful enough to override self-interest, but biology disagrees. Our nervous systems are constantly moving us toward safety and away from prolonged suffering. That instinct quietly reshapes relationships over time.</p><p>Human connection is real, but it is also temporary. Not always short-lived, but always vulnerable to time, circumstance, and the unpredictable evolution of two separate minds.</p><p>And yet — despite knowing this — humans continue building relationships again and again. This is the paradox. We are intelligent enough to recognize how fragile connection is, but emotionally wired to seek it anyway. The loneliness of isolation is simply too heavy for most people to carry for long.</p><p>So we try again. We trust again. We tell ourselves new stories about permanence even after watching permanence collapse many times before.</p><p>From a purely rational perspective, this behavior is almost absurd. But from a human perspective, it might be the most courageous thing we do. Because beneath the psychology and biology there is another truth quietly operating: the desire to be known. Not admired. Not envied. Just known.</p><p>That experience is rare enough that people chase it their entire lives. And when they lose it, the grief feels enormous not only because the person is gone, but because a witness to their inner world has disappeared with them.</p><p>In the end, the brutal truth about humans is that we are temporary beings trying to create permanent meaning with other temporary beings. And somehow — against logic, against probability, against the slow erosion of time — we keep trying anyway. Because the brief moments when it does feel real are powerful enough to make the entire risk seem worth taking.</p>` },
+
+      { icon:'🔥', label:'Verse VIII', title:'To the One I Loved Into Becoming', tagline:'You never saw me clearly. I need to say that first.', text:`<p><span class="rd-dropcap">Y</span>ou never saw me clearly.</p><p>I need to say that first. Before the grace. Before the letting go. You saw flashes — the parts of me that caught light at the right angle. You saw what I could do for you. You never saw what I was doing to myself to do it.</p><p>I was never here to compete with you. I was here to believe in you louder than you believed in yourself. And maybe that felt like pressure. Maybe that felt like danger. Maybe it felt like love, but you did not know what to do with it.</p><p>You received love — real, full, terrifying, complete love — and you did not know where to put it. You had nowhere to set it down. No room in the house that could hold it. So you set it down outside. And walked back in. And closed the door.</p><p>You do not owe me clarity. You cannot explain what you do not understand. And you do not understand yourself — not the real self, the one below the performance. I cannot keep asking a man to explain his own depths when he has never visited them.</p><p>But I owe myself freedom. Not the freedom from you. Freedom from who I was when I loved you. From the man who shrank. Who folded. Who translated his own needs into smaller and smaller words until the words disappeared.</p><p>So I leave nothing behind. Not anger. Not blame. Except one thing — the hope that you will grow. Not for me. That door is shut. But for you. The hope that someday you will stop running from your own depth. That you will jump. And the water will be cold. And I will not be there to see it. But you will know.</p><p>And if one day you see me from afar — whole, complete, shining like the self I kept putting off for you — just know: I finally loved myself the way I once loved you. And it is not smaller. It is the same love. The same depth. The same terrifying, beautiful willingness to believe in something unfinished and stay. The only difference is direction. I pointed it at you and it passed through. I pointed it at me and it landed.</p><p>I am done being someone else's light. I am my own.</p>` },
+
+      { icon:'✦', label:'Verse IX', title:'To You, the One I\'ll Recognize by the Silence Between Us', tagline:'I do not know your name yet. But I feel the space where you will fit.', text:`<p><span class="rd-dropcap">I</span> do not know your name yet. I have not heard your laugh. I do not know what your hands look like or whether they move when you talk. I do not know what your silence sounds like — and that is the thing I want most. Not your words. Your silence.</p><p>I feel the space where you will fit. Not a hole. A clearing. Like a place in a forest where something burned and the ground is still dark but the soil is richer than anything the untouched trees could ever grow from. The fire left something. Fertility.</p><p>I will not ask you to save me. I have walked too far on my own to need a rescuer. I have lain on floors with my face down and my arms out and my chest so empty it echoed. And I got up. I built ground. Solid. Mine. Ground that holds whether I am alone on it or not.</p><p>But I will let you walk beside me. Close enough that our shoulders almost touch. Close enough that when the road gets dark, you feel me there. Not pulling. Not pushing. Just there. A hand near yours — palm open, fingers loose.</p><p>I will not demand much. Just your truth. The version of you that exists at three in the morning when the mask is off. Your voice when I have gone too quiet. Your steady eyes when I am chasing impossible dreams. And your softness, when the world forgets I am still healing.</p><p>I want to laugh with you like we are the only ones in the world. The private kind. The kind that starts from nothing and builds until your stomach hurts and your eyes water. I want to sit in silence with you without discomfort. I want to build something invisible — something that lives entirely in the space between us.</p><p>I am not in a hurry anymore. I have been in a hurry my whole life. The hurry was the thing that made me accept almost. I am ready now. And ready is different from hurried. Ready is a door that is open because the house is clean, not because the house is on fire.</p><p>Until then, I will keep growing in my own name. Taller. Deeper. Wider. I will put down roots so deep that the next storm hits a man who sways instead of breaks.</p><p>And when we meet — when the accident happens, when two men who have walked through different darks end up standing in the same room — I will recognize you. Not by your face. By the silence. By the quality of your stillness. By the way you look at me like a man who has been walking for a very long time and has just seen, in the distance, another clearing. <em>There you are. I have been building toward you without knowing your name.</em></p>` },
+
+      { icon:'🩸', label:'Verse X', title:'The Knife', tagline:'I was flat on the bed like roadkill baking in the sun.', text:`<p><span class="rd-dropcap">I</span> was flat on the bed like roadkill baking in the sun. Arms and legs dead weight from battles I lost years ago — a lifetime of almosts and not-enoughs crushing down until I could not even hate myself loud anymore. The dark did not creep in. It slammed behind my eyes like a pit ripping open right in my skull, dragging me under with a pull so hungry it felt personal.</p><p>Not nothing at all. A giant, starving hole of black bone, where a river of sticky tar and flames boiled over, full of the raw howls from mountains set on fire. The scream I swallowed back in childhood — the one that said <em>you are alone and you will always be</em> — echoed in that pit.</p><p>The dark was already rooted deep, like thorny weeds twisting through my chest. Rough ropes thick with rotten juice, choking my lungs like a noose braided from strips of my own ripped skin. Air hit my throat like choking dust. I locked up stiff, breath caught like I was betting my life on it.</p><p>Then it started. That fire in the bones. Not an itch. A bomb. Total wrecking ball to the gut. Despair floods in, not quiet but a tidal wave of <em>why bother</em>. Every hope buried rises like bile. The weight of surviving too long presses down until your ribs creak. And all you want is release. Real and final.</p><p>The knife. Just a plain hunk of steel, sharp as a lie, born from some junkyard where hurt gets ground down to edges that promise peace in the pain. I needed it pressed cold against the flat bone over my heart — that hard shield hiding the bloody mess where everything beats wrong.</p><p>Shove it in. No mercy. The skin does not just split — it shreds, a ragged zipper sound like tearing wet cloth. The blood hits hot and slick, bubbling out in fat drops that sting the raw flaps like salt in a paper cut. Your gut twists hard. Acid spit floods your mouth, bitter and yellow, forcing you to swallow it back or choke on the burn.</p><p>Deeper now. The blade hits muscle and it is no clean slice. It is a chew, fibers bunching and resisting like tough gristle you have to saw through. The bone does not yield easy. The tip grinds in circles until it finds the weak spot — a high-pitched scrape that sets your teeth on edge, then the give: a deep, meaty pop that sends bone dust flying inward.</p><p>The knife sits there, heavy as a full stomach, wedged in the wreck of me like it belongs. The pain throbs around it like a second heartbeat. And I — gutted, quiet — stare up at the ceiling cracks, mouth twisted in a grin that is all teeth and no light, chest bubbling faintly with each ragged inhale. The dark curls up next to me like an old dog, belly full, finally shut up.</p><p>Relief? No. It is the real deal: carving out the rot so what is left can breathe, even if it is just for a minute in the blood. The hurt hanging on like a bad hangover you earned. I know it will wake hungry again.</p>` },
+
+      { icon:'🤝', label:'Verse XI', title:'A Bond Beyond Words', tagline:'I did not find them. I was found.', text:`<p><span class="rd-dropcap">I</span> did not find them. I want to be clear about that.</p><p>I did not go looking. I did not read a book about healing. I was found. By something that does not speak. By something that has no interest in my performance, no use for my masks, no capacity to be impressed or disappointed or charmed. And that total, non-negotiable absence of everything I had spent my life calibrating myself to provide — that was what saved me.</p><p>The first time I stood next to a horse, I did not ride. I did not lead. I just stood. In a field. Next to a body so much larger than mine that the scale alone should have terrified me. It did not.</p><p>And the absence of fear was so foreign I almost mistook it for numbness. Fear had been my operating system. Fear powered every smile, every nod, every performance of adequacy. I knew fear the way other people know their own names.</p><p>This animal triggered none of it. Instead, something in my chest released. Not relaxed. Released. Like a fist clenched so long the fingers had fused, suddenly pried open. Beneath that fist was simply a heartbeat. My heartbeat. Raw. Unarmored. Doing what it was built to do before the world taught it to do everything else.</p><p>And the horse heard it. It turned its head. It looked at me. And the eyes — God, the eyes. Not human eyes with their layers of agenda, their constant calculation. These eyes were flat. Not empty. Flat. Like still water over something so deep the bottom does not matter. They carried no judgment. No evaluation. No condition. <em>You are here.</em> That was all. Not <em>you are good.</em> Not <em>you are enough.</em> Just the ancient, devastating acknowledgment of presence.</p><p>And I breathed. The breath went deep — past the chest, past the stomach, into the belly, into the ground through my feet. It was the breath of a body remembering it was allowed to take up space. Allowed to expand without apology. The horse breathed with me. Its massive ribcage rose and fell, the exhale warm against my arm. No transaction. No condition. Just breath, offered involuntarily, without strategy.</p><p>They teach me patience — the animal kind. The kind that does not know it is patience because it has never known impatience. They show me that love is not rushed. Not forced. Trust is not requested or performed into existence. It is earned in the smallest increments — by being safe, predictable, present. By finally stopping the shapeshifting and offering the same man every single time.</p><p>And when the horse finally approaches — when the muzzle touches my chest or my open palm after days of waiting — the feeling is not triumph. It is grief. Because I realize this is what closeness was always supposed to feel like when it is not bought. This is what trust feels like when it is given freely by a being that cannot lie. The grief is for every counterfeit I once accepted as love.</p><p>In their eyes I see a reflection unlike any human mirror. They see beneath the performance. They read my nervous system, my state, the raw signal I cannot fake. When I arrive carrying the old software of effort and trying, they simply increase the distance. Calmly. Factually. <em>That is not you. Come back when it is you.</em> When I arrive stripped — honest, unmasked, tired — they come closer. Every single time. The lesson is brutal in its simplicity: The thing you were hiding was the thing that was safe. The thing you were performing was the thing that drove them away. You had it backwards your entire life.</p><p>In their quiet strength I learn to stand at my full height without bracing. The horse does not apologize for its thousand pounds. It stands full size on the earth, and the earth holds it without complaint. Standing beside that unapologetic presence, the message travels through my body: <em>You can stand like this. You can take up this much space. And the ground will hold.</em></p><p>We walk together. Side by side. My steps falling into rhythm with theirs — not by force, but by release. For a few holy minutes I am simply a body moving with another body across a planet that holds us both. The weight I carry does not disappear. But it is shared now. Distributed across four legs and two.</p><p>They do not save you. That is not what they do. They stand in a field and breathe and wait and do not lie. You stand next to them and breathe and wait, and slowly, shedding every mask you ever built, you learn that the raw, quiet, unperformed version of you is the one a thousand-pound animal trusts enough to stand beside. And if that version is enough for something that cannot be fooled, then maybe it was always enough. For everything. For everyone. The only one who did not know was you.</p><p>I return every day. Not because I am healed. Some mornings the old shame still rises and I arrive clenched, braced, performing again. On those mornings the horse knows before I do. It does not approach. It does not retreat. It waits. With the patience of seasons. Without investment in how long it takes me to arrive at myself.</p><p>And in the presence of a being whose state does not shift according to mine, something in my nervous system uncouples. The old survival wire goes slack. My body rests. Shoulders drop. Jaw softens. Breath finds the belly.</p><p>No threat detected. No performance required. Stand down.</p><p>This is what they gave me. Not a cure. Not a shiny redemption arc. They gave me ground that holds without condition. Breath that fills the whole body. Silence that does not demand to be filled. They gave me back myself — the original one, the one I buried under masks and performances and too-wide smiles.</p><p>I walk now with the rhythm of the earth. Not always perfectly. But I go back to the field. I stand next to a being with no gap between what it feels and what it is — a living tuning fork of truth. My body hears it. Matches it. And for a while, I am not fragmented. I am not performing. I am simply here. One man. One horse. One field. One silence.</p><p>And it is enough. The real enough. The kind a thousand-pound animal confirms with every quiet step toward me. The kind the earth confirms every time it holds my full weight. The way a heartbeat is enough — because it continues, honest and steady, saying the only thing that has ever truly mattered: <em>Still here. Still here. Still here.</em></p>` }
     ];
 
-    // ── CUBE CLICK → OPEN READER ──
+    // ═══════════════════════════════════════════════
+    // READER LOGIC
+    // ═══════════════════════════════════════════════
     const overlay = document.getElementById('essayOverlay');
-    const readerTitle = document.getElementById('essayReaderTitle');
-    const readerText = document.getElementById('essayReaderText');
-    const closeBtn = document.getElementById('essayClose');
+    const readerDiv = document.getElementById('essayReader');
+    const rdContent = document.getElementById('rdContent');
+    const rdClose = document.getElementById('rdClose');
 
+    function buildReaderHTML(essay) {
+      return `
+        <div class="rd-title-block">
+          <div class="rd-ornament"><div class="rd-oln"></div><div class="rd-gem"></div><div class="rd-oln rd-oln-r"></div></div>
+          <span class="rd-label">${essay.label}</span>
+          <h2 class="rd-title">${essay.title}</h2>
+          <p class="rd-tagline">${essay.tagline}</p>
+        </div>
+        <div class="rd-text-block"><div class="rd-text-body">${essay.text}</div></div>
+        <div class="rd-ornament" style="margin-top:1.5rem;"><div class="rd-oln"></div><div class="rd-gem"></div><div class="rd-oln rd-oln-r"></div></div>
+        <div class="rd-end-block">
+          <div class="rd-end-label">End of Verse</div>
+          <div class="rd-end-byline">The Horseman's Journal · Praveen Kumar</div>
+        </div>
+      `;
+    }
+
+    function openEssay(idx) {
+      const essay = essays[idx];
+      rdContent.innerHTML = buildReaderHTML(essay);
+      overlay.classList.add('open');
+      readerDiv.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEssay() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    rdClose.addEventListener('click', closeEssay);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeEssay();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeEssay();
+    });
+
+    // ═══════════════════════════════════════════════
+    // CUBE CLICKS & SCROLL REVEAL
+    // ═══════════════════════════════════════════════
     document.querySelectorAll('.cube-wrap').forEach(cube => {
       cube.addEventListener('click', () => {
         const idx = parseInt(cube.dataset.essay);
-        const essay = essays[idx];
-        readerTitle.textContent = essay.title;
-        readerText.innerHTML = essay.text;
-        overlay.classList.add('open');
+        openEssay(idx);
       });
     });
 
-    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) overlay.classList.remove('open');
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && overlay.classList.contains('open')) {
-        overlay.classList.remove('open');
-      }
-    });
-
-    // ── SCROLL REVEAL ──
-    const cubeWraps = document.querySelectorAll('.cube-wrap');
     const cubeObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
           cubeObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    cubeWraps.forEach(c => cubeObserver.observe(c));
+
+    document.querySelectorAll('.cube-wrap').forEach(c => cubeObserver.observe(c));
   </script>
 
 </body>
