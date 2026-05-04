@@ -325,7 +325,6 @@ body {
   isolation: isolate;
 }
 
-/* deep scene background layers */
 .about-bg-layer {
   position: absolute;
   inset: 0;
@@ -349,7 +348,6 @@ body {
   background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
 }
 
-/* floating runes / particles */
 .about-particles {
   position: absolute;
   inset: 0;
@@ -364,7 +362,6 @@ body {
   user-select: none;
 }
 
-/* main layout */
 .about-inner {
   position: relative;
   z-index: 2;
@@ -378,7 +375,6 @@ body {
   width: 100%;
 }
 
-/* Left: portrait + floating badges */
 .about-portrait-col {
   position: relative;
   display: flex;
@@ -489,7 +485,6 @@ body {
   text-transform: uppercase;
 }
 
-/* floating badge chips */
 .about-badge {
   position: absolute;
   background: rgba(10, 8, 4, 0.88);
@@ -508,7 +503,6 @@ body {
 .about-badge-2 { bottom: 30px; left: -40px; animation: badgeFloat 7s ease-in-out infinite 1.5s; }
 .about-badge-3 { bottom: -14px; right: -20px; animation: badgeFloat 5.5s ease-in-out infinite 0.8s; }
 
-/* Right: text content */
 .about-text-col {
   position: relative;
 }
@@ -609,7 +603,6 @@ body {
 }
 .about-cta a:hover { letter-spacing: 3.5px; border-color: var(--gold); }
 
-/* animated in state */
 .about-inner.revealed .about-eyebrow,
 .about-inner.revealed .about-title,
 .about-inner.revealed .about-subtitle,
@@ -684,7 +677,6 @@ body {
   letter-spacing: 1px;
 }
 
-/* 3D card grid */
 .companions-grid {
   max-width: 1200px;
   margin: 0 auto;
@@ -745,7 +737,6 @@ body {
 }
 .companion-card:hover .companion-card-inner::before { opacity: 1; }
 
-/* glow orb behind each card */
 .companion-card-glow {
   position: absolute;
   width: 180px;
@@ -828,7 +819,6 @@ body {
 }
 .companion-card:hover .companion-years-bar::after { left: 0; }
 
-/* "View All" footer link */
 .companions-footer {
   text-align: center;
   margin-top: 4rem;
@@ -859,7 +849,7 @@ body {
 }
 
 /* ============================================
-   EXPLORE SECTION (kept)
+   EXPLORE SECTION
    ============================================ */
 .explore {
   position: relative;
@@ -952,7 +942,9 @@ body {
   border-color: rgba(180, 100, 255, 0.2);
 }
 
-/* Animations */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes twinkle {
   0%, 100% { opacity: 0.2; transform: scale(0.8); }
   50% { opacity: 1; transform: scale(1.15); }
@@ -993,7 +985,9 @@ body {
   100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 
-/* Responsive */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 980px) {
   .links { display: none; }
   .about-inner { grid-template-columns: 1fr; gap: 3rem; }
