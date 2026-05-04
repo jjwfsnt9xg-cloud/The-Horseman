@@ -3,86 +3,883 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Horseman's Journal</title>
-  <link rel="stylesheet" href="css/hero.css" />
+  <title>The Horseman's Journal | Awakening · Chronicles · Companions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000000;
+      color: rgba(240, 230, 200, 0.85);
+      font-family: 'EB Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* Floating Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb1 {
+      width: 60vw;
+      height: 60vw;
+      top: -20vh;
+      right: -10vw;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.12), transparent);
+    }
+    .orb2 {
+      width: 40vw;
+      height: 40vw;
+      bottom: -10vh;
+      left: -15vw;
+      background: radial-gradient(circle, rgba(100, 40, 0, 0.1), transparent);
+    }
+    .orb3 {
+      width: 35vw;
+      height: 35vw;
+      top: 40vh;
+      left: 25vw;
+      background: radial-gradient(circle, rgba(50, 20, 80, 0.08), transparent);
+    }
+
+    /* ----- 3D LUXURY NAVIGATION BAR ----- */
+    .navbar-wrapper {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      right: 25px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      perspective: 1200px;
+    }
+    .scene {
+      width: 100%;
+      max-width: 1400px;
+      transform-style: preserve-3d;
+    }
+    .nav3d {
+      position: relative;
+      width: 100%;
+      height: 75px;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) translateZ(0);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .nav3d:hover {
+      transform: rotateX(3deg) translateZ(18px);
+    }
+    .nav3d .face {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+    .face-back {
+      background: rgba(0, 0, 0, 0.96);
+      transform: translateZ(-14px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+    .face-bottom-wall {
+      background: rgba(0, 0, 0, 0.92);
+      transform: translateY(10px) translateZ(-10px) rotateX(-10deg);
+      height: 24px;
+      bottom: -12px;
+      top: auto;
+    }
+    .face-left-wall {
+      background: rgba(0, 0, 0, 0.92);
+      transform: translateX(-10px) translateZ(-10px) rotateY(10deg);
+      width: 24px;
+      right: auto;
+    }
+    .face-right-wall {
+      background: rgba(0, 0, 0, 0.92);
+      transform: translateX(10px) translateZ(-10px) rotateY(-10deg);
+      width: 24px;
+      left: auto;
+    }
+    .face-top {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.06));
+      transform: translateZ(-5px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    }
+    .nav-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 75px;
+      background: rgba(8, 6, 2, 0.92);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #E8C84A;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+    .brand small {
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      color: rgba(212, 175, 55, 0.55);
+      margin-left: 10px;
+    }
+    .links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .links li a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: rgba(232, 200, 120, 0.65);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      padding: 8px 0;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .links li a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #E8C84A, transparent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    .links li a:hover::before,
+    .links li a.active::before {
+      width: 70%;
+    }
+    .links li a:hover,
+    .links li a.active {
+      color: #E8C84A;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 650px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-bg-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-bg-canvas video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.7) 100%);
+      z-index: 1;
+    }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+      z-index: 2;
+    }
+    .hero-3d-wrap {
+      position: relative;
+      z-index: 10;
+      width: min(1000px, 92vw);
+      transform-style: preserve-3d;
+      transition: transform 200ms ease-out;
+    }
+    .hero-content {
+      text-align: center;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 24px;
+      backdrop-filter: blur(4px);
+      background: linear-gradient(170deg, rgba(20, 14, 9, 0.5), rgba(7, 6, 5, 0.2));
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), inset 0 0 24px rgba(212, 175, 55, 0.08);
+    }
+    .hero-pre {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 7px;
+      color: rgba(212, 175, 55, 0.7);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.3rem, 6vw, 5.1rem);
+      line-height: 1.05;
+      color: #f5e6b0;
+      text-shadow: 0 0 38px rgba(212, 175, 55, 0.23);
+      margin: 0;
+    }
+    .gold {
+      color: #E8C84A;
+      text-shadow: 0 0 26px rgba(212, 175, 55, 0.45);
+    }
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem auto;
+    }
+    .dline {
+      width: 90px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5));
+    }
+    .dline.r {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.5), transparent);
+    }
+    .dgem {
+      width: 8px;
+      height: 8px;
+      transform: rotate(45deg);
+      background: #E8C84A;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+    }
+    .hero-tagline {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      color: rgba(240, 230, 200, 0.85);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-primary, .cta-secondary {
+      font-family: 'Cinzel', serif;
+      border: none;
+      cursor: pointer;
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 40px;
+      padding: 0.9rem 1.8rem;
+      transition: all 0.3s ease;
+    }
+    .cta-primary {
+      color: #1a1405;
+      background: linear-gradient(135deg, #E8C84A, #b88915);
+      box-shadow: 0 10px 24px rgba(212, 175, 55, 0.3);
+    }
+    .cta-secondary {
+      color: #E8C84A;
+      border: 1px solid rgba(212, 175, 55, 0.42);
+      background: rgba(0, 0, 0, 0.35);
+    }
+    .cta-primary:hover, .cta-secondary:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.05);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
+    }
+    .scroll-mouse {
+      width: 26px;
+      height: 42px;
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
+      border-radius: 20px;
+      margin: 0 auto 0.5rem;
+      position: relative;
+    }
+    .scroll-mouse::after {
+      content: "";
+      width: 4px;
+      height: 8px;
+      border-radius: 2px;
+      background: #E8C84A;
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      animation: scrollDot 1.5s ease-in-out infinite;
+    }
+    .scroll-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.6);
+    }
+    @keyframes scrollDot {
+      0%, 100% { opacity: 0.3; top: 8px; }
+      50% { opacity: 1; top: 20px; }
+    }
+
+    /* ----- ABOUT ME SECTION ----- */
+    .about {
+      position: relative;
+      min-height: 100vh;
+      padding: 8rem 2rem;
+      background: #000000;
+      overflow: hidden;
+    }
+    .about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(212, 175, 55, 0.04), transparent 60%);
+      pointer-events: none;
+    }
+    .about-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .about-portrait-col {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .about-portrait-scene {
+      width: 340px;
+      height: 420px;
+      transform-style: preserve-3d;
+    }
+    .about-portrait-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, rgba(30, 22, 10, 0.9), rgba(10, 8, 4, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(212, 175, 55, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .about-avatar-ring {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #E8C84A, rgba(212, 175, 55, 0.2), #E8C84A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .about-avatar-inner {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #2a1f0a, #0a0702);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .about-name-badge h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: #E8C84A;
+      margin-bottom: 0.3rem;
+    }
+    .about-name-badge span {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.5);
+      text-transform: uppercase;
+    }
+    .about-stats-row {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .about-stat strong {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.8rem;
+      color: #E8C84A;
+      display: block;
+    }
+    .about-stat small {
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      color: rgba(240, 230, 200, 0.45);
+    }
+    .about-text-col .about-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 6px;
+      color: rgba(212, 175, 55, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .about-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: #f5e6b0;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .about-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      color: rgba(212, 175, 55, 0.6);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    .about-body {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(240, 230, 200, 0.8);
+      margin-bottom: 1.5rem;
+    }
+    .about-body p {
+      margin-bottom: 1rem;
+    }
+    .about-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .about-dline {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.3), transparent);
+    }
+    .about-dgem {
+      width: 6px;
+      height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+    }
+    .about-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(212, 175, 55, 0.7);
+      border-left: 2px solid rgba(212, 175, 55, 0.3);
+      padding-left: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .about-cta a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: #E8C84A;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+      padding-bottom: 4px;
+      transition: all 0.3s;
+    }
+    .about-cta a:hover {
+      letter-spacing: 4px;
+      border-color: #E8C84A;
+    }
+
+    /* ----- COMPANIONS SECTION ----- */
+    .companions {
+      position: relative;
+      background: #000000;
+      padding: 6rem 2rem 8rem;
+      overflow: hidden;
+    }
+    .companions::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.05), transparent 60%);
+    }
+    .companions-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .companions-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 6px;
+      color: rgba(212, 175, 55, 0.45);
+      text-transform: uppercase;
+    }
+    .companions-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: #E8C84A;
+      margin: 0.5rem 0;
+    }
+    .companions-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: rgba(240, 230, 200, 0.5);
+      font-style: italic;
+    }
+    .companions-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+    .companion-card {
+      background: linear-gradient(160deg, rgba(25, 18, 8, 0.9), rgba(10, 7, 2, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .companion-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .companion-card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(212, 175, 55, 0.45);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.1);
+    }
+    .companion-emblem {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .companion-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.3);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .companion-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: #E8C84A;
+      margin: 0.5rem 0 0.2rem;
+    }
+    .companion-breed {
+      font-size: 0.6rem;
+      letter-spacing: 2.5px;
+      color: rgba(212, 175, 55, 0.45);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .companion-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(240, 230, 200, 0.65);
+    }
+
+    /* ----- CHRONICLES PREVIEW SECTION ----- */
+    .chronicles-preview {
+      position: relative;
+      background: linear-gradient(180deg, #0a0702 0%, #000000 100%);
+      padding: 6rem 2rem 8rem;
+    }
+    .chronicles-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .chronicles-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 6px;
+      color: rgba(212, 175, 55, 0.45);
+    }
+    .chronicles-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: #E8C84A;
+    }
+    .books-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .book-card {
+      background: linear-gradient(150deg, #0e0900, #1c1304);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: block;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .book-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .book-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+    .book-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2rem;
+      color: rgba(212, 175, 55, 0.2);
+    }
+    .book-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #E8C84A;
+      margin: 0.5rem 0;
+    }
+    .book-excerpt {
+      font-size: 0.9rem;
+      color: rgba(240, 230, 200, 0.6);
+      line-height: 1.7;
+    }
+
+    /* ----- FAQ PREVIEW SECTION ----- */
+    .faq-preview {
+      position: relative;
+      background: #000000;
+      padding: 6rem 2rem;
+    }
+    .faq-preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.04), transparent 60%);
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .faq-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: #E8C84A;
+    }
+    .faq-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: rgba(240, 230, 200, 0.5);
+      font-style: italic;
+    }
+    .faq-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: rgba(10, 7, 2, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: #E8C84A;
+    }
+    .faq-question .faq-icon {
+      transition: transform 0.3s;
+      color: rgba(212, 175, 55, 0.6);
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      padding: 0 1.5rem;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(240, 230, 200, 0.7);
+      border-top: 0px solid transparent;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 1.5rem 1.2rem 1.5rem;
+      border-top-width: 1px;
+      border-top-color: rgba(212, 175, 55, 0.15);
+    }
+
+    /* ----- ESSAYS PREVIEW SECTION (Purple/Gold) ----- */
+    .essays-preview {
+      position: relative;
+      background: linear-gradient(180deg, #0a0515 0%, #000000 100%);
+      padding: 6rem 2rem;
+    }
+    .essays-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .essays-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: #c9a0ff;
+    }
+    .essays-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .essay-card {
+      background: rgba(30, 15, 50, 0.5);
+      border: 1px solid rgba(200, 150, 255, 0.2);
+      border-radius: 16px;
+      padding: 1.8rem;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+    .essay-card:hover {
+      transform: translateX(10px);
+      border-color: rgba(200, 150, 255, 0.5);
+      background: rgba(30, 15, 50, 0.7);
+    }
+    .essay-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #c9a0ff;
+      margin-bottom: 0.5rem;
+    }
+    .essay-excerpt {
+      color: rgba(220, 200, 255, 0.6);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 860px) {
+      .navbar-wrapper { top: 15px; left: 15px; right: 15px; }
+      .links { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .companions-grid, .books-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+    }
+  </style>
 </head>
 <body>
+
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR -->
-  <header class="navbar-wrapper">
-    <nav class="nav3d">
-      <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
-      <ul class="links">
-        <li><a href="genesis.html">GENESIS</a></li>
-        <li><a href="awakening.html">AWAKENING</a></li>
-        <li><a href="chronicles.html">CHRONICLES</a></li>
-        <li><a href="companions.html">COMPANIONS</a></li>
-        <li><a href="essays.html">VERSES</a></li>
-      </ul>
-      <button class="portal-btn" type="button">PORTAL ✦</button>
-    </nav>
-  </header>
+  <!-- 3D NAVIGATION BAR -->
+  <div class="navbar-wrapper">
+    <div class="scene">
+      <nav class="nav3d">
+        <div class="face face-back"></div>
+        <div class="face face-bottom-wall"></div>
+        <div class="face face-left-wall"></div>
+        <div class="face face-right-wall"></div>
+        <div class="face face-top"></div>
+        <div class="nav-content">
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+          <ul class="links">
+            <li><a href="genesis.html">Genesis</a></li>
+            <li><a href="awakening.html">Awakening</a></li>
+            <li><a href="chronicles.html">Chronicles</a></li>
+            <li><a href="companions.html">Companions</a></li>
+            <li><a href="faq.html">Questions</a></li>
+            <li><a href="essays.html">Verses</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
 
-  <!-- HERO -->
-  <section class="hero" id="genesis">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="hero-bg.mp4" type="video/mp4" />
-    </video>
-
-    <div class="hero-fallback"></div>
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-canvas">
+      <video autoplay muted loop playsinline>
+        <source src="horse-bg.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-vignette"></div>
-    <div class="stars" id="stars"></div>
-    <div class="mist mist-1"></div>
-    <div class="mist mist-2"></div>
-
     <div class="hero-3d-wrap" id="hero3d">
       <div class="hero-content">
         <p class="hero-pre">Welcome to the world of</p>
-        <h1 class="hero-title">The <span class="gold">Horseman's</span><br />Journal</h1>
-
+        <h1 class="hero-title">The <span class="gold">Horseman's</span><br>Journal</h1>
         <div class="hero-divider">
           <div class="dline"></div>
           <div class="dgem"></div>
           <div class="dline r"></div>
         </div>
-
-        <p class="hero-tagline">
-          Where legends are written, stories ride eternal<br />
-          and every word echoes through the ages
-        </p>
-
+        <p class="hero-tagline">Where legends are written, stories ride eternal<br>and every word echoes through the ages</p>
         <div class="hero-cta">
-          <!-- FIXED -->
-          <button class="cta-primary" onclick="window.location.href='awakening.html'">
-            Enter the Journey
-          </button>
-
-          <button class="cta-secondary" onclick="window.location.href='chronicles.html'">
-            Explore the World
-          </button>
+          <button class="cta-primary" onclick="window.location.href='awakening.html'">Enter the Journey</button>
+          <button class="cta-secondary" onclick="window.location.href='chronicles.html'">Explore the World</button>
         </div>
       </div>
     </div>
-
     <div class="scroll-hint">
       <div class="scroll-mouse"></div>
       <span class="scroll-label">Scroll</span>
     </div>
   </section>
 
-  <!-- ABOUT PREVIEW -->
+  <!-- ABOUT ME SECTION -->
   <section class="about" id="about">
-    <div class="about-bg-layer layer-dust"></div>
-    <div class="about-bg-layer layer-grid"></div>
-    <div class="about-bg-layer layer-vignette"></div>
-    <div class="about-particles" id="aboutParticles"></div>
-
-    <div class="about-inner" id="aboutInner">
-
+    <div class="about-inner">
       <div class="about-portrait-col">
         <div class="about-portrait-scene" id="aboutPortrait">
           <div class="about-portrait-frame">
@@ -99,98 +896,228 @@
               <div class="about-stat"><strong>∞</strong><small>Stories</small></div>
             </div>
           </div>
-
-          <span class="about-badge about-badge-1">✦ Rider</span>
-          <span class="about-badge about-badge-2">🐴 Bonded</span>
-          <span class="about-badge about-badge-3">✍ Writer</span>
         </div>
       </div>
-
       <div class="about-text-col">
         <p class="about-eyebrow">The Author Behind the Journal</p>
-        <h2 class="about-title">I Did Not <span class="gold">Choose</span> Horses —<br />They Chose Me</h2>
+        <h2 class="about-title">I Did Not <span class="gold">Choose</span> Horses —<br>They Chose Me</h2>
         <p class="about-subtitle">Eleven years of silence, surrender, and presence.</p>
-
-        <p class="about-body">
-          This journal was not planned. It emerged from eleven years spent in the company of horses.
-        </p>
-
+        <div class="about-body">
+          <p>This journal was not planned. It emerged from eleven years spent in the company of horses. Not as a trainer who demands obedience, but as a student who learned to listen. The work is not about making a horse perform. It is about understanding what the horse is experiencing in each moment — what it feels, what it anticipates, and why it reacts the way it does.</p>
+          <p>Every behaviour, whether calm or explosive, comes from a place that can be observed and understood. My work is built around that understanding. Over time, the usual methods stopped working — not because they failed to produce results, but because they failed to produce clarity.</p>
+          <p>A horse does not react to your hands first. It reacts to your inner state, to what is beneath the hands, beneath the voice, beneath the careful posture. What I had been giving for years was technique wrapped around tension. What I began to give instead was silence. Real silence. The kind that is not absence but presence without demand.</p>
+          <p>Horses taught me that strength was never the point. What a horse asks for has nothing to do with dominance or performance. It asks you to stand without fear, to be consistent without agenda, to become the kind of presence an intelligent creature of pure instinct chooses to trust. That is a much harder thing than it sounds.</p>
+        </div>
         <div class="about-divider">
           <div class="about-dline"></div>
           <div class="about-dgem"></div>
         </div>
-
-        <p class="about-quote">
-          "The horse does not care what you know. It cares who you are in this moment."
-        </p>
-
-        <!-- KEEPING your about page -->
+        <p class="about-quote">"The horse does not care what you know. It cares who you are in this moment."</p>
         <div class="about-cta">
           <a href="genesis.html">Read the Full Story →</a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- EXPLORE -->
-  <section class="explore">
-    <div class="explore-header">
-      <p class="explore-eyebrow">Begin Your Journey</p>
-      <h2 class="explore-title">Explore the Journal</h2>
+  <!-- COMPANIONS SECTION -->
+  <section class="companions" id="companions">
+    <div class="companions-header">
+      <p class="companions-eyebrow">The Herd</p>
+      <h2 class="companions-title">Companions</h2>
+      <p class="companions-subtitle">Eight horses. Eight stories. Each one a mirror.</p>
     </div>
-
-    <div class="explore-grid">
-
-      <!-- ✅ ADDED (IMPORTANT) -->
-      <a href="awakening.html" class="explore-card">
-        <span class="explore-icon">🔥</span>
-        <h3 class="explore-card-title">Awakening</h3>
-        <p class="explore-card-desc">
-          The moment everything changed. A story of fear, clarity, and surrender.
-        </p>
-        <span class="explore-card-link">Read the Story</span>
-      </a>
-
-      <a href="genesis.html" class="explore-card">
-        <span class="explore-icon">📖</span>
-        <h3 class="explore-card-title">Genesis</h3>
-        <p class="explore-card-desc">
-          Who I am, how I work, and what this journey has taught me.
-        </p>
-        <span class="explore-card-link">Learn More</span>
-      </a>
-
-      <a href="companions.html" class="explore-card">
-        <span class="explore-icon">🐴</span>
-        <h3 class="explore-card-title">Companions</h3>
-        <p class="explore-card-desc">
-          Eight horses. Eight stories. Each one a mirror.
-        </p>
-        <span class="explore-card-link">Meet Them</span>
-      </a>
-
-      <a href="chronicles.html" class="explore-card">
-        <span class="explore-icon">📚</span>
-        <h3 class="explore-card-title">Chronicles</h3>
-        <p class="explore-card-desc">
-          Articles on horse psychology and philosophy.
-        </p>
-        <span class="explore-card-link">Explore Articles</span>
-      </a>
-
-      <a href="essays.html" class="explore-card essays-card">
-        <span class="explore-icon">✍️</span>
-        <h3 class="explore-card-title">Essays</h3>
-        <p class="explore-card-desc">
-          Personal reflections on silence, time, and writing.
-        </p>
-        <span class="explore-card-link">Read Essays</span>
-      </a>
-
+    <div class="companions-grid">
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 01</div>
+        <div class="companion-emblem">🦁</div>
+        <div class="companion-name">T-Rex</div>
+        <div class="companion-breed">Hanoverian Stallion</div>
+        <div class="companion-desc">He arrived imported, four years old, barely schooled. A living storm wrapped in midnight muscle and raw sensitivity. Every horse before him had been preparation for this one.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 02</div>
+        <div class="companion-emblem">⚔️</div>
+        <div class="companion-name">Gladiator</div>
+        <div class="companion-breed">Warmblood Stallion (In Memoriam)</div>
+        <div class="companion-desc">He arrived wearing his name like armour. Aggressive on the outside, coiled and sharp. But underneath that fire lived something ancient and tender. He taught me that fire and fragility live in the same body.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 03</div>
+        <div class="companion-emblem">🏛️</div>
+        <div class="companion-name">Xanthos</div>
+        <div class="companion-breed">Warmblood Gelding</div>
+        <div class="companion-desc">Named after the immortal horse of Achilles. From the first day, this horse carried a mythic quality in his stillness. He moves like a horse choosing to carry you.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 04</div>
+        <div class="companion-emblem">💎</div>
+        <div class="companion-name">Rubin</div>
+        <div class="companion-breed">Warmblood Stallion</div>
+        <div class="companion-desc">A gemstone of a name for a horse who made you work to find his brilliance. When Rubin finally let you in, what you found was luminous.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 05</div>
+        <div class="companion-emblem">👑</div>
+        <div class="companion-name">Highsocity</div>
+        <div class="companion-breed">Warmblood Mare (In Memoriam)</div>
+        <div class="companion-desc">She moved through the world as though she had been born knowing something the rest of us were still searching for. She taught me about grace.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 06</div>
+        <div class="companion-emblem">👑</div>
+        <div class="companion-name">Yuvraj</div>
+        <div class="companion-breed">Indian Stallion</div>
+        <div class="companion-desc">Yuvraj means prince, and he has worn that title without vanity for twenty years. There is a quality to old horses that young ones cannot manufacture.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 07</div>
+        <div class="companion-emblem">⛰️</div>
+        <div class="companion-name">Arjun</div>
+        <div class="companion-breed">Warmblood Gelding</div>
+        <div class="companion-desc">If T-Rex was the storm, Arjun was the mountain. Twelve years old, steady as stone, honest in a way that asked nothing dramatic of you.</div>
+      </div>
+      <div class="companion-card">
+        <div class="companion-number">✦ Companion No. 08</div>
+        <div class="companion-emblem">🌩️</div>
+        <div class="companion-name">Storm</div>
+        <div class="companion-breed">Thoroughbred Mare</div>
+        <div class="companion-desc">She arrived wild. A Thoroughbred mare with electric energy and a deep suspicion of the entire human world. Working with Storm was working with weather.</div>
+      </div>
     </div>
   </section>
 
-  <script src="js/hero.js"></script>
+  <!-- CHRONICLES PREVIEW SECTION -->
+  <section class="chronicles-preview" id="chronicles">
+    <div class="chronicles-header">
+      <p class="chronicles-eyebrow">The Written Record</p>
+      <h2 class="chronicles-title">Chronicles</h2>
+    </div>
+    <div class="books-grid">
+      <a href="chronicles.html" class="book-card">
+        <div class="book-number">I - V</div>
+        <div class="book-title">Foundational Articles</div>
+        <div class="book-excerpt">Understanding horse psychology, prey animal instincts, trust versus control, and reading body language.</div>
+      </a>
+      <a href="chronicles.html" class="book-card">
+        <div class="book-number">VI - X</div>
+        <div class="book-title">Practical Articles</div>
+        <div class="book-excerpt">Building trust, calming anxiety, first time handling, and signs of genuine trust.</div>
+      </a>
+      <a href="chronicles.html" class="book-card">
+        <div class="book-number">XI - XV</div>
+        <div class="book-title">Unique Edge Articles</div>
+        <div class="book-excerpt">What horses teach us, presence and intention, silence and movement, and the philosophy of working with horses.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ PREVIEW SECTION -->
+  <section class="faq-preview" id="faq">
+    <div class="faq-header">
+      <h2 class="faq-title">Common Questions</h2>
+      <p class="faq-subtitle">Straight from the arena. No theories. Only what works.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-question">Why does my horse spook at everything? <span class="faq-icon">▼</span></div>
+        <div class="faq-answer">You don't make it stop. You manage it. A horse's fear response is survival. Start by desensitizing in a safe area. Introduce scary objects at a distance. Reward curiosity or relaxation. Never punish a spook.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I bond with my horse? <span class="faq-icon">▼</span></div>
+        <div class="faq-answer">Go to the pasture without a halter. Sit down nearby. Let the horse choose to approach you. Groom without purpose. Build thousands of small, pressure-free moments where your presence is simply comfortable.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">My horse won't stand still at the mounting block. <span class="faq-icon">▼</span></div>
+        <div class="faq-answer">First, check saddle fit and back soreness. Practice standing without mounting. Reward even a second of stillness. Teach the horse that standing still leads to comfort, not more work.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I know if my horse trusts me? <span class="faq-icon">▼</span></div>
+        <div class="faq-answer">Voluntary approach. A lowered head when you are near. Slow, deep breathing. Leaning into your touch. These are the clearest signs of genuine trust.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">My horse bites when I do up the girth. <span class="faq-icon">▼</span></div>
+        <div class="faq-answer">This is almost always a pain response. Have a vet check for ulcers or back soreness. Use a soft girth. Tighten slowly, one hole per minute, giving a treat after each hole.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESSAYS PREVIEW SECTION -->
+  <section class="essays-preview" id="essays">
+    <div class="essays-header">
+      <h2 class="essays-title">Verses & Essays</h2>
+    </div>
+    <div class="essays-grid">
+      <a href="essays.html" class="essay-card">
+        <div class="essay-title">On Silence</div>
+        <div class="essay-excerpt">The most honest communication with a horse happens in silence. Not when you are asking. In between.</div>
+      </a>
+      <a href="essays.html" class="essay-card">
+        <div class="essay-title">On Presence</div>
+        <div class="essay-excerpt">Presence is not a concept. It is the quality of being fully here. Horses live there permanently.</div>
+      </a>
+      <a href="essays.html" class="essay-card">
+        <div class="essay-title">On Surrender</div>
+        <div class="essay-excerpt">The moment of connection is not a grand event. It is a surrender. The slow exhale you have been holding.</div>
+      </a>
+      <a href="essays.html" class="essay-card">
+        <div class="essay-title">On Trust</div>
+        <div class="essay-excerpt">Trust cannot be taught. It can only be earned, slowly, in ten thousand small moments of keeping your word.</div>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    // Hero 3D Tilt
+    const hero = document.getElementById('hero');
+    const hero3d = document.getElementById('hero3d');
+    if (hero && hero3d) {
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        hero3d.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 6}deg)`;
+      });
+      hero.addEventListener('mouseleave', () => {
+        hero3d.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+
+    // About Portrait 3D Tilt
+    const aboutSection = document.getElementById('about');
+    const aboutPortrait = document.getElementById('aboutPortrait');
+    if (aboutSection && aboutPortrait) {
+      aboutSection.addEventListener('mousemove', (e) => {
+        const rect = aboutSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        aboutPortrait.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 8}deg)`;
+      });
+      aboutSection.addEventListener('mouseleave', () => {
+        aboutPortrait.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+
+    // Scroll Reveal for Cards
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.companion-card, .book-card').forEach(el => revealObserver.observe(el));
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.closest('.faq-item');
+        item.classList.toggle('active');
+      });
+    });
+  </script>
 </body>
 </html>
