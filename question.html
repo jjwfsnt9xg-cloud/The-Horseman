@@ -21,7 +21,7 @@
       line-height: 1.6;
     }
 
-    /* ORBS — warm earth bronze */
+    /* ORBS */
     .orb {
       position: fixed;
       border-radius: 50%;
@@ -181,7 +181,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       HERO — THE ARENA AT DAWN
+       HERO — THE ARENA
     ═══════════════════════════════════════════════ */
     .questions-hero {
       position: relative;
@@ -206,6 +206,7 @@
       position: relative; z-index: 10;
       text-align: center; max-width: 900px; padding: 0 2rem;
       animation: heroFloat 6s ease-in-out infinite;
+      transition: opacity .6s ease;
     }
     @keyframes heroFloat {
       0%, 100% { transform: translateY(0); }
@@ -216,6 +217,7 @@
       font-size: .6rem; letter-spacing: 8px;
       color: rgba(200, 150, 60, 0.5);
       text-transform: uppercase; display: block; margin-bottom: 1.5rem;
+      transition: color .8s ease;
     }
     .hero-title {
       font-family: 'Cinzel Decorative', serif;
@@ -268,10 +270,97 @@
     }
 
     /* ═══════════════════════════════════════════════
+       SEARCH & FILTER CONTROLS
+    ═══════════════════════════════════════════════ */
+    .faq-controls {
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      stroke: rgba(200, 150, 60, 0.35);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 18px 14px 48px;
+      background: rgba(20, 14, 6, 0.7);
+      border: 1px solid rgba(180, 140, 60, 0.18);
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: 2px;
+      color: rgba(240, 225, 190, 0.7);
+      outline: none;
+      transition: all .3s ease;
+    }
+    .search-input::placeholder {
+      color: rgba(200, 150, 60, 0.3);
+      letter-spacing: 2px;
+    }
+    .search-input:focus {
+      border-color: rgba(200, 150, 60, 0.4);
+      background: rgba(30, 20, 8, 0.8);
+      box-shadow: 0 0 20px rgba(180, 140, 60, 0.06);
+    }
+    .filter-buttons {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: 'Cinzel', serif;
+      font-size: .5rem;
+      letter-spacing: 2.5px;
+      color: rgba(200, 150, 60, 0.4);
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid rgba(180, 140, 60, 0.15);
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .3s ease;
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      color: rgba(200, 150, 60, 0.7);
+      border-color: rgba(180, 140, 60, 0.3);
+      background: rgba(180, 140, 60, 0.04);
+    }
+    .filter-btn.active {
+      color: #0d0804;
+      background: #E8C84A;
+      border-color: #E8C84A;
+      box-shadow: 0 0 15px rgba(200, 150, 60, 0.3);
+    }
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      font-family: 'Cinzel', serif;
+      font-size: .7rem;
+      letter-spacing: 3px;
+      color: rgba(200, 150, 60, 0.3);
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════
        QUESTION CARDS
     ═══════════════════════════════════════════════ */
     .questions-section {
-      padding: 3rem 2rem 8rem;
+      padding: 2rem 2rem 6rem;
       position: relative; z-index: 2;
       max-width: 1100px; margin: 0 auto;
     }
@@ -292,12 +381,15 @@
       transition: all .4s ease;
       position: relative;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
+      opacity: 1;
+      transform: translateY(0);
     }
     .q-card.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    .q-card.hidden {
+      display: none;
     }
     .q-card::before {
       content: '';
@@ -354,6 +446,65 @@
     }
     .q-card:hover .q-card-arrow {
       color: #E8C84A; transform: translateX(4px);
+    }
+
+    /* ═══════════════════════════════════════════════
+       CLOSING INVITATION
+    ═══════════════════════════════════════════════ */
+    .closing-invitation {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .closing-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 2rem;
+    }
+    .closing-oln {
+      flex: 1;
+      max-width: 100px;
+      height: .5px;
+      background: linear-gradient(90deg, transparent, rgba(200,150,60,0.35));
+    }
+    .closing-oln-r {
+      background: linear-gradient(90deg, rgba(200,150,60,0.35), transparent);
+    }
+    .closing-gem {
+      width: 6px; height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px rgba(200,150,60,0.5);
+      flex-shrink: 0;
+    }
+    .closing-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: rgba(220, 200, 160, 0.55);
+      line-height: 1.9;
+      max-width: 550px;
+      margin: 0 auto 1.5rem;
+    }
+    .closing-link {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: 4px;
+      color: rgba(200,150,60,0.45);
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,150,60,0.2);
+      padding-bottom: 3px;
+      transition: all .3s ease;
+    }
+    .closing-link:hover {
+      color: #E8C84A;
+      border-bottom-color: rgba(200,150,60,0.5);
     }
 
     /* ═══════════════════════════════════════════════
@@ -444,6 +595,23 @@
       background: rgba(200,150,60,0.03);
       border-radius: 0 4px 4px 0;
     }
+    .answer-link {
+      display: inline-block;
+      margin-top: .5rem;
+      font-family: 'Cinzel', serif;
+      font-size: .5rem;
+      letter-spacing: 3px;
+      color: rgba(200,150,60,0.35);
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,150,60,0.12);
+      padding-bottom: 2px;
+      transition: all .3s ease;
+    }
+    .answer-link:hover {
+      color: #E8C84A;
+      border-bottom-color: rgba(200,150,60,0.4);
+    }
     .answer-nav {
       display: flex; justify-content: space-between; align-items: center;
       padding-top: 1.2rem; margin-top: 1.5rem;
@@ -520,7 +688,7 @@
   <section class="questions-hero" id="questionsHero">
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-overlay"></div>
-    <div class="hero-content">
+    <div class="hero-content" id="heroContent">
       <span class="hero-eyebrow">The Horseman's Journal</span>
       <h1 class="hero-title" id="heroTitle">Quest<span class="gold">ions</span></h1>
       <div class="hero-divider">
@@ -538,9 +706,36 @@
     </div>
   </section>
 
+  <!-- SEARCH & FILTER CONTROLS -->
+  <section class="faq-controls" id="faqControls">
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+      <input type="text" id="faqSearch" placeholder="Search questions..." class="search-input">
+    </div>
+    <div class="filter-buttons" id="filterButtons">
+      <button class="filter-btn active" data-filter="all">All Questions</button>
+      <button class="filter-btn" data-filter="Fear & Anxiety">Fear & Anxiety</button>
+      <button class="filter-btn" data-filter="Behavior">Behavior</button>
+      <button class="filter-btn" data-filter="Training">Training</button>
+      <button class="filter-btn" data-filter="Safety & Handling">Safety & Handling</button>
+      <button class="filter-btn" data-filter="Trust & Relationship">Trust & Relationship</button>
+    </div>
+  </section>
+
   <!-- QUESTION CARDS -->
   <section class="questions-section">
     <div class="questions-grid" id="questionsGrid"></div>
+  </section>
+
+  <!-- CLOSING INVITATION -->
+  <section class="closing-invitation">
+    <div class="closing-ornament">
+      <div class="closing-oln"></div>
+      <div class="closing-gem"></div>
+      <div class="closing-oln closing-oln-r"></div>
+    </div>
+    <p class="closing-text">These answers come from eleven years in the arena. Every horse is different. Every situation is unique. If your question isn't here, it is still worth asking.</p>
+    <a href="chronicles.html" class="closing-link">Explore the Chronicles →</a>
   </section>
 
   <!-- ANSWER PANEL -->
@@ -554,7 +749,7 @@
 
   <script>
     // ═══════════════════════════════════════════════
-    // THE ARENA CANVAS — RESPONSIVE TO QUESTIONS
+    // THE ARENA CANVAS
     // ═══════════════════════════════════════════════
     const canvas = document.getElementById('heroCanvas');
     const ctx = canvas.getContext('2d');
@@ -562,8 +757,8 @@
     let mouseX = 0.5, mouseY = 0.5;
     let time = 0;
     let particles = [];
-    let activeScene = -1; // -1 = calm arena
-    let sceneTransition = 0; // 0 to 1
+    let activeScene = -1;
+    let sceneTransition = 0;
 
     function resize() {
       W = canvas.width = canvas.offsetWidth;
@@ -591,16 +786,16 @@
     }
 
     function drawSky() {
-      const calmTop = '#1a2840';
-      const calmBot = '#4a3520';
-      const alertTop = '#2a1820';
-      const alertBot = '#3a2015';
       const t = sceneTransition;
-      const top = `rgb(${Math.round(26 + t*16)},${Math.round(40 - t*16)},${Math.round(64 - t*32)})`;
-      const bot = `rgb(${Math.round(74 - t*24)},${Math.round(53 - t*28)},${Math.round(32 - t*12)})`;
+      const topR = Math.round(26 + t * 20);
+      const topG = Math.round(40 - t * 18);
+      const topB = Math.round(64 - t * 38);
+      const botR = Math.round(74 - t * 28);
+      const botG = Math.round(53 - t * 30);
+      const botB = Math.round(32 - t * 12);
       const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, top);
-      grad.addColorStop(1, bot);
+      grad.addColorStop(0, `rgb(${topR},${topG},${topB})`);
+      grad.addColorStop(1, `rgb(${botR},${botG},${botB})`);
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
     }
@@ -623,15 +818,11 @@
       grad.addColorStop(1, '#1a0f05');
       ctx.fillStyle = grad;
       ctx.fillRect(0, H * 0.7, W, H * 0.3);
-
-      // Fence posts
       for (let i = 0; i < 12; i++) {
         const fx = W * 0.05 + i * W * 0.082;
-        const fy = H * 0.68;
         ctx.fillStyle = '#2a1f12';
-        ctx.fillRect(fx, fy, 3, H * 0.08);
+        ctx.fillRect(fx, H * 0.68, 3, H * 0.08);
       }
-      // Rails
       ctx.strokeStyle = '#3a2a18';
       ctx.lineWidth = 1.5;
       for (let r = 0; r < 3; r++) {
@@ -642,141 +833,154 @@
       }
     }
 
+    function drawTrailer() {
+      if (activeScene !== 10) return;
+      const alpha = sceneTransition;
+      const tx = W * 0.3;
+      const ty = H * 0.42;
+      ctx.fillStyle = `rgba(30,20,15,${alpha * 0.8})`;
+      ctx.fillRect(tx, ty, 90, 80);
+      ctx.fillStyle = `rgba(10,6,3,${alpha * 0.9})`;
+      ctx.fillRect(tx + 90, ty + 20, 25, 50);
+      ctx.fillStyle = `rgba(50,35,25,${alpha * 0.6})`;
+      ctx.fillRect(tx + 15, ty + 40, 60, 15);
+    }
+
     function drawHorse(x, y, scale, state) {
-      // state: 0=calm, 1=alert, 2=rearing, 3=approaching, 4=grazing
       ctx.save();
       ctx.translate(x, y);
       ctx.scale(scale, scale);
-
       const bodyColor = '#1a1008';
       const highlightColor = '#2a1a0c';
 
-      // Legs
-      const legPoses = state === 2 ? [[-15, 20, 4, 35], [-3, 22, 4, 30], [7, 22, 4, 30], [17, 20, 4, 35]] :
-                       state === 4 ? [[-16, 22, 4, 18], [-4, 22, 4, 20], [6, 22, 4, 20], [16, 22, 4, 18]] :
-                       [[-16, 20, 4, 25], [-4, 20, 4, 27], [6, 20, 4, 27], [16, 20, 4, 25]];
-      ctx.fillStyle = bodyColor;
-      legPoses.forEach(l => ctx.fillRect(l[0], l[1], l[2], l[3]));
-
-      // Body
-      ctx.fillStyle = highlightColor;
-      ctx.beginPath();
-      ctx.ellipse(0, 8, 28, 14, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Neck angle changes with state
-      const neckBaseX = 20;
-      const neckBaseY = 4;
-      const headX = state === 1 ? 26 : state === 2 ? 24 : 22;
-      const headY = state === 1 ? -38 : state === 2 ? -52 : state === 4 ? -20 : -30;
-
-      ctx.fillStyle = bodyColor;
-      ctx.beginPath();
-      ctx.moveTo(neckBaseX, neckBaseY);
-      ctx.quadraticCurveTo(headX + 8, headY + 10, headX, headY);
-      ctx.quadraticCurveTo(headX - 6, headY + 8, neckBaseX - 6, neckBaseY + 6);
-      ctx.closePath();
-      ctx.fill();
-
-      // Head
-      ctx.fillStyle = bodyColor;
-      ctx.beginPath();
-      ctx.ellipse(headX, headY, 9, 5, -0.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Ears
-      const earAlert = state === 1 ? 1.3 : 1;
-      ctx.beginPath();
-      ctx.moveTo(headX + 2, headY - 4);
-      ctx.lineTo(headX - 2, headY - 11 * earAlert);
-      ctx.lineTo(headX - 4, headY - 5);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(headX + 4, headY - 4);
-      ctx.lineTo(headX + 6, headY - 10 * earAlert);
-      ctx.lineTo(headX + 2, headY - 5);
-      ctx.fill();
-
-      // Eye — white shows when alert
-      if (state === 1) {
-        ctx.fillStyle = '#fff';
+      if (state === 2) {
+        // Rearing pose
+        ctx.fillStyle = bodyColor;
+        ctx.fillRect(-16, 28, 4, 20);
+        ctx.fillRect(14, 28, 4, 20);
+        ctx.fillStyle = highlightColor;
+        ctx.save();
+        ctx.translate(0, 5);
+        ctx.rotate(-0.7);
         ctx.beginPath();
-        ctx.arc(headX + 3, headY - 1, 1.8, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, 28, 14, 0, 0, Math.PI * 2);
         ctx.fill();
+        ctx.fillStyle = bodyColor;
+        ctx.beginPath();
+        ctx.moveTo(18, -6);
+        ctx.quadraticCurveTo(30, -38, 22, -55);
+        ctx.quadraticCurveTo(14, -36, 4, -4);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(24, -53, 9, 5, -0.3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(26, -57);
+        ctx.lineTo(22, -66);
+        ctx.lineTo(19, -58);
+        ctx.fill();
+        ctx.restore();
+      } else {
+        // Normal poses
+        const legPoses = state === 4 ? [[-16,22,4,18],[-4,22,4,20],[6,22,4,20],[16,22,4,18]] :
+                         [[-16,20,4,25],[-4,20,4,27],[6,20,4,27],[16,20,4,25]];
+        ctx.fillStyle = bodyColor;
+        legPoses.forEach(l => ctx.fillRect(l[0],l[1],l[2],l[3]));
+        ctx.fillStyle = highlightColor;
+        ctx.beginPath();
+        ctx.ellipse(0, 8, 28, 14, 0, 0, Math.PI * 2);
+        ctx.fill();
+        const neckBaseX = 20, neckBaseY = 4;
+        const headX = state === 1 ? 26 : state === 4 ? 22 : 22;
+        const headY = state === 1 ? -38 : state === 4 ? -20 : -30;
+        ctx.fillStyle = bodyColor;
+        ctx.beginPath();
+        ctx.moveTo(neckBaseX, neckBaseY);
+        ctx.quadraticCurveTo(headX + 8, headY + 10, headX, headY);
+        ctx.quadraticCurveTo(headX - 6, headY + 8, neckBaseX - 6, neckBaseY + 6);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = bodyColor;
+        ctx.beginPath();
+        ctx.ellipse(headX, headY, 9, 5, -0.2, 0, Math.PI * 2);
+        ctx.fill();
+        const earH = state === 1 ? 11 : 7;
+        ctx.beginPath();
+        ctx.moveTo(headX + 2, headY - 4);
+        ctx.lineTo(headX - 2, headY - earH);
+        ctx.lineTo(headX - 4, headY - 5);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(headX + 4, headY - 4);
+        ctx.lineTo(headX + 6, headY - earH);
+        ctx.lineTo(headX + 2, headY - 5);
+        ctx.fill();
+        if (state === 1) {
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.arc(headX + 3, headY - 1, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(headX + 3, headY - 1, 1, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = bodyColor;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(-26, 6);
+        ctx.quadraticCurveTo(-34, 0, -32 + Math.sin(time * 0.04) * 4, -10);
+        ctx.stroke();
       }
-      ctx.fillStyle = '#000';
-      ctx.beginPath();
-      ctx.arc(headX + 3, headY - 1, 1, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Tail
-      ctx.strokeStyle = bodyColor;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(-26, 6);
-      const tailSwing = Math.sin(time * 0.04) * 4;
-      ctx.quadraticCurveTo(-34, 0, -32 + tailSwing, -10);
-      ctx.stroke();
-
       ctx.restore();
     }
 
     function drawHuman(x, y, scale, pose) {
-      // pose: 0=standing calm, 1=reaching hand, 2=backing away
       ctx.save();
       ctx.translate(x, y);
       ctx.scale(scale, scale);
-
-      // Legs
       ctx.fillStyle = '#1a1512';
       ctx.fillRect(-4, 12, 3, 18);
       ctx.fillRect(2, 12, 3, 18);
-
-      // Body
       ctx.fillStyle = '#2a2520';
       ctx.beginPath();
       ctx.ellipse(0, 2, 7, 13, 0, 0, Math.PI * 2);
       ctx.fill();
-
-      // Head
       ctx.fillStyle = '#3a3028';
       ctx.beginPath();
       ctx.arc(0, -14, 5, 0, Math.PI * 2);
       ctx.fill();
-
-      // Arm
       ctx.strokeStyle = '#2a2520';
       ctx.lineWidth = 2;
+      const ax = pose === 1 ? 18 : pose === 2 ? -12 : 10;
+      const ay = pose === 1 ? -12 : pose === 2 ? -6 : -4;
       ctx.beginPath();
-      const armEndX = pose === 1 ? 18 : pose === 2 ? -12 : 10;
-      const armEndY = pose === 1 ? -12 : pose === 2 ? -6 : -4;
       ctx.moveTo(6, -4);
-      ctx.lineTo(armEndX, armEndY);
+      ctx.lineTo(ax, ay);
       ctx.stroke();
       if (pose === 1) {
         ctx.fillStyle = '#3a3028';
         ctx.beginPath();
-        ctx.arc(armEndX, armEndY, 2, 0, Math.PI * 2);
+        ctx.arc(ax, ay, 2, 0, Math.PI * 2);
         ctx.fill();
       }
-
       ctx.restore();
     }
 
     function drawParticles() {
-      const alertFactor = sceneTransition;
+      const af = sceneTransition;
       particles.forEach(p => {
-        p.speed = p.baseSpeed + alertFactor * 0.5;
+        p.speed = p.baseSpeed + af * 0.5;
         const sx = p.x * W;
         const sy = p.y * H;
         const alpha = p.opacity * (0.4 + 0.6 * Math.sin(time * 0.025 + p.phase));
-        const color = alertFactor > 0.5 ? 
-          `rgba(255,200,150,${alpha})` : `rgba(240,220,170,${alpha})`;
+        const color = af > 0.5 ? `rgba(255,200,150,${alpha})` : `rgba(240,220,170,${alpha})`;
         ctx.fillStyle = color;
         ctx.shadowColor = color;
         ctx.shadowBlur = 2;
         ctx.beginPath();
-        ctx.arc(sx, sy, p.size * (1 + alertFactor * 0.5), 0, Math.PI * 2);
+        ctx.arc(sx, sy, p.size * (1 + af * 0.5), 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
       });
@@ -787,27 +991,23 @@
       drawSky();
       drawStars();
       drawArenaGround();
-
+      drawTrailer();
       const hx = W * 0.55 + (mouseX - 0.5) * 20;
       const hy = H * 0.58 + (mouseY - 0.5) * 12;
-
       let horseState = 0;
-      let humanPose = 0;
-      if (activeScene === 1) horseState = 1; // spook: alert horse
-      if (activeScene === 4) horseState = 2; // rear
-      if (activeScene === 3) horseState = 0; // trust: calm
-      if (activeScene === 12) horseState = 0; // bond: calm, close
-
-      drawHuman(hx - 55, hy + 15, 0.8, humanPose);
+      if (activeScene === 1 || activeScene === 10) horseState = 1;
+      if (activeScene === 4) horseState = 2;
+      if (activeScene === 3 || activeScene === 12) horseState = 0;
+      if (activeScene === 5) horseState = 4;
+      drawHuman(hx - 55, hy + 15, 0.8, activeScene === 3 ? 1 : 0);
       drawHorse(hx, hy, 1.1, horseState);
       drawParticles();
     }
 
     function animateCanvas() {
       time++;
-      // Smooth transition
-      const targetTransition = activeScene >= 0 ? 1 : 0;
-      sceneTransition += (targetTransition - sceneTransition) * 0.05;
+      const target = activeScene >= 0 ? 1 : 0;
+      sceneTransition += (target - sceneTransition) * 0.05;
       particles.forEach(p => {
         p.y -= p.speed * 0.06;
         p.x += Math.sin(time * 0.015 + p.phase) * p.drift * 0.02;
@@ -823,131 +1023,177 @@
     // ═══════════════════════════════════════════════
     const questions = [
       {
-        num: '01',
-        category: 'Fear & Anxiety',
+        num: '01', category: 'Fear & Anxiety',
         title: 'Why does my horse spook at nothing?',
         excerpt: 'Your horse is not being stupid. It is reading a world you cannot fully perceive.',
         scene: 1,
-        answer: `<p>The first thing to understand is that your horse is not spooking at nothing. It is spooking at something you did not detect. Horses possess sensory abilities far beyond ours. Their eyes are set on the sides of their head, giving them nearly 350 degrees of vision. Their ears rotate independently to track sounds from different directions simultaneously. Their nose can detect scents at concentrations we cannot register. When a horse spooks, it has detected something — a sound, a smell, a movement in the peripheral vision — that its sixty-million-year-old survival system has flagged as potentially dangerous.</p><p>This is not a flaw. It is the design working perfectly. The amygdala fires before the thinking brain has time to process. In twelve milliseconds, adrenaline floods the system. The body is already moving before the conscious mind catches up. You cannot reason with this response because reason arrives too late.</p><div class="answer-key">Fear in a horse is not a character flaw. It is sixty million years of perfect engineering. Your job is not to eliminate it. Your job is to become the thing the horse trusts more than it fears the unknown.</div><p>What you can do: First, stop punishing the spook. Punishment adds a second layer of threat. The horse now fears the original stimulus and the human beside it. Instead, become a source of calm. Breathe out. Soften your body. Let your stillness communicate that the environment is safe. Over time, the horse will begin to use your nervous system as a reference point. This is called co-regulation, and it is the foundation of genuine trust.</p>`
+        chroniclesLink: null,
+        answer: `<p>The first thing to understand is that your horse is not spooking at nothing. It is spooking at something you did not detect. Horses possess sensory abilities far beyond ours. Their eyes are set on the sides of their head, giving them nearly 350 degrees of vision. Their ears rotate independently to track sounds from different directions simultaneously. Their nose can detect scents at concentrations we cannot register. When a horse spooks, it has detected something — a sound, a smell, a movement in the peripheral vision — that its sixty-million-year-old survival system has flagged as potentially dangerous.</p><p>This is not a flaw. It is the design working perfectly. The amygdala fires before the thinking brain has time to process. In twelve milliseconds, adrenaline floods the system. The body is already moving before the conscious mind catches up. You cannot reason with this response because reason arrives too late.</p><div class="answer-key">Fear in a horse is not a character flaw. It is sixty million years of perfect engineering. Your job is not to eliminate it. Your job is to become the thing the horse trusts more than it fears the unknown.</div><p>What you can do: First, stop punishing the spook. Punishment adds a second layer of threat. The horse now fears the original stimulus and the human beside it. Instead, become a source of calm. Breathe out. Soften your body. Let your stillness communicate that the environment is safe. Over time, the horse will begin to use your nervous system as a reference point. This is called co-regulation, and it is the foundation of genuine trust.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: The Flight Response →</a>`
       },
       {
-        num: '02',
-        category: 'Behavior',
+        num: '02', category: 'Behavior',
         title: 'Why does my horse not listen to me?',
         excerpt: 'A horse that seems to ignore you is not being stubborn. It is communicating.',
         scene: 2,
-        answer: `<p>When a horse does not respond, the natural human reaction is to ask louder. More leg. More rein. More pressure. This is almost always the wrong response. A horse that is not listening is not defying you. It is telling you something. Your job is to figure out what.</p><p>There are three real reasons horses stop responding. The first is clarity. The horse does not understand what you are asking. You may think the signal is clear, but horses learn through the release of pressure, not the application of it. If the release is not timed precisely, the horse never learns what made the pressure stop.</p><p>The second reason is pain. Horses are stoic prey animals that hide discomfort. By the time a horse displays resistance, it may have been in pain for weeks or months. Check the back, the hocks, the teeth, the feet, the saddle fit. A horse that refuses to go forward or accept contact is often a horse in physical distress.</p><div class="answer-key">The third reason is trust. A horse that has learned that mistakes bring punishment will stop trying. It is not stubborn. It is being careful with the only body it has.</div><p>Before you escalate, ask: Is the ask clear? Is the horse in pain? Is there enough trust for the horse to try something uncertain? Answer those honestly, and the listening almost always returns.</p>`
+        chroniclesLink: null,
+        answer: `<p>When a horse does not respond, the natural human reaction is to ask louder. More leg. More rein. More pressure. This is almost always the wrong response. A horse that is not listening is not defying you. It is telling you something. Your job is to figure out what.</p><p>There are three real reasons horses stop responding. The first is clarity. The horse does not understand what you are asking. You may think the signal is clear, but horses learn through the release of pressure, not the application of it. If the release is not timed precisely, the horse never learns what made the pressure stop.</p><p>The second reason is pain. Horses are stoic prey animals that hide discomfort. By the time a horse displays resistance, it may have been in pain for weeks or months. Check the back, the hocks, the teeth, the feet, the saddle fit. A horse that refuses to go forward or accept contact is often a horse in physical distress.</p><div class="answer-key">The third reason is trust. A horse that has learned that mistakes bring punishment will stop trying. It is not stubborn. It is being careful with the only body it has.</div><p>Before you escalate, ask: Is the ask clear? Is the horse in pain? Is there enough trust for the horse to try something uncertain? Answer those honestly, and the listening almost always returns.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: Why Your Horse Does Not Listen →</a>`
       },
       {
-        num: '03',
-        category: 'Trust & Relationship',
+        num: '03', category: 'Trust & Relationship',
         title: 'How do I build trust with a new horse?',
         excerpt: 'Trust is not earned in grand gestures. It is built in a thousand small, honest moments.',
         scene: 3,
-        answer: `<p>Trust is not a feeling. It is a behavior. And like all behavior, it is built through repetition — through showing up the same way, every single time, without exception. The horse that sees the same person every day, with the same calm energy, the same predictable responses, learns that this person is safe.</p><p>Start by being worth approaching. Stand in the field without an agenda. Do not walk straight at the horse — that is predator behavior. Approach at an angle. Keep your eyes soft. Breathe slowly. Let the horse come the last step. The horse that walks toward you voluntarily has made a choice. That choice is the first real brick in the wall of trust.</p><div class="answer-key">The horse does not ask you to be perfect. It asks you to be consistent. Predictable. Safe. A creature it can read without confusion.</div><p>Every interaction either deposits into or withdraws from the trust account. Handle the horse with clarity. Move slowly through sensitive areas. If the horse braces, pause and wait for the release before continuing. End every session on a note of softness. The last thing that happens is what the horse carries into tomorrow.</p>`
+        chroniclesLink: null,
+        answer: `<p>Trust is not a feeling. It is a behavior. And like all behavior, it is built through repetition — through showing up the same way, every single time, without exception. The horse that sees the same person every day, with the same calm energy, the same predictable responses, learns that this person is safe.</p><p>Start by being worth approaching. Stand in the field without an agenda. Do not walk straight at the horse — that is predator behavior. Approach at an angle. Keep your eyes soft. Breathe slowly. Let the horse come the last step. The horse that walks toward you voluntarily has made a choice. That choice is the first real brick in the wall of trust.</p><div class="answer-key">The horse does not ask you to be perfect. It asks you to be consistent. Predictable. Safe. A creature it can read without confusion.</div><p>Every interaction either deposits into or withdraws from the trust account. Handle the horse with clarity. Move slowly through sensitive areas. If the horse braces, pause and wait for the release before continuing. End every session on a note of softness. The last thing that happens is what the horse carries into tomorrow.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: How to Build Trust →</a>`
       },
       {
-        num: '04',
-        category: 'Safety & Handling',
+        num: '04', category: 'Safety & Handling',
         title: 'Why does my horse rear or buck?',
         excerpt: 'Rearing and bucking are not defiance. They are a horse saying something is very wrong.',
         scene: 4,
+        chroniclesLink: null,
         answer: `<p>Rearing and bucking are among the most dangerous behaviors a horse can display. But they are almost never acts of rebellion. They are communication — loud, desperate communication from a horse that has been trying to tell you something in quieter ways and has not been heard.</p><p>The most common cause is pain. A horse with a poorly fitting saddle, a sore back, dental issues, hock pain, or hoof discomfort may buck or rear because the pain becomes unbearable under saddle. Before you address the behavior, rule out physical causes. This is not optional. It is your responsibility.</p><p>Fear is the second major cause. A horse that feels trapped — between a rider's leg and a frightening object, or in a situation it cannot escape — may rear as a last resort. The horse is not fighting you. It is trying to survive.</p><div class="answer-key">When a horse rears or bucks, the worst thing you can do is punish it. Punishment confirms the horse's fear that the situation is dangerous and you are part of the danger.</div><p>What works: Get off if you are mounted. Give the horse space. Check for pain. Go back to groundwork. Rebuild trust in small, achievable steps. A horse that feels safe, heard, and physically comfortable has no reason to rear or buck.</p>`
       },
       {
-        num: '05',
-        category: 'Training',
+        num: '05', category: 'Training',
         title: 'How do I calm a nervous or anxious horse?',
         excerpt: 'You cannot fight a nervous system. You can only offer it something steadier.',
         scene: 5,
-        answer: `<p>The most powerful tool for calming an anxious horse is also the most underused: your own nervous system. Horses are masters of co-regulation. A frightened foal calms when it presses against its mother's side not because of any conscious decision, but because its nervous system synchronizes with hers. The same mechanism works between horse and human.</p><p>When a horse is escalating, move less, not more. Reduce stimulation in the environment. Soften your body from the inside out — release tension in your jaw, your shoulders, your hands. Breathe in a rhythm slower than the horse's current rhythm. Do not demand anything. Simply be present beside the horse with a quality of calm that is genuine, not performed.</p><div class="answer-key">You cannot fake calm to a horse. But you can practice genuine calm until it becomes the default. The horse will notice the moment it does.</div><p>Movement can also help if used correctly. Not frantic movement forced through anxiety, but deliberate, rhythmic, low-demand walking on a loose lead. This gives the horse an outlet for nervous energy without pushing it toward the thing it fears. Learn where touch calms your particular horse. For many, slow, firm strokes along the neck at the crest activate the parasympathetic nervous system. For others, touch during anxiety escalates. Know your horse.</p>`
+        chroniclesLink: null,
+        answer: `<p>The most powerful tool for calming an anxious horse is also the most underused: your own nervous system. Horses are masters of co-regulation. A frightened foal calms when it presses against its mother's side not because of any conscious decision, but because its nervous system synchronizes with hers. The same mechanism works between horse and human.</p><p>When a horse is escalating, move less, not more. Reduce stimulation in the environment. Soften your body from the inside out — release tension in your jaw, your shoulders, your hands. Breathe in a rhythm slower than the horse's current rhythm. Do not demand anything. Simply be present beside the horse with a quality of calm that is genuine, not performed.</p><div class="answer-key">You cannot fake calm to a horse. But you can practice genuine calm until it becomes the default. The horse will notice the moment it does.</div><p>Movement can also help if used correctly. Not frantic movement forced through anxiety, but deliberate, rhythmic, low-demand walking on a loose lead. This gives the horse an outlet for nervous energy without pushing it toward the thing it fears. Learn where touch calms your particular horse. For many, slow, firm strokes along the neck at the crest activate the parasympathetic nervous system. For others, touch during anxiety escalates. Know your horse.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: How to Calm a Nervous Horse →</a>`
       },
       {
-        num: '06',
-        category: 'Trust & Relationship',
+        num: '06', category: 'Trust & Relationship',
         title: 'What are the signs my horse trusts me?',
         excerpt: 'Trust is not invisible. It is a behavior. And behavior can be read.',
         scene: 6,
-        answer: `<p>The clearest sign of trust is voluntary approach. A horse that trusts you does not need to be caught. When you enter the field, it comes to you — not for food, but because your presence is comfortable and wanted. This is the horse voting with its feet. Nothing is more unambiguous.</p><p>The second sign is the quality of relaxation in your presence. A horse that trusts you will lower its head — a gesture of complete physical relaxation from an animal whose survival depends on keeping its head up. The lowered head is a deep exhale. It means: I am safe here.</p><p>The third sign is the breathing. A horse that feels safe breathes slowly and deeply, sometimes with long, audible sighs. Sit quietly beside a horse that trusts you and listen to its breath settle. It is one of the most peaceful sounds in the world.</p><div class="answer-key">The horse that lowers its head as you approach is not being polite. It is making itself vulnerable to you. Understand what that costs a prey animal, and you will understand what trust means.</div><p>The fourth sign is physical softness. A horse that trusts you will lean into your touch rather than away from it. It will allow you to handle its feet, its ears, its face without brace or resistance. This is not the stillness of a horse that has given up. It is the softness of a horse that genuinely does not feel the need to protect itself from you.</p>`
+        chroniclesLink: null,
+        answer: `<p>The clearest sign of trust is voluntary approach. A horse that trusts you does not need to be caught. When you enter the field, it comes to you — not for food, but because your presence is comfortable and wanted. This is the horse voting with its feet. Nothing is more unambiguous.</p><p>The second sign is the quality of relaxation in your presence. A horse that trusts you will lower its head — a gesture of complete physical relaxation from an animal whose survival depends on keeping its head up. The lowered head is a deep exhale. It means: I am safe here.</p><p>The third sign is the breathing. A horse that feels safe breathes slowly and deeply, sometimes with long, audible sighs. Sit quietly beside a horse that trusts you and listen to its breath settle. It is one of the most peaceful sounds in the world.</p><div class="answer-key">The horse that lowers its head as you approach is not being polite. It is making itself vulnerable to you. Understand what that costs a prey animal, and you will understand what trust means.</div><p>The fourth sign is physical softness. A horse that trusts you will lean into your touch rather than away from it. It will allow you to handle its feet, its ears, its face without brace or resistance. This is not the stillness of a horse that has given up. It is the softness of a horse that genuinely does not feel the need to protect itself from you.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: Signs of Trust →</a>`
       },
       {
-        num: '07',
-        category: 'Behavior',
+        num: '07', category: 'Behavior',
         title: 'Why does my horse bite or kick?',
         excerpt: 'Biting and kicking are not aggression. They are a horse that has run out of quieter ways to speak.',
         scene: 7,
-        answer: `<p>Horses do not bite or kick without reason. These behaviors are almost always the final stage of communication — the loudest message from a horse that has been trying to tell you something in subtler ways and has been consistently ignored. Ears pinned. Tail swishing. Body tensing. Head turning away. All of these came before the bite or the kick. You just did not see them.</p><p>Pain is the most common underlying cause. A horse with gastric ulcers may bite when girthed. A horse with a sore hip may kick when the hind leg is handled. Before labeling a horse as aggressive, rule out physical causes thoroughly.</p><div class="answer-key">A horse that bites was not born mean. It learned that biting is the only message strong enough to make a human stop doing something painful or frightening.</div><p>What you can do: Learn to read the early warning signs. Pinned ears, a swishing tail, a hard eye, a tightened jaw — these are not the explosion. They are the warning before it. Respond to the warning by stepping back, assessing what the horse is reacting to, and addressing the cause. Never punish a horse for communicating. Punish the communication, and the horse will stop warning you before it bites or kicks — making the behavior far more dangerous.</p>`
+        chroniclesLink: null,
+        answer: `<p>Horses do not bite or kick without reason. These behaviors are almost always the final stage of communication — the loudest message from a horse that has been trying to tell you something in subtler ways and has been consistently ignored. Ears pinned. Tail swishing. Body tensing. Head turning away. All of these came before the bite or the kick. You just did not see them.</p><p>Pain is the most common underlying cause. A horse with gastric ulcers may bite when girthed. A horse with a sore hip may kick when the hind leg is handled. Before labeling a horse as aggressive, rule out physical causes thoroughly.</p><div class="answer-key">A horse that bites was not born mean. It learned that biting is the only message strong enough to make a human stop doing something painful or frightening.</div><p>What you can do: Learn to read the early warning signs. Pinned ears, a swishing tail, a hard eye, a tightened jaw — these are not the explosion. They are the warning before it. Respond to the warning by stepping back, assessing what the horse is reacting to, and addressing the cause. Never punish a horse for communicating. Punish the communication, and the horse will stop warning you before it bites or kicks — making the behavior far more dangerous.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: Reading Body Language →</a>`
       },
       {
-        num: '08',
-        category: 'Safety & Handling',
+        num: '08', category: 'Safety & Handling',
         title: 'How should I approach a horse for the first time?',
         excerpt: 'There is no second first meeting. What you bring to that moment, the horse will remember.',
         scene: 8,
-        answer: `<p>The first impression you make on a horse is permanent. Everything you bring — your speed, your energy, the tension in your hands, the quality of your breath — the horse will carry forward into every interaction that follows. Getting it right is not about experience. It is about presence.</p><p>Never walk straight at a horse from the front with direct eye contact. This is predator behavior. Every cell in the horse's body reads this signal as a threat. Instead, approach at an angle. Let your path be curved, not straight. Soften your gaze. Move at a pace that is slower than your habitual pace — deliberate, unhurried, as if you have nowhere more important to be.</p><div class="answer-key">Walk toward a horse the way you would approach a sleeping child — with the understanding that how you arrive is already a conversation.</div><p>Approach from the side, toward the shoulder, where the horse can see you clearly. Speak softly. Let the horse turn toward you and acknowledge you before you close the final distance. When you are close enough, pause. Let the horse come the last step — even if it is just a nose stretched in your direction. That small offering of choice matters enormously. Your hands are the first language you speak. Make sure they are soft, warm, and listening.</p>`
+        chroniclesLink: null,
+        answer: `<p>The first impression you make on a horse is permanent. Everything you bring — your speed, your energy, the tension in your hands, the quality of your breath — the horse will carry forward into every interaction that follows. Getting it right is not about experience. It is about presence.</p><p>Never walk straight at a horse from the front with direct eye contact. This is predator behavior. Every cell in the horse's body reads this signal as a threat. Instead, approach at an angle. Let your path be curved, not straight. Soften your gaze. Move at a pace that is slower than your habitual pace — deliberate, unhurried, as if you have nowhere more important to be.</p><div class="answer-key">Walk toward a horse the way you would approach a sleeping child — with the understanding that how you arrive is already a conversation.</div><p>Approach from the side, toward the shoulder, where the horse can see you clearly. Speak softly. Let the horse turn toward you and acknowledge you before you close the final distance. When you are close enough, pause. Let the horse come the last step — even if it is just a nose stretched in your direction. That small offering of choice matters enormously. Your hands are the first language you speak. Make sure they are soft, warm, and listening.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: First Time Handling →</a>`
       },
       {
-        num: '09',
-        category: 'Training',
+        num: '09', category: 'Training',
         title: 'How do horses think differently from humans?',
         excerpt: 'Until you understand the equine mind, everything else is guesswork.',
         scene: 9,
-        answer: `<p>Horses do not think in words. They do not sort their experience into reasons or explanations. They think in pictures, in feelings, in what is happening right now. A horse scared once by a white plastic bag does not remember that plastic bags are scary. It remembers the exact feeling of that moment — the sudden movement, the crinkle of sound, the rush of fear — and when it sees another plastic bag, it does not think. It simply feels the same feeling, and the body moves.</p><p>This is not stupidity. This is intelligence so sharp, so finely made, that it has kept horses alive for millions of years. A prey animal that had to stop and think before running did not survive long enough to have offspring. The horses alive today are the children of those who felt danger and moved before the thinking mind could catch up.</p><div class="answer-key">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind built for a world where a single mistake means death.</div><p>Horses live entirely in the present moment. They are not worrying about tomorrow. They are not replaying yesterday. They are here, now, fully alive in this breath. This is why your inner state matters so much. The horse reads your tension, your breath, your intention — not your words. You cannot hide from a horse. And that honesty, once you learn to work with it rather than against it, is the greatest gift horsemanship offers.</p>`
+        chroniclesLink: null,
+        answer: `<p>Horses do not think in words. They do not sort their experience into reasons or explanations. They think in pictures, in feelings, in what is happening right now. A horse scared once by a white plastic bag does not remember that plastic bags are scary. It remembers the exact feeling of that moment — the sudden movement, the crinkle of sound, the rush of fear — and when it sees another plastic bag, it does not think. It simply feels the same feeling, and the body moves.</p><p>This is not stupidity. This is intelligence so sharp, so finely made, that it has kept horses alive for millions of years. A prey animal that had to stop and think before running did not survive long enough to have offspring. The horses alive today are the children of those who felt danger and moved before the thinking mind could catch up.</p><div class="answer-key">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind built for a world where a single mistake means death.</div><p>Horses live entirely in the present moment. They are not worrying about tomorrow. They are not replaying yesterday. They are here, now, fully alive in this breath. This is why your inner state matters so much. The horse reads your tension, your breath, your intention — not your words. You cannot hide from a horse. And that honesty, once you learn to work with it rather than against it, is the greatest gift horsemanship offers.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: Horse Psychology →</a>`
       },
       {
-        num: '10',
-        category: 'Fear & Anxiety',
+        num: '10', category: 'Fear & Anxiety',
         title: 'Why does my horse refuse to load into a trailer?',
         excerpt: 'A horse that will not load is not being difficult. It is being honest about its fear.',
         scene: 10,
+        chroniclesLink: null,
         answer: `<p>A horse trailer is, from the horse's perspective, a dark, enclosed, moving cave. Every instinct says: do not enter. Add to this the fact that many horses have had traumatic trailering experiences — rough driving, sharp turns, no ventilation, being tied too short or too long — and you have a recipe for genuine terror. The horse is not being stubborn. It is being a horse.</p><p>The most common mistake is trying to force the horse in. Pulling on the lead rope, tapping with a whip, or using ropes and pulleys may eventually get the horse into the trailer, but it destroys trust and confirms every fear the horse had. Next time will be worse.</p><div class="answer-key">You cannot argue a horse out of its fear. You can only give it enough safe experiences to outweigh the ones that were not.</div><p>What works: Make the trailer a place of rest, not pressure. Park it in the field and let the horse investigate it on its own time. Feed near it. Then inside it — without closing the door. Build positive associations over days or weeks, not hours. When the horse loads voluntarily, do not immediately drive away. Let it load, stand quietly, and unload. Repeat. Trust cannot be rushed. The horse that walks into the trailer with a low head and a soft eye is a horse that trusts you more than it fears the dark space.</p>`
       },
       {
-        num: '11',
-        category: 'Safety & Handling',
+        num: '11', category: 'Safety & Handling',
         title: 'How do I know if my horse is in pain?',
         excerpt: 'Horses hide pain. By the time you see it, it has been there for weeks.',
         scene: 11,
+        chroniclesLink: null,
         answer: `<p>As prey animals, horses have evolved to conceal weakness. In the wild, a visibly injured horse is the first one targeted by predators. This means that by the time a horse is displaying obvious behavioral signs of pain, it has likely been suffering in silence for a considerable period.</p><p>The early signs are subtle. A slight change in performance — not wanting to pick up one lead, being stiff on one rein, rushing downhill. A shift in attitude — the horse that was previously willing becomes reluctant. Physical cues like a tight jaw, a hard eye, flinching when girthed, or standing with one hind leg slightly rested more often than usual.</p><div class="answer-key">Before you train the resistance out, make sure the resistance is not the horse asking for help.</div><p>Common sources of pain include the back (poor saddle fit), the hocks (arthritis), the teeth (sharp edges causing mouth pain), the feet (laminitis, abscesses, navicular), and the stomach (gastric ulcers are epidemic in domestic horses). If your horse's behavior changes — especially suddenly — your first call should be to a veterinarian, not a trainer. A horse in pain cannot learn. It can only endure.</p>`
       },
       {
-        num: '12',
-        category: 'Trust & Relationship',
+        num: '12', category: 'Trust & Relationship',
         title: 'Can a horse really bond with a human?',
         excerpt: 'Yes. But not the way most people think. A horse bonds through trust, not affection.',
         scene: 12,
+        chroniclesLink: null,
         answer: `<p>Yes. Absolutely. But it is not the sentimental, Disney version of bonding that many people imagine. Horses do not bond through treats or baby talk or the projection of human emotions onto them. They bond through trust. And trust, for a prey animal, is the most significant decision it can make. It is staking its survival on you.</p><p>When a horse bonds with a human, it is because that human has proven — over hundreds of interactions, across thousands of small moments — that they are safe. Consistent. Predictable. The horse's nervous system has learned to use the human's calm as a reference point. In the absence of horse companions, many horses will transfer their herd bonding to a human. They are not being sentimental. They are doing what their biology requires — finding something to trust.</p><div class="answer-key">When a horse turns to you in fear instead of running from you, you have become its herd. That is the whole of horsemanship.</div><p>The signs are unmistakable once you have seen them. The horse that seeks you out in the field — not for food, but simply to stand beside you. The horse that lowers its head and sighs when you approach. The horse that, when frightened, looks at you before deciding whether to run. These are not trained behaviors. They are the natural expression of a bond built on trust. And that bond, when it is real, is one of the most profound relationships a human being can experience.</p>`
       }
     ];
 
     // ═══════════════════════════════════════════════
-    // BUILD QUESTION CARDS
+    // BUILD CARDS
     // ═══════════════════════════════════════════════
     const grid = document.getElementById('questionsGrid');
-    questions.forEach((q, i) => {
-      const card = document.createElement('div');
-      card.className = 'q-card';
-      card.innerHTML = `
-        <span class="q-card-category">${q.category}</span>
-        <span class="q-card-num">${q.num}</span>
-        <h3 class="q-card-title">${q.title}</h3>
-        <p class="q-card-excerpt">${q.excerpt}</p>
-        <span class="q-card-arrow">Read Answer →</span>
-      `;
-      card.addEventListener('click', () => openAnswer(i));
-      grid.appendChild(card);
-    });
+    let cardElements = [];
 
-    // Scroll reveal
-    const cardObserver = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          cardObserver.unobserve(e.target);
-        }
+    function buildCards(filteredQuestions) {
+      grid.innerHTML = '';
+      cardElements = [];
+      if (filteredQuestions.length === 0) {
+        grid.innerHTML = '<div class="no-results">No questions match your search</div>';
+        return;
+      }
+      filteredQuestions.forEach((q, i) => {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        card.setAttribute('data-category', q.category);
+        card.setAttribute('data-num', q.num);
+        card.innerHTML = `
+          <span class="q-card-category">${q.category}</span>
+          <span class="q-card-num">${q.num}</span>
+          <h3 class="q-card-title">${q.title}</h3>
+          <p class="q-card-excerpt">${q.excerpt}</p>
+          <span class="q-card-arrow">Read Answer →</span>
+        `;
+        card.addEventListener('click', () => {
+          const realIndex = questions.findIndex(oq => oq.num === q.num);
+          openAnswer(realIndex);
+        });
+        grid.appendChild(card);
+        cardElements.push(card);
+        setTimeout(() => card.classList.add('visible'), i * 60);
       });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.q-card').forEach(c => cardObserver.observe(c));
+    }
+
+    buildCards(questions);
+
+    // ═══════════════════════════════════════════════
+    // SEARCH
+    // ═══════════════════════════════════════════════
+    const searchInput = document.getElementById('faqSearch');
+    let activeFilter = 'all';
+
+    function filterQuestions() {
+      const query = searchInput.value.toLowerCase().trim();
+      let filtered = questions;
+      if (activeFilter !== 'all') {
+        filtered = filtered.filter(q => q.category === activeFilter);
+      }
+      if (query) {
+        filtered = filtered.filter(q =>
+          q.title.toLowerCase().includes(query) ||
+          q.excerpt.toLowerCase().includes(query) ||
+          q.category.toLowerCase().includes(query) ||
+          q.answer.toLowerCase().includes(query)
+        );
+      }
+      buildCards(filtered);
+    }
+
+    searchInput.addEventListener('input', filterQuestions);
+
+    // ═══════════════════════════════════════════════
+    // CATEGORY FILTERS
+    // ═══════════════════════════════════════════════
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.getAttribute('data-filter');
+        filterQuestions();
+      });
+    });
 
     // ═══════════════════════════════════════════════
     // ANSWER PANEL
@@ -961,13 +1207,11 @@
       currentQ = i;
       const q = questions[i];
       activeScene = q.scene;
-
-      // Update hero text
       document.getElementById('heroTitle').innerHTML = q.title.split('?')[0] + '<span class="gold">?</span>';
       document.getElementById('heroTagline').textContent = q.excerpt;
-
-      // Highlight active card
-      document.querySelectorAll('.q-card').forEach((c, idx) => c.classList.toggle('active', idx === i));
+      document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+      const activeCard = document.querySelector(`.q-card[data-num="${q.num}"]`);
+      if (activeCard) activeCard.classList.add('active');
 
       answerContent.innerHTML = `
         <span class="answer-num">Question ${q.num} · ${q.category}</span>
@@ -979,7 +1223,6 @@
           <button class="answer-nav-btn" id="answerNext">Next →</button>
         </div>
       `;
-
       document.getElementById('answerPrev').addEventListener('click', () => {
         const prev = (currentQ - 1 + questions.length) % questions.length;
         openAnswer(prev);
