@@ -7,19 +7,27 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="genesis.css" />
 </head>
 <body>
-  <div class="bg-layer" aria-hidden="true">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-    <div class="ring"></div>
+
+  <!-- 3D Canvas Background -->
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <!-- Atmospheric layers -->
+  <div class="atmosphere" aria-hidden="true">
+    <div class="atm-orb atm-orb1"></div>
+    <div class="atm-orb atm-orb2"></div>
+    <div class="atm-orb atm-orb3"></div>
+    <div class="atm-ring atm-ring1"></div>
+    <div class="atm-ring atm-ring2"></div>
+    <div class="grain"></div>
   </div>
 
-  <header class="top-nav">
+  <!-- Navigation -->
+  <header class="top-nav" id="topNav">
     <a href="index.html" class="brand">The Horseman's Journal</a>
     <nav>
       <a href="index.html">Home</a>
@@ -29,111 +37,394 @@
       <a href="essays.html">Essays</a>
       <a href="about.html">About</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <section class="genesis" id="awakening">
-    <div class="genesis-header reveal">
-      <span class="genesis-eyebrow">The Story Behind the Journal</span>
-      <div class="header-ornament">
-        <div class="orn-line"></div><div class="orn-gem"></div><div class="orn-line r"></div>
+  <!-- ═══════════════════════════════════════════
+       SECTION 0 — LANDING / HERO
+  ═══════════════════════════════════════════ -->
+  <section class="section-hero" id="hero" data-section="0">
+    <div class="hero-inner">
+      <div class="hero-eyebrow reveal-up">The Story Behind the Journal</div>
+      <div class="hero-ornament reveal-up delay-1">
+        <div class="orn-line"></div>
+        <div class="orn-gem"></div>
+        <div class="orn-line orn-line-r"></div>
       </div>
-      <h1 class="genesis-title">Genesis</h1>
-      <span class="genesis-author">by Praveen Kumar</span>
+      <h1 class="hero-title reveal-up delay-2">
+        <span class="hero-title-word">Genesis</span>
+      </h1>
+      <div class="hero-subtitle reveal-up delay-3">by Praveen Kumar</div>
+      <div class="hero-lore reveal-up delay-4">
+        Eleven years. One black stallion. One moment of surrender.
+      </div>
+      <a href="#ch1" class="hero-scroll-cta reveal-up delay-5">
+        <span>Begin the Story</span>
+        <div class="cta-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+      </a>
     </div>
-
-    <div class="chapters">
-      <article class="chapter reveal" id="ch1">
-        <div class="chapter-header">
-          <span class="chapter-num">Chapter I</span><div class="chapter-line"></div><span class="chapter-title-label">Eleven Years</span>
-        </div>
-        <div class="chapter-body">
-          <p class="dropcap">For eleven years I have lived inside the world of horses. Stallions, warmbloods, creatures of instinct and grace. They remade me from the inside.</p>
-          <p>Horsemanship was never about force. It was learning to stand without fear and becoming the kind of man a thousand-pound animal chooses to trust.</p>
-          <p>I am ordinary. Quiet. But with horses, I could breathe. In their presence, life finally made sense.</p>
-          <p>For years I trained with hidden urgency. The horses obeyed, yet they did not fully rest in my presence.</p>
-        </div>
-      </article>
-
-      <div class="chapter-divider">
-        <div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div>
-      </div>
-
-      <article class="chapter reveal" id="ch2">
-        <div class="chapter-header">
-          <span class="chapter-num">Chapter II</span><div class="chapter-line"></div><span class="chapter-title-label">The Black Stallion</span>
-        </div>
-        <div class="chapter-body">
-          <p class="dropcap">Then the Black Stallion arrived. Four years old. Barely schooled. A living storm wrapped in midnight muscle.</p>
-          <p>He read me with an honesty that cut through every mask I wore.</p>
-          <div class="pullquote">The universe had not sent me a horse to train. It had sent me a mirror that refused to lie.</div>
-          <p>Inside a small fifteen-meter circle, fear lived quietly in both of us every day.</p>
-        </div>
-      </article>
-
-      <div class="chapter-divider">
-        <div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div>
-      </div>
-
-      <article class="chapter reveal" id="ch3">
-        <div class="chapter-header">
-          <span class="chapter-num">Chapter III</span><div class="chapter-line"></div><span class="chapter-title-label">The Storm</span>
-        </div>
-        <div class="chapter-body">
-          <p class="dropcap">He tried to run. I stopped him. He exploded forward and dragged me through the dirt.</p>
-          <p>Later I let him move freely. When the storm passed, he came back on his own.</p>
-          <p>I shouted one day, blamed him, and walked away. I thought I was done forever.</p>
-          <div class="pullquote">But I stayed.</div>
-        </div>
-      </article>
-
-      <div class="chapter-divider">
-        <div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div>
-      </div>
-
-      <article class="chapter reveal" id="ch4">
-        <div class="chapter-header">
-          <span class="chapter-num">Chapter IV</span><div class="chapter-line"></div><span class="chapter-title-label">The Surrender</span>
-        </div>
-        <div class="chapter-body">
-          <p class="dropcap">I stopped performing. I stopped correcting. I watched.</p>
-          <p>When I returned, I did not try to fix him. I stayed close, quiet, present.</p>
-          <div class="pullquote">A horse does not react to your hands first. He reacts to your inner state.</div>
-          <p>I began rewarding willingness instead of forcing response. He began changing on his own.</p>
-        </div>
-      </article>
-
-      <div class="chapter-divider">
-        <div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div>
-      </div>
-
-      <article class="chapter reveal" id="ch5">
-        <div class="chapter-header">
-          <span class="chapter-num">Chapter V</span><div class="chapter-line"></div><span class="chapter-title-label">The Bond</span>
-        </div>
-        <div class="chapter-body">
-          <p class="dropcap">Today, when he sees me, he calls out. He leans into me. He rests his head and exhales trust.</p>
-          <p>I thought I was training him. The truth is he was training me.</p>
-          <p>With him, I am finally clear. That has always been enough.</p>
-        </div>
-      </article>
-
-      <div class="chapter-divider">
-        <div class="cdiv-line"></div><div class="cdiv-center"><div class="cdiv-diamond"></div><div class="cdiv-diamond big"></div><div class="cdiv-diamond"></div></div><div class="cdiv-line r"></div>
-      </div>
-
-      <article class="chapter reveal" id="ch6">
-        <div class="closing-verse">
-          <p>Eleven years of searching. One black stallion. One moment of surrender.</p>
-          <p>He did not just teach me how to train horses.<br />He taught me how to train myself.</p>
-          <p><em>I am exactly where I belong.</em></p>
-          <p class="closing-gold">It is everything.</p>
-          <span class="closing-symbol">🖤 🐴</span>
-        </div>
-      </article>
-    </div>
-
-    <div class="genesis-bottom-fade"></div>
+    <div class="hero-horse-shadow" aria-hidden="true">🐴</div>
   </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — CHAPTER I: ELEVEN YEARS
+  ═══════════════════════════════════════════ -->
+  <section class="chapter-section" id="ch1" data-section="1">
+    <div class="chapter-frame">
+      <div class="chapter-number-bg" aria-hidden="true">I</div>
+      <div class="chapter-content">
+        <div class="chapter-tag reveal-up">
+          <span class="chapter-label">Chapter I</span>
+          <div class="tag-line"></div>
+          <span class="chapter-name">Eleven Years</span>
+        </div>
+
+        <div class="chapter-text reveal-up delay-1">
+          <p class="dropcap">For eleven years I have lived inside the world of horses. Stallions, warmbloods, creatures of instinct and ancient grace who have no use for pretense. They remade me, slowly, from the inside out, without asking permission and without offering explanations.</p>
+
+          <p>I came to them ordinary. Quiet in a way that felt like smallness rather than strength. The world outside the stable never quite felt like a place I was built for. But inside that world, surrounded by warmth and breath and the particular weight of a thousand-pound animal standing still beside you, something in me could finally exhale.</p>
+
+          <p>Horsemanship taught me that strength was never the point. What a horse asks for has nothing to do with dominance or performance. It asks you to stand without fear, to be consistent without agenda, to become the kind of presence an intelligent creature of pure instinct chooses to trust. That is a much harder thing than it sounds.</p>
+
+          <p>For seven or eight of those eleven years, I trained with a hidden tension in every movement. My hands were soft. My voice was low. I never raised a fist in anger. But inside every gentle correction lived a quiet need to make things perfect, to shape the moment into something flawless, to prove something I could not even name.</p>
+
+          <p>The horses obeyed. Mostly. They performed. But when the work was done and the lead rope went slack, they never turned toward me. They never sought the curve of my shoulder or the open cradle of my palms. Something was always held back, on both sides of that invisible line between us.</p>
+
+          <p>I did not understand it then. I thought I was doing everything right. But a horse reads what is underneath the gesture, not the gesture itself. And what was underneath mine, all those years, was a man who had never fully learned to rest.</p>
+        </div>
+      </div>
+
+      <div class="chapter-visual ch1-visual" aria-hidden="true">
+        <div class="visual-ring v-ring1"></div>
+        <div class="visual-ring v-ring2"></div>
+        <div class="visual-ring v-ring3"></div>
+        <div class="visual-text">XI</div>
+        <div class="visual-label">Years</div>
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#hero" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+      <a href="#ch2" class="snav-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — CHAPTER II: THE BLACK STALLION
+  ═══════════════════════════════════════════ -->
+  <section class="chapter-section section-dark-alt" id="ch2" data-section="2">
+    <div class="chapter-frame chapter-frame-reversed">
+      <div class="chapter-content">
+        <div class="chapter-tag reveal-up">
+          <span class="chapter-label">Chapter II</span>
+          <div class="tag-line"></div>
+          <span class="chapter-name">The Black Stallion</span>
+        </div>
+
+        <div class="chapter-text reveal-up delay-1">
+          <p class="dropcap">Then the black stallion arrived, and everything changed.</p>
+
+          <p>He was four years old. Barely schooled. A living storm wrapped in midnight muscle and something older than training, older than language. He moved through the world as though every object in it was a question worth examining and every person in it might, at any moment, become a danger worth calculating.</p>
+
+          <p>He was not stubborn. He was honest. There is a large difference, and it took me months to understand it. A stubborn horse is refusing. An honest horse is telling you the truth about something you did not want to hear.</p>
+
+          <blockquote class="pullquote reveal-up delay-2">
+            The universe had not sent me a horse to train. It had sent me a mirror that refused to lie, no matter how gently I tried to adjust the angle.
+          </blockquote>
+
+          <p>From the first day, he read me with a precision that cut through every mask I had carefully constructed over years of training. The tension I hid behind soft hands, he felt. The agenda behind my patient voice, he heard. The need behind my quiet presence, he knew.</p>
+
+          <p>Inside a fifteen-meter circle, every morning, the two of us faced each other across a distance that was never just about feet or meters. It was about everything I was carrying that I had not yet learned to put down.</p>
+
+          <p>Fear lived in that circle. Not only his. Mine too. And for the first time in eleven years, I could not hide it well enough to fool the one who mattered.</p>
+        </div>
+      </div>
+
+      <div class="chapter-visual ch2-visual" aria-hidden="true">
+        <div class="stallion-shape">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(212,175,55,0.35)"/>
+                <stop offset="100%" stop-color="rgba(212,175,55,0)"/>
+              </radialGradient>
+            </defs>
+            <circle cx="100" cy="100" r="95" fill="url(#sg)" stroke="rgba(212,175,55,0.2)" stroke-width="0.5"/>
+            <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(212,175,55,0.12)" stroke-width="0.5"/>
+            <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="0.5"/>
+            <text x="100" y="108" text-anchor="middle" font-family="Cinzel Decorative, serif" font-size="28" fill="rgba(212,175,55,0.8)" letter-spacing="2">🐴</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#ch1" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+      <a href="#ch3" class="snav-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — CHAPTER III: THE STORM
+  ═══════════════════════════════════════════ -->
+  <section class="chapter-section" id="ch3" data-section="3">
+    <div class="chapter-frame">
+      <div class="chapter-number-bg" aria-hidden="true">III</div>
+      <div class="chapter-content">
+        <div class="chapter-tag reveal-up">
+          <span class="chapter-label">Chapter III</span>
+          <div class="tag-line"></div>
+          <span class="chapter-name">The Storm</span>
+        </div>
+
+        <div class="chapter-text reveal-up delay-1">
+          <p class="dropcap">One day, he leapt in panic and dragged me across the earth.</p>
+
+          <p>The rope burned into my palms. The ground came up hard. For those seconds, I was certain this was the end of something, though I could not yet say what. He was not being cruel. He was afraid. But fear in a thousand-pound animal does not pause to make that distinction clear.</p>
+
+          <p>Two fears had collided in that moment. His fear of harm, ancient and animal and legitimate. And mine, which was older and stranger and harder to name. The pounding heart. The shame of falling. The loneliness of feeling wrong in a world that never quite had room for you.</p>
+
+          <p>I could have tightened the rope. I could have corrected him back into order, the way training manuals say you should, firmly and without hesitation. Instead, something inside me, something that had been carrying too much for too long, said: no more of this.</p>
+
+          <blockquote class="pullquote reveal-up delay-2">
+            I was exhausted. Exhausted of shaping. Exhausted of control dressed up as gentleness. Exhausted of always trying to force the moment into something it was not ready to be.
+          </blockquote>
+
+          <p>I let him move. When the storm passed through his body and the circle went quiet, he came back on his own. Ears forward. Eyes soft. He stood next to me as though nothing had happened, and in his stillness I heard something I had never heard before from any horse or any training system or any book. He was offering me something. Freely. Without being asked.</p>
+
+          <p>Months later came a day I remember differently. He reared high and walked on his hind legs and leapt clean over me, and in that single suspended moment of terror I understood something that changed everything. I was not afraid of what he would do to me. I was afraid of what might happen to him. I could not lose that horse. The thought was so clear and so complete that it cut through all the noise of eleven years in a single breath.</p>
+
+          <p>I went home that night and stayed away for twenty days. I cursed myself in ways I will not repeat. I told myself it was over. That I was finished. That whatever I had tried to build across all those years of early mornings and calloused hands had finally proved what I always feared: that I was not enough for it.</p>
+        </div>
+      </div>
+
+      <div class="chapter-visual ch3-visual" aria-hidden="true">
+        <div class="storm-lines">
+          <div class="sl sl1"></div>
+          <div class="sl sl2"></div>
+          <div class="sl sl3"></div>
+          <div class="sl sl4"></div>
+          <div class="sl sl5"></div>
+        </div>
+        <div class="storm-number">III</div>
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#ch2" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+      <a href="#ch4" class="snav-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4 — CHAPTER IV: THE TWENTY DAYS
+  ═══════════════════════════════════════════ -->
+  <section class="chapter-section section-dark-alt" id="ch4" data-section="4">
+    <div class="chapter-frame chapter-frame-reversed">
+      <div class="chapter-content">
+        <div class="chapter-tag reveal-up">
+          <span class="chapter-label">Chapter IV</span>
+          <div class="tag-line"></div>
+          <span class="chapter-name">The Twenty Days</span>
+        </div>
+
+        <div class="chapter-text reveal-up delay-1">
+          <p class="dropcap">But I kept going back.</p>
+
+          <p>Seven times, eight times, across those twenty days of telling myself I was done, I forced myself to walk out to where he was and stand near him. I could barely breathe when I did it. My chest felt like something was pressing from the inside. The pain of it was real, physical, the kind of grief that does not ask permission before it sits down in your body.</p>
+
+          <p>And every time I went, he showed me something. He raised his head in exactly the way I had spent months rewarding. That particular lift, that small gesture of pride and recognition, the one we had built together through patient repetition and quiet reward. He still remembered. He was still doing it. For me. As if he was saying: I know you are struggling. I am here. I remember what we made together.</p>
+
+          <p>I did not understand it fully in those moments. I thought I was broken beyond repair. I could not see clearly enough through the anger and the disappointment and the fear to recognize what was actually happening: he was waiting for me. Not the trained version of me. Not the performing version. The real one.</p>
+
+          <blockquote class="pullquote reveal-up delay-2">
+            On the twentieth day, I stopped running. I stood next to him with my heart pounding so hard it felt like fists against my ribs from the inside. My mind was chaos. My body stayed.
+          </blockquote>
+
+          <p>Present. Alert. Working. Giving the aids. Waiting. Rewarding. The body knows things the mind forgets when it is shouting. My hands softened without being told to. My breathing slowed without being managed. The work continued. And in continuing, something I had been unable to name began, quietly, to shift.</p>
+        </div>
+      </div>
+
+      <div class="chapter-visual ch4-visual" aria-hidden="true">
+        <div class="days-counter">
+          <div class="dc-number">20</div>
+          <div class="dc-label">Days</div>
+          <div class="dc-subtext">of returning</div>
+        </div>
+        <div class="days-dots">
+          <div class="dd dd1"></div><div class="dd dd2"></div><div class="dd dd3"></div><div class="dd dd4"></div><div class="dd dd5"></div>
+          <div class="dd dd6"></div><div class="dd dd7"></div><div class="dd dd8"></div><div class="dd dd9"></div><div class="dd dd10"></div>
+          <div class="dd dd11"></div><div class="dd dd12"></div><div class="dd dd13"></div><div class="dd dd14"></div><div class="dd dd15"></div>
+          <div class="dd dd16"></div><div class="dd dd17"></div><div class="dd dd18"></div><div class="dd dd19"></div><div class="dd dd20 dd-gold"></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#ch3" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+      <a href="#ch5" class="snav-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5 — CHAPTER V: THE SURRENDER
+  ═══════════════════════════════════════════ -->
+  <section class="chapter-section" id="ch5" data-section="5">
+    <div class="chapter-frame">
+      <div class="chapter-number-bg" aria-hidden="true">V</div>
+      <div class="chapter-content">
+        <div class="chapter-tag reveal-up">
+          <span class="chapter-label">Chapter V</span>
+          <div class="tag-line"></div>
+          <span class="chapter-name">The Surrender</span>
+        </div>
+
+        <div class="chapter-text reveal-up delay-1">
+          <p class="dropcap">I stopped performing. I stopped correcting. I watched.</p>
+
+          <p>A horse does not react to your hands first. He reacts to your inner state, to what is beneath the hands, beneath the voice, beneath the careful posture. What I had been giving him for years was technique wrapped around tension. What I began to give him instead was silence. Real silence. The kind that is not absence but presence without demand.</p>
+
+          <p>I stayed calm on the outside while everything inside was loud. That was the practice. Not pretending the fear was gone, but refusing to let it leak through as threat or correction or tightened grip. I observed without reacting. I listened, and then I acted. With intelligence rather than reflex. With effort rather than impulse.</p>
+
+          <p>I gave him space to choose. And the extraordinary thing, the thing I had not been able to give him before in eleven years of training and intention and genuine love for horses, was that when I stopped insisting on the correct response, he began finding it himself. Instinctively. Slowly. Not perfectly. But freely.</p>
+
+          <blockquote class="pullquote reveal-up delay-2">
+            A horse does not react to your hands first. He reacts to your inner state. What I had been giving him for years was technique wrapped around tension.
+          </blockquote>
+
+          <p>When he tried, even the smallest flicker of willingness, I answered with reward. Carrots sweet on his tongue. Feed scattered in the dirt like quiet blessings. And above all, the slow deliberate scratching along his neck and withers and chest that became our private language. Those scratches said what no training cue had ever been able to say clearly enough: you are good. You are seen. You are safe here.</p>
+
+          <p>Slowly, across days and weeks of returning to that same quiet, he began to believe it.</p>
+
+          <p>My only real mistake across all of it was misunderstanding him. His rears were never threats. They were questions. Requests. Sometimes pure play. And I had been answering them as though they were aggression, as though he was something to be managed rather than someone to be understood.</p>
+        </div>
+      </div>
+
+      <div class="chapter-visual ch5-visual" aria-hidden="true">
+        <div class="surrender-spiral">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 100 100 m 0 -70 a 70 70 0 1 1 -0.1 0" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/>
+            <path d="M 100 100 m 0 -50 a 50 50 0 1 1 -0.1 0" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="0.5"/>
+            <path d="M 100 100 m 0 -30 a 30 30 0 1 1 -0.1 0" fill="none" stroke="rgba(212,175,55,0.35)" stroke-width="0.5"/>
+            <text x="100" y="106" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="rgba(212,175,55,0.6)" letter-spacing="3">SURRENDER</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#ch4" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+      <a href="#ch6" class="snav-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 6 — CHAPTER VI: THE BOND
+  ═══════════════════════════════════════════ -->
+  <section class="chapter-section section-dark-alt" id="ch6" data-section="6">
+    <div class="chapter-frame chapter-frame-reversed">
+      <div class="chapter-content">
+        <div class="chapter-tag reveal-up">
+          <span class="chapter-label">Chapter VI</span>
+          <div class="tag-line"></div>
+          <span class="chapter-name">The Bond</span>
+        </div>
+
+        <div class="chapter-text reveal-up delay-1">
+          <p class="dropcap">He beats the door until I come.</p>
+
+          <p>He moves the moment he sees me crossing the yard. He calls out when I have been away too long, that particular sound that is not fear and not hunger but something else entirely, the sound of a creature that has decided you are worth calling for. He chooses me, freely, over everything else in his world.</p>
+
+          <p>I thought, across all those years, that I was training him. The truth was always the other way around. He was patient with me in ways I had not yet learned to be patient with myself. He waited while I broke open and put myself back together, and when I finally arrived as something closer to whole, he was still there. Still recognizing me. Still choosing.</p>
+
+          <p>Through him I learned to see things I had been unable to see before. The way tension moves through a body before the body knows it is tense. The difference between an action and an intention. The space between a request and a demand. The particular quality of stillness that a creature feels as safe compared to the stillness that feels like the quiet before something goes wrong.</p>
+
+          <blockquote class="pullquote reveal-up delay-2">
+            I thought I was training him. The truth is he was training me, with more patience and more honesty than I had ever managed to give myself.
+          </blockquote>
+
+          <p>He lifted his legs higher when he knew I was watching. Raised his head in that way that made something in my chest go still. He did not do these things because he was trained to perform them. He did them because he wanted to. Because in that circle, in that space we had built together across four years of failing and returning and failing differently and returning again, something had been made that belonged to both of us.</p>
+
+          <p>I am still afraid sometimes. Even now. Even after everything. Fear does not disappear because you have learned to work alongside it. But I stand. Not because I would lose something if I walked away. Not because training demands it. But because I refuse to abandon the one thing that has carried me through all of this. The practice. The presence. The relationship that only exists in the showing up.</p>
+        </div>
+      </div>
+
+      <div class="chapter-visual ch6-visual" aria-hidden="true">
+        <div class="bond-symbol">
+          <div class="bs-outer"></div>
+          <div class="bs-inner"></div>
+          <div class="bs-core">🖤</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#ch5" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+      <a href="#closing" class="snav-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 7 — CLOSING VERSE
+  ═══════════════════════════════════════════ -->
+  <section class="section-closing" id="closing" data-section="7">
+    <div class="closing-inner">
+      <div class="closing-ornament reveal-up">
+        <div class="co-line"></div>
+        <div class="co-diamonds">
+          <div class="co-d"></div><div class="co-d co-d-lg"></div><div class="co-d"></div>
+        </div>
+        <div class="co-line"></div>
+      </div>
+
+      <div class="closing-verse reveal-up delay-1">
+        <p>Eleven years of searching.</p>
+        <p>One black stallion who refused to let me hide.</p>
+        <p>One moment of surrender that changed everything.</p>
+      </div>
+
+      <div class="closing-break reveal-up delay-2">
+        <div class="cb-line"></div>
+      </div>
+
+      <div class="closing-lesson reveal-up delay-3">
+        <p>He did not teach me how to train horses.</p>
+        <p>He taught me how to train myself.</p>
+      </div>
+
+      <div class="closing-final reveal-up delay-4">
+        <em>I am exactly where I belong.</em>
+      </div>
+
+      <div class="closing-gold reveal-up delay-5">It is everything.</div>
+
+      <div class="closing-symbol reveal-up delay-6">
+        <span>🖤</span><span>🐴</span>
+      </div>
+
+      <div class="closing-byline reveal-up delay-7">
+        Written by Praveen Kumar
+      </div>
+    </div>
+    <div class="section-nav">
+      <a href="#ch6" class="snav-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- Chapter Progress Indicator -->
+  <div class="progress-bar" id="progressBar" aria-hidden="true">
+    <div class="pb-fill" id="pbFill"></div>
+  </div>
+
+  <!-- Chapter Nav Dots -->
+  <nav class="chapter-dots" id="chapterDots" aria-label="Chapter navigation">
+    <a href="#hero"    class="cd-dot active" data-sec="0" title="Introduction"></a>
+    <a href="#ch1"     class="cd-dot" data-sec="1" title="Chapter I"></a>
+    <a href="#ch2"     class="cd-dot" data-sec="2" title="Chapter II"></a>
+    <a href="#ch3"     class="cd-dot" data-sec="3" title="Chapter III"></a>
+    <a href="#ch4"     class="cd-dot" data-sec="4" title="Chapter IV"></a>
+    <a href="#ch5"     class="cd-dot" data-sec="5" title="Chapter V"></a>
+    <a href="#ch6"     class="cd-dot" data-sec="6" title="Chapter VI"></a>
+    <a href="#closing" class="cd-dot" data-sec="7" title="Closing"></a>
+  </nav>
 
   <script src="genesis.js"></script>
 </body>
