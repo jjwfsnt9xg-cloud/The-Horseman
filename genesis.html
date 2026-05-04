@@ -1,224 +1,808 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Genesis — The Horseman's Journal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genesis - The Horseman's Journal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* RESET & BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- MAIN NAVBAR STYLE -->
-  <link rel="stylesheet" href="css/hero.css" />
+    body {
+      background: #0a0702;
+      color: #e8dfc7;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-  <!-- GENESIS STYLE -->
-  <link rel="stylesheet" href="css/genesis.css" />
+    /* LUXURY ORBS */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb1 {
+      width: 60vw;
+      height: 60vw;
+      top: -20vh;
+      right: -20vw;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent);
+    }
+    .orb2 {
+      width: 50vw;
+      height: 50vw;
+      bottom: -15vh;
+      left: -25vw;
+      background: radial-gradient(circle, rgba(180, 130, 60, 0.08), transparent);
+    }
+    .orb3 {
+      width: 40vw;
+      height: 40vw;
+      top: 40vh;
+      left: 30vw;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.06), transparent);
+    }
 
-  <!-- FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+    /* ════════════════════════════════════════════════════════
+       LUXURY 3D NAVIGATION BAR
+    ════════════════════════════════════════════════════════ */
+    .navbar-wrapper {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      right: 25px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      perspective: 1200px;
+    }
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    .scene {
+      width: 100%;
+      max-width: 1400px;
+      transform-style: preserve-3d;
+    }
+
+    .nav3d {
+      position: relative;
+      width: 100%;
+      height: 75px;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) translateZ(0);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .nav3d:hover {
+      transform: rotateX(3deg) translateZ(18px);
+    }
+
+    /* 3D Faces */
+    .nav3d .face {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+    .face-back {
+      background: rgba(0, 0, 0, 0.96);
+      transform: translateZ(-14px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+    .face-bottom-wall {
+      background: rgba(0, 0, 0, 0.92);
+      transform: translateY(10px) translateZ(-10px) rotateX(-10deg);
+      height: 24px;
+      bottom: -12px;
+      top: auto;
+    }
+    .face-left-wall {
+      background: rgba(0, 0, 0, 0.92);
+      transform: translateX(-10px) translateZ(-10px) rotateY(10deg);
+      width: 24px;
+      right: auto;
+    }
+    .face-right-wall {
+      background: rgba(0, 0, 0, 0.92);
+      transform: translateX(10px) translateZ(-10px) rotateY(-10deg);
+      width: 24px;
+      left: auto;
+    }
+    .face-top {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.06));
+      transform: translateZ(-5px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+    }
+
+    .nav-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 75px;
+      background: rgba(8, 6, 2, 0.92);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #E8C84A;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .brand small {
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      color: rgba(212, 175, 55, 0.55);
+      margin-left: 10px;
+      font-weight: 400;
+    }
+
+    .brand:hover {
+      text-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
+      letter-spacing: 5px;
+    }
+
+    .links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .links li a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: rgba(232, 200, 120, 0.65);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .links li a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #E8C84A, transparent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .links li a:hover::before,
+    .links li a.active::before {
+      width: 70%;
+    }
+
+    .links li a:hover,
+    .links li a.active {
+      color: #E8C84A;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+
+    .portal-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.55);
+      background: rgba(212, 175, 55, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .portal-btn:hover {
+      color: #E8C84A;
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(212, 175, 55, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 12px;
+      padding: 8px 12px;
+    }
+    .menu-toggle span {
+      width: 24px;
+      height: 2px;
+      background: #E8C84A;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HERO SECTION
+    ════════════════════════════════════════════════════════ */
+    .genesis-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 650px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0a0702 0%, #1a1204 50%, #0a0702 100%);
+      z-index: 0;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+      transform: translateZ(80px);
+    }
+
+    .hero-content h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 3px;
+      line-height: 1.2;
+      text-shadow: 0 0 50px rgba(212, 175, 55, 0.4), 0 4px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .hero-divider-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    }
+    .hero-divider-gem {
+      width: 8px;
+      height: 8px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+    }
+
+    .hero-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(232, 200, 120, 0.85);
+      letter-spacing: 1px;
+      line-height: 1.5;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.6;
+      animation: fadeUpDown 2.5s ease-in-out infinite;
+    }
+    .hero-scroll span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      color: rgba(212, 175, 55, 0.6);
+      text-transform: uppercase;
+    }
+    .hero-scroll svg {
+      width: 20px;
+      stroke: rgba(212, 175, 55, 0.6);
+    }
+
+    @keyframes fadeUpDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       LUXURY CONTENT SECTIONS
+    ════════════════════════════════════════════════════════ */
+    .genesis-content {
+      position: relative;
+      padding: 100px 2rem 120px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .block {
+      margin-bottom: 120px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+    }
+
+    .block.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .block h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      color: #E8C84A;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      width: auto;
+    }
+
+    .block h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    }
+
+    .block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: rgba(232, 223, 199, 0.85);
+      margin-bottom: 1.2rem;
+      text-align: justify;
+      text-indent: 2em;
+    }
+
+    .block p:first-of-type {
+      text-indent: 0;
+    }
+
+    .block p strong {
+      color: #E8C84A;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Block ornaments */
+    .block-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 2rem 0 1rem;
+    }
+    .block-ornament span {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    }
+    .block-ornament i {
+      width: 6px;
+      height: 6px;
+      background: rgba(212, 175, 55, 0.5);
+      transform: rotate(45deg);
+    }
+
+    /* Special Quote Block */
+    .block-quote {
+      text-align: center;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      background: rgba(212, 175, 55, 0.02);
+    }
+    .block-quote p {
+      font-style: italic;
+      font-size: 1.3rem;
+      color: rgba(232, 200, 120, 0.9);
+      text-align: center;
+      text-indent: 0;
+    }
+    .block-quote p::before {
+      content: '"';
+      font-size: 2rem;
+      color: rgba(212, 175, 55, 0.3);
+      margin-right: 5px;
+    }
+    .block-quote p::after {
+      content: '"';
+      font-size: 2rem;
+      color: rgba(212, 175, 55, 0.3);
+      margin-left: 5px;
+    }
+
+    /* Closing Block */
+    .block-closing {
+      text-align: center;
+      margin-top: 80px;
+      padding: 3rem;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.04), rgba(212, 175, 55, 0.01));
+      border-radius: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.12);
+    }
+    .block-closing p {
+      text-align: center;
+      text-indent: 0;
+      font-size: 1.25rem;
+    }
+    .block-closing p:last-child {
+      font-size: 1.4rem;
+      color: #E8C84A;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    /* Horse silhouette decoration */
+    .horse-silhouette {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 5rem;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+      transform: scaleX(-1);
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .navbar-wrapper {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+      }
+      .links {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav3d.menu-open .links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 85px;
+        left: 0;
+        right: 0;
+        background: rgba(8, 6, 2, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        gap: 1rem;
+        text-align: center;
+      }
+      .block {
+        margin-bottom: 80px;
+      }
+      .block p {
+        font-size: 1rem;
+      }
+      .block-quote p {
+        font-size: 1.1rem;
+      }
+      .genesis-content {
+        padding: 60px 1.5rem 80px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-content h1 {
+        letter-spacing: 2px;
+      }
+      .brand small {
+        display: none;
+      }
+      .block h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll {
+        animation: none;
+      }
+      .block {
+        transition: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-  <!-- ORBS (same as main page) -->
+  <!-- ORBS -->
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR (EXACT COPY) -->
-  <header class="navbar-wrapper">
-    <nav class="nav3d">
-      <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
-      <ul class="links">
-        <li><a href="index.html">GENESIS</a></li>
-        <li><a href="genesis.html">AWAKENING</a></li>
-        <li><a href="chronicles.html">CHRONICLES</a></li>
-        <li><a href="companions.html">COMPANIONS</a></li>
-        <li><a href="essays.html">VERSES</a></li>
-      </ul>
-      <button class="portal-btn" type="button">PORTAL ✦</button>
-    </nav>
-  </header>
+  <!-- LUXURY 3D NAVIGATION BAR -->
+  <div class="navbar-wrapper">
+    <div class="scene">
+      <nav class="nav3d" id="nav3d">
+        <div class="face face-back"></div>
+        <div class="face face-bottom-wall"></div>
+        <div class="face face-left-wall"></div>
+        <div class="face face-right-wall"></div>
+        <div class="face face-top"></div>
+        <div class="nav-content">
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+          <ul class="links" id="navLinks">
+            <li><a href="index.html">Genesis</a></li>
+            <li><a href="awakening.html" class="active">Awakening</a></li>
+            <li><a href="chronicles.html">Chronicles</a></li>
+            <li><a href="companions.html">Companions</a></li>
+            <li><a href="essays.html">Verses</a></li>
+          </ul>
+          <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
 
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section class="genesis-hero" id="hero3d">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
-
-    <!-- HORSE LAYERS -->
-    <img src="images/horse1.png" class="horse horse-1">
-    <img src="images/horse2.png" class="horse horse-2">
-
-    <div class="horse-presence"></div>
     <div class="hero-content">
       <h1>I do not train horses</h1>
+      <div class="hero-divider">
+        <div class="hero-divider-line"></div>
+        <div class="hero-divider-gem"></div>
+        <div class="hero-divider-line"></div>
+      </div>
       <h2>I work with them until they no longer feel the need to resist</h2>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
     </div>
   </section>
 
-  <!-- CONTENT -->
+  <!-- CONTENT SECTIONS -->
   <section class="genesis-content">
 
-  <div class="block">
-    <h2>The Work</h2>
-    <p>
-      For over eleven years, I have worked with horses in a way that does not rely on force, domination, or mechanical repetition.
-      I did not begin with a philosophy. I began like most people do—trying to make things work, trying to control outcomes,
-      trying to get the horse to respond correctly.
-    </p>
+    <div class="block">
+      <h2>The Work</h2>
+      <p>For over eleven years, I have worked with horses in a way that does not rely on force, domination, or mechanical repetition. I did not begin with a philosophy. I began like most people do, trying to make things work, trying to control outcomes, trying to get the horse to respond correctly.</p>
+      <p>Over time, that approach stopped making sense. What I do now is not about making a horse perform. It is about understanding what the horse is experiencing in each moment, what it feels, what it anticipates, and why it reacts the way it does.</p>
+      <p>Every behaviour, whether calm or explosive, comes from a place that can be observed and understood. My work is built around that understanding.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-    <p>
-      Over time, that approach stopped making sense. What I do now is not about making a horse perform.
-      It is about understanding what the horse is experiencing in each moment—what it feels, what it anticipates,
-      and why it reacts the way it does.
-    </p>
+    <div class="block">
+      <h2>The Shift</h2>
+      <p>There was a point where the usual methods stopped working, not because they failed to produce results, but because they failed to produce clarity.</p>
+      <p>I began to notice that a horse could comply and still remain tense, disconnected, or uncertain. The behaviour would look correct, but something underneath it remained unresolved.</p>
+      <p>Instead of asking, "How do I get the horse to do this?", the question became: <strong>Why does the horse feel the need to resist in the first place?</strong></p>
+      <p>Everything I do now comes from that shift.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-    <p>
-      Every behaviour, whether calm or explosive, comes from a place that can be observed and understood.
-      My work is built around that understanding.
-    </p>
-  </div>
+    <div class="block">
+      <h2>How I Work</h2>
+      <p>Most approaches to training respond to resistance by increasing pressure. Sometimes this works. But often, it only suppresses the visible behaviour while leaving the cause untouched.</p>
+      <p>When a horse resists, I do not immediately correct it. I observe it. I reduce unnecessary pressure. I allow space for the horse to process instead of react. I focus on removing confusion rather than overpowering it.</p>
+      <p>This does not always look impressive in the moment. It is slower in the beginning. But it produces something far more stable.</p>
+      <div class="block-quote">
+        <p>A horse that understands, rather than a horse that complies</p>
+      </div>
+    </div>
 
-  <div class="block">
-    <h2>The Shift</h2>
-    <p>
-      There was a point where the usual methods stopped working—not because they failed to produce results,
-      but because they failed to produce clarity.
-    </p>
+    <div class="block">
+      <h2>Core Principles</h2>
+      <p><strong>A horse must be able to think before it can learn.</strong><br>If the horse is overwhelmed, no amount of pressure will create clarity.</p>
+      <p><strong>Behaviour is information, not disobedience.</strong><br>Every reaction shows you something about the horse's internal state.</p>
+      <p><strong>Willingness is more valuable than obedience.</strong><br>A correct response given freely is fundamentally different from one that is forced.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-    <p>
-      I began to notice that a horse could comply and still remain tense, disconnected, or uncertain.
-      The behaviour would look correct, but something underneath it remained unresolved.
-    </p>
+    <div class="block">
+      <h2>Experience</h2>
+      <p>Over the past eleven years, I have worked with a range of horses across different temperaments and conditions. Stallions, highly reactive horses, and individuals with deeply ingrained behavioural patterns.</p>
+      <p>Much of my work has involved fear based reactions, rearing, escalation, and horses that have been misunderstood or pushed too far.</p>
+      <p>These are not unusual cases. They are simply situations where the underlying issue has not been addressed.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-    <p>
-      Instead of asking, “How do I get the horse to do this?”, the question became:
-      <strong>“Why does the horse feel the need to resist in the first place?”</strong>
-    </p>
+    <div class="block">
+      <h2>What I Offer</h2>
+      <p>I do not offer shortcuts, and I do not promise instant results.</p>
+      <p>What I offer is a way of working that prioritizes clarity over control, stability over speed, and understanding over repetition.</p>
+      <p>If someone comes to me, they should expect a process, not a quick solution.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-    <p>
-      Everything I do now comes from that shift.
-    </p>
-  </div>
+    <div class="block">
+      <h2>What Horses Taught Me</h2>
+      <p>There was a time I believed I was confident, even fearless. That belief does not survive long when you stand next to a thousand kilogram animal that can read every inconsistency in you.</p>
+      <p>Horses do not respond to what you say. They respond to what you are.</p>
+      <p>They forced me to confront fear, hesitation, and lack of clarity in a way nothing else could. Over time, the work became less about technique and more about presence.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-  <div class="block">
-    <h2>How I Work</h2>
+    <div class="block">
+      <h2>Boundary</h2>
+      <p>I do not work with dominance based or suppression based handling.</p>
+      <p>A horse cannot find clarity through a handler who is internally conflicted or externally aggressive. Emotional steadiness is not optional in this work. It is the foundation of it.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
 
-    <p>
-      Most approaches to training respond to resistance by increasing pressure.
-      Sometimes this works. But often, it only suppresses the visible behaviour
-      while leaving the cause untouched.
-    </p>
+    <div class="block block-closing">
+      <p>A horse does not need to be made obedient. It needs to feel safe enough to respond.</p>
+      <p><strong>That is where my work begins.</strong></p>
+    </div>
 
-    <p>
-      When a horse resists, I do not immediately correct it. I observe it.
-      I reduce unnecessary pressure. I allow space for the horse to process instead of react.
-      I focus on removing confusion rather than overpowering it.
-    </p>
+  </section>
 
-    <p>
-      This does not always look impressive in the moment. It is slower in the beginning.
-      But it produces something far more stable:
-    </p>
+  <div class="horse-silhouette">🐴</div>
 
-    <p><strong>A horse that understands, rather than a horse that complies.</strong></p>
-  </div>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const nav3d = document.getElementById('nav3d');
+    if (menuToggle && nav3d) {
+      menuToggle.addEventListener('click', () => {
+        nav3d.classList.toggle('menu-open');
+      });
+    }
 
-  <div class="block">
-    <h2>Core Principles</h2>
+    // Close menu when link is clicked
+    document.querySelectorAll('.links a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav3d.classList.remove('menu-open');
+      });
+    });
 
-    <p><strong>1. A horse must be able to think before it can learn.</strong><br>
-    If the horse is overwhelmed, no amount of pressure will create clarity.</p>
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '#hero3d') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
 
-    <p><strong>2. Behaviour is information, not disobedience.</strong><br>
-    Every reaction shows you something about the horse’s internal state.</p>
+    // Scroll reveal for blocks
+    const blocks = document.querySelectorAll('.block');
+    
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-    <p><strong>3. Willingness is more valuable than obedience.</strong><br>
-    A correct response given freely is fundamentally different from one that is forced.</p>
-  </div>
+    const blockObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          blockObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
 
-  <div class="block">
-    <h2>Experience</h2>
+    blocks.forEach(block => {
+      blockObserver.observe(block);
+    });
 
-    <p>
-      Over the past eleven years, I have worked with a range of horses across different temperaments and conditions—
-      stallions, highly reactive horses, and individuals with deeply ingrained behavioural patterns.
-    </p>
+    // 3D Mouse effect on hero
+    const hero = document.getElementById('hero3d');
+    if (hero) {
+      document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX - window.innerWidth / 2) / 60;
+        const y = (e.clientY - window.innerHeight / 2) / 60;
+        hero.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+      });
+    }
 
-    <p>
-      Much of my work has involved fear-based reactions, rearing, escalation, and horses that have been misunderstood
-      or pushed too far.
-    </p>
+    // Particle effect for hero background
+    const heroBg = document.querySelector('.hero-bg');
+    if (heroBg) {
+      for (let i = 0; i < 40; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = Math.random() * 3 + 1 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.background = `rgba(212, 175, 55, ${Math.random() * 0.3 + 0.1})`;
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.bottom = '-20px';
+        particle.style.pointerEvents = 'none';
+        particle.style.animation = `floatParticle ${Math.random() * 6 + 4}s linear infinite`;
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        heroBg.appendChild(particle);
+      }
+    }
 
-    <p>
-      These are not unusual cases. They are simply situations where the underlying issue has not been addressed.
-    </p>
-  </div>
+    // Add particle animation style
+    const particleStyle = document.createElement('style');
+    particleStyle.textContent = `
+      @keyframes floatParticle {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 0.5; }
+        100% { transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(particleStyle);
+  </script>
 
-  <div class="block">
-    <h2>What I Offer</h2>
-
-    <p>
-      I do not offer shortcuts, and I do not promise instant results.
-    </p>
-
-    <p>
-      What I offer is a way of working that prioritizes clarity over control,
-      stability over speed, and understanding over repetition.
-    </p>
-
-    <p>
-      If someone comes to me, they should expect a process—not a quick solution.
-    </p>
-  </div>
-
-  <div class="block">
-    <h2>What Horses Taught Me</h2>
-
-    <p>
-      There was a time I believed I was confident, even fearless.
-      That belief does not survive long when you stand next to a thousand-kilogram animal
-      that can read every inconsistency in you.
-    </p>
-
-    <p>
-      Horses do not respond to what you say.
-      They respond to what you are.
-    </p>
-
-    <p>
-      They forced me to confront fear, hesitation, and lack of clarity in a way nothing else could.
-      Over time, the work became less about technique and more about presence.
-    </p>
-  </div>
-
-  <div class="block">
-    <h2>Boundary</h2>
-
-    <p>
-      I do not work with dominance-based or suppression-based handling.
-    </p>
-
-    <p>
-      A horse cannot find clarity through a handler who is internally conflicted or externally aggressive.
-      Emotional steadiness is not optional in this work—it is the foundation of it.
-    </p>
-  </div>
-
-  <div class="block">
-    <h2>Closing</h2>
-
-    <p>
-      A horse does not need to be made obedient.
-      It needs to feel safe enough to respond.
-    </p>
-
-    <p><strong>That is where my work begins.</strong></p>
-  </div>
-
-</section>
-
-  <script src="js/genesis.js"></script>
 </body>
 </html>
