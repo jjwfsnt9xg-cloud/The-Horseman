@@ -17,7 +17,6 @@
       <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
       <ul class="links">
         <li><a href="genesis.html">GENESIS</a></li>
-        <li><a href="about.html">ABOUT</a></li>
         <li><a href="awakening.html">AWAKENING</a></li>
         <li><a href="chronicles.html">CHRONICLES</a></li>
         <li><a href="companions.html">COMPANIONS</a></li>
@@ -27,9 +26,7 @@
     </nav>
   </header>
 
-  <!-- ═══════════════════════════════════
-       SECTION 1 — HERO
-  ════════════════════════════════════ -->
+  <!-- HERO -->
   <section class="hero" id="genesis">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="hero-bg.mp4" type="video/mp4" />
@@ -59,8 +56,14 @@
         </p>
 
         <div class="hero-cta">
-          <button class="cta-primary" onclick="window.location.href='genesis.html'">Enter the Journey</button>
-          <button class="cta-secondary" onclick="window.location.href='chronicles.html'">Explore the World</button>
+          <!-- FIXED -->
+          <button class="cta-primary" onclick="window.location.href='awakening.html'">
+            Enter the Journey
+          </button>
+
+          <button class="cta-secondary" onclick="window.location.href='chronicles.html'">
+            Explore the World
+          </button>
         </div>
       </div>
     </div>
@@ -71,9 +74,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════
-       SECTION 2 — ABOUT ME
-  ════════════════════════════════════ -->
+  <!-- ABOUT PREVIEW -->
   <section class="about" id="about">
     <div class="about-bg-layer layer-dust"></div>
     <div class="about-bg-layer layer-grid"></div>
@@ -82,53 +83,36 @@
 
     <div class="about-inner" id="aboutInner">
 
-      <!-- Portrait Column -->
       <div class="about-portrait-col">
         <div class="about-portrait-scene" id="aboutPortrait">
           <div class="about-portrait-frame">
             <div class="about-avatar-ring">
-              <div class="about-avatar-inner">
-                🐎
-              </div>
+              <div class="about-avatar-inner">🐎</div>
             </div>
             <div class="about-name-badge">
               <h3>The Horseman</h3>
               <span>Author · Rider · Observer</span>
             </div>
             <div class="about-stats-row">
-              <div class="about-stat">
-                <strong>11</strong>
-                <small>Years</small>
-              </div>
-              <div class="about-stat">
-                <strong>8</strong>
-                <small>Horses</small>
-              </div>
-              <div class="about-stat">
-                <strong>∞</strong>
-                <small>Stories</small>
-              </div>
+              <div class="about-stat"><strong>11</strong><small>Years</small></div>
+              <div class="about-stat"><strong>8</strong><small>Horses</small></div>
+              <div class="about-stat"><strong>∞</strong><small>Stories</small></div>
             </div>
           </div>
 
-          <!-- Floating badges -->
           <span class="about-badge about-badge-1">✦ Rider</span>
           <span class="about-badge about-badge-2">🐴 Bonded</span>
           <span class="about-badge about-badge-3">✍ Writer</span>
         </div>
       </div>
 
-      <!-- Text Column -->
       <div class="about-text-col">
         <p class="about-eyebrow">The Author Behind the Journal</p>
         <h2 class="about-title">I Did Not <span class="gold">Choose</span> Horses —<br />They Chose Me</h2>
         <p class="about-subtitle">Eleven years of silence, surrender, and presence.</p>
 
         <p class="about-body">
-          This journal was not planned. It emerged from eleven years spent in the company of horses — learning their language, their patience, their refusal to lie. I came looking for a skill. I found a <strong>philosophy</strong>.
-        </p>
-        <p class="about-body">
-          I am not a trainer, not a competitor. I am a student of relationship — of what happens when two beings meet with full honesty and no agenda. Every horse I've known has taught me something I couldn't have learned from a book: about <strong>presence</strong>, about trust, about the courage it takes to truly listen.
+          This journal was not planned. It emerged from eleven years spent in the company of horses.
         </p>
 
         <div class="about-divider">
@@ -137,20 +121,19 @@
         </div>
 
         <p class="about-quote">
-          "The horse does not care what you know. It cares who you are in this moment — and whether you are willing to be fully here."
+          "The horse does not care what you know. It cares who you are in this moment."
         </p>
 
+        <!-- KEEPING your about page -->
         <div class="about-cta">
-          <a href="about.html">Read the Full Story <span>→</span></a>
+          <a href="genesis.html">Read the Full Story →</a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════
-       EXPLORE SECTION
-  ════════════════════════════════════ -->
+  <!-- EXPLORE -->
   <section class="explore">
     <div class="explore-header">
       <p class="explore-eyebrow">Begin Your Journey</p>
@@ -158,33 +141,53 @@
     </div>
 
     <div class="explore-grid">
+
+      <!-- ✅ ADDED (IMPORTANT) -->
+      <a href="awakening.html" class="explore-card">
+        <span class="explore-icon">🔥</span>
+        <h3 class="explore-card-title">Awakening</h3>
+        <p class="explore-card-desc">
+          The moment everything changed. A story of fear, clarity, and surrender.
+        </p>
+        <span class="explore-card-link">Read the Story</span>
+      </a>
+
       <a href="genesis.html" class="explore-card">
         <span class="explore-icon">📖</span>
         <h3 class="explore-card-title">Genesis</h3>
-        <p class="explore-card-desc">The origin story. Eleven years. One black stallion. One moment of complete surrender.</p>
-        <span class="explore-card-link">Read the Story</span>
+        <p class="explore-card-desc">
+          Who I am, how I work, and what this journey has taught me.
+        </p>
+        <span class="explore-card-link">Learn More</span>
       </a>
 
       <a href="companions.html" class="explore-card">
         <span class="explore-icon">🐴</span>
         <h3 class="explore-card-title">Companions</h3>
-        <p class="explore-card-desc">Eight horses. Eight stories. Each one a mirror, a teacher, a gift shaped by time.</p>
+        <p class="explore-card-desc">
+          Eight horses. Eight stories. Each one a mirror.
+        </p>
         <span class="explore-card-link">Meet Them</span>
       </a>
 
       <a href="chronicles.html" class="explore-card">
         <span class="explore-icon">📚</span>
         <h3 class="explore-card-title">Chronicles</h3>
-        <p class="explore-card-desc">Articles on horse psychology, trust, presence, and the philosophy of partnership.</p>
+        <p class="explore-card-desc">
+          Articles on horse psychology and philosophy.
+        </p>
         <span class="explore-card-link">Explore Articles</span>
       </a>
 
       <a href="essays.html" class="explore-card essays-card">
         <span class="explore-icon">✍️</span>
         <h3 class="explore-card-title">Essays</h3>
-        <p class="explore-card-desc">Personal reflections on writing, time, silence, and the quiet spaces where words emerge.</p>
+        <p class="explore-card-desc">
+          Personal reflections on silence, time, and writing.
+        </p>
         <span class="explore-card-link">Read Essays</span>
       </a>
+
     </div>
   </section>
 
