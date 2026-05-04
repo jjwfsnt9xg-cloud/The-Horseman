@@ -186,13 +186,11 @@
       requestAnimationFrame(function () {
         var scrollY = window.scrollY;
 
-        // Parallax the about section grid layer
         var gridLayer = document.querySelector(".about-bg-layer.layer-grid");
         if (gridLayer) {
           gridLayer.style.transform = "translateY(" + scrollY * 0.12 + "px)";
         }
 
-        // Parallax the companions grid layer
         var compGrid = document.querySelector(".companions-bg-grid");
         if (compGrid) {
           var companionsTop = document.getElementById("companions");
