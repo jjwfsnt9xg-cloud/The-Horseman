@@ -3,9 +3,614 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Essays - The Horseman's Journal</title>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/essays.css">
+  <title>Verses - The Horseman's Journal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #06040a;
+      color: #e0d8f0;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ORBS */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb1 {
+      width: 55vw; height: 55vw;
+      top: -15vh; right: -15vw;
+      background: radial-gradient(circle, rgba(130, 100, 220, 0.12), transparent);
+    }
+    .orb2 {
+      width: 45vw; height: 45vw;
+      bottom: -10vh; left: -20vw;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.06), transparent);
+    }
+    .orb3 {
+      width: 35vw; height: 35vw;
+      top: 50vh; left: 40vw;
+      background: radial-gradient(circle, rgba(160, 140, 220, 0.05), transparent);
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAVBAR (IDENTICAL TO CHRONICLES)
+    ═══════════════════════════════════════════════ */
+    .navbar-wrapper {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 2rem 0;
+      pointer-events: none;
+    }
+    .navbar-wrapper * { pointer-events: auto; }
+
+    .scene {
+      perspective: 700px;
+      perspective-origin: 50% 60%;
+      width: 100%;
+      max-width: 1020px;
+    }
+    .nav3d {
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(28deg) rotateY(0deg);
+      transition: transform .5s cubic-bezier(.23, 1, .32, 1);
+      height: 64px;
+    }
+    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
+
+    .face { position: absolute; border-radius: 18px; }
+
+    .face-top {
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(212,175,55,0.06) 40%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(212,175,55,0.45);
+      border-bottom-color: rgba(212,175,55,0.15);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(212,175,55,0.06);
+      z-index: 4;
+    }
+    .face-back {
+      inset: 0;
+      background: rgba(212,175,55,0.04);
+      border: 1px solid rgba(212,175,55,0.2);
+      transform: translateZ(-36px);
+      z-index: 1;
+    }
+    .face-bottom-wall {
+      left: 18px; right: 18px; bottom: -36px; height: 36px;
+      background: linear-gradient(180deg, rgba(212,175,55,0.18) 0%, rgba(100,60,0,0.08) 60%, rgba(0,0,0,0.02) 100%);
+      border-left: 1px solid rgba(212,175,55,0.15);
+      border-right: 1px solid rgba(212,175,55,0.15);
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+      border-radius: 0 0 12px 12px;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+      z-index: 2;
+    }
+    .face-top-wall {
+      left: 18px; right: 18px; top: -5px; height: 5px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(212,175,55,0.2));
+      border-radius: 18px 18px 0 0;
+      transform-origin: bottom center;
+      transform: rotateX(90deg);
+      z-index: 3;
+    }
+    .face-left-wall {
+      top: 4px; bottom: 4px; left: -36px; width: 36px;
+      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(212,175,55,0.1) 100%);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 12px 0 0 12px;
+      transform-origin: right center;
+      transform: rotateY(-90deg);
+      z-index: 2;
+    }
+    .face-right-wall {
+      top: 4px; bottom: 4px; right: -36px; width: 36px;
+      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(212,175,55,0.1) 100%);
+      border: 1px solid rgba(212,175,55,0.1);
+      border-radius: 0 12px 12px 0;
+      transform-origin: left center;
+      transform: rotateY(90deg);
+      z-index: 2;
+    }
+    .nav-content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.8rem;
+      transform: translateZ(1px);
+    }
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #E8C84A;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.25;
+      text-shadow: 0 0 24px rgba(212,175,55,0.8), 0 0 60px rgba(212,175,55,0.3);
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .brand small {
+      display: block;
+      font-size: .52rem;
+      letter-spacing: 4px;
+      color: rgba(212,175,55,0.4);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+    .links {
+      display: flex;
+      gap: .05rem;
+      list-style: none;
+    }
+    .links li a {
+      display: block;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: rgba(255,240,180,0.5);
+      text-decoration: none;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: all .25s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      position: relative;
+      white-space: nowrap;
+    }
+    .links li a:hover {
+      color: #FFF8DC;
+      background: rgba(255,255,255,0.07);
+      text-shadow: 0 0 16px rgba(212,175,55,0.9), 0 0 40px rgba(212,175,55,0.4);
+    }
+    .portal-scene {
+      perspective: 300px;
+      flex-shrink: 0;
+    }
+    .portal-btn {
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(22deg);
+      transition: transform .25s;
+      display: inline-block;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
+    .portal-btn:active { transform: rotateX(30deg) translateY(2px); }
+    .portal-top {
+      display: block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(212,175,55,0.35) 50%, rgba(180,120,0,0.25) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212,175,55,0.7);
+      border-bottom-color: rgba(212,175,55,0.2);
+      border-radius: 100px;
+      font-family: 'Raleway', sans-serif;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: #FFF8DC;
+      text-shadow: 0 0 12px rgba(212,175,55,0.9);
+      position: relative;
+      z-index: 3;
+      white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .portal-wall {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(140,90,0,0.6), rgba(60,30,0,0.4));
+      border-radius: 100px;
+      transform: translateZ(-14px);
+      z-index: 2;
+      border: 1px solid rgba(120,70,0,0.5);
+    }
+    .portal-glow {
+      position: absolute;
+      inset: -4px;
+      border-radius: 100px;
+      background: transparent;
+      box-shadow: 0 0 20px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.15);
+      transform: translateZ(-7px);
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════
+       VERSES HEADER
+    ═══════════════════════════════════════════════ */
+    .verses-header {
+      text-align: center;
+      padding: 10rem 2rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+    .verses-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 7px;
+      color: rgba(180, 160, 220, 0.5);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .verses-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 3px;
+      line-height: 1.1;
+      text-shadow: 0 0 50px rgba(160, 130, 220, 0.3), 0 0 100px rgba(212, 175, 55, 0.15);
+      margin-bottom: 1.2rem;
+    }
+    .verses-title .gold {
+      color: #E8C84A;
+      text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+    }
+    .verses-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .v-dline {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(180, 160, 220, 0.4));
+    }
+    .v-dline.r {
+      background: linear-gradient(90deg, rgba(180, 160, 220, 0.4), transparent);
+    }
+    .v-dgem {
+      width: 6px; height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
+    }
+    .verses-tagline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(.95rem, 1.6vw, 1.15rem);
+      color: rgba(210, 195, 240, 0.55);
+      letter-spacing: .5px;
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CUBE GRID
+    ═══════════════════════════════════════════════ */
+    .cubes-section {
+      padding: 2rem 2rem 8rem;
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cubes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3.5rem 3rem;
+      perspective: 1000px;
+    }
+    @media (max-width: 900px) {
+      .cubes-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
+    }
+    @media (max-width: 560px) {
+      .cubes-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ── CUBE WRAPPER ── */
+    .cube-wrap {
+      perspective: 800px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .cube-wrap.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── 3D CUBE ── */
+    .cube-3d {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      transform-style: preserve-3d;
+      transform: rotateX(-18deg) rotateY(-22deg);
+      transition: transform .6s cubic-bezier(.23, 1, .32, 1);
+    }
+    .cube-wrap:hover .cube-3d {
+      transform: rotateX(-6deg) rotateY(-10deg) translateY(-6px);
+    }
+
+    /* ── CUBE FACES ── */
+    .cube-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      backface-visibility: hidden;
+    }
+
+    /* TOP FACE — Indigo glass */
+    .cube-face-top {
+      background: linear-gradient(145deg, rgba(90, 70, 160, 0.55), rgba(50, 35, 100, 0.7));
+      border: 1.5px solid rgba(180, 160, 220, 0.35);
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 0 40px rgba(130, 100, 220, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      z-index: 3;
+      transform: translateZ(0);
+    }
+
+    /* FRONT EDGE — Dark depth */
+    .cube-face-front {
+      background: linear-gradient(180deg, rgba(40, 25, 80, 0.9), rgba(20, 10, 50, 0.95));
+      border: 1px solid rgba(140, 120, 200, 0.2);
+      transform: translateZ(-26px);
+      z-index: 1;
+      border-radius: 14px;
+    }
+
+    /* BOTTOM EDGE */
+    .cube-face-bottom {
+      background: linear-gradient(180deg, rgba(30, 18, 60, 0.8), rgba(15, 8, 35, 0.9));
+      border-left: 1px solid rgba(140, 120, 200, 0.15);
+      border-right: 1px solid rgba(140, 120, 200, 0.15);
+      border-bottom: 1px solid rgba(140, 120, 200, 0.1);
+      height: 28px;
+      bottom: -28px;
+      top: auto;
+      border-radius: 0 0 10px 10px;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+      z-index: 2;
+    }
+
+    /* LEFT EDGE */
+    .cube-face-left {
+      background: linear-gradient(90deg, rgba(25, 14, 55, 0.85), rgba(40, 25, 80, 0.7));
+      border: 1px solid rgba(140, 120, 200, 0.12);
+      width: 28px;
+      left: -28px;
+      right: auto;
+      border-radius: 10px 0 0 10px;
+      transform-origin: right center;
+      transform: rotateY(-90deg);
+      z-index: 2;
+    }
+
+    /* RIGHT EDGE */
+    .cube-face-right {
+      background: linear-gradient(270deg, rgba(25, 14, 55, 0.85), rgba(40, 25, 80, 0.7));
+      border: 1px solid rgba(140, 120, 200, 0.12);
+      width: 28px;
+      right: -28px;
+      left: auto;
+      border-radius: 0 10px 10px 0;
+      transform-origin: left center;
+      transform: rotateY(90deg);
+      z-index: 2;
+    }
+
+    /* ── CUBE CONTENT (on top face) ── */
+    .cube-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+      position: relative;
+      z-index: 1;
+    }
+    .cube-label {
+      font-family: 'Cinzel', serif;
+      font-size: .5rem;
+      letter-spacing: 4px;
+      color: rgba(212, 175, 55, 0.55);
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+      position: relative;
+      z-index: 1;
+    }
+    .cube-title {
+      font-family: 'Cinzel', serif;
+      font-size: .85rem;
+      font-weight: 600;
+      color: #e8ddf8;
+      letter-spacing: .5px;
+      line-height: 1.3;
+      margin-bottom: .5rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 15px rgba(180, 150, 230, 0.3);
+    }
+    .cube-rule {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+      margin: .5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    .cube-excerpt {
+      font-family: 'EB Garamond', serif;
+      font-size: .72rem;
+      line-height: 1.6;
+      color: rgba(200, 185, 230, 0.55);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .cube-read {
+      font-family: 'Cinzel', serif;
+      font-size: .5rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.5);
+      text-transform: uppercase;
+      margin-top: auto;
+      padding-top: .6rem;
+      position: relative;
+      z-index: 1;
+      transition: color .3s;
+    }
+    .cube-wrap:hover .cube-read {
+      color: rgba(212, 175, 55, 0.9);
+    }
+
+    /* ── SHADOW UNDER CUBE ── */
+    .cube-shadow {
+      position: absolute;
+      bottom: -30px;
+      left: 10%;
+      right: 10%;
+      height: 30px;
+      background: radial-gradient(ellipse, rgba(100, 70, 180, 0.25) 0%, transparent 70%);
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════════
+       ESSAY OVERLAY (READER)
+    ═══════════════════════════════════════════════ */
+    .essay-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(4, 2, 10, 0.94);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+    .essay-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .essay-reader {
+      background: linear-gradient(160deg, #0e0a1a 0%, #1a1230 50%, #0c0818 100%);
+      border: 1px solid rgba(180, 160, 220, 0.2);
+      border-radius: 16px;
+      padding: 3rem 3.5rem;
+      max-width: 700px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.1);
+    }
+    .essay-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      z-index: 10;
+      width: 32px; height: 32px;
+      border: 1px solid rgba(180,160,220,0.3);
+      border-radius: 50%;
+      background: rgba(130,100,200,0.08);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+    .essay-close:hover {
+      background: rgba(180,140,240,0.2);
+      border-color: rgba(180,160,220,0.6);
+    }
+    .essay-close::before,
+    .essay-close::after {
+      content: '';
+      position: absolute;
+      width: 12px; height: 1px;
+      background: rgba(200,180,230,0.7);
+    }
+    .essay-close::before { transform: rotate(45deg); }
+    .essay-close::after { transform: rotate(-45deg); }
+    .essay-reader-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      color: #E8C84A;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      padding-right: 2rem;
+      text-shadow: 0 0 20px rgba(212,175,55,0.2);
+    }
+    .essay-reader-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      line-height: 2;
+      color: rgba(220,210,240,0.8);
+    }
+    .essay-reader-text p {
+      margin-bottom: 1.3rem;
+    }
+    .essay-reader-text p:first-child::first-letter {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.2em;
+      font-weight: 700;
+      color: #c9a030;
+      float: left;
+      line-height: .7;
+      margin: .08em .1em 0 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 860px) {
+      .navbar-wrapper { padding: 0.8rem 1rem 0; }
+      .nav3d { height: 56px; transform: rotateX(15deg); }
+      .brand { font-size: 0.7rem; }
+      .links { gap: 0; }
+      .links li a { font-size: .52rem; padding: 4px 5px; letter-spacing: 1px; }
+      .portal-top { font-size: .55rem; padding: 6px 12px; }
+      .verses-header { padding: 8rem 1.5rem 3rem; }
+      .essay-reader { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 520px) {
+      .brand small { display: none; }
+      .links li a { font-size: .45rem; padding: 3px 4px; }
+      .cube-3d { transform: rotateX(-10deg) rotateY(-14deg); }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,7 +618,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR (IDENTICAL TO CHRONICLES) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -44,62 +649,155 @@
     </div>
   </div>
 
-  <!-- ESSAYS SECTION -->
-  <section class="essays" id="verses">
-    <div class="essays-stars" id="essaysStars"></div>
-    <div class="essays-header">
-      <span class="essays-eyebrow">Words from the Heart</span>
-      <h2 class="essays-title">Essays</h2>
-      <div class="essays-divider">
-        <div class="e-dline"></div>
-        <div class="e-dgem"></div>
-        <div class="e-dline"></div>
-      </div>
-      <p class="essays-tagline">Where thoughts become poetry, silence becomes voice, and the unspoken finds its shape in words.</p>
+  <!-- VERSES HEADER -->
+  <section class="verses-header">
+    <span class="verses-eyebrow">Words from the Heart</span>
+    <h2 class="verses-title">Ver<span class="gold">ses</span></h2>
+    <div class="verses-divider">
+      <div class="v-dline"></div>
+      <div class="v-dgem"></div>
+      <div class="v-dline v-dline r"></div>
     </div>
-    <div class="essays-grid">
-      <div class="essay-card" data-essay="0">
-        <div class="essay-icon">🤝</div>
-        <h3 class="essay-title">A Bond Beyond Words</h3>
-        <p class="essay-excerpt">In the quiet space between heartbeats, where language ends and understanding begins...</p>
-        <span class="essay-read">Read Essay</span>
+    <p class="verses-tagline">Where thoughts become poetry, silence becomes voice, and the unspoken finds its shape in words.</p>
+  </section>
+
+  <!-- CUBE GRID -->
+  <section class="cubes-section">
+    <div class="cubes-grid" id="cubesGrid">
+
+      <!-- CUBE 1 -->
+      <div class="cube-wrap" data-essay="0">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">🤝</div>
+            <div class="cube-label">Verse I</div>
+            <div class="cube-title">A Bond Beyond Words</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">In the quiet space between heartbeats, where language ends and understanding begins...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
-      <div class="essay-card" data-essay="1">
-        <div class="essay-icon">⏳</div>
-        <h3 class="essay-title">The Unyielding March</h3>
-        <p class="essay-excerpt">Time does not pause. It does not negotiate. It simply moves forward, indifferent to our readiness...</p>
-        <span class="essay-read">Read Essay</span>
+
+      <!-- CUBE 2 -->
+      <div class="cube-wrap" data-essay="1">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">⏳</div>
+            <div class="cube-label">Verse II</div>
+            <div class="cube-title">The Unyielding March</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">Time does not pause. It does not negotiate. It simply moves forward, indifferent to our readiness...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
-      <div class="essay-card" data-essay="2">
-        <div class="essay-icon">🕯️</div>
-        <h3 class="essay-title">The Funeral I Attend Every Day</h3>
-        <p class="essay-excerpt">There are losses that announce themselves with ceremony. And then there are the quiet deaths...</p>
-        <span class="essay-read">Read Essay</span>
+
+      <!-- CUBE 3 -->
+      <div class="cube-wrap" data-essay="2">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">🕯️</div>
+            <div class="cube-label">Verse III</div>
+            <div class="cube-title">The Funeral I Attend Every Day</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">There are losses that announce themselves with ceremony. And then there are the quiet deaths...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
-      <div class="essay-card" data-essay="3">
-        <div class="essay-icon">💫</div>
-        <h3 class="essay-title">The Flickering</h3>
-        <p class="essay-excerpt">I sit in my room and it is quiet. A different kind of quiet than I used to know...</p>
-        <span class="essay-read">Read Essay</span>
+
+      <!-- CUBE 4 -->
+      <div class="cube-wrap" data-essay="3">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">💫</div>
+            <div class="cube-label">Verse IV</div>
+            <div class="cube-title">The Flickering</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">I sit in my room and it is quiet. A different kind of quiet than I used to know...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
-      <div class="essay-card" data-essay="4">
-        <div class="essay-icon">🎭</div>
-        <h3 class="essay-title">The Primitive Beneath</h3>
-        <p class="essay-excerpt">If you watch people long enough, really watch them without soft filters, something unsettling becomes clear...</p>
-        <span class="essay-read">Read Essay</span>
+
+      <!-- CUBE 5 -->
+      <div class="cube-wrap" data-essay="4">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">🎭</div>
+            <div class="cube-label">Verse V</div>
+            <div class="cube-title">The Primitive Beneath</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">If you watch people long enough, really watch them without soft filters, something unsettling becomes clear...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
-      <div class="essay-card" data-essay="5">
-        <div class="essay-icon">🛏️</div>
-        <h3 class="essay-title">Within These Walls</h3>
-        <p class="essay-excerpt">I was flat on the bed. The ceiling familiar, the silence heavy, the hours endless...</p>
-        <span class="essay-read">Read Essay</span>
+
+      <!-- CUBE 6 -->
+      <div class="cube-wrap" data-essay="5">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">🛏️</div>
+            <div class="cube-label">Verse VI</div>
+            <div class="cube-title">Within These Walls</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">I was flat on the bed. The ceiling familiar, the silence heavy, the hours endless...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
-      <div class="essay-card" data-essay="6">
-        <div class="essay-icon">✍️</div>
-        <h3 class="essay-title">I Miss My Writing</h3>
-        <p class="essay-excerpt">I never thought I would say that, but I do. There was a time when words came to me without effort...</p>
-        <span class="essay-read">Read Essay</span>
+
+      <!-- CUBE 7 -->
+      <div class="cube-wrap" data-essay="6">
+        <div class="cube-3d">
+          <div class="cube-face cube-face-front"></div>
+          <div class="cube-face cube-face-bottom"></div>
+          <div class="cube-face cube-face-left"></div>
+          <div class="cube-face cube-face-right"></div>
+          <div class="cube-face cube-face-top">
+            <div class="cube-icon">✍️</div>
+            <div class="cube-label">Verse VII</div>
+            <div class="cube-title">I Miss My Writing</div>
+            <div class="cube-rule"></div>
+            <p class="cube-excerpt">I never thought I would say that, but I do. There was a time when words came to me without effort...</p>
+            <span class="cube-read">Read Verse</span>
+          </div>
+        </div>
+        <div class="cube-shadow"></div>
       </div>
+
     </div>
   </section>
 
@@ -112,8 +810,91 @@
     </div>
   </div>
 
-  <script src="js/global.js"></script>
-  <script src="js/essays.js"></script>
+  <script>
+    // ── ESSAY DATA ──
+    const essays = [
+      {
+        title: "A Bond Beyond Words",
+        text: `<p>In the quiet space between heartbeats, where language ends and understanding begins, something extraordinary takes root. It is not measured in words exchanged or time spent together. It is felt in the silence that does not need filling, in the glance that says everything, in the presence that makes solitude impossible even when you are alone.</p>
+        <p>I have spent years watching connections form between beings who share no common tongue. A horse and its handler. Two souls from different species, different worlds, different ways of perceiving reality itself. And yet something passes between them — something real, something tangible, something that defies every attempt to reduce it to mere instinct or conditioning.</p>
+        <p>This bond is not taught. It is discovered. It is not built through repetition alone but through a quality of attention that most of us have forgotten how to give. When you truly see another being — not as a tool, not as a project, not as a reflection of your own needs — something shifts. The walls between self and other become thinner. The illusion of separation wavers. And for a moment, you understand that connection is not something we create. It is something we remember.</p>`
+      },
+      {
+        title: "The Unyielding March",
+        text: `<p>Time does not pause. It does not negotiate. It does not look back at what it has crushed or wait for those who have fallen behind. It simply moves forward, indifferent to our readiness, our grief, our desperate attempts to hold onto moments that are already dissolving into memory.</p>
+        <p>I think about this often in the arena. A horse does not waste a single second regretting the stride it just took or worrying about the one ahead. It lives entirely inside the present footfall, the current breath, the immediate sensation of being alive. This is not ignorance. This is wisdom of the deepest kind — a wisdom we traded away when we learned to think about time instead of living inside it.</p>
+        <p>The unyielding march is not cruel. It is simply true. And perhaps the only sane response is to stop marching alongside it as if we were reluctant conscripts and start moving with it as willing participants. To be where we are. To feel what we feel now, not what we felt then or might feel later. The horse already knows this. It is waiting for us to catch up.</p>`
+      },
+      {
+        title: "The Funeral I Attend Every Day",
+        text: `<p>There are losses that announce themselves with ceremony. They come with caskets and condolences, with black clothes and quiet voices, with the ritual acknowledgment that something precious has been taken. And then there are the quiet deaths — the ones no one marks, no one names, no one even notices are happening until the absence has become too large to ignore.</p>
+        <p>I attend these funerals daily. The death of a version of myself I never became. The loss of a possibility I was too afraid to pursue. The quiet burial of a dream I stopped feeding because the world told me it was impractical. These funerals have no flowers. No eulogies. Just the slow, private grief of watching pieces of yourself disappear into the ground of ordinary life.</p>
+        <p>But here is what I have learned: attending the funeral is not the same as being buried. You can stand at the graveside of what might have been and still turn back toward what is. You can mourn without becoming the mourning. The horse that loses its companion does not stop grazing. It grieves, deeply and visibly, and then it continues. Not because it has forgotten, but because life asks to be lived even in the shadow of loss.</p>`
+      },
+      {
+        title: "The Flickering",
+        text: `<p>I sit in my room and it is quiet. A different kind of quiet than I used to know. Not the peaceful quiet of a mind at rest, but the hollow quiet of a room waiting for something that no longer arrives. The walls are the same. The light is the same. But something has changed, and I cannot name it.</p>
+        <p>This is the flickering. The sense that the world is just slightly less solid than it was yesterday. That the edges of things have begun to blur. That the colours are just a shade dimmer than they should be. It is not depression, exactly. It is not sadness in any way I know how to describe. It is more like watching a film where the projector bulb is slowly dying, and no one else in the theatre seems to notice.</p>
+        <p>Horses feel this too. I have seen them stand at the edge of their field, staring at nothing, their bodies present but something behind their eyes gone somewhere else entirely. They do not explain it. They do not need to. They simply live through it, as all creatures must live through the flickering, trusting that the light will hold long enough to find the other side.</p>`
+      },
+      {
+        title: "The Primitive Beneath",
+        text: `<p>If you watch people long enough — really watch them, without the soft filters we usually apply — something unsettling becomes clear. Beneath the manners, beneath the carefully constructed personas, beneath the education and the sophistication and the moral reasoning, there is something older. Something that does not negotiate. Something that wants what it wants with a directness that civilisation has only partially managed to paper over.</p>
+        <p>I do not say this as judgment. The primitive beneath is not evil. It is simply real. It is the part of us that existed before we learned to perform ourselves for others. The part that remembers what it felt like to need something so badly that the need itself became a kind of violence. The part that loves without strategy and hates without justification.</p>
+        <p>Horses live from this place constantly. They do not pretend. They do not soften their needs to make them more palatable. When a horse wants something, it moves toward it. When it fears something, it moves away. There is no calculation, no image management, no careful positioning for social advantage. There is only the raw, honest, sometimes uncomfortable truth of what is actually happening inside. I think this is why we are drawn to them. They remind us of something we lost.</p>`
+      },
+      {
+        title: "Within These Walls",
+        text: `<p>I was flat on the bed. The ceiling familiar, the silence heavy, the hours endless. Outside, the world continued without me — people moving, lives unfolding, the ordinary noise of existence carrying on as if my stillness meant nothing. And in that room, within those walls, I learned something that no teacher had ever taught me.</p>
+        <p>Confinement is not always physical. Sometimes the walls are made of fear. Sometimes they are built from exhaustion, from grief, from the slow accumulation of days that all feel the same. You can be free to move and still be imprisoned. You can have every door open and still be unable to walk through any of them. The worst cages are the ones we cannot see.</p>
+        <p>A horse in a stall experiences this in ways we rarely consider. We see the hay, the water, the shelter. We do not see the absence of horizon, the loss of movement, the slow erosion of something essential that withers when it cannot run. Within these walls, whether made of wood or made of sorrow, the soul contracts. And the only way out is to remember that walls — even the ones we built ourselves — can be dismantled, one brick at a time.</p>`
+      },
+      {
+        title: "I Miss My Writing",
+        text: `<p>I never thought I would say that, but I do. There was a time when words came to me without effort — not always good words, not always words worth keeping, but words nonetheless. They flowed through me like water through an open channel, and I did not question where they came from or whether they would continue. I simply wrote.</p>
+        <p>Then something changed. The channel narrowed. The water slowed. I sat down to write and found nothing waiting for me — just the blank page and the terrible silence of a mind that had forgotten how to speak to itself. I grieved this loss more than I expected to. Writing had been my companion, my confessor, my way of making sense of a world that rarely made sense on its own.</p>
+        <p>What I have learned — slowly, painfully, over many empty mornings — is that writing does not leave. It waits. It is patient in ways I am not. It does not demand consistency or brilliance or even coherence. It only asks that you show up, again and again, even when nothing comes. Especially when nothing comes. Because the showing up is the writing. The words are just the evidence that you were there.</p>`
+      }
+    ];
+
+    // ── CUBE CLICK → OPEN READER ──
+    const overlay = document.getElementById('essayOverlay');
+    const readerTitle = document.getElementById('essayReaderTitle');
+    const readerText = document.getElementById('essayReaderText');
+    const closeBtn = document.getElementById('essayClose');
+
+    document.querySelectorAll('.cube-wrap').forEach(cube => {
+      cube.addEventListener('click', () => {
+        const idx = parseInt(cube.dataset.essay);
+        const essay = essays[idx];
+        readerTitle.textContent = essay.title;
+        readerText.innerHTML = essay.text;
+        overlay.classList.add('open');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) {
+        overlay.classList.remove('open');
+      }
+    });
+
+    // ── SCROLL REVEAL ──
+    const cubeWraps = document.querySelectorAll('.cube-wrap');
+    const cubeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          cubeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    cubeWraps.forEach(c => cubeObserver.observe(c));
+  </script>
 
 </body>
 </html>
