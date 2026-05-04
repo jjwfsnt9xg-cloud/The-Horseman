@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <style>
     /* RESET & BASE */
@@ -56,196 +56,243 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       LUXURY 3D NAVIGATION BAR
+       NAVBAR — IDENTICAL TO CHRONICLES (from global.css)
     ════════════════════════════════════════════════════════ */
     .navbar-wrapper {
       position: fixed;
-      top: 25px;
-      left: 25px;
-      right: 25px;
-      z-index: 1000;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
       display: flex;
       justify-content: center;
-      perspective: 1200px;
+      padding: 1.5rem 2rem 0;
+      pointer-events: none;
+    }
+
+    .navbar-wrapper * {
+      pointer-events: auto;
     }
 
     .scene {
+      perspective: 700px;
+      perspective-origin: 50% 60%;
       width: 100%;
-      max-width: 1400px;
-      transform-style: preserve-3d;
+      max-width: 1020px;
     }
 
     .nav3d {
       position: relative;
-      width: 100%;
-      height: 75px;
       transform-style: preserve-3d;
-      transform: rotateX(0deg) translateZ(0);
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: rotateX(28deg) rotateY(0deg);
+      transition: transform .5s cubic-bezier(.23, 1, .32, 1);
+      height: 64px;
     }
 
     .nav3d:hover {
-      transform: rotateX(3deg) translateZ(18px);
+      transform: rotateX(8deg) rotateY(2deg);
     }
 
-    /* 3D Faces */
-    .nav3d .face {
+    .face {
       position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      pointer-events: none;
+      border-radius: 18px;
     }
-    .face-back {
-      background: rgba(0, 0, 0, 0.96);
-      transform: translateZ(-14px);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-    }
-    .face-bottom-wall {
-      background: rgba(0, 0, 0, 0.92);
-      transform: translateY(10px) translateZ(-10px) rotateX(-10deg);
-      height: 24px;
-      bottom: -12px;
-      top: auto;
-    }
-    .face-left-wall {
-      background: rgba(0, 0, 0, 0.92);
-      transform: translateX(-10px) translateZ(-10px) rotateY(10deg);
-      width: 24px;
-      right: auto;
-    }
-    .face-right-wall {
-      background: rgba(0, 0, 0, 0.92);
-      transform: translateX(10px) translateZ(-10px) rotateY(-10deg);
-      width: 24px;
-      left: auto;
-    }
+
     .face-top {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.06));
-      transform: translateZ(-5px);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(212, 175, 55, 0.06) 40%, rgba(255, 255, 255, 0.04) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-bottom-color: rgba(212, 175, 55, 0.15);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 60px rgba(212, 175, 55, 0.06);
+      z-index: 4;
+    }
+
+    .face-back {
+      inset: 0;
+      background: rgba(212, 175, 55, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transform: translateZ(-36px);
+      z-index: 1;
+    }
+
+    .face-bottom-wall {
+      left: 18px;
+      right: 18px;
+      bottom: -36px;
+      height: 36px;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.18) 0%, rgba(100, 60, 0, 0.08) 60%, rgba(0, 0, 0, 0.02) 100%);
+      border-left: 1px solid rgba(212, 175, 55, 0.15);
+      border-right: 1px solid rgba(212, 175, 55, 0.15);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: 0 0 12px 12px;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+      z-index: 2;
+    }
+
+    .face-top-wall {
+      left: 18px;
+      right: 18px;
+      top: -5px;
+      height: 5px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(212, 175, 55, 0.2));
+      border-radius: 18px 18px 0 0;
+      transform-origin: bottom center;
+      transform: rotateX(90deg);
+      z-index: 3;
+    }
+
+    .face-left-wall {
+      top: 4px;
+      bottom: 4px;
+      left: -36px;
+      width: 36px;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.0) 0%, rgba(212, 175, 55, 0.1) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: 12px 0 0 12px;
+      transform-origin: right center;
+      transform: rotateY(-90deg);
+      z-index: 2;
+    }
+
+    .face-right-wall {
+      top: 4px;
+      bottom: 4px;
+      right: -36px;
+      width: 36px;
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0.0) 0%, rgba(212, 175, 55, 0.1) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: 0 12px 12px 0;
+      transform-origin: left center;
+      transform: rotateY(90deg);
+      z-index: 2;
     }
 
     .nav-content {
-      position: relative;
+      position: absolute;
+      inset: 0;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
-      height: 75px;
-      background: rgba(8, 6, 2, 0.92);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.28);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      padding: 0 1.8rem;
+      transform: translateZ(1px);
     }
 
     .brand {
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
+      font-size: .85rem;
       font-weight: 700;
-      letter-spacing: 4px;
       color: #E8C84A;
-      text-decoration: none;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+      line-height: 1.25;
+      text-shadow: 0 0 24px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.3);
+      flex-shrink: 0;
+      text-decoration: none;
     }
 
     .brand small {
-      font-size: 0.55rem;
-      letter-spacing: 2px;
-      color: rgba(212, 175, 55, 0.55);
-      margin-left: 10px;
+      display: block;
+      font-size: .52rem;
+      letter-spacing: 4px;
+      color: rgba(212, 175, 55, 0.4);
       font-weight: 400;
-    }
-
-    .brand:hover {
-      text-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
-      letter-spacing: 5px;
+      margin-top: 1px;
     }
 
     .links {
       display: flex;
-      gap: 2rem;
+      gap: .05rem;
       list-style: none;
     }
 
     .links li a {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 3px;
-      color: rgba(232, 200, 120, 0.65);
+      display: block;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: rgba(255, 240, 180, 0.5);
       text-decoration: none;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      padding: 8px 0;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: all .25s;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
       position: relative;
+      white-space: nowrap;
     }
 
-    .links li a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, #E8C84A, transparent);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
+    .links li a:hover {
+      color: #FFF8DC;
+      background: rgba(255, 255, 255, 0.07);
+      text-shadow: 0 0 16px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.4);
     }
 
-    .links li a:hover::before,
-    .links li a.active::before {
-      width: 70%;
-    }
-
-    .links li a:hover,
-    .links li a.active {
-      color: #E8C84A;
-      text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    .portal-scene {
+      perspective: 300px;
+      flex-shrink: 0;
     }
 
     .portal-btn {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 3px;
-      color: rgba(212, 175, 55, 0.55);
-      background: rgba(212, 175, 55, 0.06);
-      border: 1px solid rgba(212, 175, 55, 0.22);
-      padding: 8px 20px;
-      border-radius: 30px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(22deg);
+      transition: transform .25s;
+      display: inline-block;
+      border: none;
+      background: transparent;
+      padding: 0;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
 
     .portal-btn:hover {
-      color: #E8C84A;
-      border-color: rgba(212, 175, 55, 0.5);
-      background: rgba(212, 175, 55, 0.12);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: rotateX(5deg) translateY(-2px);
     }
 
-    /* Mobile Menu */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 12px;
-      padding: 8px 12px;
+    .portal-btn:active {
+      transform: rotateX(30deg) translateY(2px);
     }
-    .menu-toggle span {
-      width: 24px;
-      height: 2px;
-      background: #E8C84A;
-      border-radius: 2px;
-      transition: all 0.3s;
+
+    .portal-top {
+      display: block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(212, 175, 55, 0.35) 50%, rgba(180, 120, 0, 0.25) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.7);
+      border-bottom-color: rgba(212, 175, 55, 0.2);
+      border-radius: 100px;
+      font-family: 'Raleway', sans-serif;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: #FFF8DC;
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.9);
+      position: relative;
+      z-index: 3;
+      white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .portal-wall {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(140, 90, 0, 0.6), rgba(60, 30, 0, 0.4));
+      border-radius: 100px;
+      transform: translateZ(-14px);
+      z-index: 2;
+      border: 1px solid rgba(120, 70, 0, 0.5);
+    }
+
+    .portal-glow {
+      position: absolute;
+      inset: -4px;
+      border-radius: 100px;
+      background: transparent;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.15);
+      transform: translateZ(-7px);
+      z-index: 1;
     }
 
     /* ════════════════════════════════════════════════════════
@@ -517,30 +564,26 @@
     /* Responsive */
     @media (max-width: 860px) {
       .navbar-wrapper {
-        top: 15px;
-        left: 15px;
-        right: 15px;
+        padding: 0.8rem 1rem 0;
+      }
+      .nav3d {
+        height: 56px;
+        transform: rotateX(15deg) rotateY(0deg);
+      }
+      .brand {
+        font-size: 0.7rem;
       }
       .links {
-        display: none;
+        gap: 0;
       }
-      .menu-toggle {
-        display: flex;
+      .links li a {
+        font-size: .52rem;
+        padding: 4px 5px;
+        letter-spacing: 1px;
       }
-      .nav3d.menu-open .links {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 85px;
-        left: 0;
-        right: 0;
-        background: rgba(8, 6, 2, 0.98);
-        backdrop-filter: blur(20px);
-        padding: 1.5rem;
-        border-radius: 20px;
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        gap: 1rem;
-        text-align: center;
+      .portal-top {
+        font-size: .55rem;
+        padding: 6px 12px;
       }
       .block {
         margin-bottom: 80px;
@@ -566,6 +609,10 @@
       .block h2 {
         font-size: 1.4rem;
       }
+      .links li a {
+        font-size: .45rem;
+        padding: 3px 4px;
+      }
     }
 
     /* Reduced Motion */
@@ -586,26 +633,31 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- LUXURY 3D NAVIGATION BAR -->
+  <!-- NAVBAR (IDENTICAL TO CHRONICLES) -->
   <div class="navbar-wrapper">
     <div class="scene">
-      <nav class="nav3d" id="nav3d">
+      <nav class="nav3d">
         <div class="face face-back"></div>
         <div class="face face-bottom-wall"></div>
+        <div class="face face-top-wall"></div>
         <div class="face face-left-wall"></div>
         <div class="face face-right-wall"></div>
         <div class="face face-top"></div>
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
-          <ul class="links" id="navLinks">
-            <li><a href="index.html">Genesis</a></li>
-            <li><a href="awakening.html" class="active">Awakening</a></li>
-            <li><a href="chronicles.html">Chronicles</a></li>
-            <li><a href="companions.html">Companions</a></li>
-            <li><a href="essays.html">Verses</a></li>
+          <ul class="links">
+            <li><a href="index.html">GENESIS</a></li>
+            <li><a href="genesis.html">AWAKENING</a></li>
+            <li><a href="chronicles.html">CHRONICLES</a></li>
+            <li><a href="companions.html">COMPANIONS</a></li>
+            <li><a href="essays.html">VERSES</a></li>
           </ul>
-          <div class="menu-toggle" id="menuToggle">
-            <span></span><span></span><span></span>
+          <div class="portal-scene">
+            <button class="portal-btn">
+              <span class="portal-glow"></span>
+              <span class="portal-wall"></span>
+              <span class="portal-top">PORTAL ✦</span>
+            </button>
           </div>
         </div>
       </nav>
@@ -712,35 +764,6 @@
   <div class="horse-silhouette">🐴</div>
 
   <script>
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const nav3d = document.getElementById('nav3d');
-    if (menuToggle && nav3d) {
-      menuToggle.addEventListener('click', () => {
-        nav3d.classList.toggle('menu-open');
-      });
-    }
-
-    // Close menu when link is clicked
-    document.querySelectorAll('.links a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav3d.classList.remove('menu-open');
-      });
-    });
-
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '#hero3d') return;
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
     // Scroll reveal for blocks
     const blocks = document.querySelectorAll('.block');
     
@@ -777,16 +800,18 @@
     if (heroBg) {
       for (let i = 0; i < 40; i++) {
         const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 3 + 1 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.background = `rgba(212, 175, 55, ${Math.random() * 0.3 + 0.1})`;
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.bottom = '-20px';
-        particle.style.pointerEvents = 'none';
-        particle.style.animation = `floatParticle ${Math.random() * 6 + 4}s linear infinite`;
-        particle.style.animationDelay = Math.random() * 5 + 's';
+        particle.style.cssText = `
+          position: absolute;
+          width: ${Math.random() * 3 + 1}px;
+          height: ${Math.random() * 3 + 1}px;
+          background: rgba(212, 175, 55, ${Math.random() * 0.3 + 0.1});
+          border-radius: 50%;
+          left: ${Math.random() * 100}%;
+          bottom: -20px;
+          pointer-events: none;
+          animation: floatParticle ${Math.random() * 6 + 4}s linear infinite;
+          animation-delay: ${Math.random() * 5}s;
+        `;
         heroBg.appendChild(particle);
       }
     }
@@ -798,7 +823,7 @@
         0% { transform: translateY(0) translateX(0); opacity: 0; }
         10% { opacity: 1; }
         90% { opacity: 0.5; }
-        100% { transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px); opacity: 0; }
+        100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
       }
     `;
     document.head.appendChild(particleStyle);
