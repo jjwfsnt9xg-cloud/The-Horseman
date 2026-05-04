@@ -1,22 +1,21 @@
-/* ═══════════════════════════════════════════════════════
-   GENESIS — The Horseman's Journal
-   Interactive JavaScript — 3D Starfield + Scroll System
-═══════════════════════════════════════════════════════ */
-
+/* ════════════════════════════════════════════════════════
+   AWAKENING — The Horseman's Journal
+   JavaScript — Particles · 3D Tilt · Scroll · Reveal
+════════════════════════════════════════════════════════ */
 (function () {
   "use strict";
 
-  /* ──────────────────────────────────────────
-     3D STARFIELD CANVAS
-  ────────────────────────────────────────── */
-  var canvas = document.getElementById("starfield");
-  var ctx    = canvas ? canvas.getContext("2d") : null;
-  var stars  = [];
-  var STAR_COUNT = 200;
-  var DEPTH = 800;
-  var mouse = { x: 0, y: 0 };
-  var tilt  = { x: 0, y: 0 };
-  var rafId = null;
+  /* ── utils ── */
+  var qs  = function(s)  { return document.querySelector(s); };
+  var qsa = function(s)  { return document.querySelectorAll(s); };
+
+  /* ════════════════════════════════════════════
+     1. RISING PARTICLES — matches chronicles chrRise
+  ════════════════════════════════════════════ */
+  var canvas  = document.getElementById("awkCanvas");
+  var ctx     = canvas ? canvas.getContext("2d") : null;
+  var particles = [];
+  var PCOUNT = 80;
 
   function resizeCanvas() {
     if (!canvas) return;
@@ -24,412 +23,363 @@
     canvas.height = window.innerHeight;
   }
 
-  function initStars() {
-    stars = [];
-    for (var i = 0; i < STAR_COUNT; i++) {
-      stars.push({
-        x: (Math.random() - 0.5) * canvas.width  * 2,
-        y: (Math.random() - 0.5) * canvas.height * 2,
-        z: Math.random() * DEPTH,
-        px: 0,
-        py: 0,
-        size: Math.random() * 1.2 + 0.3,
-        speed: Math.random() * 0.4 + 0.15
-      });
-    }
-  }
-
-  function projectStar(s) {
-    var fov = DEPTH;
-    var ox  = canvas.width  / 2 + tilt.x * 60;
-    var oy  = canvas.height / 2 + tilt.y * 40;
-    var scale = fov / (fov + s.z);
+  function makeParticle() {
     return {
-      x: ox + s.x * scale,
-      y: oy + s.y * scale,
-      r: s.size * scale * 1.8,
-      a: Math.min(1, (1 - s.z / DEPTH) * 1.4)
+      x: Math.random() * (canvas ? canvas.width : window.innerWidth),
+      y: (canvas ? canvas.height : window.innerHeight) + 10,
+      r: Math.random() * 1.8 + 0.4,
+      speed: Math.random() * 0.55 + 0.18,
+      drift: (Math.random() - 0.5) * 1.2,   /* horizontal drift */
+      alpha: 0,
+      alphaDir: 1,
+      maxAlpha: Math.random() * 0.55 + 0.15,
+      life: 0,
+      maxLife: (Math.random() * 0.85 + 0.15) /* 0→1 fade in then out */
     };
   }
 
-  function drawStars() {
+  function initParticles() {
+    particles = [];
+    for (var i = 0; i < PCOUNT; i++) {
+      var p = makeParticle();
+      /* scatter vertically so they don't all start at the bottom */
+      p.y = Math.random() * (canvas ? canvas.height : window.innerHeight);
+      p.life = Math.random();
+      particles.push(p);
+    }
+  }
+
+  function drawParticles() {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < stars.length; i++) {
-      var s   = stars[i];
-      var old = { z: s.z + s.speed * 0.8 };
-      var p   = projectStar(s);
-      var op  = projectStar({ x: s.x, y: s.y, z: old.z, size: s.size });
 
-      // Draw trailing line for fast stars
-      if (s.speed > 0.3) {
-        ctx.beginPath();
-        ctx.moveTo(op.x, op.y);
-        ctx.lineTo(p.x, p.y);
-        ctx.strokeStyle = "rgba(212,175,55," + (p.a * 0.3) + ")";
-        ctx.lineWidth   = p.r * 0.5;
-        ctx.stroke();
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+
+      /* life 0→0.15: fade in; 0.15→0.85: full; 0.85→1: fade out */
+      if (p.life < 0.15) {
+        p.alpha = (p.life / 0.15) * p.maxAlpha;
+      } else if (p.life > 0.85) {
+        p.alpha = ((1 - p.life) / 0.15) * p.maxAlpha;
+      } else {
+        p.alpha = p.maxAlpha;
       }
 
-      // Draw star dot
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(0.3, p.r), 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(240,230,200," + p.a + ")";
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(212,175,55,1)";
       ctx.fill();
+      ctx.restore();
 
-      // Advance star
-      s.z -= s.speed;
-      if (s.z <= 1) {
-        s.x = (Math.random() - 0.5) * canvas.width  * 2;
-        s.y = (Math.random() - 0.5) * canvas.height * 2;
-        s.z = DEPTH;
+      /* move upward + drift */
+      p.y    -= p.speed;
+      p.x    += p.drift * 0.008;
+      p.life += p.speed / (canvas ? canvas.height : 800);
+
+      /* reset when off top or life complete */
+      if (p.life >= 1 || p.y < -10) {
+        particles[i] = makeParticle();
       }
     }
   }
 
-  function starLoop() {
-    drawStars();
-    rafId = requestAnimationFrame(starLoop);
+  var rafParticle;
+  function particleLoop() {
+    drawParticles();
+    rafParticle = requestAnimationFrame(particleLoop);
   }
 
-  // Smooth tilt toward mouse
-  function updateTilt() {
-    var tx = (mouse.x / window.innerWidth  - 0.5);
-    var ty = (mouse.y / window.innerHeight - 0.5);
-    tilt.x += (tx - tilt.x) * 0.04;
-    tilt.y += (ty - tilt.y) * 0.04;
-  }
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (!reducedMotion) {
     resizeCanvas();
-    initStars();
-    // Attach tilt update to star loop
-    var _orig = drawStars;
-    drawStars = function () { updateTilt(); _orig(); };
-    starLoop();
-
-    window.addEventListener("mousemove", function (e) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    }, { passive: true });
+    initParticles();
+    particleLoop();
 
     window.addEventListener("resize", function () {
       resizeCanvas();
-      initStars();
+      initParticles();
     }, { passive: true });
   }
 
-  /* ──────────────────────────────────────────
-     SCROLL PROGRESS BAR
-  ────────────────────────────────────────── */
-  var pbFill = document.getElementById("pbFill");
+  /* ════════════════════════════════════════════
+     2. SCROLL PROGRESS BAR
+  ════════════════════════════════════════════ */
+  var progFill = document.getElementById("awkProgFill");
 
   function updateProgress() {
-    if (!pbFill) return;
-    var scrollTop    = window.scrollY || 0;
-    var docHeight    = document.documentElement.scrollHeight - window.innerHeight;
-    var pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    pbFill.style.width = Math.min(100, pct) + "%";
+    if (!progFill) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progFill.style.width = Math.min(100, pct) + "%";
   }
 
-  /* ──────────────────────────────────────────
-     NAV SCROLL STATE
-  ────────────────────────────────────────── */
-  var topNav = document.getElementById("topNav");
-
+  /* ════════════════════════════════════════════
+     3. NAV SCROLL STATE
+  ════════════════════════════════════════════ */
+  var awkNav = document.getElementById("awkNav");
   function updateNav() {
-    if (!topNav) return;
-    if ((window.scrollY || 0) > 60) {
-      topNav.classList.add("scrolled");
-    } else {
-      topNav.classList.remove("scrolled");
-    }
+    if (!awkNav) return;
+    awkNav.classList.toggle("scrolled", window.scrollY > 60);
   }
 
-  /* ──────────────────────────────────────────
-     PARALLAX FOR ATMOSPHERE ORBS
-  ────────────────────────────────────────── */
-  var orb1 = document.querySelector(".atm-orb1");
-  var orb2 = document.querySelector(".atm-orb2");
-  var orb3 = document.querySelector(".atm-orb3");
-  var ring1 = document.querySelector(".atm-ring1");
-  var ring2 = document.querySelector(".atm-ring2");
-
+  /* ════════════════════════════════════════════
+     4. ATMOSPHERE PARALLAX (same as chronicles)
+  ════════════════════════════════════════════ */
+  var o1 = qs(".awk-o1"), o2 = qs(".awk-o2"), o3 = qs(".awk-o3");
   function updateParallax() {
-    var y = window.scrollY || 0;
-    if (orb1) orb1.style.transform = "translateY(" + (y * 0.06)  + "px)";
-    if (orb2) orb2.style.transform = "translateY(" + (-y * 0.04) + "px)";
-    if (orb3) orb3.style.transform = "translateX(" + (y * 0.02)  + "px)";
-    if (ring1) ring1.style.transform = "translate(-50%,-50%) rotate(" + (y * 0.018) + "deg)";
-    if (ring2) ring2.style.transform = "translate(-50%,-50%) rotate(" + (-y * 0.025) + "deg)";
+    var y = window.scrollY;
+    if (o1) o1.style.transform = "translateY(" + (y * 0.06)  + "px)";
+    if (o2) o2.style.transform = "translateY(" + (-y * 0.04) + "px)";
+    if (o3) o3.style.transform = "translateX(" + (y * 0.02)  + "px)";
   }
 
-  /* ──────────────────────────────────────────
-     MASTER SCROLL HANDLER
-  ────────────────────────────────────────── */
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    window.addEventListener("scroll", function () {
-      updateProgress();
-      updateNav();
-      updateParallax();
-    }, { passive: true });
-  } else {
-    window.addEventListener("scroll", function () {
-      updateProgress();
-      updateNav();
-    }, { passive: true });
-  }
+  /* ════════════════════════════════════════════
+     5. MASTER SCROLL HANDLER
+  ════════════════════════════════════════════ */
+  window.addEventListener("scroll", function () {
+    updateProgress();
+    updateNav();
+    if (!reducedMotion) updateParallax();
+  }, { passive: true });
 
-  // Initial call
   updateProgress();
   updateNav();
 
-  /* ──────────────────────────────────────────
-     INTERSECTION OBSERVER — REVEAL ANIMATIONS
-  ────────────────────────────────────────── */
-  var revealEls = document.querySelectorAll(".reveal-up");
-
-  var revealObserver = new IntersectionObserver(function (entries, observer) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+  /* ════════════════════════════════════════════
+     6. REVEAL — scroll-triggered fade-in
+  ════════════════════════════════════════════ */
+  var revealEls = qsa(".awk-reveal");
+  var revealObs = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        /* respect CSS transition-delay set by --ad */
+        var delay = e.target.style.getPropertyValue("--ad") || "0s";
+        e.target.style.transitionDelay = delay;
+        e.target.classList.add("vis");
+        obs.unobserve(e.target);
       }
     });
-  }, {
-    threshold: 0.10,
-    rootMargin: "0px 0px -50px 0px"
-  });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 
-  revealEls.forEach(function (el) {
-    revealObserver.observe(el);
-  });
+  revealEls.forEach(function (el) { revealObs.observe(el); });
 
-  /* ──────────────────────────────────────────
-     CHAPTER DOT ACTIVE STATE
-  ────────────────────────────────────────── */
-  var sections    = document.querySelectorAll("[data-section]");
-  var chapterDots = document.querySelectorAll(".cd-dot");
+  /* ════════════════════════════════════════════
+     7. PAGE 3D TILT ON MOUSE MOVE
+  ════════════════════════════════════════════ */
+  if (!reducedMotion) {
+    var pages = qsa(".awk-page");
+    pages.forEach(function (pg) {
+      var inner = pg.querySelector(".awk-page-inner");
+      if (!inner) return;
 
-  var sectionObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        var idx = entry.target.getAttribute("data-section");
-        chapterDots.forEach(function (dot) {
-          dot.classList.toggle("active", dot.getAttribute("data-sec") === idx);
+      pg.addEventListener("mousemove", function (e) {
+        var rect = pg.getBoundingClientRect();
+        var cx = rect.left + rect.width  / 2;
+        var cy = rect.top  + rect.height / 2;
+        var dx = (e.clientX - cx) / (rect.width  / 2);
+        var dy = (e.clientY - cy) / (rect.height / 2);
+        inner.style.transform = "rotateX(" + (18 - dy * 6) + "deg) rotateY(" + (-4 + dx * 4) + "deg)";
+        inner.style.transition = "transform 0.08s ease";
+      }, { passive: true });
+
+      pg.addEventListener("mouseleave", function () {
+        inner.style.transform = "rotateX(18deg) rotateY(-4deg)";
+        inner.style.transition = "transform 0.6s cubic-bezier(0.23,1,0.32,1)";
+      }, { passive: true });
+    });
+  }
+
+  /* ════════════════════════════════════════════
+     8. CHAPTER DOT ACTIVE STATE
+  ════════════════════════════════════════════ */
+  var sections   = qsa("[data-i]");
+  var dots       = qsa(".awk-dot");
+  var currentIdx = 0;
+
+  var sectionObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var idx = e.target.getAttribute("data-i");
+        currentIdx = parseInt(idx) || 0;
+        dots.forEach(function (d) {
+          d.classList.toggle("active", d.getAttribute("data-i") === idx);
         });
       }
     });
-  }, {
-    threshold: 0.4
-  });
+  }, { threshold: 0.45 });
 
-  sections.forEach(function (s) { sectionObserver.observe(s); });
+  sections.forEach(function (s) { sectionObs.observe(s); });
 
-  /* ──────────────────────────────────────────
-     DAYS DOTS — ANIMATE ON SCROLL INTO VIEW
-  ────────────────────────────────────────── */
-  var daysDots = document.querySelectorAll(".dd");
-  var daysSection = document.getElementById("ch4");
+  /* ════════════════════════════════════════════
+     9. DAYS GRID — animated dots on scroll into view
+  ════════════════════════════════════════════ */
+  function buildDaysGrid(containerId, count, litCount) {
+    var grid = document.getElementById(containerId);
+    if (!grid) return;
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement("div");
+      d.className = "awk-dg-dot";
+      d.setAttribute("data-dot", i);
+      grid.appendChild(d);
+    }
 
-  if (daysSection) {
-    var dotsObserver = new IntersectionObserver(function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          daysDots.forEach(function (dot, i) {
+    var gridObs = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var dots2 = e.target.querySelectorAll(".awk-dg-dot");
+          dots2.forEach(function (dot, idx) {
             setTimeout(function () {
-              dot.style.background = i < 19
-                ? "rgba(212,175,55,0.35)"
-                : "var(--gold)";
-              dot.style.borderColor = i < 19
-                ? "rgba(212,175,55,0.5)"
-                : "var(--gold)";
-              dot.style.transform = "scale(1.15)";
-              setTimeout(function () {
-                dot.style.transform = "scale(1)";
-              }, 200);
-            }, i * 80);
+              if (idx < litCount) dot.classList.add("lit");
+            }, idx * 60);
           });
-          observer.unobserve(entry.target);
+          obs.unobserve(e.target);
         }
       });
     }, { threshold: 0.3 });
 
-    dotsObserver.observe(daysSection);
+    gridObs.observe(grid);
   }
 
-  /* ──────────────────────────────────────────
-     3D TILT ON CHAPTER CARDS — MOUSE ENTER/LEAVE
-  ────────────────────────────────────────── */
-  var chapterFrames = document.querySelectorAll(".chapter-frame");
+  buildDaysGrid("daysGrid", 20, 8);   /* page4 — 20 days, 8 visits shown lit */
 
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    chapterFrames.forEach(function (frame) {
-      frame.addEventListener("mousemove", function (e) {
-        var rect   = frame.getBoundingClientRect();
-        var cx     = rect.left + rect.width  / 2;
-        var cy     = rect.top  + rect.height / 2;
-        var dx     = (e.clientX - cx) / (rect.width  / 2);
-        var dy     = (e.clientY - cy) / (rect.height / 2);
-        frame.style.transform = "perspective(1200px) rotateY(" + (dx * 2.5) + "deg) rotateX(" + (-dy * 1.5) + "deg)";
-        frame.style.transition = "transform 0.1s ease";
-      }, { passive: true });
-
-      frame.addEventListener("mouseleave", function () {
-        frame.style.transform = "perspective(1200px) rotateY(0deg) rotateX(0deg)";
-        frame.style.transition = "transform 0.6s cubic-bezier(0.16,1,0.3,1)";
-      }, { passive: true });
-    });
-  }
-
-  /* ──────────────────────────────────────────
-     MOBILE NAV TOGGLE
-  ────────────────────────────────────────── */
-  var navToggle = document.getElementById("navToggle");
-  if (navToggle && topNav) {
-    navToggle.addEventListener("click", function () {
-      topNav.classList.toggle("nav-open");
-    });
-
-    // Close on nav link click
-    var navLinks = topNav.querySelectorAll("nav a");
-    navLinks.forEach(function (link) {
-      link.addEventListener("click", function () {
-        topNav.classList.remove("nav-open");
+  /* Also build right-side decoration dots */
+  function buildDecoDots(containerId, count, litIdx) {
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement("div");
+      d.className = "awk-dd-d";
+      c.appendChild(d);
+    }
+    var dObs = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var dd = e.target.querySelectorAll(".awk-dd-d");
+          dd.forEach(function (dot, idx) {
+            setTimeout(function () {
+              if (idx === litIdx) dot.classList.add("lit");
+            }, idx * 90);
+          });
+          obs.unobserve(e.target);
+        }
       });
-    });
+    }, { threshold: 0.3 });
+    dObs.observe(c);
   }
 
-  /* ──────────────────────────────────────────
-     SMOOTH ANCHOR SCROLL
-  ────────────────────────────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+  buildDecoDots("decoDotsRight", 20, 19);   /* last dot glows gold */
+
+  /* ════════════════════════════════════════════
+     10. SMOOTH ANCHOR SCROLL
+  ════════════════════════════════════════════ */
+  var navH = function () {
+    return parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue("--nav-h")) || 54;
+  };
+
+  qsa('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id  = a.getAttribute("href").slice(1);
-      var target = document.getElementById(id);
-      if (!target) return;
+      var tgt = document.getElementById(id);
+      if (!tgt) return;
       e.preventDefault();
-      var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 58;
-      var top  = target.getBoundingClientRect().top + window.scrollY - navH;
+      var top = tgt.getBoundingClientRect().top + window.scrollY - navH();
       window.scrollTo({ top: top, behavior: "smooth" });
     });
   });
 
-  /* ──────────────────────────────────────────
-     KEYBOARD NAVIGATION (ARROW KEYS)
-  ────────────────────────────────────────── */
-  var sectionIds  = ["hero","ch1","ch2","ch3","ch4","ch5","ch6","closing"];
-  var currentSec  = 0;
-  var scrollLocked = false;
+  /* ════════════════════════════════════════════
+     11. KEYBOARD ARROW NAVIGATION
+  ════════════════════════════════════════════ */
+  var sectionIds = ["hero","ch1","ch2","ch3","ch4","ch5","ch6","closing"];
+  var locked = false;
 
-  function navToSection(idx) {
-    if (idx < 0 || idx >= sectionIds.length) return;
+  function navToIdx(idx) {
+    if (locked || idx < 0 || idx >= sectionIds.length) return;
     var el = document.getElementById(sectionIds[idx]);
     if (!el) return;
-    currentSec = idx;
-    scrollLocked = true;
-    var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 58;
-    var top  = el.getBoundingClientRect().top + window.scrollY - navH;
+    currentIdx = idx; locked = true;
+    var top = el.getBoundingClientRect().top + window.scrollY - navH();
     window.scrollTo({ top: top, behavior: "smooth" });
-    setTimeout(function () { scrollLocked = false; }, 900);
+    setTimeout(function () { locked = false; }, 900);
   }
 
   document.addEventListener("keydown", function (e) {
-    if (scrollLocked) return;
-    if (e.key === "ArrowDown" || e.key === "PageDown") {
-      e.preventDefault();
-      navToSection(currentSec + 1);
-    } else if (e.key === "ArrowUp" || e.key === "PageUp") {
-      e.preventDefault();
-      navToSection(currentSec - 1);
-    }
+    if (locked) return;
+    if (e.key === "ArrowDown" || e.key === "PageDown") { e.preventDefault(); navToIdx(currentIdx + 1); }
+    if (e.key === "ArrowUp"   || e.key === "PageUp")   { e.preventDefault(); navToIdx(currentIdx - 1); }
   });
 
-  // Track current section via scroll
-  var secTrackObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        var id  = entry.target.getAttribute("id");
-        var idx = sectionIds.indexOf(id);
-        if (idx >= 0) currentSec = idx;
-      }
+  /* ════════════════════════════════════════════
+     12. MOBILE HAMBURGER
+  ════════════════════════════════════════════ */
+  var ham  = document.getElementById("awkHam");
+  var nav2 = document.getElementById("awkNav");
+  if (ham && nav2) {
+    ham.addEventListener("click", function () {
+      nav2.classList.toggle("nav-open");
     });
-  }, { threshold: 0.5 });
-
-  sections.forEach(function (s) { secTrackObserver.observe(s); });
-
-  /* ──────────────────────────────────────────
-     PULLQUOTE HIGHLIGHT ON SCROLL
-  ────────────────────────────────────────── */
-  var pullquotes = document.querySelectorAll(".pullquote");
-  var pqObserver = new IntersectionObserver(function (entries, observer) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.style.borderLeftColor = "rgba(212,175,55,0.8)";
-        entry.target.style.background      = "rgba(212,175,55,0.07)";
-        entry.target.style.transition      = "border-left-color 0.6s, background 0.6s";
-        observer.unobserve(entry.target);
-      }
+    qsa(".awk-navlinks a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        nav2.classList.remove("nav-open");
+      });
     });
-  }, { threshold: 0.6 });
+  }
 
-  pullquotes.forEach(function (pq) { pqObserver.observe(pq); });
-
-  /* ──────────────────────────────────────────
-     CURSOR TRAIL (desktop only)
-  ────────────────────────────────────────── */
-  if (window.innerWidth > 820 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  /* ════════════════════════════════════════════
+     13. GOLD CURSOR TRAIL (desktop only)
+  ════════════════════════════════════════════ */
+  if (!reducedMotion && window.innerWidth > 860) {
+    var TRAIL = 14;
     var trail = [];
-    var TRAIL_LEN = 12;
-
-    for (var t = 0; t < TRAIL_LEN; t++) {
-      var dot = document.createElement("div");
-      dot.style.cssText = [
+    for (var t = 0; t < TRAIL; t++) {
+      var el = document.createElement("div");
+      var sz = (3.5 - t * 0.20);
+      el.style.cssText = [
         "position:fixed",
-        "width:" + (4 - t * 0.25) + "px",
-        "height:" + (4 - t * 0.25) + "px",
-        "border-radius:50%",
-        "background:rgba(212,175,55," + (0.55 - t * 0.04) + ")",
         "pointer-events:none",
         "z-index:9999",
+        "border-radius:50%",
         "transform:translate(-50%,-50%)",
-        "transition:opacity 0.2s",
-        "left:-100px",
-        "top:-100px"
+        "width:"  + sz + "px",
+        "height:" + sz + "px",
+        "background:rgba(212,175,55," + (0.60 - t * 0.035) + ")",
+        "left:-200px",
+        "top:-200px"
       ].join(";");
-      document.body.appendChild(dot);
-      trail.push({ el: dot, x: -100, y: -100 });
+      document.body.appendChild(el);
+      trail.push({ el: el, x: -200, y: -200 });
     }
 
-    var cursorPos = { x: -100, y: -100 };
-
+    var cursor = { x: -200, y: -200 };
     document.addEventListener("mousemove", function (e) {
-      cursorPos.x = e.clientX;
-      cursorPos.y = e.clientY;
+      cursor.x = e.clientX; cursor.y = e.clientY;
     }, { passive: true });
 
-    (function trailLoop() {
-      trail[0].x = cursorPos.x;
-      trail[0].y = cursorPos.y;
+    (function trailRaf() {
+      trail[0].x = cursor.x; trail[0].y = cursor.y;
       for (var i = 1; i < trail.length; i++) {
-        trail[i].x += (trail[i-1].x - trail[i].x) * 0.38;
-        trail[i].y += (trail[i-1].y - trail[i].y) * 0.38;
+        trail[i].x += (trail[i-1].x - trail[i].x) * 0.40;
+        trail[i].y += (trail[i-1].y - trail[i].y) * 0.40;
       }
       for (var j = 0; j < trail.length; j++) {
         trail[j].el.style.left = trail[j].x + "px";
         trail[j].el.style.top  = trail[j].y + "px";
       }
-      requestAnimationFrame(trailLoop);
+      requestAnimationFrame(trailRaf);
     })();
 
-    // Hide on scroll
-    var scrollTimer;
+    /* hide trail during scroll */
+    var st;
     window.addEventListener("scroll", function () {
       trail.forEach(function (t) { t.el.style.opacity = "0"; });
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function () {
+      clearTimeout(st);
+      st = setTimeout(function () {
         trail.forEach(function (t) { t.el.style.opacity = "1"; });
-      }, 300);
+      }, 280);
     }, { passive: true });
   }
 
