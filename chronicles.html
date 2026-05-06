@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/chronicles.css">
+  <link rel="stylesheet" href="chronicles.css">
 </head>
 <body>
 
@@ -15,58 +15,33 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
-        <div class="face face-back"></div>
-        <div class="face face-bottom-wall"></div>
-        <div class="face face-top-wall"></div>
-        <div class="face face-left-wall"></div>
-        <div class="face face-right-wall"></div>
-        <div class="face face-top"></div>
+        <div class="face face-back"></div><div class="face face-bottom-wall"></div><div class="face face-top-wall"></div><div class="face face-left-wall"></div><div class="face face-right-wall"></div><div class="face face-top"></div>
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
-            <li><a href="awakening.html">AWAKENING</a></li>
-            <li><a href="chronicles.html">CHRONICLES</a></li>
-            <li><a href="companions.html">COMPANIONS</a></li>
-            <li><a href="essays.html">VERSES</a></li>
-            <li><a href="questions.html">QUESTIONS</a></li>
-            <li><a href="gathering.html">GATHERING</a></li>
+            <li><a href="genesis.html">GENESIS</a></li><li><a href="awakening.html">AWAKENING</a></li><li><a href="chronicles.html">CHRONICLES</a></li><li><a href="companions.html">COMPANIONS</a></li><li><a href="essays.html">VERSES</a></li><li><a href="questions.html">QUESTIONS</a></li><li><a href="gathering.html">GATHERING</a></li>
           </ul>
-          <div class="portal-scene">
-            <button class="portal-btn">
-              <span class="portal-glow"></span>
-              <span class="portal-wall"></span>
-              <span class="portal-top">PORTAL ✦</span>
-            </button>
-          </div>
+          <div class="portal-scene"><button class="portal-btn"><span class="portal-glow"></span><span class="portal-wall"></span><span class="portal-top">PORTAL ✦</span></button></div>
         </div>
       </nav>
     </div>
   </div>
 
-  <!-- THE LIVING ARCHIVE HERO -->
   <section class="chronicles-hero" id="chronicles">
     <canvas id="archiveCanvas"></canvas>
     <div class="chr-overlay"></div>
     <div class="chr-content">
       <p class="chr-eyebrow">The Horseman's Journal</p>
       <h2 class="chr-title">Chron<span class="gold">icles</span></h2>
-      <div class="chr-div">
-        <div class="chr-dline"></div><div class="chr-dgem"></div><div class="chr-dline chr-dline-r"></div>
-      </div>
+      <div class="chr-div"><div class="chr-dline"></div><div class="chr-dgem"></div><div class="chr-dline chr-dline-r"></div></div>
       <p class="chr-tagline">Fifteen articles. Three paths. One truth. Written in dust, silence, and the breath of horses.</p>
     </div>
-    <div class="chr-scroll">
-      <span>Enter the Archive</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </div>
+    <div class="chr-scroll"><span>Enter the Archive</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
   </section>
 
-  <!-- THE KNOWLEDGE WITHIN -->
   <section class="horse-intro" id="chronicles-intro">
     <div class="intro-inner">
       <div class="intro-badge">The Knowledge Within</div>
@@ -76,51 +51,22 @@
         <p>What you are about to read in these chronicles is not a training manual. It is not a collection of techniques or methods or step by step instructions. It is something older and quieter than that. An attempt to put into words what happens in the space between a human being and a horse when both of them, finally, stop pretending and begin to truly see each other.</p>
         <p>These articles were not written at a desk. They were written in arenas, on dusty ground, in the aftermath of falls and breakthroughs and long, hard silences. They were written by a man who has spent eleven years being taught by animals that cannot speak and learning that this is exactly why they are the best teachers in the world.</p>
       </div>
-      <div class="intro-ornament">
-        <div class="iorn-line"></div>
-        <div class="iorn-text">Fifteen Articles | Three Paths | One Truth</div>
-        <div class="iorn-line iorn-line-r"></div>
-      </div>
+      <div class="intro-ornament"><div class="iorn-line"></div><div class="iorn-text">Fifteen Articles | Three Paths | One Truth</div><div class="iorn-line iorn-line-r"></div></div>
     </div>
   </section>
 
-  <!-- THE ARTICLES -->
   <section class="chronicles" id="chronicles-books">
     <canvas id="libraryFloorCanvas"></canvas>
-    <div class="chr-sec-header">
-      <span class="chr-sec-eyebrow">The Written Record</span>
-      <h2 class="chr-sec-title">The Articles</h2>
-      <p class="chr-sec-sub">Select a path. Open a book. Begin.</p>
-    </div>
+    <div class="chr-sec-header"><span class="chr-sec-eyebrow">The Written Record</span><h2 class="chr-sec-title">The Articles</h2><p class="chr-sec-sub">Select a path. Open a book. Begin.</p></div>
     <div class="chr-filters">
-      <button class="chr-filter-btn active" data-filter="all">All Articles</button>
-      <div class="chr-filter-sep"></div>
-      <button class="chr-filter-btn" data-filter="foundational">Foundational</button>
-      <div class="chr-filter-sep"></div>
-      <button class="chr-filter-btn" data-filter="practical">Practical</button>
-      <div class="chr-filter-sep"></div>
-      <button class="chr-filter-btn" data-filter="edge">Your Unique Edge</button>
+      <button class="chr-filter-btn active" data-filter="all">All Articles</button><div class="chr-filter-sep"></div><button class="chr-filter-btn" data-filter="foundational">Foundational</button><div class="chr-filter-sep"></div><button class="chr-filter-btn" data-filter="practical">Practical</button><div class="chr-filter-sep"></div><button class="chr-filter-btn" data-filter="edge">Your Unique Edge</button>
     </div>
-    <div class="books-grid" id="booksGrid">
-      <!-- Populated by chronicles.js -->
-    </div>
-
-    <!-- ARTICLE READER PANEL -->
+    <div class="books-grid" id="booksGrid"></div>
     <div class="article-panel" id="articlePanel">
-      <div class="art-panel-inner">
-        <div class="art-watermark">🐴</div>
-        <button class="art-close" id="artClose"></button>
-        <div class="art-header">
-          <span class="art-label" id="artLabel"></span>
-          <h3 class="art-title" id="artTitle"></h3>
-          <div class="art-rule"></div>
-          <div class="art-keywords" id="artKeywords"></div>
-        </div>
-        <div class="art-body" id="artBody"></div>
-      </div>
+      <div class="art-panel-inner"><div class="art-watermark">🐴</div><button class="art-close" id="artClose"></button><div class="art-header"><span class="art-label" id="artLabel"></span><h3 class="art-title" id="artTitle"></h3><div class="art-rule"></div><div class="art-keywords" id="artKeywords"></div></div><div class="art-body" id="artBody"></div></div>
     </div>
   </section>
 
-  <script src="js/chronicles.js"></script>
+  <script src="chronicles.js"></script>
 </body>
 </html>
