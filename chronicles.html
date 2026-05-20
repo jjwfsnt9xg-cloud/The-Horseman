@@ -2,11 +2,499 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chronicles - The Horseman's Journal</title>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/chronicles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Chronicles - The Horseman's Journal | 3D Interactive Horses</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #060308;
+      color: #e8dfc7;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* 3D Canvas Layer */
+    #horseCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+      background: radial-gradient(ellipse at 50% 40%, #0a0718, #020108);
+    }
+
+    /* UI Content sits above canvas */
+    .navbar-wrapper,
+    .chronicles-hero,
+    .horse-intro,
+    .chronicles-section {
+      position: relative;
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    /* ORBS */
+    .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 1; }
+    .orb1 { width: 55vw; height: 55vw; top: -12vh; right: -12vw; background: radial-gradient(circle, rgba(200,150,60,0.12), transparent); }
+    .orb2 { width: 45vw; height: 45vw; bottom: -8vh; left: -18vw; background: radial-gradient(circle, rgba(180,130,100,0.08), transparent); }
+    .orb3 { width: 35vw; height: 35vw; top: 45vh; left: 32vw; background: radial-gradient(circle, rgba(140,100,180,0.06), transparent); }
+
+    /* NAVBAR */
+    .navbar-wrapper {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none;
+    }
+    .navbar-wrapper * { pointer-events: auto; }
+    .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
+    .nav3d {
+      position: relative; transform-style: preserve-3d;
+      transform: rotateX(28deg) rotateY(0deg);
+      transition: transform .5s cubic-bezier(.23,1,.32,1); height: 64px;
+    }
+    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
+    .face { position: absolute; border-radius: 18px; }
+    .face-top {
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(200,155,60,0.08) 40%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(200,155,60,0.45); border-bottom-color: rgba(200,155,60,0.15);
+      backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(180,140,50,0.06);
+      z-index: 4;
+    }
+    .face-back {
+      inset: 0; background: rgba(180,130,40,0.04);
+      border: 1px solid rgba(200,155,60,0.2); transform: translateZ(-36px); z-index: 1;
+    }
+    .face-bottom-wall {
+      left: 18px; right: 18px; bottom: -36px; height: 36px;
+      background: linear-gradient(180deg, rgba(180,130,50,0.18) 0%, rgba(80,50,10,0.08) 60%, rgba(0,0,0,0.02) 100%);
+      border-left: 1px solid rgba(200,155,60,0.15); border-right: 1px solid rgba(200,155,60,0.15);
+      border-bottom: 1px solid rgba(200,155,60,0.1); border-radius: 0 0 12px 12px;
+      transform-origin: top center; transform: rotateX(-90deg); z-index: 2;
+    }
+    .face-top-wall {
+      left: 18px; right: 18px; top: -5px; height: 5px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(200,155,60,0.2));
+      border-radius: 18px 18px 0 0; transform-origin: bottom center; transform: rotateX(90deg); z-index: 3;
+    }
+    .face-left-wall {
+      top: 4px; bottom: 4px; left: -36px; width: 36px;
+      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1); border-radius: 12px 0 0 12px;
+      transform-origin: right center; transform: rotateY(-90deg); z-index: 2;
+    }
+    .face-right-wall {
+      top: 4px; bottom: 4px; right: -36px; width: 36px;
+      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1); border-radius: 0 12px 12px 0;
+      transform-origin: left center; transform: rotateY(90deg); z-index: 2;
+    }
+    .nav-content {
+      position: absolute; inset: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.8rem; transform: translateZ(1px);
+    }
+    .brand {
+      font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700;
+      color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase;
+      text-shadow: 0 0 24px rgba(200,150,50,0.8);
+      flex-shrink: 0; text-decoration: none;
+    }
+    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(200,150,50,0.4); }
+    .links { display: flex; gap: .05rem; list-style: none; }
+    .links li a {
+      display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px;
+      color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px;
+      border-radius: 8px; transition: all .25s;
+    }
+    .links li a:hover, .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(200,150,50,0.9); }
+    .portal-scene { perspective: 300px; flex-shrink: 0; }
+    .portal-btn {
+      position: relative; transform-style: preserve-3d; transform: rotateX(22deg);
+      transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer;
+    }
+    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
+    .portal-top {
+      display: block; padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
+      backdrop-filter: blur(12px); border: 1px solid rgba(200,150,50,0.7);
+      border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: 2.5px; color: #FFF8DC;
+      position: relative; z-index: 3; white-space: nowrap;
+    }
+    .portal-wall {
+      position: absolute; inset: 0; background: linear-gradient(180deg, rgba(120,80,20,0.6), rgba(50,30,5,0.4));
+      border-radius: 100px; transform: translateZ(-14px); z-index: 2;
+    }
+    .portal-glow {
+      position: absolute; inset: -4px; border-radius: 100px;
+      box-shadow: 0 0 20px rgba(200,150,50,0.4), 0 0 60px rgba(200,150,50,0.15);
+      transform: translateZ(-7px); z-index: 1;
+    }
+
+    /* CHRONICLES HERO */
+    .chronicles-hero {
+      position: relative; width: 100%; height: 100vh; min-height: 650px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .chr-content {
+      position: relative; z-index: 10; text-align: center;
+      animation: fadeUp 1.2s ease;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .chr-eyebrow {
+      font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 8px; color: rgba(200, 155, 60, 0.6);
+      margin-bottom: 1.5rem;
+    }
+    .chr-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 700; color: #fff; letter-spacing: 6px;
+      text-shadow: 0 0 80px rgba(200, 140, 40, 0.5);
+    }
+    .chr-title .gold { color: #E8C84A; text-shadow: 0 0 60px rgba(232,200,74,0.8); }
+    .chr-div {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.2rem; margin: 1.5rem 0;
+    }
+    .chr-dline { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,155,60,0.6), transparent); }
+    .chr-dgem { width: 8px; height: 8px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 18px rgba(232,200,74,0.9); }
+    .chr-tagline {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: 1rem; color: rgba(240, 220, 180, 0.7);
+      max-width: 550px; margin: 0 auto; line-height: 1.8;
+    }
+
+    /* HORSE INTRO */
+    .horse-intro {
+      position: relative; background: rgba(6, 3, 8, 0.7);
+      backdrop-filter: blur(2px); padding: 6rem 2rem;
+    }
+    .intro-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+    .intro-badge {
+      font-family: 'Cinzel', serif; font-size: 0.6rem;
+      letter-spacing: 5px; color: rgba(200, 155, 60, 0.6);
+      text-transform: uppercase; margin-bottom: 2rem;
+      display: inline-block;
+    }
+    .intro-headline {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; color: #E8C84A;
+      letter-spacing: 1px; line-height: 1.2; margin-bottom: 2rem;
+    }
+    .intro-body {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem; line-height: 1.9;
+      color: rgba(240, 230, 200, 0.85);
+    }
+    .intro-body p { margin-bottom: 1.5rem; }
+    .intro-body p:first-child::first-letter {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.5em; font-weight: 700; color: #E8C84A;
+      float: left; line-height: 0.75; margin: 0.1em 0.15em 0 0;
+      text-shadow: 0 0 25px rgba(200, 155, 60, 0.6);
+    }
+    .intro-ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .iorn-line { width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,155,60,0.4), transparent); }
+    .iorn-text {
+      font-family: 'Cinzel', serif; font-size: 0.6rem;
+      letter-spacing: 4px; color: rgba(200, 155, 60, 0.45);
+      text-transform: uppercase;
+    }
+
+    /* CHRONICLES ARTICLES SECTION */
+    .chronicles-section {
+      position: relative; background: rgba(6, 3, 8, 0.8);
+      backdrop-filter: blur(2px); padding: 5rem 2rem 8rem;
+    }
+    .chr-sec-header { text-align: center; margin-bottom: 3rem; }
+    .chr-sec-eyebrow {
+      font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 8px; color: rgba(200, 155, 60, 0.5);
+      text-transform: uppercase;
+    }
+    .chr-sec-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700; color: #E8C84A;
+      letter-spacing: 3px; margin: 0.5rem 0;
+    }
+    .chr-sec-sub {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      color: rgba(240, 230, 200, 0.45);
+    }
+    .chr-filters {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;
+    }
+    .chr-filter-btn {
+      font-family: 'Cinzel', serif; font-size: 0.65rem;
+      letter-spacing: 2.5px; color: rgba(200, 155, 60, 0.6);
+      text-transform: uppercase; background: transparent;
+      border: 1px solid rgba(200, 155, 60, 0.25);
+      padding: 8px 20px; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .chr-filter-btn:hover {
+      color: rgba(200, 155, 60, 0.9);
+      border-color: rgba(200, 155, 60, 0.5);
+      background: rgba(200, 155, 60, 0.08);
+    }
+    .chr-filter-btn.active {
+      color: #0a0500; background: #E8C84A;
+      border-color: #E8C84A; box-shadow: 0 0 20px rgba(200,155,60,0.3);
+    }
+
+    /* Books Grid */
+    .books-grid {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 1000px) { .books-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 680px) { .books-grid { grid-template-columns: 1fr; } }
+
+    /* Book Card - Simplified for visibility */
+    .book-card {
+      background: linear-gradient(145deg, #1a1628, #0f0c1a);
+      border: 1px solid rgba(200, 155, 60, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .book-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .book-card.hidden {
+      display: none;
+    }
+    .book-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(200, 155, 60, 0.5);
+    }
+    .book-cover {
+      background: linear-gradient(135deg, #2a1e0a, #1a1205);
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .book-icon {
+      font-size: 4rem;
+      opacity: 0.5;
+    }
+    .book-category {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      background: #c8922a;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.5rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      color: #0a0500;
+      font-weight: bold;
+    }
+    .book-card[data-category="practical"] .book-category { background: #d4854a; }
+    .book-card[data-category="edge"] .book-category { background: #b890c0; }
+    .book-number {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.1);
+    }
+    .book-info {
+      padding: 1.2rem;
+      background: linear-gradient(160deg, #f5efd4, #ede0b8);
+      color: #3a2200;
+    }
+    .book-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .book-excerpt {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: rgba(50, 30, 5, 0.8);
+      margin: 0.5rem 0;
+    }
+    .book-read {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      color: #b87a1a;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+    .book-read::after {
+      content: ' →';
+    }
+
+    /* Article Modal */
+    .article-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s ease;
+    }
+    .article-modal.open {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-container {
+      width: 90%;
+      max-width: 850px;
+      max-height: 85vh;
+      background: linear-gradient(145deg, #1a1528, #0d0a18);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 16px;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.96);
+      transition: transform 0.3s ease;
+    }
+    .article-modal.open .modal-container {
+      transform: scale(1);
+    }
+    .modal-container::-webkit-scrollbar { width: 4px; }
+    .modal-container::-webkit-scrollbar-track { background: #1e192c; }
+    .modal-container::-webkit-scrollbar-thumb { background: #c9a546; border-radius: 4px; }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(200, 155, 60, 0.1);
+      border: 1px solid rgba(200, 155, 60, 0.3);
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      font-size: 1.2rem;
+      color: #c9a546;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .modal-close:hover {
+      background: rgba(200, 155, 60, 0.2);
+    }
+    .modal-content {
+      padding: 2rem;
+      font-family: 'EB Garamond', serif;
+      color: rgba(232, 212, 178, 0.9);
+      line-height: 1.9;
+    }
+    .modal-content .article-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: rgba(200, 155, 60, 0.7);
+      text-transform: uppercase;
+    }
+    .modal-content .article-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #E8C84A;
+      margin: 0.5rem 0;
+    }
+    .modal-content .article-tagline {
+      font-style: italic;
+      color: rgba(200, 155, 60, 0.6);
+      margin-bottom: 1rem;
+    }
+    .modal-content .article-keywords {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .modal-content .article-kw {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 1px;
+      color: rgba(200, 155, 60, 0.8);
+      border: 1px solid rgba(200, 155, 60, 0.3);
+      padding: 0.2rem 0.7rem;
+    }
+    .modal-content .blockquote {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      padding: 1rem 2rem;
+      margin: 1.5rem 0;
+      border-left: 3px solid #c9a030;
+      background: rgba(200, 155, 60, 0.08);
+      color: #e8d8a0;
+    }
+    .modal-content p {
+      margin-bottom: 1.2rem;
+      text-indent: 1.5em;
+    }
+    .modal-content p:first-child {
+      text-indent: 0;
+    }
+    .modal-content .rd-dropcap {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.2em;
+      font-weight: 700;
+      color: #c9a030;
+      float: left;
+      line-height: 0.75;
+      margin: 0.07em 0.15em 0 0;
+    }
+
+    @media (max-width: 860px) {
+      .navbar-wrapper { padding: 0.8rem 1rem 0; }
+      .nav3d { height: 56px; transform: rotateX(15deg); }
+      .brand { font-size: 0.7rem; }
+      .links li a { font-size: 0.48rem; padding: 4px 5px; }
+      .modal-content { padding: 1.5rem; }
+      .modal-content .article-title { font-size: 1.3rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -14,10 +502,8 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- 4D Canvas (from global.js) -->
-  <canvas id="worldCanvas"></canvas>
+  <canvas id="horseCanvas"></canvas>
 
-  <!-- NAVBAR (from global.css) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -28,13 +514,13 @@
         <div class="face face-right-wall"></div>
         <div class="face face-top"></div>
         <div class="nav-content">
-          <a href="index.html" class="brand">THE HORSEMAN'S JOURNAL<small>EST. MMXXVI</small></a>
+          <a href="#" class="brand">THE HORSEMAN'S JOURNAL<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
-            <li><a href="awakening.html">AWAKENING</a></li>
-            <li><a href="chronicles.html" class="active">CHRONICLES</a></li>
-            <li><a href="companions.html">COMPANIONS</a></li>
-            <li><a href="essays.html">VERSES</a></li>
+            <li><a href="#">GENESIS</a></li>
+            <li><a href="#">AWAKENING</a></li>
+            <li><a href="#" class="active">CHRONICLES</a></li>
+            <li><a href="#">COMPANIONS</a></li>
+            <li><a href="#">VERSES</a></li>
           </ul>
           <div class="portal-scene">
             <button class="portal-btn">
@@ -48,26 +534,19 @@
     </div>
   </div>
 
-  <!-- CHRONICLES HERO SECTION -->
-  <section class="chronicles-hero" id="chroniclesHero">
-    <div class="chr-overlay"></div>
+  <section class="chronicles-hero">
     <div class="chr-content">
-      <p class="chr-eyebrow">THE HORSEMAN'S JOURNAL</p>
+      <div class="chr-eyebrow">THE HORSEMAN'S JOURNAL</div>
       <h2 class="chr-title">CHRON<span class="gold">ICLES</span></h2>
-      <div class="chr-divider">
-        <div class="chr-line"></div>
-        <div class="chr-diamond"></div>
-        <div class="chr-line"></div>
+      <div class="chr-div">
+        <div class="chr-dline"></div>
+        <div class="chr-dgem"></div>
+        <div class="chr-dline"></div>
       </div>
-      <p class="chr-tagline">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
-    </div>
-    <div class="chr-scroll">
-      <span>Scroll to explore</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      <div class="chr-tagline">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</div>
     </div>
   </section>
 
-  <!-- HORSE INTRODUCTION -->
   <section class="horse-intro">
     <div class="intro-inner">
       <div class="intro-badge">THE KNOWLEDGE WITHIN</div>
@@ -85,12 +564,11 @@
     </div>
   </section>
 
-  <!-- CHRONICLES ARTICLES SECTION -->
   <section class="chronicles-section">
     <div class="chr-sec-header">
-      <span class="chr-sec-eyebrow">THE WRITTEN RECORD</span>
+      <div class="chr-sec-eyebrow">THE WRITTEN RECORD</div>
       <h2 class="chr-sec-title">THE ARTICLES</h2>
-      <p class="chr-sec-sub">Select a path. Open a book. Begin.</p>
+      <div class="chr-sec-sub">Select a path. Open a book. Begin.</div>
     </div>
     
     <div class="chr-filters">
@@ -102,7 +580,6 @@
 
     <div class="books-grid" id="booksGrid"></div>
 
-    <!-- ARTICLE READER MODAL -->
     <div class="article-modal" id="articleModal">
       <div class="modal-container">
         <button class="modal-close" id="modalClose">✕</button>
@@ -111,9 +588,515 @@
     </div>
   </section>
 
-  <!-- Global JS (4D Engine) -->
-  <script src="js/global.js"></script>
-  <!-- Chronicles JS (Books + Modal) -->
-  <script src="js/chronicles.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+
+    // ============================================================
+    // 3D HORSES ENGINE
+    // ============================================================
+    const canvas = document.getElementById('horseCanvas');
+    if (canvas) {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x060308, 0);
+      
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 2.8, 14);
+      
+      const ambientLight = new THREE.AmbientLight(0x332a44);
+      scene.add(ambientLight);
+      const mainLight = new THREE.DirectionalLight(0xffdd99, 1.3);
+      mainLight.position.set(6, 10, 5);
+      mainLight.castShadow = true;
+      scene.add(mainLight);
+      const fillLight = new THREE.PointLight(0xaa8866, 0.5);
+      fillLight.position.set(-3, 4, 4);
+      scene.add(fillLight);
+      const rimLight = new THREE.PointLight(0xffaa66, 0.4);
+      rimLight.position.set(0, 3, -6);
+      scene.add(rimLight);
+      
+      const groundPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(24, 16),
+        new THREE.ShadowMaterial({ opacity: 0.3, color: 0x000000, transparent: true })
+      );
+      groundPlane.rotation.x = -Math.PI / 2;
+      groundPlane.position.y = -0.7;
+      groundPlane.receiveShadow = true;
+      scene.add(groundPlane);
+      
+      // Particle field
+      const particleCount = 800;
+      const particleGeo = new THREE.BufferGeometry();
+      const particlePositions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        particlePositions[i*3] = (Math.random() - 0.5) * 28;
+        particlePositions[i*3+1] = Math.random() * 6;
+        particlePositions[i*3+2] = (Math.random() - 0.5) * 22;
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+      const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.045, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending });
+      const dustField = new THREE.Points(particleGeo, particleMat);
+      scene.add(dustField);
+      
+      function createHorse(bodyColor, maneColor, posX, posZ) {
+        const group = new THREE.Group();
+        const bodyMat = new THREE.MeshStandardMaterial({ color: bodyColor, roughness: 0.4 });
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.7, 1.9), bodyMat);
+        body.position.set(0, 0, 0);
+        body.castShadow = true;
+        group.add(body);
+        
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.48, 0.9, 8), bodyMat);
+        neck.position.set(0.18, 0.48, -0.75);
+        neck.castShadow = true;
+        group.add(neck);
+        
+        const head = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.48, 0.6), bodyMat);
+        head.position.set(0.22, 0.75, -1.12);
+        head.castShadow = true;
+        group.add(head);
+        
+        const muzzle = new THREE.Mesh(new THREE.SphereGeometry(0.24, 8, 8), bodyMat);
+        muzzle.position.set(0.28, 0.58, -1.45);
+        group.add(muzzle);
+        
+        // Eyes
+        const eyeMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0a });
+        const leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), eyeMat);
+        leftEye.position.set(0.12, 0.84, -1.25);
+        group.add(leftEye);
+        const rightEye = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), eyeMat);
+        rightEye.position.set(0.38, 0.84, -1.25);
+        group.add(rightEye);
+        
+        // Eye shine
+        const shineMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const leftShine = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), shineMat);
+        leftShine.position.set(0.1, 0.86, -1.23);
+        group.add(leftShine);
+        const rightShine = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), shineMat);
+        rightShine.position.set(0.36, 0.86, -1.23);
+        group.add(rightShine);
+        
+        // Ears
+        const earMat = new THREE.MeshStandardMaterial({ color: bodyColor });
+        const leftEar = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.28, 6), earMat);
+        leftEar.position.set(0.08, 1.02, -1.18);
+        leftEar.castShadow = true;
+        group.add(leftEar);
+        const rightEar = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.28, 6), earMat);
+        rightEar.position.set(0.42, 1.02, -1.18);
+        rightEar.castShadow = true;
+        group.add(rightEar);
+        
+        // Mane
+        const maneMat = new THREE.MeshStandardMaterial({ color: maneColor });
+        for (let i = 0; i < 7; i++) {
+          const mane = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.12, 0.14, 4), maneMat);
+          mane.position.set(-0.18, 0.58 + i * 0.11, -0.6 + i * 0.12);
+          mane.castShadow = true;
+          group.add(mane);
+        }
+        
+        // Tail
+        const tail = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.06, 0.45, 5), maneMat);
+        tail.position.set(-0.45, 0.18, 0.92);
+        tail.castShadow = true;
+        group.add(tail);
+        
+        // Legs
+        const legMat2 = new THREE.MeshStandardMaterial({ color: bodyColor });
+        const legPositions = [
+          [-0.45, -0.4, -0.7], [0.28, -0.4, -0.7],
+          [-0.45, -0.4, 0.7], [0.28, -0.4, 0.7]
+        ];
+        legPositions.forEach(pos => {
+          const leg = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.65, 0.3), legMat2);
+          leg.position.set(pos[0], pos[1], pos[2]);
+          leg.castShadow = true;
+          group.add(leg);
+        });
+        
+        group.position.set(posX, 0, posZ);
+        group.userData = { head, tail, ears: [leftEar, rightEar] };
+        return group;
+      }
+      
+      const horse1 = createHorse(0x8B5E3C, 0x5C3A1E, -4.5, -1.5);
+      const horse2 = createHorse(0x9B6E4A, 0x6C4828, -1.5, -1.8);
+      const horse3 = createHorse(0x7B4E2E, 0x4C2E18, 1.8, -1.6);
+      const horse4 = createHorse(0xA87B54, 0x7C5434, 4.5, -1.2);
+      scene.add(horse1, horse2, horse3, horse4);
+      
+      let time = 0;
+      function animateHorses() {
+        if (horse1.userData.head) {
+          horse1.userData.head.rotation.x = Math.sin(time * 1.2) * 0.04;
+          horse1.userData.tail.rotation.z = Math.sin(time * 2.5) * 0.1;
+        }
+        if (horse2.userData.head) {
+          horse2.userData.head.rotation.x = 0.55 + Math.sin(time * 0.8) * 0.04;
+        }
+        if (horse3.userData.head) {
+          horse3.userData.head.rotation.y = Math.sin(time * 0.6) * 0.12;
+        }
+        if (horse4.userData.tail) {
+          horse4.userData.tail.rotation.z = Math.sin(time * 4) * 0.2;
+        }
+      }
+      
+      function animate() {
+        requestAnimationFrame(animate);
+        time += 0.016;
+        animateHorses();
+        camera.lookAt(0, 1.2, 0);
+        dustField.rotation.y += 0.001;
+        renderer.render(scene, camera);
+      }
+      animate();
+      
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    // ============================================================
+    // ARTICLES DATA - 15 COMPLETE ARTICLES
+    // ============================================================
+    
+    const articlesData = [
+      {
+        label: "Foundational",
+        title: "Understanding Horse Psychology: How Horses Think and Perceive Humans",
+        tagline: "Sixty million years of evolution. One question. Am I safe?",
+        keywords: ["horse psychology", "how horses think", "equine mindset"],
+        category: "foundational",
+        content: `<p class="rd-dropcap">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind that never stops watching, never stops reading, and never stops preparing for the moment everything changes.</p>
+        <p>The horse brain is wired differently than the human brain. While humans are predators who look for patterns and opportunities, horses are prey animals designed to detect threats before they become dangerous. This fundamental difference shapes every interaction you will ever have with a horse.</p>
+        <div class="blockquote">A horse does not ask what you want. It asks what you are. And it asks this question with every fiber of its being, every second you are near it.</div>
+        <p>Horses perceive humans through a lens of constant risk assessment. They notice your breathing, your heart rate, the tension in your shoulders, the direction of your gaze. Before you have taken three steps toward a horse, it has already decided whether you are safe or dangerous.</p>
+        <p>Understanding this changes everything. When you realize that a horse is not being stubborn or difficult, but is simply trying to survive, your entire approach transforms. You stop asking why the horse resists and start asking what the horse perceives as a threat.</p>
+        <p>The most important truth about horse psychology is this: horses do not generalize well. What they learn in one context does not automatically transfer to another context. A horse that loads calmly into a trailer at home may refuse completely at a competition. This is not disobedience. This is a prey animal's survival instinct responding to a new environment.</p>
+        <p>Working with horse psychology means accepting that you must teach the same lesson in many different places, under many different conditions, until the horse truly understands. This takes time. But the result is a horse that thinks, not just a horse that reacts.</p>`
+      },
+      {
+        label: "Foundational",
+        title: "Prey Animal Instincts in Horses: Why Fear Shapes Everything",
+        tagline: "Fear is not a character flaw. It is sixty million years of perfect engineering.",
+        keywords: ["prey animal instincts", "flight response", "horse fear triggers"],
+        category: "foundational",
+        content: `<p class="rd-dropcap">Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by nature. A horse that never felt fear would not survive a week in the wild. When you understand why a horse is afraid, you stop fighting fear and start working with it.</p>
+        <p>The flight response is the horse's primary defense mechanism. Unlike predators who fight or freeze, horses run. Their bodies are built for speed and endurance. Their minds are built for rapid threat detection and immediate escape planning.</p>
+        <div class="blockquote">A horse can go from calm to full flight in less than a second. This is not a problem to be fixed. This is survival hardware that has worked for sixty million years.</div>
+        <p>What triggers fear in horses? Sudden movements. Unexpected sounds. Unfamiliar objects. Changes in pressure. Conflicting signals from a handler. A horse that feels trapped will escalate its fear response. A horse that sees an escape route will generally choose it over confrontation.</p>
+        <p>Understanding fear triggers allows you to prevent fear responses before they happen. This is the foundation of low stress training. Instead of waiting for the horse to become afraid and then calming it down, you arrange the environment and your approach so the horse never needs to become afraid in the first place.</p>
+        <p>When fear does occur, the worst thing you can do is increase pressure. The horse's brain literally cannot process learning when it is in a fear state. The best thing you can do is reduce pressure, create space, and allow the horse to return to a thinking state. Only then can learning resume.</p>`
+      },
+      {
+        label: "Foundational",
+        title: "Trust Versus Control in Horse Training: What Actually Works",
+        tagline: "Control gives you obedience. Trust gives you a horse that chooses you.",
+        keywords: ["trust vs control", "natural horsemanship", "horse training philosophy"],
+        category: "foundational",
+        content: `<p class="rd-dropcap">Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all exits are open. Only one of these is real horsemanship. The other is simply managing a captive animal.</p>
+        <p>Most traditional training methods rely on control. They use pressure, repetition, and the limitation of options to produce a desired behavior. These methods work in the sense that they produce results. But they produce compliance, not partnership.</p>
+        <div class="blockquote">The horse that obeys because it has no choice is not truly trained. It is simply waiting for an opportunity to choose differently.</div>
+        <p>Trust based training is slower in the beginning. You spend time building relationship before building skills. You allow the horse to make mistakes and learn from them. You reward willingness even when the execution is imperfect.</p>
+        <p>The result of trust based training is a horse that offers effort. A horse that tries. A horse that looks to you for guidance rather than looking for an escape route. This horse is not just trained. This horse is educated.</p>
+        <p>The shift from control to trust requires something difficult from the human. It requires letting go of the need to be right. It requires accepting that the horse's perspective matters. It requires admitting that you do not always know best.</p>
+        <p>When you make this shift, everything changes. The horse stops watching for your next correction and starts watching for your next request. The relationship becomes a conversation instead of a command structure. And in that conversation, real learning happens on both sides of the lead rope.</p>`
+      },
+      {
+        label: "Foundational",
+        title: "How to Read a Horse's Body Language from Beginner to Advanced",
+        tagline: "Every flick of an ear is a sentence. Learn to read the language.",
+        keywords: ["horse body language", "horse ears meaning", "signs of stress horses"],
+        category: "foundational",
+        content: `<p class="rd-dropcap">Horses speak in the language of the body, constantly, precisely, and honestly. Every ear position, every muscle twitch, every shift of weight is a sentence. Learning to read this language is the first step toward genuine communication with horses.</p>
+        <p>The ears are your primary indicator of where the horse's attention is focused. Ears forward means the horse is interested in something ahead. Ears back can mean concentration, irritation, or threat depending on the context. Ears to the side means the horse is relaxed. One ear forward and one ear back means the horse is listening in two directions at once.</p>
+        <div class="blockquote">A horse that is truly relaxed will have a soft eye, a lowered head, and a slight cocking of one hind leg. This is the horse's neutral state. Learn to recognize it.</div>
+        <p>The tail tells you about the horse's emotional state. A clamped tail indicates fear or tension. A swishing tail indicates irritation. A tail held slightly away with gentle movement indicates a relaxed but aware horse.</p>
+        <p>Body posture tells you everything about the horse's intention. A horse about to flee will coil its muscles and raise its head. A horse about to fight will lower its head and pin its ears. A curious horse will stretch its neck forward with ears pricked.</p>
+        <p>Reading body language is a skill that takes years to develop. Start with the obvious signals and gradually work toward subtlety. The more you watch, the more you will see. And what you see will prevent problems before they ever begin.</p>`
+      },
+      {
+        label: "Foundational",
+        title: "Common Human Mistakes with Horses and Why Horses React",
+        tagline: "Most horses do not have problems. Most horses have people.",
+        keywords: ["mistakes in horse training", "why horses misbehave", "training mistakes beginners"],
+        category: "foundational",
+        content: `<p class="rd-dropcap">Most horses do not have problems. Most horses have people with problems that the horse is simply reflecting back. Understanding what we do wrong is the most useful education a horseman can receive.</p>
+        <p>The first common mistake is inconsistency. One day you allow the horse to graze while leading. The next day you correct it. The horse cannot read your mind. It only knows that the rules keep changing, and this creates confusion, which creates anxiety, which creates unwanted behaviour.</p>
+        <div class="blockquote">A horse does not misbehave to spite you. It misbehaves because your signals are unclear, because it is afraid, or because it has learned that misbehaving works.</div>
+        <p>The second mistake is escalating pressure too quickly. Many handlers go from a light cue to a strong correction without giving the horse time to process. The horse learns that the light cue is meaningless and waits for the strong correction.</p>
+        <p>The third mistake is releasing pressure at the wrong moment. Pressure release is how horses learn. If you release when the horse is resisting, you have taught resistance. If you release the instant the horse tries, you have taught trying.</p>
+        <p>The fourth mistake is ignoring the horse's emotional state. A horse that is too afraid cannot learn. A horse that is too tired cannot learn. Recognizing when to stop is as important as knowing when to push.</p>`
+      },
+      {
+        label: "Practical",
+        title: "How to Build Trust with a Horse: A Complete Step by Step Guide",
+        tagline: "Trust is not a feeling. It is a thousand small promises kept.",
+        keywords: ["how to build trust", "bonding with a horse", "gain horse trust"],
+        category: "practical",
+        content: `<p class="rd-dropcap">Trust is not built in a single day or a single session. It is built in a thousand small honest moments, each one a brick, each one a promise kept. This is the guide to laying those bricks correctly.</p>
+        <p>Step one: Show up consistently. Horses learn who you are by how often you appear. A horse that sees you irregularly will never fully trust you. Show up every day, even if only for a few minutes. Consistency is the foundation of trust.</p>
+        <div class="blockquote">Trust is not a feeling. It is a prediction. The horse predicts that you will be safe because you have always been safe before.</div>
+        <p>Step two: Be predictable. Horses feel safe when they can predict what will happen next. Use the same routines. Approach from the same angle. Speak in the same tone. Boring is safe. Safe is the foundation of trust.</p>
+        <p>Step three: Listen to the horse. If the horse says no, hear it. Do not push through refusal without understanding it. Ask yourself why the horse is refusing. Address the cause, not the behaviour.</p>
+        <p>Step four: Reward the smallest try. A flicker of an ear toward you. A slight shift of weight. A single step forward. These are victories. Reward them as if they were perfect.</p>
+        <p>Step five: Never lie to the horse. Do not ask for something you cannot enforce. Do not reward a behaviour one day and correct it the next. Horses have long memories for betrayal.</p>
+        <p>Building trust takes time. There is no shortcut. But the trust you build will outlast any technique. A horse that trusts you will follow you anywhere.</p>`
+      },
+      {
+        label: "Practical",
+        title: "Why Your Horse Does Not Listen to You: The Real Reasons Explained",
+        tagline: "A horse that will not listen is not defying you. It is talking to you.",
+        keywords: ["horse not listening", "horse training problems", "why horse ignores commands"],
+        category: "practical",
+        content: `<p class="rd-dropcap">When a horse stops listening, most people think the horse has a problem. In eleven years, I have almost never found the problem to be in the horse. The answer always begins somewhere closer to home.</p>
+        <p>Reason one: Your signals are unclear. The horse cannot read your mind. If you ask for a turn with your leg one way today and a different way tomorrow, the horse will become confused. Clarify your aids before you blame the horse.</p>
+        <div class="blockquote">Every time you think the horse is being difficult, ask yourself this question: Have I taught this clearly enough? The answer is almost always no.</div>
+        <p>Reason two: The horse is in pain. Physical discomfort is the most common cause of sudden behaviour changes. Check saddle fit. Check teeth. Check feet. A horse that hurts cannot focus on learning.</p>
+        <p>Reason three: The horse is afraid. Fear shuts down the thinking brain. A horse that is afraid cannot process new information. Remove the fear, and the learning will return.</p>
+        <p>Reason four: You have taught the horse to ignore you. Every time you give a cue and do not follow through, you teach the horse that your cue means nothing. Be precise. Be consistent.</p>
+        <p>Reason five: The horse is exhausted. Mental fatigue is real. Watch for signs: the dull eye, the heavy head, the slow response. When you see them, stop. Rest. Try again tomorrow.</p>`
+      },
+      {
+        label: "Practical",
+        title: "How to Calm a Nervous or Anxious Horse",
+        tagline: "You cannot fight a nervous system. You can only offer it something steadier.",
+        keywords: ["how to calm a horse", "anxious horse behavior", "nervous horse training"],
+        category: "practical",
+        content: `<p class="rd-dropcap">You cannot calm a horse by fighting its nervous system. You can only offer it something steady enough to anchor to. This is the art of becoming that anchor, and it begins long before you ever touch the rope.</p>
+        <p>The first step to calming an anxious horse is calming yourself. Horses read human emotion with extraordinary precision. If you are tense, the horse will be tense. If you are breathing shallowly, the horse will hold its breath.</p>
+        <div class="blockquote">Your breathing is the most powerful tool you have. Breathe slowly. Breathe deeply. Breathe audibly enough that the horse can hear you. Your breath becomes the rhythm the horse can follow out of panic.</div>
+        <p>The second step is to give the horse space to process its fear. Do not crowd an anxious horse. Do not push it toward what scares it. Allow it to move its feet. Allow it to look at the scary thing from a distance.</p>
+        <p>The third step is to become the most boring thing in the environment. If you stand still, breathe slowly, and do nothing, you become the safe place. The horse will eventually orient toward you.</p>
+        <p>The fourth step is to use familiar routines. Anxious horses find comfort in what they know. Go back to basics. Ask for simple things the horse knows well.</p>
+        <p>The fifth step is to never punish fear. A horse that is punished for being afraid learns to be afraid of punishment. Instead, wait out the fear. Reward moments of calm.</p>`
+      },
+      {
+        label: "Practical",
+        title: "First Time Handling a Horse: What You Must Know",
+        tagline: "There is no second first meeting. What you bring to that moment, the horse will remember.",
+        keywords: ["first time horse tips", "horse safety basics", "beginner horse handling"],
+        category: "practical",
+        content: `<p class="rd-dropcap">The first impression you make on a horse is written in its memory with indelible ink. There is no second first meeting. Everything you bring into that initial encounter, the horse will remember.</p>
+        <p>Before you approach, check yourself. Are you calm? Are you breathing? Are you present? If you are nervous, the horse will know. Take a moment to center yourself. Your emotional state is the first thing the horse reads.</p>
+        <div class="blockquote">Approach the horse from the shoulder, not from directly in front or directly behind. The shoulder is the horse's blind spot. Approach at an angle so the horse can see you coming.</div>
+        <p>When you reach the horse, do not rush to touch it. Stand quietly near the shoulder. Let the horse look at you. Let the horse decide to engage. If the horse moves away, do not chase it. Wait.</p>
+        <p>When you do touch the horse, start on the shoulder or neck. These are safe zones. Use long, slow strokes. Do not pat. Horses prefer long, rhythmic strokes that mimic mutual grooming.</p>
+        <p>The lead rope is not a weapon or a restraint. Never wrap it around your hand. If the horse pulls away, you need to be able to release the rope instantly.</p>
+        <p>Safety rules: Never stand directly behind a horse. Never walk under the tie rope. Never wrap the rope around your body. These rules exist because people who broke them got hurt.</p>`
+      },
+      {
+        label: "Practical",
+        title: "Signs Your Horse Trusts You and Signs It Does Not",
+        tagline: "Trust in a horse is not invisible. It is a behavior. And behavior can be read.",
+        keywords: ["signs a horse trusts you", "horse bonding signs", "horse trust behavior"],
+        category: "practical",
+        content: `<p class="rd-dropcap">A horse's trust is not a feeling. It is a behaviour. And like all behaviour, it is visible, measurable, and honest. Here is what genuine trust looks like, and what its absence reveals about the work still to be done.</p>
+        <p>Sign one of trust: The horse approaches you in the pasture. When you enter the field, a trusting horse will come to you. It may not come running, but it will orient toward you and eventually close the distance.</p>
+        <div class="blockquote">The horse that rests a hind leg while you groom it is showing you trust. This is the horse's relaxed posture. If it will rest one leg while you are present, it feels safe.</div>
+        <p>Sign two of trust: The horse lowers its head when you approach. A lowered head is a sign of submission and relaxation. A horse that raises its head is assessing threat.</p>
+        <p>Sign three of trust: The horse licks and chews during training. This behaviour signals that the horse is processing information and returning to a relaxed state.</p>
+        <p>Sign four of trust: The horse stands quietly when you mount or work around its feet. These are vulnerable positions. If the horse tolerates them calmly, it trusts you.</p>
+        <p>Signs that trust is lacking: The horse turns its hindquarters toward you. The horse pins its ears when you approach. The horse walks away when you enter the pasture. These mean you have work to do on the relationship.</p>`
+      },
+      {
+        label: "Unique Edge",
+        title: "What Horses Teach Us About Human Behavior",
+        tagline: "Spend enough time with horses and you will learn more about yourself than any mirror can show.",
+        keywords: ["what horses teach humans", "lessons from horses", "horse psychology humans"],
+        category: "edge",
+        content: `<p class="rd-dropcap">A horse has no ego, no agenda, no ability to lie. It can only respond to what is real. Spend enough time with horses and you will learn more about yourself than any therapist, any book, or any amount of quiet reflection could ever show you.</p>
+        <p>The first lesson horses teach is that presence matters more than technique. You can perform all the right actions and the horse will still resist if your internal state is conflicted.</p>
+        <div class="blockquote">You cannot pretend with a horse. It will see through every mask you wear. The horse does not care about your credentials or your good intentions. It only cares about what you are in this exact moment.</div>
+        <p>The second lesson is that patience is not passive. Waiting for the horse to process, allowing the horse to choose, giving the horse time to think — this is not doing nothing. This is active patience.</p>
+        <p>The third lesson is that fear is not weakness. Fear is information. When a horse is afraid, it is telling you that something in its environment feels threatening. When I am afraid, it is telling me the same thing.</p>
+        <p>The fourth lesson is that relationships are built in small moments. The big breakthroughs get the attention. But the relationship is built in the quiet moments, the grooming sessions, the times you stand together doing nothing at all.</p>
+        <p>The fifth lesson is that trust cannot be demanded. It can only be earned. And it is earned the same way every time: by showing up consistently, by being honest, by keeping promises.</p>`
+      },
+      {
+        label: "Unique Edge",
+        title: "To Feel What a Horse Feels: Understanding Presence and Intention",
+        tagline: "Horses live where most humans only visit — fully inside the present moment.",
+        keywords: ["horse sensitivity to humans", "connection with horses", "horse energy intention"],
+        category: "edge",
+        content: `<p class="rd-dropcap">Presence is not a concept. It is a physical state, the quality of being fully here, fully alive, fully available to what is happening in this exact second. Horses live there permanently. Most humans have forgotten the address.</p>
+        <p>When you are truly present with a horse, you feel the shift. The horse stops watching the horizon and starts focusing on you. The tension in its body releases. Its breathing slows to match yours.</p>
+        <div class="blockquote">Intention precedes action. Before your hand moves, your mind has already moved. Before you ask the horse to turn, you have already turned in your mind. The horse reads this intention.</div>
+        <p>To develop presence, practice stillness. Stand with a horse and do nothing. Do not ask for anything. Do not try to train. Just be present. Learn to be still. The horse will teach you how.</p>
+        <p>To develop clear intention, practice visualization. Before you ask the horse for anything, see it in your mind. See the turn. See the halt. See the transition. Your body will begin to organize itself around this mental image.</p>
+        <p>The connection between presence and intention is this: When you are fully present, your intentions become clearer. When your intentions are clear, the horse can read them easily. When the horse reads you easily, it can respond without confusion.</p>`
+      },
+      {
+        label: "Unique Edge",
+        title: "Why Horses React to Your Mind and Not Just Your Actions",
+        tagline: "Before your hand moves, your mind has already moved. The horse felt it first.",
+        keywords: ["do horses sense emotions", "horse awareness", "horse reaction to humans"],
+        category: "edge",
+        content: `<p class="rd-dropcap">Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle in your body. A horse does not read your actions. It reads the thought behind them.</p>
+        <p>This is not mysticism. This is biology. Horses are hyper vigilant prey animals. They have evolved to read the subtlest signals of intention in the animals around them.</p>
+        <div class="blockquote">If you think stop, your body begins to prepare for a stop before you pick up the reins. Your seat deepens. Your core tightens. You breathe out. The horse feels these micro movements and stops before your hands ever move.</div>
+        <p>The implication is profound. You cannot fake it with a horse. You cannot think one thing and do another and expect the horse to follow your hands instead of your mind. The horse will always respond to what you truly intend.</p>
+        <p>This is why anxious people have anxious horses. The horse feels the anxiety before the rider even knows they are anxious. The problem was never the horse.</p>
+        <p>This is also why confident, quiet riders have calm horses. Their internal state broadcasts safety. The horse reads this safety and relaxes.</p>
+        <p>Training the mind is as important as training the body. If you want your horse to be calm, learn to be calm. If you want your horse to be confident, learn to be confident. The horse is your mirror.</p>`
+      },
+      {
+        label: "Unique Edge",
+        title: "Silence, Energy, and Movement: The Language Horses Understand",
+        tagline: "There is a language older than words. Horses speak it fluently. Most humans have forgotten it exists.",
+        keywords: ["horse communication", "non verbal horses", "how horses communicate"],
+        category: "edge",
+        content: `<p class="rd-dropcap">There is a language older than words, older than sound, older than the first human who tried to name things. Horses speak it fluently. It is made of silence, of the quality of stillness, and of the precise intention inside every movement.</p>
+        <p>Silence is not empty. Silence is full of information. When you are silent, you can hear the horse's breathing, feel its heartbeat through the lead rope, notice the tiny shifts in its weight that tell you what it is thinking.</p>
+        <div class="blockquote">Energy is not a new age concept. It is the sum total of your muscle tone, your breathing rate, your focus, your intention. A horse feels your energy the moment you enter the barn.</div>
+        <p>To speak this language, start with silence. Stop talking. Horses do not understand English. They understand tone and volume, but the words themselves mean nothing. Replace words with pauses.</p>
+        <p>Next, learn to manage your energy. Before you approach a horse, check your own state. Are you rushed? Are you tense? Adjust. Breathe. Slow down. Center yourself. The horse will feel the difference.</p>
+        <p>Finally, learn to move with intention. Every step you take around a horse means something. Make your movements mean what you want them to mean. The horse is watching. Make sure it sees what you intend.</p>`
+      },
+      {
+        label: "Unique Edge",
+        title: "The Philosophy of Working with Horses and Not Against Them",
+        tagline: "There are two ways to work with a horse. Only one of them is real.",
+        keywords: ["natural horsemanship", "ethical horse training", "working with horses"],
+        category: "edge",
+        content: `<p class="rd-dropcap">There are two ways to work with a horse. One way produces obedience. The other way produces partnership. They look similar from the outside. From inside the horse, they feel completely different. Only one of them is real.</p>
+        <p>The obedience model sees the horse as something to be controlled. It uses pressure, repetition, and the limitation of choices. It produces results quickly, but those results are fragile. Remove the pressure, and the obedience disappears.</p>
+        <div class="blockquote">The partnership model sees the horse as a sentient being with its own perspective, its own fears, its own desires. It uses consent, clarity, and mutual respect. This is horsemanship.</div>
+        <p>The shift from obedience to partnership requires a fundamental change in how you see horses. They are not machines to be programmed. They are not vehicles to be steered. They are individuals with whom you can build a relationship.</p>
+        <p>Working with a horse, not against it, means accepting that the horse gets a vote. Sometimes the horse says no. When the horse says no, you need to ask why. Listen to the no. It is information, not disobedience.</p>
+        <p>Working with a horse means giving the horse choices whenever possible. The more choices you give the horse, the more the horse will choose you.</p>
+        <p>This philosophy is not the easy path. It is slower. It requires more patience, more self awareness. But it produces a horse that tries, that offers, that wants to be with you. And that horse is worth the wait.</p>`
+      }
+    ];
+
+    // Generate book cards
+    const booksGrid = document.getElementById('booksGrid');
+    const icons = ['🐴', '🐎', '📖', '🔮', '✨', '🌟', '🍃', '🌙', '⚡', '💫', '🕯️', '📜', '🏔️', '🌊', '🔥'];
+    
+    articlesData.forEach((article, idx) => {
+      const bookCard = document.createElement('div');
+      bookCard.className = 'book-card';
+      bookCard.setAttribute('data-category', article.category);
+      bookCard.setAttribute('data-index', idx);
+      
+      const shortExcerpt = article.content.replace(/<[^>]*>/g, '').substring(0, 100) + '...';
+      
+      bookCard.innerHTML = `
+        <div class="book-cover">
+          <div class="book-category">${article.label}</div>
+          <div class="book-icon">${icons[idx % icons.length]}</div>
+          <div class="book-number">${String(idx + 1).padStart(2, '0')}</div>
+        </div>
+        <div class="book-info">
+          <div class="book-title">${article.title.length > 55 ? article.title.substring(0, 52) + '...' : article.title}</div>
+          <div class="book-excerpt">${article.tagline}</div>
+          <div class="book-read">Read Article</div>
+        </div>
+      `;
+      
+      bookCard.addEventListener('click', () => openArticleModal(idx));
+      booksGrid.appendChild(bookCard);
+    });
+
+    // Intersection Observer for reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.book-card').forEach(card => observer.observe(card));
+
+    // Modal functions
+    const modal = document.getElementById('articleModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+    
+    function buildModalHTML(article) {
+      return `
+        <div class="article-label">${article.label}</div>
+        <div class="article-title">${article.title}</div>
+        <div class="article-tagline">${article.tagline}</div>
+        <div class="article-keywords">
+          ${article.keywords.map(kw => `<span class="article-kw">${kw}</span>`).join('')}
+        </div>
+        ${article.content}
+        <div style="margin-top: 2rem; text-align: center; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; color: rgba(200,155,60,0.5);">
+          The Horseman's Journal · Praveen Kumar
+        </div>
+      `;
+    }
+    
+    function openArticleModal(index) {
+      const article = articlesData[index];
+      if (!article) return;
+      modalContent.innerHTML = buildModalHTML(article);
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeArticleModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    
+    if (modalClose) {
+      modalClose.addEventListener('click', closeArticleModal);
+    }
+    
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeArticleModal();
+      });
+    }
+    
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.chr-filter-btn');
+    const bookCards = document.querySelectorAll('.book-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        bookCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal && modal.classList.contains('open') && e.key === 'Escape') {
+        closeArticleModal();
+      }
+    });
+    
+    console.log('Chronicles loaded: 15 articles, 4 animated 3D horses');
+  </script>
 </body>
 </html>
