@@ -1,3 +1,301 @@
+// Chronicles - The Horseman's Journal
+// 3D Interactive Horses + 15 Complete Articles
+
+import * as THREE from 'three';
+
+// ============================================================
+// 3D HORSES ENGINE - Visible, Colorful, Animated Horses
+// ============================================================
+
+const canvas = document.getElementById('horseCanvas');
+if (canvas) {
+  // Setup renderer
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.shadowMap.enabled = true;
+  renderer.setClearColor(0x060308, 0);
+  
+  // Scene
+  const scene = new THREE.Scene();
+  
+  // Camera
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 2.8, 14);
+  camera.lookAt(0, 1, 0);
+  
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0x332a44);
+  scene.add(ambientLight);
+  
+  const mainLight = new THREE.DirectionalLight(0xffdd99, 1.3);
+  mainLight.position.set(6, 10, 5);
+  mainLight.castShadow = true;
+  mainLight.shadow.mapSize.width = 1024;
+  mainLight.shadow.mapSize.height = 1024;
+  scene.add(mainLight);
+  
+  const fillLight = new THREE.PointLight(0xaa8866, 0.6);
+  fillLight.position.set(-3, 4, 4);
+  scene.add(fillLight);
+  
+  const rimLight = new THREE.PointLight(0xffaa66, 0.5);
+  rimLight.position.set(0, 3, -6);
+  scene.add(rimLight);
+  
+  const backFill = new THREE.PointLight(0x8866cc, 0.4);
+  backFill.position.set(4, 2, -4);
+  scene.add(backFill);
+  
+  // Ground shadow catcher
+  const groundPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(24, 16),
+    new THREE.ShadowMaterial({ opacity: 0.4, color: 0x000000, transparent: true, side: THREE.DoubleSide })
+  );
+  groundPlane.rotation.x = -Math.PI / 2;
+  groundPlane.position.y = -0.7;
+  groundPlane.receiveShadow = true;
+  scene.add(groundPlane);
+  
+  // Floating dust particles
+  const particleCount = 1200;
+  const particleGeo = new THREE.BufferGeometry();
+  const particlePositions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) {
+    particlePositions[i*3] = (Math.random() - 0.5) * 28;
+    particlePositions[i*3+1] = Math.random() * 6;
+    particlePositions[i*3+2] = (Math.random() - 0.5) * 22 - 7;
+  }
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+  const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.045, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending });
+  const dustField = new THREE.Points(particleGeo, particleMat);
+  scene.add(dustField);
+  
+  // Function to create a detailed 3D horse
+  function createHorse(bodyColor, maneColor, posX, posZ, scaleVal = 0.9) {
+    const group = new THREE.Group();
+    
+    // Body
+    const bodyMat = new THREE.MeshStandardMaterial({ color: bodyColor, roughness: 0.4, metalness: 0.1 });
+    const body = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.7, 1.9), bodyMat);
+    body.position.set(0, 0, 0);
+    body.castShadow = true;
+    body.receiveShadow = true;
+    group.add(body);
+    
+    // Neck
+    const neckMat = new THREE.MeshStandardMaterial({ color: bodyColor, roughness: 0.4 });
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.48, 0.9, 8), neckMat);
+    neck.position.set(0.18, 0.48, -0.75);
+    neck.castShadow = true;
+    group.add(neck);
+    
+    // Head
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.48, 0.6), bodyMat);
+    head.position.set(0.22, 0.75, -1.12);
+    head.castShadow = true;
+    group.add(head);
+    
+    // Muzzle
+    const muzzle = new THREE.Mesh(new THREE.SphereGeometry(0.24, 8, 8), bodyMat);
+    muzzle.position.set(0.28, 0.58, -1.45);
+    muzzle.castShadow = true;
+    group.add(muzzle);
+    
+    // Eyes
+    const eyeMat = new THREE.MeshStandardMaterial({ color: 0x2a1a0a });
+    const leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), eyeMat);
+    leftEye.position.set(0.12, 0.84, -1.25);
+    group.add(leftEye);
+    const rightEye = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), eyeMat);
+    rightEye.position.set(0.38, 0.84, -1.25);
+    group.add(rightEye);
+    
+    // Eye shine
+    const shineMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x442200 });
+    const leftShine = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), shineMat);
+    leftShine.position.set(0.1, 0.86, -1.23);
+    group.add(leftShine);
+    const rightShine = new THREE.Mesh(new THREE.SphereGeometry(0.035, 6, 6), shineMat);
+    rightShine.position.set(0.36, 0.86, -1.23);
+    group.add(rightShine);
+    
+    // Ears
+    const earMat = new THREE.MeshStandardMaterial({ color: bodyColor });
+    const leftEar = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.28, 6), earMat);
+    leftEar.position.set(0.08, 1.02, -1.18);
+    leftEar.castShadow = true;
+    group.add(leftEar);
+    const rightEar = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.28, 6), earMat);
+    rightEar.position.set(0.42, 1.02, -1.18);
+    rightEar.castShadow = true;
+    group.add(rightEar);
+    
+    // Inner ears
+    const innerMat = new THREE.MeshStandardMaterial({ color: 0xd4a070 });
+    const leftInner = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.2, 6), innerMat);
+    leftInner.position.set(0.08, 1.02, -1.16);
+    group.add(leftInner);
+    const rightInner = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.2, 6), innerMat);
+    rightInner.position.set(0.42, 1.02, -1.16);
+    group.add(rightInner);
+    
+    // Mane
+    const maneMat = new THREE.MeshStandardMaterial({ color: maneColor });
+    for (let i = 0; i < 7; i++) {
+      const manePiece = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.12, 0.14, 4), maneMat);
+      manePiece.position.set(-0.18, 0.58 + i * 0.11, -0.6 + i * 0.12);
+      manePiece.castShadow = true;
+      group.add(manePiece);
+    }
+    
+    // Tail
+    const tail = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.06, 0.45, 5), maneMat);
+    tail.position.set(-0.45, 0.18, 0.92);
+    tail.castShadow = true;
+    group.add(tail);
+    
+    // Legs
+    const legMat = new THREE.MeshStandardMaterial({ color: bodyColor });
+    const legs = [];
+    const legPositions = [
+      { x: -0.45, y: -0.4, z: -0.7 },
+      { x: 0.28, y: -0.4, z: -0.7 },
+      { x: -0.45, y: -0.4, z: 0.7 },
+      { x: 0.28, y: -0.4, z: 0.7 }
+    ];
+    legPositions.forEach(pos => {
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.65, 0.3), legMat);
+      leg.position.set(pos.x, pos.y, pos.z);
+      leg.castShadow = true;
+      group.add(leg);
+      legs.push(leg);
+    });
+    
+    // Hooves
+    const hoofMat = new THREE.MeshStandardMaterial({ color: 0x5a4a3a });
+    legs.forEach(leg => {
+      const hoof = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.12, 0.32), hoofMat);
+      hoof.position.set(leg.position.x, leg.position.y - 0.36, leg.position.z);
+      hoof.castShadow = true;
+      group.add(hoof);
+    });
+    
+    group.position.set(posX, 0, posZ);
+    group.scale.set(scaleVal, scaleVal, scaleVal);
+    group.castShadow = true;
+    
+    group.userData = { head, neck, tail, legs, ears: [leftEar, rightEar] };
+    return group;
+  }
+  
+  // Create 4 horses with different colors and positions
+  const horse1 = createHorse(0x8B5E3C, 0x5C3A1E, -4.8, -1.5, 0.92);
+  scene.add(horse1);
+  
+  const horse2 = createHorse(0x9B6E4A, 0x6C4828, -1.8, -2.0, 0.88);
+  scene.add(horse2);
+  
+  const horse3 = createHorse(0x7B4E2E, 0x4C2E18, 1.5, -1.8, 0.9);
+  scene.add(horse3);
+  
+  const horse4 = createHorse(0xA87B54, 0x7C5434, 4.5, -1.2, 0.95);
+  scene.add(horse4);
+  
+  // Add some grass tufts
+  const grassMat = new THREE.MeshStandardMaterial({ color: 0x2a3a1a });
+  for (let i = 0; i < 300; i++) {
+    const grass = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.18, 3), grassMat);
+    grass.position.set((Math.random() - 0.5) * 24, -0.68, (Math.random() - 0.5) * 16);
+    grass.castShadow = true;
+    scene.add(grass);
+  }
+  
+  let time = 0;
+  let mouseX = 0, mouseY = 0;
+  let scrollPercent = 0;
+  
+  window.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+  });
+  
+  window.addEventListener('scroll', () => {
+    scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  });
+  
+  function animateHorses() {
+    // Horse 1 - Sentinel (proud, alert)
+    if (horse1.userData.head) {
+      horse1.userData.head.rotation.x = Math.sin(time * 1.2) * 0.04;
+      horse1.userData.tail.rotation.z = Math.sin(time * 2.5) * 0.12;
+      horse1.userData.ears[0].rotation.x = -0.35;
+      horse1.userData.ears[1].rotation.x = -0.35;
+      horse1.userData.ears[0].rotation.z = 0.1;
+      horse1.userData.ears[1].rotation.z = -0.1;
+    }
+    
+    // Horse 2 - Grazing (head down)
+    if (horse2.userData.head) {
+      horse2.userData.head.rotation.x = 0.65 + Math.sin(time * 0.9) * 0.05;
+      horse2.userData.head.position.y = 0.74 + Math.sin(time * 3.5) * 0.015;
+      horse2.userData.neck.rotation.x = 0.25;
+      horse2.userData.ears[0].rotation.x = 0.1;
+      horse2.userData.ears[1].rotation.x = 0.1;
+    }
+    
+    // Horse 3 - Nuzzling/Curious
+    if (horse3.userData.head) {
+      horse3.userData.head.rotation.y = Math.sin(time * 0.6) * 0.15;
+      horse3.userData.head.rotation.x = 0.05;
+      horse3.userData.neck.rotation.y = Math.sin(time * 0.7) * 0.06;
+      horse3.userData.tail.rotation.z = Math.sin(time * 2) * 0.1;
+      horse3.userData.ears[0].rotation.x = -0.2;
+      horse3.userData.ears[1].rotation.x = -0.2;
+    }
+    
+    // Horse 4 - Galloping pose
+    if (horse4.userData.legs) {
+      const gallop = time * 3.8;
+      if (horse4.userData.legs[0]) horse4.userData.legs[0].position.z = -0.7 + Math.sin(gallop) * 0.15;
+      if (horse4.userData.legs[1]) horse4.userData.legs[1].position.z = -0.7 - Math.sin(gallop) * 0.15;
+      if (horse4.userData.legs[2]) horse4.userData.legs[2].position.z = 0.7 - Math.sin(gallop) * 0.12;
+      if (horse4.userData.legs[3]) horse4.userData.legs[3].position.z = 0.7 + Math.sin(gallop) * 0.12;
+      horse4.userData.tail.rotation.z = Math.sin(time * 4.5) * 0.25;
+      horse4.userData.tail.rotation.x = -0.15;
+      horse4.userData.head.rotation.x = -0.1;
+      horse4.userData.ears[0].rotation.x = 0.08;
+      horse4.userData.ears[1].rotation.x = 0.08;
+    }
+  }
+  
+  function animate() {
+    requestAnimationFrame(animate);
+    time += 0.016;
+    animateHorses();
+    
+    // Camera follows mouse and scroll
+    const targetX = mouseX * 0.6;
+    const targetY = mouseY * 0.3 + scrollPercent * 0.3;
+    camera.position.x += (targetX - camera.position.x) * 0.05;
+    camera.position.y += (targetY - camera.position.y) * 0.05;
+    camera.lookAt(0, 1.2, 0);
+    
+    dustField.rotation.y += 0.001;
+    dustField.rotation.x = Math.sin(time * 0.1) * 0.03;
+    
+    renderer.render(scene, camera);
+  }
+  
+  animate();
+  
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+}
+
 /* ── Chronicles particles ── */
 const cp = document.getElementById('chrParticles');
 if (cp) {
@@ -1059,3 +1357,136 @@ const bookObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.book-wrap').forEach(b => bookObs.observe(b));
+
+// ============================================================
+// DOM INTERACTIONS
+// ============================================================
+
+// Generate book cards
+const booksGrid = document.getElementById('booksGrid');
+const categories = ['foundational', 'foundational', 'foundational', 'foundational', 'foundational',
+                    'practical', 'practical', 'practical', 'practical', 'practical',
+                    'edge', 'edge', 'edge', 'edge', 'edge'];
+const icons = ['🐴', '🐎', '🐴', '🐎', '🐴', '🐎', '🐴', '🐎', '🐴', '🐎', '🐴', '🐎', '🐴', '🐎', '🐴'];
+
+articlesData.forEach((article, idx) => {
+  const bookDiv = document.createElement('div');
+  bookDiv.className = 'book-wrap';
+  bookDiv.setAttribute('data-category', categories[idx]);
+  bookDiv.setAttribute('data-article', idx);
+  
+  const shortTitle = article.title.length > 55 ? article.title.substring(0, 52) + '...' : article.title;
+  const cleanText = article.content.replace(/<[^>]*>/g, '').substring(0, 110) + '...';
+  
+  bookDiv.innerHTML = `
+    <div class="book-3d">
+      <div class="book-spread">
+        <div class="book-left">
+          <div class="book-left-placeholder">${icons[idx]}</div>
+          <div class="book-ribbon">${article.label}</div>
+          <div class="book-num">${String(idx+1).padStart(2,'0')}</div>
+        </div>
+        <div class="book-spine"></div>
+        <div class="book-right">
+          <div class="book-watermark">${icons[idx]}</div>
+          <div class="book-page-num">The Horseman's Journal | Vol ${String(idx+1).padStart(2,'0')}</div>
+          <div class="book-art-label">${article.label} Article</div>
+          <div class="book-art-title">${shortTitle}</div>
+          <div class="book-rule"></div>
+          <p class="book-art-text">${cleanText}</p>
+          <div class="book-keywords">${article.keywords.map(k => `<span class="book-kw">${k}</span>`).join('')}</div>
+          <span class="book-read">Read Article</span>
+        </div>
+      </div>
+      <div class="book-edge"></div>
+      <div class="book-shadow"></div>
+    </div>
+  `;
+  booksGrid.appendChild(bookDiv);
+});
+
+// DOM Elements
+const articlePanel = document.getElementById('articlePanel');
+const artLabel = document.getElementById('artLabel');
+const artTitle = document.getElementById('artTitle');
+const artKeywords = document.getElementById('artKeywords');
+const artBody = document.getElementById('artBody');
+const artClose = document.getElementById('artClose');
+const artWatermark = document.getElementById('artWatermark');
+let currentArticleIndex = 0;
+
+// Filter buttons
+const filterBtns = document.querySelectorAll('.chr-filter-btn');
+const bookWraps = document.querySelectorAll('.book-wrap');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.getAttribute('data-filter');
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    bookWraps.forEach(book => {
+      if (filter === 'all' || book.getAttribute('data-category') === filter) {
+        book.classList.remove('hidden');
+      } else {
+        book.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// Open article
+function openArticle(index) {
+  const article = articlesData[index];
+  if (!article) return;
+  currentArticleIndex = index;
+  artLabel.textContent = article.label;
+  artTitle.textContent = article.title;
+  artKeywords.innerHTML = article.keywords.map(kw => `<span class="art-kw">${kw}</span>`).join('');
+  if (article.label === 'Foundational') artWatermark.textContent = '📘';
+  else if (article.label === 'Practical') artWatermark.textContent = '📗';
+  else artWatermark.textContent = '📜';
+  artBody.innerHTML = article.content;
+  articlePanel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  articlePanel.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Add click handlers
+document.querySelectorAll('.book-wrap').forEach((book, idx) => {
+  book.addEventListener('click', () => {
+    const articleIndex = parseInt(book.getAttribute('data-article'));
+    openArticle(articleIndex);
+  });
+});
+
+if (artClose) artClose.addEventListener('click', closeArticle);
+if (articlePanel) {
+  articlePanel.addEventListener('click', (e) => {
+    if (e.target === articlePanel) closeArticle();
+  });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (!articlePanel.classList.contains('open')) return;
+  if (e.key === 'Escape') closeArticle();
+  else if (e.key === 'ArrowRight') openArticle((currentArticleIndex + 1) % articlesData.length);
+  else if (e.key === 'ArrowLeft') openArticle((currentArticleIndex - 1 + articlesData.length) % articlesData.length);
+});
+
+// Intersection Observer for book animations
+const bookObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      bookObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.book-wrap').forEach(book => bookObserver.observe(book));
+
+console.log('Chronicles loaded: 15 articles, 4 animated 3D horses');
