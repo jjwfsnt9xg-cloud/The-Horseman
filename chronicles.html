@@ -2,10 +2,345 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chronicles - The Horseman's Journal</title>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/chronicles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Chronicles - The Horseman's Journal | 3D Interactive Horses</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #060308;
+      color: #e8dfc7;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* 3D Canvas Layer */
+    #horseCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* UI Content sits above canvas */
+    .navbar-wrapper,
+    .chronicles-hero,
+    .horse-intro,
+    .chronicles {
+      position: relative;
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    /* ORBS */
+    .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 1; }
+    .orb1 { width: 55vw; height: 55vw; top: -12vh; right: -12vw; background: radial-gradient(circle, rgba(200,150,60,0.07), transparent); }
+    .orb2 { width: 45vw; height: 45vw; bottom: -8vh; left: -18vw; background: radial-gradient(circle, rgba(180,130,100,0.04), transparent); }
+    .orb3 { width: 35vw; height: 35vw; top: 45vh; left: 32vw; background: radial-gradient(circle, rgba(140,100,180,0.03), transparent); }
+
+    /* NAVBAR */
+    .navbar-wrapper {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none;
+    }
+    .navbar-wrapper * { pointer-events: auto; }
+    .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
+    .nav3d {
+      position: relative; transform-style: preserve-3d;
+      transform: rotateX(28deg) rotateY(0deg);
+      transition: transform .5s cubic-bezier(.23,1,.32,1); height: 64px;
+    }
+    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
+    .face { position: absolute; border-radius: 18px; }
+    .face-top {
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(200,155,60,0.08) 40%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(200,155,60,0.45); border-bottom-color: rgba(200,155,60,0.15);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(180,140,50,0.06);
+      z-index: 4;
+    }
+    .face-back {
+      inset: 0; background: rgba(180,130,40,0.04);
+      border: 1px solid rgba(200,155,60,0.2); transform: translateZ(-36px); z-index: 1;
+    }
+    .face-bottom-wall {
+      left: 18px; right: 18px; bottom: -36px; height: 36px;
+      background: linear-gradient(180deg, rgba(180,130,50,0.18) 0%, rgba(80,50,10,0.08) 60%, rgba(0,0,0,0.02) 100%);
+      border-left: 1px solid rgba(200,155,60,0.15); border-right: 1px solid rgba(200,155,60,0.15);
+      border-bottom: 1px solid rgba(200,155,60,0.1); border-radius: 0 0 12px 12px;
+      transform-origin: top center; transform: rotateX(-90deg); z-index: 2;
+    }
+    .face-top-wall {
+      left: 18px; right: 18px; top: -5px; height: 5px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(200,155,60,0.2));
+      border-radius: 18px 18px 0 0; transform-origin: bottom center; transform: rotateX(90deg); z-index: 3;
+    }
+    .face-left-wall {
+      top: 4px; bottom: 4px; left: -36px; width: 36px;
+      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1); border-radius: 12px 0 0 12px;
+      transform-origin: right center; transform: rotateY(-90deg); z-index: 2;
+    }
+    .face-right-wall {
+      top: 4px; bottom: 4px; right: -36px; width: 36px;
+      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1); border-radius: 0 12px 12px 0;
+      transform-origin: left center; transform: rotateY(90deg); z-index: 2;
+    }
+    .nav-content {
+      position: absolute; inset: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.8rem; transform: translateZ(1px);
+    }
+    .brand {
+      font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700;
+      color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.25;
+      text-shadow: 0 0 24px rgba(200,150,50,0.8), 0 0 60px rgba(200,150,50,0.3);
+      flex-shrink: 0; text-decoration: none;
+    }
+    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(200,150,50,0.4); font-weight: 400; margin-top: 1px; }
+    .links { display: flex; gap: .05rem; list-style: none; }
+    .links li a {
+      display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px;
+      color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px;
+      border-radius: 8px; transition: all .25s; text-shadow: 0 1px 3px rgba(0,0,0,0.8); white-space: nowrap;
+    }
+    .links li a:hover, .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(200,150,50,0.9); }
+    .portal-scene { perspective: 300px; flex-shrink: 0; }
+    .portal-btn {
+      position: relative; transform-style: preserve-3d; transform: rotateX(22deg);
+      transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer;
+    }
+    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
+    .portal-top {
+      display: block; padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
+      backdrop-filter: blur(12px); border: 1px solid rgba(200,150,50,0.7); border-bottom-color: rgba(200,150,50,0.2);
+      border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: 2.5px; color: #FFF8DC; text-shadow: 0 0 12px rgba(200,150,50,0.9);
+      position: relative; z-index: 3; white-space: nowrap; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .portal-wall {
+      position: absolute; inset: 0; background: linear-gradient(180deg, rgba(120,80,20,0.6), rgba(50,30,5,0.4));
+      border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(100,60,15,0.5);
+    }
+    .portal-glow {
+      position: absolute; inset: -4px; border-radius: 100px; background: transparent;
+      box-shadow: 0 0 20px rgba(200,150,50,0.4), 0 0 60px rgba(200,150,50,0.15);
+      transform: translateZ(-7px); z-index: 1;
+    }
+
+    /* CHRONICLES HERO */
+    .chronicles-hero {
+      position: relative; width: 100%; height: 100vh; min-height: 650px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .chr-video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.35; pointer-events: none;
+    }
+    .chr-animated-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 40% 50%, rgba(212,175,55,0.05), transparent 70%);
+      z-index: 0;
+    }
+    .chr-particles {
+      position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none;
+    }
+    .chr-p {
+      position: absolute; background: rgba(212,175,55,0.4); border-radius: 50%; filter: blur(1px);
+      animation: chrFloat 12s infinite ease-in-out;
+    }
+    @keyframes chrFloat {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.3; }
+      100% { transform: translateY(-80vh) translateX(var(--d, 30px)); opacity: 0; }
+    }
+    .chr-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, #020108 100%);
+      pointer-events: none; z-index: 2;
+    }
+    .chr-bar {
+      position: absolute; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+      z-index: 3;
+    }
+    .chr-bar-top { top: 20%; }
+    .chr-bar-bottom { bottom: 20%; }
+    .chr-content {
+      position: relative; z-index: 10; text-align: center; max-width: 900px;
+      padding: 0 2rem; animation: fadeUp 1.2s ease;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .chr-eyebrow {
+      font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 8px;
+      color: rgba(200,155,60,0.5); text-transform: uppercase; display: block; margin-bottom: 1.5rem;
+    }
+    .chr-title {
+      font-family: 'Cinzel Decorative',serif; font-size: clamp(2.6rem,6.5vw,5.5rem);
+      font-weight: 700; color: #fff; letter-spacing: 4px; line-height: 1.05; margin-bottom: 1.5rem;
+      text-shadow: 0 0 80px rgba(200,140,40,0.35),0 0 160px rgba(180,120,20,0.2),0 4px 60px rgba(0,0,0,0.6);
+    }
+    .chr-title .gold { color: #E8C84A; text-shadow: 0 0 60px rgba(232,200,74,0.8),0 0 120px rgba(200,150,50,0.4); }
+    .chr-div { display: flex; align-items: center; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; }
+    .chr-dline { width: 90px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,155,60,0.5)); }
+    .chr-dline.r { background: linear-gradient(90deg,rgba(200,155,60,0.5),transparent); }
+    .chr-dgem { width: 8px; height: 8px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 18px rgba(232,200,74,0.9); }
+    .chr-tagline {
+      font-family: 'EB Garamond',serif; font-style: italic; font-size: clamp(.9rem,1.8vw,1.2rem);
+      color: rgba(240,220,180,0.6); letter-spacing: .5px; max-width: 550px; margin: 0 auto; line-height: 1.8;
+    }
+
+    /* HORSE INTRO */
+    .horse-intro { position: relative; background: #060308; padding: 7rem 2rem 6rem; overflow: hidden; }
+    .intro-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; text-align: center; }
+    .intro-badge {
+      display: inline-flex; align-items: center; gap: 10px; font-family: 'Cinzel',serif;
+      font-size: .6rem; letter-spacing: 5px; color: rgba(200,155,60,0.5); text-transform: uppercase; margin-bottom: 2.5rem;
+    }
+    .intro-badge::before, .intro-badge::after { content: ''; display: block; width: 40px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,155,60,0.4)); }
+    .intro-badge::after { background: linear-gradient(90deg,rgba(200,155,60,0.4),transparent); }
+    .intro-headline {
+      font-family: 'Cinzel Decorative',serif; font-size: clamp(1.6rem,3.5vw,2.8rem); font-weight: 700;
+      color: #E8C84A; letter-spacing: 1px; line-height: 1.2; text-shadow: 0 0 30px rgba(200,155,60,0.25); margin-bottom: 2.5rem;
+    }
+    .intro-body { font-family: 'EB Garamond',serif; font-size: clamp(1.05rem,1.8vw,1.25rem); color: rgba(240,230,200,0.75); line-height: 2; letter-spacing: .2px; margin-bottom: 2rem; }
+    .intro-body p { margin-bottom: 1.5rem; }
+    .intro-body p:first-child::first-letter {
+      font-family: 'Cinzel Decorative',serif; font-size: 3.6em; font-weight: 700; color: #E8C84A;
+      float: left; line-height: .75; margin: 0.1em 0.12em 0 0; text-shadow: 0 0 25px rgba(200,155,60,0.6);
+    }
+    .intro-ornament { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 3rem; }
+    .iorn-line { flex: 1; max-width: 160px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,155,60,0.3)); }
+    .iorn-line.r { background: linear-gradient(90deg,rgba(200,155,60,0.3),transparent); }
+    .iorn-text { font-family: 'Cinzel',serif; font-size: .58rem; letter-spacing: 4px; color: rgba(200,155,60,0.35); text-transform: uppercase; white-space: nowrap; }
+
+    /* CHRONICLES BOOKS SECTION */
+    .chronicles { position: relative; background: #060308; padding: 5rem 0 8rem; overflow: hidden; }
+    .chr-sec-header { text-align: center; padding: 0 2rem 4rem; position: relative; z-index: 2; }
+    .chr-sec-eyebrow { font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 6px; color: rgba(200,155,60,0.4); text-transform: uppercase; display: block; margin-bottom: 1rem; }
+    .chr-sec-title { font-family: 'Cinzel Decorative',serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; color: #E8C84A; letter-spacing: 2px; text-shadow: 0 0 30px rgba(200,155,60,0.2); margin-bottom: .8rem; }
+    .chr-sec-sub { font-family: 'EB Garamond',serif; font-style: italic; font-size: clamp(.9rem,1.5vw,1.05rem); color: rgba(240,230,200,0.35); letter-spacing: .5px; }
+    .chr-filters { display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; padding: 0 2rem 3.5rem; position: relative; z-index: 2; }
+    .chr-filter-btn {
+      font-family: 'Cinzel',serif; font-size: .62rem; letter-spacing: 2.5px; color: rgba(200,155,60,0.45);
+      text-transform: uppercase; background: transparent; border: 1px solid rgba(200,155,60,0.15);
+      padding: 9px 22px; border-radius: 2px; cursor: pointer; transition: all .3s; white-space: nowrap;
+    }
+    .chr-filter-btn:hover { color: rgba(200,155,60,0.8); border-color: rgba(200,155,60,0.35); background: rgba(200,155,60,0.04); }
+    .chr-filter-btn.active { color: #0a0500; background: #E8C84A; border-color: #E8C84A; box-shadow: 0 0 20px rgba(200,155,60,0.3); }
+    .chr-filter-sep { width: 1px; height: 16px; background: rgba(200,155,60,0.15); }
+
+    .books-grid { max-width: 1300px; margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 3rem 2.5rem; position: relative; z-index: 2; }
+    @media(max-width:1000px){.books-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.books-grid{grid-template-columns:1fr}}
+
+    /* BOOK CARDS */
+    .book-wrap { perspective: 900px; cursor: pointer; opacity: 0; transform: translateY(24px); transition: opacity .7s,transform .7s; position: relative; }
+    .book-wrap.visible { opacity: 1; transform: translateY(0); }
+    .book-wrap.hidden { display: none; }
+    .book-3d { position: relative; transform-style: preserve-3d; transform: rotateX(22deg) rotateY(-6deg); transition: transform .5s cubic-bezier(.23,1,.32,1); width: 100%; z-index: 1; }
+    .book-wrap:hover .book-3d { transform: rotateX(10deg) rotateY(-3deg) translateY(-8px); }
+    .book-spread { display: grid; grid-template-columns: 1fr 8px 1fr; width: 100%; border-radius: 3px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.9),0 10px 25px rgba(0,0,0,0.6),0 0 0 1px rgba(200,155,60,0.12); position: relative; }
+
+    .book-left { position: relative; overflow: hidden; min-height: 340px; background: #0d0800; }
+    .book-left img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; filter: brightness(.85) sepia(.1); }
+    .book-wrap:hover .book-left img { transform: scale(1.04); filter: brightness(1) sepia(0); }
+    .book-left-placeholder { width: 100%; height: 100%; min-height: 340px; display: flex; align-items: center; justify-content: center; font-size: 4rem; opacity: .25; }
+    .book-left::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 24px; background: linear-gradient(90deg,transparent,rgba(0,0,0,0.5)); pointer-events: none; }
+
+    .book-ribbon { position: absolute; top: 16px; left: 0; z-index: 3; font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 2px; color: #0a0500; text-transform: uppercase; padding: 4px 12px 4px 10px; clip-path: polygon(0 0,100% 0,92% 50%,100% 100%,0 100%); font-weight: 600; }
+    .book-wrap[data-category="foundational"] .book-ribbon { background: #c8922a; }
+    .book-wrap[data-category="practical"] .book-ribbon { background: #d4854a; }
+    .book-wrap[data-category="edge"] .book-ribbon { background: #b890c0; }
+    .book-num { position: absolute; bottom: 12px; left: 12px; z-index: 3; font-family: 'Cinzel Decorative',serif; font-size: 2.2rem; font-weight: 700; color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none; }
+    
+    .book-spine { background: linear-gradient(180deg,rgba(200,155,60,0.6) 0%,rgba(160,110,20,0.8) 30%,rgba(200,155,60,0.5) 60%,rgba(120,80,0,0.7) 100%); }
+    .book-right { position: relative; background: linear-gradient(160deg,#f5efd4 0%,#ede0b8 40%,#e8d8a0 100%); padding: 1.4rem 1.4rem 1.2rem; display: flex; flex-direction: column; gap: .7rem; overflow: hidden; min-height: 340px; }
+    .book-right::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(180deg,transparent,transparent 27px,rgba(180,150,80,0.12) 27px,rgba(180,150,80,0.12) 28px); pointer-events: none; }
+    .book-watermark { position: absolute; bottom: -10px; right: -10px; font-size: 7rem; opacity: .05; pointer-events: none; line-height: 1; transform: rotate(-15deg); z-index: 0; }
+    .book-page-num { font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 3px; color: rgba(100,70,20,0.4); text-transform: uppercase; text-align: right; position: relative; z-index: 1; }
+    .book-art-label { font-family: 'Cinzel',serif; font-size: .52rem; letter-spacing: 3px; color: rgba(140,90,20,0.6); text-transform: uppercase; position: relative; z-index: 1; }
+    .book-art-title { font-family: 'Cinzel',serif; font-size: .82rem; font-weight: 700; color: #3a2200; letter-spacing: .5px; line-height: 1.35; position: relative; z-index: 1; }
+    .book-rule { height: 1px; background: linear-gradient(90deg,rgba(180,130,40,0.4),transparent); position: relative; z-index: 1; }
+    .book-art-text { font-family: 'EB Garamond',serif; font-size: .82rem; line-height: 1.75; color: rgba(50,30,5,0.75); position: relative; z-index: 1; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .book-keywords { display: flex; gap: 4px; flex-wrap: wrap; position: relative; z-index: 1; margin-top: auto; }
+    .book-kw { font-family: 'Cinzel',serif; font-size: .46rem; letter-spacing: 1.5px; color: rgba(140,90,20,0.65); text-transform: uppercase; padding: 2px 7px; border: 1px solid rgba(180,130,40,0.25); border-radius: 1px; background: rgba(200,155,60,0.06); }
+    .book-read { font-family: 'Cinzel',serif; font-size: .55rem; letter-spacing: 2px; color: rgba(180,120,20,0.7); text-transform: uppercase; display: inline-flex; align-items: center; gap: 5px; position: relative; z-index: 1; transition: color .2s; }
+    .book-wrap:hover .book-read { color: rgba(180,120,20,1); }
+    .book-read::after { content: '→'; transition: transform .2s; }
+    .book-wrap:hover .book-read::after { transform: translateX(3px); }
+    .book-edge { position: absolute; bottom: -8px; left: 4px; right: 4px; height: 8px; background: linear-gradient(180deg,rgba(30,20,0,0.7),rgba(10,5,0,0.9)); border-radius: 0 0 3px 3px; transform: translateZ(-4px); z-index: -1; }
+    .book-shadow { position: absolute; bottom: -20px; left: 5%; right: 5%; height: 20px; background: radial-gradient(ellipse,rgba(0,0,0,0.6) 0%,transparent 70%); filter: blur(6px); pointer-events: none; }
+
+    /* ARTICLE READER PANEL */
+    .article-panel {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(20px);
+      z-index: 1000; display: flex; align-items: center; justify-content: center;
+      visibility: hidden; opacity: 0; transition: 0.3s ease;
+    }
+    .article-panel.open { visibility: visible; opacity: 1; }
+    .art-panel-inner {
+      width: 90%; max-width: 850px; max-height: 85vh;
+      background: linear-gradient(145deg, #1a1528, #0d0a18);
+      border-radius: 24px; border: 1px solid rgba(212,175,55,0.4);
+      overflow-y: auto; transform: scale(0.96);
+      transition: transform 0.3s ease;
+    }
+    .article-panel.open .art-panel-inner { transform: scale(1); }
+    .art-panel-inner::-webkit-scrollbar { width: 4px; }
+    .art-panel-inner::-webkit-scrollbar-track { background: #1e192c; }
+    .art-panel-inner::-webkit-scrollbar-thumb { background: #c9a546; border-radius: 4px; }
+    
+    .art-watermark { position: absolute; bottom: -20px; right: -20px; font-size: 14rem; opacity: .04; transform: rotate(-15deg); pointer-events: none; z-index: 0; }
+    .art-close {
+      position: absolute; top: 20px; right: 20px; width: 32px; height: 32px;
+      border: 1px solid rgba(180,130,40,0.3); border-radius: 50%; background: rgba(200,155,60,0.08);
+      cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;
+    }
+    .art-close::before, .art-close::after { content: ''; position: absolute; width: 14px; height: 1px; background: rgba(200,155,60,0.7); }
+    .art-close::before { transform: rotate(45deg); } .art-close::after { transform: rotate(-45deg); }
+    .art-header { padding: 3rem 3rem 0; position: relative; z-index: 1; }
+    .art-label { font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 4px; color: rgba(200,155,60,0.5); text-transform: uppercase; display: block; margin-bottom: .8rem; }
+    .art-title { font-family: 'Cinzel',serif; font-size: clamp(1.2rem,2.5vw,1.8rem); font-weight: 700; color: #E8C84A; line-height: 1.3; margin-bottom: 1rem; }
+    .art-rule { height: 1px; background: linear-gradient(90deg,rgba(200,155,60,0.5),rgba(200,155,60,0.2),transparent); margin-bottom: 1rem; }
+    .art-keywords { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+    .art-kw { font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 1.5px; color: rgba(200,155,60,0.7); text-transform: uppercase; padding: 3px 10px; border: 1px solid rgba(180,130,40,0.25); border-radius: 1px; background: rgba(200,155,60,0.08); }
+    .art-body { font-family: 'EB Garamond',serif; font-size: clamp(1rem,1.6vw,1.1rem); line-height: 2; color: rgba(232,212,178,.85); padding: 0 3rem 3rem; position: relative; z-index: 1; }
+    .art-body p { margin-bottom: 1.5rem; text-indent: 2em; }
+    .art-body p:first-child { text-indent: 0; }
+    .art-body p:first-child::first-letter {
+      font-family: 'Cinzel Decorative',serif; font-size: 3.2em; font-weight: 700; color: #c9a030;
+      float: left; line-height: .75; margin: .07em .15em 0 0; text-shadow: 0 0 22px rgba(200,155,60,0.4);
+    }
+    .art-body .blockquote {
+      font-family: 'Cinzel',serif; font-size: .9rem; font-style: italic;
+      padding: 1.2rem 2rem; margin: 1.5rem 0; border-left: 3px solid #c9a030;
+      background: rgba(200,155,60,0.05); color: #e8d8a0; text-indent: 0;
+    }
+
+    @media(max-width:860px){
+      .navbar-wrapper { padding: 0.8rem 1rem 0; }
+      .nav3d { height: 56px; transform: rotateX(15deg); }
+      .brand { font-size: 0.7rem; }
+      .links li a { font-size: .5rem; padding: 4px 5px; letter-spacing: 1px; }
+      .art-header { padding: 2rem 1.5rem 0; }
+      .art-body { padding: 0 1.5rem 2rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,7 +348,10 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR (EXACTLY AS ORIGINAL) -->
+  <!-- 3D CANVAS for Horses -->
+  <canvas id="horseCanvas"></canvas>
+
+  <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -28,7 +366,7 @@
           <ul class="links">
             <li><a href="index.html">GENESIS</a></li>
             <li><a href="genesis.html">AWAKENING</a></li>
-            <li><a href="chronicles.html">CHRONICLES</a></li>
+            <li><a href="chronicles.html" class="active">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
             <li><a href="essays.html">VERSES</a></li>
           </ul>
@@ -44,7 +382,7 @@
     </div>
   </div>
 
-  <!-- CHRONICLES HERO (EXACTLY AS ORIGINAL) -->
+  <!-- CHRONICLES HERO -->
   <section class="chronicles-hero" id="chronicles">
     <video class="chr-video" autoplay muted loop playsinline>
       <source src="chronicles-bg.mp4" type="video/mp4">
@@ -64,7 +402,7 @@
     </div>
   </section>
 
-  <!-- HORSE INTRODUCTION (EXACTLY AS ORIGINAL) -->
+  <!-- HORSE INTRODUCTION -->
   <section class="horse-intro" id="chronicles-intro">
     <div class="intro-inner">
       <div class="intro-badge">The Knowledge Within</div>
@@ -82,7 +420,7 @@
     </div>
   </section>
 
-  <!-- CHRONICLES BOOKS -->
+  <!-- CHRONICLES BOOKS GRID -->
   <section class="chronicles" id="chronicles-books">
     <div class="chr-sec-header">
       <span class="chr-sec-eyebrow">The Written Record</span>
@@ -99,14 +437,12 @@
       <button class="chr-filter-btn" data-filter="edge">Your Unique Edge</button>
     </div>
     <div class="books-grid" id="booksGrid">
-
-      <!-- BOOK 1 - FOUNDATIONAL: Horse Psychology -->
+      <!-- Book 1 - Horse Psychology -->
       <div class="book-wrap" data-category="foundational" data-article="0">
         <div class="book-3d">
           <div class="book-spread">
             <div class="book-left">
-              <img src="article1.jpg" alt="Horse Psychology" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0d00,#0d0800);">🐴</div>
+              <div class="book-left-placeholder">🐴</div>
               <div class="book-ribbon">Foundational</div>
               <div class="book-num">01</div>
             </div>
@@ -117,30 +453,19 @@
               <div class="book-art-label">Understanding the Horse Mind</div>
               <div class="book-art-title">Horse Psychology: How Horses Think and Perceive Humans</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind that never stops watching, never stops reading, and never stops preparing for the moment everything changes.</p>
-              <div class="book-keywords">
-                <span class="book-kw">horse psychology</span>
-                <span class="book-kw">how horses think</span>
-                <span class="book-kw">equine mindset</span>
-              </div>
+              <p class="book-art-text">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a mind that never stops watching...</p>
+              <div class="book-keywords"><span class="book-kw">horse psychology</span><span class="book-kw">how horses think</span><span class="book-kw">equine mindset</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
-          <div class="book-edge"></div>
-          <div class="book-shadow"></div>
+          <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 2 - FOUNDATIONAL: Prey Animal Instincts -->
+      <!-- Book 2 - Prey Animal Instincts -->
       <div class="book-wrap" data-category="foundational" data-article="1">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article2.jpg" alt="Prey Animal Instincts" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a0e1a,#060b14);">🐎</div>
-              <div class="book-ribbon">Foundational</div>
-              <div class="book-num">02</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐎</div><div class="book-ribbon">Foundational</div><div class="book-num">02</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐎</div>
@@ -148,29 +473,19 @@
               <div class="book-art-label">The Primal Architecture</div>
               <div class="book-art-title">Prey Animal Instincts in Horses: Why Fear Shapes Everything</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by nature. When you understand why a horse is afraid, you stop fighting fear and start working with it.</p>
-              <div class="book-keywords">
-                <span class="book-kw">prey animal instincts</span>
-                <span class="book-kw">flight response</span>
-                <span class="book-kw">horse fear triggers</span>
-              </div>
+              <p class="book-art-text">Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by nature...</p>
+              <div class="book-keywords"><span class="book-kw">prey animal instincts</span><span class="book-kw">flight response</span><span class="book-kw">horse fear triggers</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 3 - FOUNDATIONAL: Trust vs Control -->
+      <!-- Book 3 - Trust vs Control -->
       <div class="book-wrap" data-category="foundational" data-article="2">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article3.jpg" alt="Trust vs Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0f0a00,#1a1000);">🐴</div>
-              <div class="book-ribbon">Foundational</div>
-              <div class="book-num">03</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Foundational</div><div class="book-num">03</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐴</div>
@@ -178,59 +493,39 @@
               <div class="book-art-label">The Central Question</div>
               <div class="book-art-title">Trust Versus Control in Horse Training: What Actually Works</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all exits are open. Only one of these is real horsemanship.</p>
-              <div class="book-keywords">
-                <span class="book-kw">trust vs control</span>
-                <span class="book-kw">natural horsemanship</span>
-                <span class="book-kw">horse training philosophy</span>
-              </div>
+              <p class="book-art-text">Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all exits are open...</p>
+              <div class="book-keywords"><span class="book-kw">trust vs control</span><span class="book-kw">natural horsemanship</span><span class="book-kw">horse training philosophy</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 4 - FOUNDATIONAL: Body Language -->
+      <!-- Book 4 - Body Language -->
       <div class="book-wrap" data-category="foundational" data-article="3">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article4.jpg" alt="Body Language" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#080012,#050009);">🐎</div>
-              <div class="book-ribbon">Foundational</div>
-              <div class="book-num">04</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Foundational</div><div class="book-num">04</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
-              <div class="book-watermark">🐎</div>
+              <div class="book-watermark">🐴</div>
               <div class="book-page-num">The Horseman's Journal | Volume IV</div>
               <div class="book-art-label">The Silent Vocabulary</div>
               <div class="book-art-title">How to Read a Horse's Body Language from Beginner to Advanced</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Horses speak in the language of the body, constantly, precisely, and honestly. Every ear position, every muscle, every shift of weight is a sentence. Learning to read it is the first step toward genuine communication.</p>
-              <div class="book-keywords">
-                <span class="book-kw">horse body language</span>
-                <span class="book-kw">horse ears meaning</span>
-                <span class="book-kw">signs of stress horses</span>
-              </div>
+              <p class="book-art-text">Horses speak in the language of the body, constantly, precisely, and honestly. Every ear position, every muscle twitch, every shift of weight is a sentence...</p>
+              <div class="book-keywords"><span class="book-kw">horse body language</span><span class="book-kw">horse ears meaning</span><span class="book-kw">signs of stress horses</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 5 - FOUNDATIONAL: Common Human Mistakes -->
+      <!-- Book 5 - Common Human Mistakes -->
       <div class="book-wrap" data-category="foundational" data-article="4">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article5.jpg" alt="Human Mistakes" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#120800,#1e0f00);">🐴</div>
-              <div class="book-ribbon">Foundational</div>
-              <div class="book-num">05</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Foundational</div><div class="book-num">05</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐴</div>
@@ -238,29 +533,19 @@
               <div class="book-art-label">What We Get Wrong</div>
               <div class="book-art-title">Common Human Mistakes with Horses and Why Horses React</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Most horses do not have problems. Most horses have people with problems that the horse is simply reflecting back. Understanding what we do wrong is the most useful education a horseman can receive.</p>
-              <div class="book-keywords">
-                <span class="book-kw">mistakes in horse training</span>
-                <span class="book-kw">why horses misbehave</span>
-                <span class="book-kw">training mistakes beginners</span>
-              </div>
+              <p class="book-art-text">Most horses do not have problems. Most horses have people with problems that the horse is simply reflecting back...</p>
+              <div class="book-keywords"><span class="book-kw">mistakes in horse training</span><span class="book-kw">why horses misbehave</span><span class="book-kw">training mistakes beginners</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 6 - PRACTICAL: Build Trust -->
+      <!-- Book 6 - Build Trust -->
       <div class="book-wrap" data-category="practical" data-article="5">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article6.jpg" alt="Build Trust" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001008,#000a05);">🐎</div>
-              <div class="book-ribbon">Practical</div>
-              <div class="book-num">06</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐎</div><div class="book-ribbon">Practical</div><div class="book-num">06</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐎</div>
@@ -268,59 +553,39 @@
               <div class="book-art-label">Step by Step</div>
               <div class="book-art-title">How to Build Trust with a Horse: A Complete Step by Step Guide</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Trust is not built in a single day or a single session. It is built in a thousand small honest moments, each one a brick, each one a promise kept. This is the guide to laying those bricks correctly.</p>
-              <div class="book-keywords">
-                <span class="book-kw">how to build trust</span>
-                <span class="book-kw">bonding with a horse</span>
-                <span class="book-kw">gain horse trust</span>
-              </div>
+              <p class="book-art-text">Trust is not built in a single day or a single session. It is built in a thousand small honest moments...</p>
+              <div class="book-keywords"><span class="book-kw">how to build trust</span><span class="book-kw">bonding with a horse</span><span class="book-kw">gain horse trust</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 7 - PRACTICAL: Horse Not Listening -->
+      <!-- Book 7 - Horse Not Listening -->
       <div class="book-wrap" data-category="practical" data-article="6">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article7.jpg" alt="Horse Not Listening" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0d0015,#080010);">🐴</div>
-              <div class="book-ribbon">Practical</div>
-              <div class="book-num">07</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Practical</div><div class="book-num">07</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
-              <div class="book-watermark">🐎</div>
+              <div class="book-watermark">🐴</div>
               <div class="book-page-num">The Horseman's Journal | Volume VII</div>
               <div class="book-art-label">The Real Diagnosis</div>
               <div class="book-art-title">Why Your Horse Does Not Listen to You: The Real Reasons Explained</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">When a horse stops listening, most people think the horse has a problem. In eleven years, I have almost never found the problem to be in the horse. The answer always begins somewhere closer to home.</p>
-              <div class="book-keywords">
-                <span class="book-kw">horse not listening</span>
-                <span class="book-kw">horse training problems</span>
-                <span class="book-kw">why horse ignores commands</span>
-              </div>
+              <p class="book-art-text">When a horse stops listening, most people think the horse has a problem. In eleven years, I have almost never found the problem to be in the horse...</p>
+              <div class="book-keywords"><span class="book-kw">horse not listening</span><span class="book-kw">horse training problems</span><span class="book-kw">why horse ignores commands</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 8 - PRACTICAL: Calm Anxious Horse -->
+      <!-- Book 8 - Calm Anxious Horse -->
       <div class="book-wrap" data-category="practical" data-article="7">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article8.jpg" alt="Calm Anxious Horse" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001a10,#001208);">🐎</div>
-              <div class="book-ribbon">Practical</div>
-              <div class="book-num">08</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐎</div><div class="book-ribbon">Practical</div><div class="book-num">08</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐎</div>
@@ -328,59 +593,39 @@
               <div class="book-art-label">Finding Stillness</div>
               <div class="book-art-title">How to Calm a Nervous or Anxious Horse</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">You cannot calm a horse by fighting its nervous system. You can only offer it something steady enough to anchor to. This is the art of becoming that anchor and it begins long before you ever touch the rope.</p>
-              <div class="book-keywords">
-                <span class="book-kw">how to calm a horse</span>
-                <span class="book-kw">anxious horse behavior</span>
-                <span class="book-kw">nervous horse training</span>
-              </div>
+              <p class="book-art-text">You cannot calm a horse by fighting its nervous system. You can only offer it something steady enough to anchor to...</p>
+              <div class="book-keywords"><span class="book-kw">how to calm a horse</span><span class="book-kw">anxious horse behavior</span><span class="book-kw">nervous horse training</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 9 - PRACTICAL: First Time Handling -->
+      <!-- Book 9 - First Time Handling -->
       <div class="book-wrap" data-category="practical" data-article="8">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article9.jpg" alt="First Time Handling" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0a00,#120700);">🐴</div>
-              <div class="book-ribbon">Practical</div>
-              <div class="book-num">09</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Practical</div><div class="book-num">09</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
-              <div class="book-watermark">🐎</div>
+              <div class="book-watermark">🐴</div>
               <div class="book-page-num">The Horseman's Journal | Volume IX</div>
               <div class="book-art-label">The First Meeting</div>
               <div class="book-art-title">First Time Handling a Horse: What You Must Know</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">The first impression you make on a horse is written in its memory with indelible ink. There is no second first meeting. Everything you bring into that initial encounter, your speed, your tension, your breath, the horse will remember.</p>
-              <div class="book-keywords">
-                <span class="book-kw">first time horse tips</span>
-                <span class="book-kw">horse safety basics</span>
-                <span class="book-kw">beginner horse handling</span>
-              </div>
+              <p class="book-art-text">The first impression you make on a horse is written in its memory with indelible ink. There is no second first meeting...</p>
+              <div class="book-keywords"><span class="book-kw">first time horse tips</span><span class="book-kw">horse safety basics</span><span class="book-kw">beginner horse handling</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 10 - PRACTICAL: Signs of Trust -->
+      <!-- Book 10 - Signs of Trust -->
       <div class="book-wrap" data-category="practical" data-article="9">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article10.jpg" alt="Signs of Trust" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a001a,#060012);">🐎</div>
-              <div class="book-ribbon">Practical</div>
-              <div class="book-num">10</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐎</div><div class="book-ribbon">Practical</div><div class="book-num">10</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐎</div>
@@ -388,29 +633,19 @@
               <div class="book-art-label">Reading the Bond</div>
               <div class="book-art-title">Signs Your Horse Trusts You and Signs It Does Not</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">A horse's trust is not a feeling. It is a behaviour. And like all behaviour, it is visible, measurable, and honest. Here is what genuine trust looks like, and what its absence reveals about the work still to be done.</p>
-              <div class="book-keywords">
-                <span class="book-kw">signs a horse trusts you</span>
-                <span class="book-kw">horse bonding signs</span>
-                <span class="book-kw">horse trust behavior</span>
-              </div>
+              <p class="book-art-text">A horse's trust is not a feeling. It is a behaviour. And like all behaviour, it is visible, measurable, and honest...</p>
+              <div class="book-keywords"><span class="book-kw">signs a horse trusts you</span><span class="book-kw">horse bonding signs</span><span class="book-kw">horse trust behavior</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 11 - EDGE: What Horses Teach -->
+      <!-- Book 11 - What Horses Teach -->
       <div class="book-wrap" data-category="edge" data-article="10">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article11.jpg" alt="What Horses Teach" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#001014,#00080d);">🐴</div>
-              <div class="book-ribbon">Unique Edge</div>
-              <div class="book-num">11</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Unique Edge</div><div class="book-num">11</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐴</div>
@@ -418,29 +653,19 @@
               <div class="book-art-label">The Mirror in the Arena</div>
               <div class="book-art-title">What Horses Teach Us About Human Behavior</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">A horse has no ego, no agenda, no ability to lie. It can only respond to what is real. Spend enough time with horses and you will learn more about yourself than any therapist, any book, or any amount of quiet reflection could ever show you.</p>
-              <div class="book-keywords">
-                <span class="book-kw">what horses teach humans</span>
-                <span class="book-kw">lessons from horses</span>
-                <span class="book-kw">horse psychology humans</span>
-              </div>
+              <p class="book-art-text">A horse has no ego, no agenda, no ability to lie. It can only respond to what is real. Spend enough time with horses and you will learn more about yourself...</p>
+              <div class="book-keywords"><span class="book-kw">what horses teach humans</span><span class="book-kw">lessons from horses</span><span class="book-kw">horse psychology humans</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 12 - EDGE: Feel What a Horse Feels -->
+      <!-- Book 12 - Presence and Intention -->
       <div class="book-wrap" data-category="edge" data-article="11">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article12.jpg" alt="Feel What a Horse Feels" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a1000,#120a00);">🐎</div>
-              <div class="book-ribbon">Unique Edge</div>
-              <div class="book-num">12</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐎</div><div class="book-ribbon">Unique Edge</div><div class="book-num">12</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐎</div>
@@ -448,29 +673,19 @@
               <div class="book-art-label">Presence and Intention</div>
               <div class="book-art-title">To Feel What a Horse Feels: Understanding Presence and Intention</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Presence is not a concept. It is a physical state, the quality of being fully here, fully alive, fully available to what is happening in this exact second. Horses live there permanently. Most humans have forgotten the address.</p>
-              <div class="book-keywords">
-                <span class="book-kw">horse sensitivity to humans</span>
-                <span class="book-kw">connection with horses</span>
-                <span class="book-kw">horse energy intention</span>
-              </div>
+              <p class="book-art-text">Presence is not a concept. It is a physical state, the quality of being fully here, fully alive, fully available to what is happening in this exact second...</p>
+              <div class="book-keywords"><span class="book-kw">horse sensitivity to humans</span><span class="book-kw">connection with horses</span><span class="book-kw">horse energy intention</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 13 - EDGE: Horses React to Mind -->
+      <!-- Book 13 - Horses React to Mind -->
       <div class="book-wrap" data-category="edge" data-article="12">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article13.jpg" alt="Horses React to Mind" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#00100a,#000d07);">🐴</div>
-              <div class="book-ribbon">Unique Edge</div>
-              <div class="book-num">13</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Unique Edge</div><div class="book-num">13</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐴</div>
@@ -478,59 +693,39 @@
               <div class="book-art-label">The Invisible Rein</div>
               <div class="book-art-title">Why Horses React to Your Mind and Not Just Your Actions</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle in your body. A horse does not read your actions. It reads the thought behind them.</p>
-              <div class="book-keywords">
-                <span class="book-kw">do horses sense emotions</span>
-                <span class="book-kw">horse awareness</span>
-                <span class="book-kw">horse reaction to humans</span>
-              </div>
+              <p class="book-art-text">Before your hand moves, your mind has already moved. Before your leg gives the aid, your intention has already broadcast itself through every muscle...</p>
+              <div class="book-keywords"><span class="book-kw">do horses sense emotions</span><span class="book-kw">horse awareness</span><span class="book-kw">horse reaction to humans</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 14 - EDGE: Silence, Energy, Movement -->
+      <!-- Book 14 - Silence, Energy, Movement -->
       <div class="book-wrap" data-category="edge" data-article="13">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article14.jpg" alt="Silence Energy Movement" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#0a0015,#060010);">🐎</div>
-              <div class="book-ribbon">Unique Edge</div>
-              <div class="book-num">14</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Unique Edge</div><div class="book-num">14</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
-              <div class="book-watermark">🐎</div>
+              <div class="book-watermark">🐴</div>
               <div class="book-page-num">The Horseman's Journal | Volume XIV</div>
               <div class="book-art-label">The Ancient Language</div>
               <div class="book-art-title">Silence, Energy, and Movement: The Language Horses Understand</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">There is a language older than words, older than sound, older than the first human who tried to name things. Horses speak it fluently. It is made of silence, of the quality of stillness, and of the precise intention inside every movement. This article is an attempt to translate it.</p>
-              <div class="book-keywords">
-                <span class="book-kw">horse communication</span>
-                <span class="book-kw">non verbal horses</span>
-                <span class="book-kw">how horses communicate</span>
-              </div>
+              <p class="book-art-text">There is a language older than words, older than sound, older than the first human who tried to name things. Horses speak it fluently...</p>
+              <div class="book-keywords"><span class="book-kw">horse communication</span><span class="book-kw">non verbal horses</span><span class="book-kw">how horses communicate</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
-      <!-- BOOK 15 - EDGE: Philosophy -->
+      <!-- Book 15 - Philosophy -->
       <div class="book-wrap" data-category="edge" data-article="14">
         <div class="book-3d">
           <div class="book-spread">
-            <div class="book-left">
-              <img src="article15.jpg" alt="Philosophy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="book-left-placeholder" style="display:none;background:linear-gradient(145deg,#1a0800,#120600);">🐴</div>
-              <div class="book-ribbon">Unique Edge</div>
-              <div class="book-num">15</div>
-            </div>
+            <div class="book-left"><div class="book-left-placeholder">🐴</div><div class="book-ribbon">Unique Edge</div><div class="book-num">15</div></div>
             <div class="book-spine"></div>
             <div class="book-right">
               <div class="book-watermark">🐴</div>
@@ -538,19 +733,14 @@
               <div class="book-art-label">The Deepest Truth</div>
               <div class="book-art-title">The Philosophy of Working with Horses and Not Against Them</div>
               <div class="book-rule"></div>
-              <p class="book-art-text">There are two ways to work with a horse. One way produces obedience. The other way produces partnership. They look similar from the outside. From the inside, from inside the horse, they feel completely different. Only one of them is real.</p>
-              <div class="book-keywords">
-                <span class="book-kw">natural horsemanship</span>
-                <span class="book-kw">ethical horse training</span>
-                <span class="book-kw">working with horses</span>
-              </div>
+              <p class="book-art-text">There are two ways to work with a horse. One way produces obedience. The other way produces partnership...</p>
+              <div class="book-keywords"><span class="book-kw">natural horsemanship</span><span class="book-kw">ethical horse training</span><span class="book-kw">working with horses</span></div>
               <span class="book-read">Read Article</span>
             </div>
           </div>
           <div class="book-edge"></div><div class="book-shadow"></div>
         </div>
       </div>
-
     </div>
 
     <!-- ARTICLE READER PANEL -->
@@ -567,16 +757,334 @@
         <div class="art-body" id="artBody"></div>
       </div>
     </div>
-
   </section>
 
-  <script src="js/global.js"></script>
-  <script src="js/chronicles.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    // ============================================================
+    // 3D HORSES ENGINE - Four Interactive Horses
+    // ============================================================
+    import * as THREE from 'three';
 
+    const canvas = document.getElementById('horseCanvas');
+    if (canvas) {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x060308, 0);
+      
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 2.5, 14);
+      camera.lookAt(0, 1, 0);
+      
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0x221c30);
+      scene.add(ambientLight);
+      const mainLight = new THREE.DirectionalLight(0xffeebb, 0.9);
+      mainLight.position.set(5, 8, 4);
+      mainLight.castShadow = true;
+      scene.add(mainLight);
+      const fillLight = new THREE.PointLight(0x8866aa, 0.5);
+      fillLight.position.set(-2, 3, 3);
+      scene.add(fillLight);
+      const backLight = new THREE.PointLight(0xccaa55, 0.4);
+      backLight.position.set(0, 2, -5);
+      scene.add(backLight);
+      
+      // Ground shadow catcher
+      const groundPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(20, 12),
+        new THREE.ShadowMaterial({ opacity: 0.3, color: 0x000000, transparent: true, side: THREE.DoubleSide })
+      );
+      groundPlane.rotation.x = -Math.PI / 2;
+      groundPlane.position.y = -0.6;
+      groundPlane.receiveShadow = true;
+      scene.add(groundPlane);
+      
+      // Dust particles
+      const particleCount = 600;
+      const particleGeo = new THREE.BufferGeometry();
+      const particlePositions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        particlePositions[i*3] = (Math.random() - 0.5) * 22;
+        particlePositions[i*3+1] = Math.random() * 5;
+        particlePositions[i*3+2] = (Math.random() - 0.5) * 18 - 5;
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+      const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.04, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending });
+      const dustField = new THREE.Points(particleGeo, particleMat);
+      scene.add(dustField);
+      
+      // Helper to create a horse
+      function createHorse(color, maneColor, gesture = 'sentinel') {
+        const group = new THREE.Group();
+        const bodyMat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.5, metalness: 0.1 });
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.65, 1.8), bodyMat);
+        body.position.set(0, 0, 0);
+        body.castShadow = true;
+        body.receiveShadow = true;
+        group.add(body);
+        
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 0.85, 8), bodyMat);
+        neck.position.set(0.15, 0.45, -0.7);
+        neck.castShadow = true;
+        group.add(neck);
+        
+        const head = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.45, 0.55), bodyMat);
+        head.position.set(0.2, 0.7, -1.05);
+        head.castShadow = true;
+        group.add(head);
+        
+        const muzzle = new THREE.Mesh(new THREE.SphereGeometry(0.22, 8, 8), bodyMat);
+        muzzle.position.set(0.25, 0.55, -1.35);
+        muzzle.castShadow = true;
+        group.add(muzzle);
+        
+        // Legs
+        const legMat = new THREE.MeshStandardMaterial({ color: color });
+        const legPositions = [[-0.4, -0.35, -0.65], [0.25, -0.35, -0.65], [-0.4, -0.35, 0.65], [0.25, -0.35, 0.65]];
+        const legs = [];
+        legPositions.forEach(pos => {
+          const leg = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.6, 0.28), legMat);
+          leg.position.set(pos[0], pos[1], pos[2]);
+          leg.castShadow = true;
+          group.add(leg);
+          legs.push(leg);
+        });
+        
+        // Tail
+        const tailMat = new THREE.MeshStandardMaterial({ color: maneColor });
+        const tail = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.05, 0.4, 5), tailMat);
+        tail.position.set(-0.4, 0.15, 0.85);
+        tail.castShadow = true;
+        group.add(tail);
+        
+        // Ears
+        const earMat = new THREE.MeshStandardMaterial({ color: color });
+        const leftEar = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.25, 6), earMat);
+        leftEar.position.set(0.05, 0.95, -1.1);
+        group.add(leftEar);
+        const rightEar = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.25, 6), earMat);
+        rightEar.position.set(0.4, 0.95, -1.1);
+        group.add(rightEar);
+        
+        group.userData = { head, neck, legs, tail, ears: [leftEar, rightEar], gesture, originalY: 0 };
+        return group;
+      }
+      
+      const horse1 = createHorse(0x6a4a2a, 0x4a3018, 'sentinel');
+      horse1.position.set(-4.2, 0, -1.5);
+      horse1.scale.set(0.9, 0.9, 0.9);
+      scene.add(horse1);
+      
+      const horse2 = createHorse(0x7a5535, 0x5a3a1a, 'grazing');
+      horse2.position.set(-1.5, 0, -2);
+      horse2.scale.set(0.85, 0.85, 0.85);
+      scene.add(horse2);
+      
+      const horse3 = createHorse(0x5a3a1a, 0x3a2010, 'nuzzling');
+      horse3.position.set(1.8, 0, -1.8);
+      horse3.scale.set(0.88, 0.88, 0.88);
+      scene.add(horse3);
+      
+      const horse4 = createHorse(0x8a6040, 0x6a4020, 'galloping');
+      horse4.position.set(4.5, 0, -1.2);
+      horse4.scale.set(0.92, 0.92, 0.92);
+      scene.add(horse4);
+      
+      let time = 0;
+      let mouseX = 0, mouseY = 0;
+      let scrollPercent = 0;
+      
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+      });
+      window.addEventListener('scroll', () => {
+        scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      });
+      
+      function animateHorses() {
+        // Horse 1 - Sentinel
+        if (horse1.userData.head) {
+          horse1.userData.head.rotation.x = Math.sin(time * 1.5) * 0.03;
+          horse1.userData.tail.rotation.z = Math.sin(time * 3) * 0.15;
+          horse1.userData.ears[0].rotation.x = -0.3;
+          horse1.userData.ears[1].rotation.x = -0.3;
+        }
+        // Horse 2 - Grazing
+        if (horse2.userData.head) {
+          horse2.userData.head.rotation.x = 0.55 + Math.sin(time * 0.8) * 0.04;
+          horse2.userData.head.position.y = 0.7 + Math.sin(time * 4) * 0.02;
+          horse2.userData.neck.rotation.x = 0.2;
+        }
+        // Horse 3 - Nuzzling
+        if (horse3.userData.head) {
+          horse3.userData.head.rotation.y = Math.sin(time * 0.5) * 0.12;
+          horse3.userData.neck.rotation.y = Math.sin(time * 0.6) * 0.05;
+          horse3.userData.tail.rotation.z = Math.sin(time * 2.2) * 0.1;
+        }
+        // Horse 4 - Galloping
+        if (horse4.userData.legs) {
+          const gallopPhase = time * 3.5;
+          if (horse4.userData.legs[0]) horse4.userData.legs[0].position.z = -0.65 + Math.sin(gallopPhase) * 0.12;
+          if (horse4.userData.legs[1]) horse4.userData.legs[1].position.z = -0.65 - Math.sin(gallopPhase) * 0.12;
+          if (horse4.userData.legs[2]) horse4.userData.legs[2].position.z = 0.65 - Math.sin(gallopPhase) * 0.1;
+          if (horse4.userData.legs[3]) horse4.userData.legs[3].position.z = 0.65 + Math.sin(gallopPhase) * 0.1;
+          horse4.userData.tail.rotation.z = Math.sin(time * 5) * 0.2;
+          horse4.userData.head.rotation.x = -0.08;
+        }
+      }
+      
+      function animate() {
+        requestAnimationFrame(animate);
+        time += 0.016;
+        animateHorses();
+        
+        const targetX = mouseX * 0.8;
+        const targetY = mouseY * 0.4 + scrollPercent * 0.5;
+        camera.position.x += (targetX - camera.position.x) * 0.05;
+        camera.position.y += (targetY - camera.position.y) * 0.05;
+        camera.lookAt(0, 1.2, 0);
+        
+        dustField.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      animate();
+      
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+    
+    // ============================================================
+    // CHRONICLES ARTICLES DATA
+    // ============================================================
+    const articlesData = [
+      { label: "Foundational", title: "Understanding Horse Psychology: How Horses Think and Perceive Humans", keywords: ["horse psychology", "how horses think", "equine mindset"], content: `<p class="dropcap">Every decision a horse makes is filtered through sixty million years of prey animal evolution...</p><p>The horse brain is wired differently than the human brain...</p><div class="blockquote">A horse does not ask what you want. It asks what you are.</div><p>Understanding this changes everything...</p>` },
+      { label: "Foundational", title: "Prey Animal Instincts in Horses: Why Fear Shapes Everything", keywords: ["prey animal instincts", "flight response", "horse fear triggers"], content: `<p class="dropcap">Fear is not a character flaw in a horse. It is the most sophisticated survival system ever built by nature...</p><p>The flight response is the horse's primary defense mechanism...</p><div class="blockquote">A horse can go from calm to full flight in less than a second.</div>` },
+      { label: "Foundational", title: "Trust Versus Control in Horse Training: What Actually Works", keywords: ["trust vs control", "natural horsemanship", "horse training philosophy"], content: `<p class="dropcap">Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all exits are open...</p><p>Most traditional training methods rely on control...</p><div class="blockquote">The horse that obeys because it has no choice is not truly trained.</div>` },
+      { label: "Foundational", title: "How to Read a Horse's Body Language from Beginner to Advanced", keywords: ["horse body language", "horse ears meaning", "signs of stress horses"], content: `<p class="dropcap">Horses speak in the language of the body, constantly, precisely, and honestly...</p><p>The ears are your primary indicator...</p><div class="blockquote">A horse that is truly relaxed will have a soft eye, a lowered head, and a slight cocking of one hind leg.</div>` },
+      { label: "Foundational", title: "Common Human Mistakes with Horses and Why Horses React", keywords: ["mistakes in horse training", "why horses misbehave", "training mistakes beginners"], content: `<p class="dropcap">Most horses do not have problems. Most horses have people with problems...</p><p>The first common mistake is inconsistency...</p><div class="blockquote">A horse does not misbehave to spite you. It misbehaves because your signals are unclear.</div>` },
+      { label: "Practical", title: "How to Build Trust with a Horse: A Complete Step by Step Guide", keywords: ["how to build trust", "bonding with a horse", "gain horse trust"], content: `<p class="dropcap">Trust is not built in a single day or a single session...</p><p>Step one: Show up consistently...</p><div class="blockquote">Trust is not a feeling. It is a prediction.</div>` },
+      { label: "Practical", title: "Why Your Horse Does Not Listen to You: The Real Reasons Explained", keywords: ["horse not listening", "horse training problems", "why horse ignores commands"], content: `<p class="dropcap">When a horse stops listening, most people think the horse has a problem...</p><p>Reason one: Your signals are unclear...</p><div class="blockquote">Every time you think the horse is being difficult, ask yourself: Have I taught this clearly enough?</div>` },
+      { label: "Practical", title: "How to Calm a Nervous or Anxious Horse", keywords: ["how to calm a horse", "anxious horse behavior", "nervous horse training"], content: `<p class="dropcap">You cannot calm a horse by fighting its nervous system...</p><p>The first step to calming an anxious horse is calming yourself...</p><div class="blockquote">Your breathing is the most powerful tool you have.</div>` },
+      { label: "Practical", title: "First Time Handling a Horse: What You Must Know", keywords: ["first time horse tips", "horse safety basics", "beginner horse handling"], content: `<p class="dropcap">The first impression you make on a horse is written in its memory with indelible ink...</p><p>Before you approach, check yourself...</p>` },
+      { label: "Practical", title: "Signs Your Horse Trusts You and Signs It Does Not", keywords: ["signs a horse trusts you", "horse bonding signs", "horse trust behavior"], content: `<p class="dropcap">A horse's trust is not a feeling. It is a behaviour...</p><p>Sign one of trust: The horse approaches you in the pasture...</p>` },
+      { label: "Unique Edge", title: "What Horses Teach Us About Human Behavior", keywords: ["what horses teach humans", "lessons from horses", "horse psychology humans"], content: `<p class="dropcap">A horse has no ego, no agenda, no ability to lie...</p><p>The first lesson horses teach is that presence matters more than technique...</p>` },
+      { label: "Unique Edge", title: "To Feel What a Horse Feels: Understanding Presence and Intention", keywords: ["horse sensitivity to humans", "connection with horses", "horse energy intention"], content: `<p class="dropcap">Presence is not a concept. It is a physical state...</p><p>When you are truly present with a horse, you feel the shift...</p>` },
+      { label: "Unique Edge", title: "Why Horses React to Your Mind and Not Just Your Actions", keywords: ["do horses sense emotions", "horse awareness", "horse reaction to humans"], content: `<p class="dropcap">Before your hand moves, your mind has already moved...</p><p>This is not mysticism. This is biology...</p>` },
+      { label: "Unique Edge", title: "Silence, Energy, and Movement: The Language Horses Understand", keywords: ["horse communication", "non verbal horses", "how horses communicate"], content: `<p class="dropcap">There is a language older than words, older than sound...</p><p>Silence is not empty. Silence is full of information...</p>` },
+      { label: "Unique Edge", title: "The Philosophy of Working with Horses and Not Against Them", keywords: ["natural horsemanship", "ethical horse training", "working with horses"], content: `<p class="dropcap">There are two ways to work with a horse...</p><p>The obedience model sees the horse as something to be controlled...</p>` }
+    ];
+    
+    // DOM Elements
+    const articlePanel = document.getElementById('articlePanel');
+    const artLabel = document.getElementById('artLabel');
+    const artTitle = document.getElementById('artTitle');
+    const artKeywords = document.getElementById('artKeywords');
+    const artBody = document.getElementById('artBody');
+    const artClose = document.getElementById('artClose');
+    const artWatermark = document.getElementById('artWatermark');
+    
+    const filterBtns = document.querySelectorAll('.chr-filter-btn');
+    const bookWraps = document.querySelectorAll('.book-wrap');
+    let currentArticleIndex = 0;
+    
+    // Filter functionality
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        bookWraps.forEach(book => {
+          if (filter === 'all' || book.getAttribute('data-category') === filter) {
+            book.classList.remove('hidden');
+          } else {
+            book.classList.add('hidden');
+          }
+        });
+      });
+    });
+    
+    // Open article
+    function openArticle(index) {
+      const article = articlesData[index];
+      if (!article) return;
+      currentArticleIndex = index;
+      artLabel.textContent = article.label;
+      artTitle.textContent = article.title;
+      artKeywords.innerHTML = article.keywords.map(kw => `<span class="art-kw">${kw}</span>`).join('');
+      if (article.label === 'Foundational') artWatermark.textContent = '📘';
+      else if (article.label === 'Practical') artWatermark.textContent = '📗';
+      else artWatermark.textContent = '📜';
+      artBody.innerHTML = article.content;
+      articlePanel.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeArticle() {
+      articlePanel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    
+    bookWraps.forEach((book, idx) => {
+      book.addEventListener('click', () => {
+        const articleIndex = parseInt(book.getAttribute('data-article'));
+        openArticle(articleIndex);
+      });
+    });
+    
+    if (artClose) artClose.addEventListener('click', closeArticle);
+    if (articlePanel) {
+      articlePanel.addEventListener('click', (e) => {
+        if (e.target === articlePanel) closeArticle();
+      });
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (!articlePanel.classList.contains('open')) return;
+      if (e.key === 'Escape') closeArticle();
+      else if (e.key === 'ArrowRight') openArticle((currentArticleIndex + 1) % articlesData.length);
+      else if (e.key === 'ArrowLeft') openArticle((currentArticleIndex - 1 + articlesData.length) % articlesData.length);
+    });
+    
+    // Intersection Observer for book animations
+    const bookObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          bookObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    bookWraps.forEach(book => bookObserver.observe(book));
+    
+    // Hero particles
+    const heroParticles = document.getElementById('chrParticles');
+    if (heroParticles) {
+      for (let i = 0; i < 60; i++) {
+        const p = document.createElement('div');
+        p.className = 'chr-p';
+        const sz = Math.random() * 3 + 1;
+        p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;bottom:0px;animation-duration:${Math.random()*8+5}s;animation-delay:${Math.random()*10}s;--d:${(Math.random()-0.5)*100}px;`;
+        heroParticles.appendChild(p);
+      }
+    }
+    
+    console.log('Chronicles loaded with 15 articles and 4 interactive 3D horses');
+  </script>
 </body>
 </html>
-
-
 
 
 
